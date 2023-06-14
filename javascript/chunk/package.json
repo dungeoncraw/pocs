@@ -1,0 +1,13 @@
+{
+  "name": "chunk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "aaaa.js",
+  "scripts": {
+    "chunk": "node test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

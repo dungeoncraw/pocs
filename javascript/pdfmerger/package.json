@@ -1,0 +1,14 @@
+{
+  "name": "pdfmerger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "merge": "node merger.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pdf-merger-js": "^3.3.2"
+  }
+}

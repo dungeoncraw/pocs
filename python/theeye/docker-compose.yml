@@ -1,0 +1,34 @@
+version: "3.3"
+   
+services:
+  redis:
+    image: redis
+  db:
+    image: mongo:5.0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=AnyStrangeUser
+      - MONGO_INITDB_ROOT_PASSWORD=AlfaDotCom33Zero
+      - MONGO_INITDB_DATABASE=isee
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: AnyStrangeUser
+      ME_CONFIG_MONGODB_ADMINPASSWORD: AlfaDotCom33Zero
+      ME_CONFIG_MONGODB_URL: mongodb://AnyStrangeUser:AlfaDotCom33Zero@db:27017/
+    depends_on:
+      - db
+  app:
+    build: .
+    environment:
+      - SECRET_KEY=nauyifn27bfb2743blfas0
+      - DEBUG=1
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
