@@ -1,0 +1,9 @@
+USERNAME='nonroot'
+PASSWORD='passworD_01'
+SERVER='localhost'
+DB='account_management'
+
+SQLALCHEMY_DATABASE_URI=f'mysql://{USERNAME}:{PASSWORD}@{SERVER}/{DB}'
+SQLALCHEMY_TRACK_MODIFICATIONS=True
+
+SECRET_KEY='sna789da2dk09_98cn'
