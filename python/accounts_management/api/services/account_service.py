@@ -3,7 +3,7 @@ from ..models import account_model
 
 
 def list_accounts():
-    accounts = account_model.Conta.query.all()
+    accounts = account_model.Account.query.all()
     return accounts
 
 
@@ -12,7 +12,7 @@ def get_account(id):
     return account
 
 def register_account(account):
-    account_db = account_model(name=account.name, description=account.description, balance=account.balance)
+    account_db = account_model.Account(name=account.name, description=account.description, balance=account.balance)
     db.session.add(account_db)
     db.session.commit()
     return account_db

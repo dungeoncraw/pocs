@@ -17,4 +17,4 @@ api = Api(app)
 
 from .models import account_model, operations_model
 
-from .views import account_view
+from .views import account_view, operation_view
