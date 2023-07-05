@@ -7,6 +7,30 @@ void main() {
   group('Login flow Test', () {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
     testWidgets(
+        'Should show required fields error message when user taps submit without entering email and password',
+        (WidgetTester tester) async {
+      // Arrange
+      await tester.pumpWidget(const MaterialApp(
+        home: LoginScreen(),
+      ));
+      // Act
+      Finder emailTextField = find.byKey(const ValueKey('email'));
+      Finder passwordTextField = find.byKey(const ValueKey('password'));
+      await tester.enterText(emailTextField, '');
+      await tester.enterText(passwordTextField, '');
+
+      Finder loginButton = find.byType(ElevatedButton);
+      // simulate touch screen
+      await tester.tap(loginButton);
+      // await animations to finish
+      await tester.pumpAndSettle();
+
+      Finder errorText = find.text('Required Field');
+
+      // Assert
+      expect(errorText, findsNWidgets(2));
+    });
+    testWidgets(
         'Should show home screen if user taps on login button and have valid email and password in login screen ',
         (WidgetTester tester) async {
       // Arrange
