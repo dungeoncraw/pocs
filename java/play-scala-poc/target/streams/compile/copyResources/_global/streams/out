@@ -1,0 +1,5 @@
+[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/thiagonascimento/Projects/poc/java/play-scala-poc/conf/logback.xml,/Users/thiagonascimento/Projects/poc/java/play-scala-poc/target/scala-2.13/classes/logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/thiagonascimento/Projects/poc/java/play-scala-poc/conf/messages,/Users/thiagonascimento/Projects/poc/java/play-scala-poc/target/scala-2.13/classes/messages)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/thiagonascimento/Projects/poc/java/play-scala-poc/conf/application.conf,/Users/thiagonascimento/Projects/poc/java/play-scala-poc/target/scala-2.13/classes/application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/thiagonascimento/Projects/poc/java/play-scala-poc/conf/routes,/Users/thiagonascimento/Projects/poc/java/play-scala-poc/target/scala-2.13/classes/routes)[0m

@@ -1,0 +1,10 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/thiagonascimento/Projects/poc/java/play-scala-poc/app/controllers/HomeController.scala:26:25: no arguments allowed for nullary method apply: (): play.twirl.api.HtmlFormat.Appendable in object hello[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.hello(name))[0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/thiagonascimento/Projects/poc/java/play-scala-poc/app/views/hello.scala.html:3:3: not found: value name[0m
+[0m[[0m[31merror[0m] [0m[0m@(name: String)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/thiagonascimento/Projects/poc/java/play-scala-poc/app/views/hello.scala.html:7:43: not found: value name[0m
+[0m[[0m[31merror[0m] [0m[0m            <h1>I love SBT+Play, and you @name</h1>[0m
+[0m[[0m[31merror[0m] [0m[0m                                          ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m

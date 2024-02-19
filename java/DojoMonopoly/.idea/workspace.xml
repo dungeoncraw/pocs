@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5f2d5ddd-2511-405b-ae36-d0cabea9a375" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="21" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="21" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2amqPwGFvy8TQ2No96d4mIGQ8iw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "JUnit.AnalysisTest.checkDuplicatedPurchases.executor": "Run",
+    "JUnit.AnalysisTest.checkInvalidPurchase.executor": "Run",
+    "JUnit.AnalysisTest.checkMultipleValidPurchases.executor": "Run",
+    "JUnit.AnalysisTest.executor": "Run",
+    "JUnit.CalculatorTest.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "kotlin-language-version-configured": "true",
+    "onboarding.tips.debug.path": "/Users/thiagonascimento/Projects/poc/java/DojoMonopoly/src/main/java/org/tnascimento/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.tnascimento" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.AnalysisTest.checkDuplicatedPurchases">
+    <configuration name="AnalysisTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DojoMonopoly" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tnascimento.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tnascimento" />
+      <option name="MAIN_CLASS_NAME" value="org.tnascimento.AnalysisTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AnalysisTest.checkDuplicatedPurchases" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DojoMonopoly" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tnascimento.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tnascimento" />
+      <option name="MAIN_CLASS_NAME" value="org.tnascimento.AnalysisTest" />
+      <option name="METHOD_NAME" value="checkDuplicatedPurchases" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AnalysisTest.checkInvalidPurchase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DojoMonopoly" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tnascimento.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tnascimento" />
+      <option name="MAIN_CLASS_NAME" value="org.tnascimento.AnalysisTest" />
+      <option name="METHOD_NAME" value="checkInvalidPurchase" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AnalysisTest.checkMultipleValidPurchases" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DojoMonopoly" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tnascimento.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tnascimento" />
+      <option name="MAIN_CLASS_NAME" value="org.tnascimento.AnalysisTest" />
+      <option name="METHOD_NAME" value="checkMultipleValidPurchases" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DojoMonopoly" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.tnascimento.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.tnascimento" />
+      <option name="MAIN_CLASS_NAME" value="org.tnascimento.CalculatorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.AnalysisTest.checkDuplicatedPurchases" />
+        <item itemvalue="JUnit.AnalysisTest.checkMultipleValidPurchases" />
+        <item itemvalue="JUnit.AnalysisTest" />
+        <item itemvalue="JUnit.AnalysisTest.checkInvalidPurchase" />
+        <item itemvalue="JUnit.CalculatorTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-2f79fb23" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f2d5ddd-2511-405b-ae36-d0cabea9a375" name="Changes" comment="" />
+      <created>1704934085596</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704934085596</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/tnascimento/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
