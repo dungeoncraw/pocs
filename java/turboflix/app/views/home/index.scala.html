@@ -1,0 +1,13 @@
+@* This config is injected as a variable from Controller *@
+@(config: com.typesafe.config.Config)
+
+@main("Turboflix!") {
+  <h1>Turboflix - Conhecimento a um click de distância</h1>
+  <h3>Exibindo configs - debug </h3>
+  <ul>
+  @for(entry <- config.entrySet()) {
+    <li>@entry</li>
+  }
+  </ul>
+  <span>@config</span>
+}

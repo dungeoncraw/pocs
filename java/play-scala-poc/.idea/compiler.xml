@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="play-scala-poc" options="-encoding utf8 -g" />
+      <module name="play-scala-poc" options="" />
     </option>
   </component>
 </project>
