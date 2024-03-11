@@ -1,5 +1,6 @@
 package controllers;
 
+import play.*;
 import play.mvc.*;
 import com.typesafe.config.Config;
 import javax.inject.Inject;
@@ -24,8 +25,12 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     // this is nice, so to modify the view path folder, follow views.html.FOLDER_NAME.FILENAME.render method
-    public Result index() {
-        return ok(views.html.home.index.render(this.config));
+    public Result index(Http.Request request) {
+        Http.Session session = request.session();
+        if (session.get("tsession").isEmpty()) {
+            return redirect(routes.LoginController.index());
+        }
+        return ok(views.html.home.index.render("anyusername"));
     }
 
 }
