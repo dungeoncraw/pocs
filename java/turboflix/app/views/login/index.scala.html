@@ -1,18 +1,30 @@
 @()
+<!-- need to follow one example https://github.com/playframework/play-samples/tree/3.0.x/play-java-forms-example-->
+<!-- Documentation is poor and confusing in form -->
 
 @main("Turboflix! - Access your account") {
     <h1>Welcome back!</h1>
     <h2>Please enter your credentials</h2>
-    <form>
-        <div class="container">
-            <label>Username : </label>
-            <input type="text" placeholder="Enter Username" name="username" required>
-            <label>Password : </label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-            <button type="submit">Login</button>
-            <input type="checkbox" checked="checked"> Remember me
-            <button type="button" class="cancelbtn"> Cancel</button>
-            Forgot <a href="#"> password? </a>
-        </div>
-    </form>
+
+    @(loginForm: play.data.Form[forms.LoginForm])(implicit messages: play.i18n.Messages)
+
+    @helper.form(action = routes.LoginController.submit) {
+
+        @helper.inputText(loginForm("username"), Symbol("id") -> "username", Symbol("label") -> "Username")
+
+        @helper.inputPassword(loginForm("password"), Symbol("id") -> "password", Symbol("label") -> "Password")
+    <button type="submit">Login</button>
+    }
+<!--    <form method="post" action="">-->
+<!--        <div class="container">-->
+<!--            <label>Username : </label>-->
+<!--            <input type="text" placeholder="Enter Username" name="username" required>-->
+<!--            <label>Password : </label>-->
+<!--            <input type="password" placeholder="Enter Password" name="password" required>-->
+<!--            <button type="submit">Login</button>-->
+<!--            <input type="checkbox" checked="checked"> Remember me-->
+<!--            <button type="button" class="cancelbtn"> Cancel</button>-->
+<!--            Forgot <a href="#"> password? </a>-->
+<!--        </div>-->
+<!--    </form>-->
 }
