@@ -7,7 +7,7 @@ GET     /                           controllers.HomeController.index(request: Re
 
 # TODO: Need to understand if can split the routes configuration
 # TODO: this is too magical as it inject the dependency under the hood, how is that done?
-GET     /login                      controllers.LoginController.index()
+GET     /login                      controllers.LoginController.index(request: Request)
 POST    /login                      controllers.LoginController.submit(request: Request)
 
 # Map static resources from the /public folder to the /assets URL path

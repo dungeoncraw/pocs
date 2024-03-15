@@ -1,8 +1,10 @@
 package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import play.data.Form;
 import play.data.FormFactory;
-import play.mvc.BodyParser;
+import play.i18n.MessagesApi;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -12,23 +14,28 @@ import forms.LoginForm;
 
 public class LoginController extends  Controller {
 
-    FormFactory formFactory;
+    private final Form<LoginForm> form;
+    private MessagesApi messagesAPI;
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
-    public LoginController(FormFactory formFactory) {
-        this.formFactory = formFactory;
+    public LoginController(FormFactory formFactory, MessagesApi messagesApi) {
+        this.form = formFactory.form(LoginForm.class);
+        this.messagesAPI = messagesApi;
     }
 
-    public Result index() {
-        Form<LoginForm> loginForm = formFactory.form(LoginForm.class);
-        return ok(views.html.login.index.render());
+    public Result index(Http.Request request) {
+        return ok(views.html.login.index.render(form, request, messagesAPI.preferred(request)));
     };
 
-    // explicitly define the body parser to JSON https://www.playframework.com/documentation/3.0.x/JavaBodyParsers
-    @BodyParser.Of(BodyParser.Json.class)
     public Result submit(Http.Request request) {
-        JsonNode json = request.body().asJson();
-        // accessing one property and converting to text json.get("username").asText()
-        return ok(views.html.home.index.render(json.get("username").asText()));
+        final Form<LoginForm> boundForm = form.bindFromRequest(request);
+        if (boundForm.hasErrors()) {
+            logger.error("errors = {}", boundForm.errors());
+            return badRequest(views.html.login.index.render(boundForm, request, messagesAPI.preferred(request)));
+        }
+        // TODO: include some inmemory DB to handle login properly
+        return redirect(routes.HomeController.index()).flashing("info", "Login successfully");
     }
 }
