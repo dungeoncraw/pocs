@@ -30,7 +30,7 @@ public class HomeController extends Controller {
         if (session.get("tsession").isEmpty()) {
             return redirect(routes.LoginController.index());
         }
-        return ok(views.html.home.index.render("anyusername"));
+        return ok(views.html.home.index.render(session.get("tsession").get()));
     }
 
 }

@@ -36,6 +36,6 @@ public class LoginController extends  Controller {
             return badRequest(views.html.login.index.render(boundForm, request, messagesAPI.preferred(request)));
         }
         // TODO: include some inmemory DB to handle login properly
-        return redirect(routes.HomeController.index()).flashing("info", "Login successfully");
+        return redirect(routes.HomeController.index()).flashing("info", "Login successfully").addingToSession(request, "tsession", boundForm.get().username);
     }
 }
