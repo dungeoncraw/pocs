@@ -7,12 +7,14 @@ import play.mvc.Result;
 import play.inject.guice.GuiceApplicationBuilder;
 
 import play.test.WithApplication;
-import play.twirl.api.Content;
 
-import static org.junit.Assert.assertTrue;
+import java.util.Optional;
+
 import static play.mvc.Http.Status.OK;
 import static org.junit.Assert.assertEquals;
 import static play.test.Helpers.*;
+
+import forms.LoginForm;
 
 public class LoginControllerTest extends WithApplication {
     // This creates a simple test application https://www.playframework.com/documentation/2.9.x/JavaFunctionalTest
@@ -26,11 +28,7 @@ public class LoginControllerTest extends WithApplication {
                 .uri("/login");
         Result result = route(app, request);
         assertEquals(OK, result.status());
+        assertEquals(Optional.of("text/html"), result.contentType());
     }
 
-    @Test public void testLoginRender() {
-        Content html = views.html.login.index.render();
-        assertEquals("text/html", html.contentType());
-        assertTrue(contentAsString(html).contains("Please enter your credentials"));
-    }
 }

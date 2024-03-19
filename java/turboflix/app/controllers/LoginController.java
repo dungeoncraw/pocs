@@ -15,7 +15,7 @@ import forms.LoginForm;
 public class LoginController extends  Controller {
 
     private final Form<LoginForm> form;
-    private MessagesApi messagesAPI;
+    private final MessagesApi messagesAPI;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
