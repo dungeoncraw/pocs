@@ -9,6 +9,5 @@ scalaVersion := "2.13.13"
 
 libraryDependencies += guice
 
-
-includeFilter in (Assets, LessKeys.less) := "*.less"
-excludeFilter in (Assets, LessKeys.less) := "_*.less"
+Assets / LessKeys.less / includeFilter:= "*.less"
+Assets / LessKeys.less / excludeFilter := "_*.less"

@@ -2,7 +2,7 @@
 @(loginForm: Form[forms.LoginForm])(implicit request: Request, messages: play.i18n.Messages)
 
 @main("Turboflix! - Access your account") {
-    <h1>Welcome back!</h1>
+    <h1>Turboflix! Knowledge anywhere</h1>
     <h2>Please enter your credentials</h2>
     @* Flash shows updates to a page *@
     @request.flash.asScala().data.map { case (name, value) =>
