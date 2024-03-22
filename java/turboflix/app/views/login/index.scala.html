@@ -9,17 +9,22 @@
         @request.flash.asScala().data.map { case (name, value) =>
             <div class="@name">@value</div>
         }
-
-        <div class="form">
-            @helper.form(routes.LoginController.submit()) {
-                @* CSRF protection *@
-                @helper.CSRF.formField
-                <div class="input">
-                    @helper.inputText(loginForm("username"), Symbol("id") -> "username", Symbol("_label") -> "Username", Symbol("_class") -> "username")
-                </div>
-                @helper.inputPassword(loginForm("password"), Symbol("id") -> "password", Symbol("_label") -> "Password")
-                <button type="submit">Login</button>
-            }
-        </div>
+<!--        -->
+<!--        <div class="form">-->
+<!--            @helper.form(routes.LoginController.submit()) {-->
+<!--                @* CSRF protection *@-->
+<!--                @helper.CSRF.formField-->
+<!--                <div class="input">-->
+<!--                    @helper.inputText(loginForm("username"), Symbol("id") -> "username", Symbol("_label") -> "Username", Symbol("_class") -> "username")-->
+<!--                </div>-->
+<!--                @helper.inputPassword(loginForm("password"), Symbol("id") -> "password", Symbol("_label") -> "Password")-->
+<!--                <button type="submit">Login</button>-->
+<!--            }-->
+<!--        </div>-->
+        @b4.vertical.form(routes.LoginController.submit) { implicit vfc =>
+            @b4.email( loginForm("username"), '_label -> "Email", 'placeholder -> "example@mail.com" )
+            @b4.password( loginForm("password"), '_label -> "Password", 'placeholder -> "Password" )
+            @b4.submit('class -> "btn btn-default"){ Login }
+        }
     </div>
 }
