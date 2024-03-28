@@ -11,18 +11,6 @@
         @request.flash.asScala().data.map { case (name, value) =>
             <div class="@name">@value</div>
         }
-<!--        -->
-<!--        <div class="form">-->
-<!--            @helper.form(routes.LoginController.submit()) {-->
-<!--                @* CSRF protection *@-->
-<!--                @helper.CSRF.formField-->
-<!--                <div class="input">-->
-<!--                    @helper.inputText(loginForm("username"), Symbol("id") -> "username", Symbol("_label") -> "Username", Symbol("_class") -> "username")-->
-<!--                </div>-->
-<!--                @helper.inputPassword(loginForm("password"), Symbol("id") -> "password", Symbol("_label") -> "Password")-->
-<!--                <button type="submit">Login</button>-->
-<!--            }-->
-<!--        </div>-->
         <div class="d-flex p-2 bd-highlight mt-5 form">
         @b4.vertical.formCSRF(routes.LoginController.submit) { implicit vfc =>
             @b4.email( loginForm("username"), '_label -> "Username", 'placeholder -> "example@mail.com" )
