@@ -1,6 +1,5 @@
 package controllers;
 
-import play.*;
 import play.mvc.*;
 import com.typesafe.config.Config;
 import javax.inject.Inject;
