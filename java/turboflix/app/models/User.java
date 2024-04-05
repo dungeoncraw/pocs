@@ -1,7 +1,7 @@
 package models;
-
-// TODO finish the model and db based in tutorial https://github.com/playframework/play-samples/blob/3.0.x/play-java-jpa-example/conf/application.conf
 import jakarta.persistence.*;
+// TODO finish the model and db based in tutorial https://github.com/playframework/play-samples/blob/3.0.x/play-java-jpa-example/conf/application.conf
+
 @Entity
 public class User {
     @Id
