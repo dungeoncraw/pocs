@@ -12,10 +12,10 @@
             <div class="@name">@value</div>
         }
         <div class="d-flex p-2 bd-highlight mt-5 form">
-        @b4.vertical.formCSRF(routes.LoginController.submit) { implicit vfc =>
-            @b4.email( loginForm("username"), '_label -> "Username", 'placeholder -> "example@mail.com" )
-            @b4.password( loginForm("password"), '_label -> "Password", 'placeholder -> "Password" )
-            @b4.submit('class -> "btn btn-default w-100 text-white bg-primary"){ Login }
+        @b4.vertical.formCSRF(routes.LoginController.submit() ) { implicit vfc =>
+            @b4.email( loginForm("username"), Symbol("_label") -> "Username", Symbol("placeholder") -> "example@mail.com" )
+            @b4.password( loginForm("password"), Symbol("_label") -> "Password", Symbol("placeholder") -> "Password" )
+            @b4.submit(Symbol("class") -> "btn btn-default w-100 text-white bg-primary"){ Login }
         }
         </div>
     </div>
