@@ -11,4 +11,9 @@ public class User {
     public String name;
     public String email;
     private String password;
+
+    public void setPassword(String password) {
+        // include hash password
+        this.password = password;
+    }
 }
