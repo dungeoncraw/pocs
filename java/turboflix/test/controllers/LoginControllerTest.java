@@ -5,6 +5,7 @@ import com.typesafe.config.ConfigFactory;
 import models.user.User;
 import models.user.UserRepository;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
+import org.junit.Assert;
 import org.junit.Test;
 import play.Application;
 import play.data.FormFactory;
@@ -16,23 +17,23 @@ import play.mvc.Result;
 import play.inject.guice.GuiceApplicationBuilder;
 import play.i18n.Messages;
 
+
+
 import play.test.Helpers;
 import play.test.WithApplication;
 
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
-import static org.junit.Assert.assertTrue;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 import static play.mvc.Http.Status.OK;
-import static org.junit.Assert.assertEquals;
 import static play.test.Helpers.*;
 import static org.mockito.Mockito.mock;
 import static play.test.Helpers.contentAsString;
 
-import forms.LoginForm;
-
-import javax.annotation.processing.Completion;
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 
@@ -81,9 +82,13 @@ public class LoginControllerTest extends WithApplication {
         Config config = ConfigFactory.load();
         FormFactory formFactory = new FormFactory(messagesApi, new Formatters(messagesApi), validatorFactory, config);
 
-        final LoginController controller = new LoginController(formFactory, messagesApi);
+        final LoginController controller = new LoginController(formFactory, messagesApi, repository);
 
-        CompletionStage<User> stage = controller.submit(request);
+        CompletionStage<Result> stage = controller.submit(request);
+
+        await().atMost(1, SECONDS).untilAsserted(
+                () -> Assert.assertThat(stage.toCompletableFuture()).isCompletedWithValueMatching(
+        );
     }
 
 }

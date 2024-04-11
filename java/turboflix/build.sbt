@@ -11,15 +11,15 @@ libraryDependencies ++= Seq(
   guice,
   javaJpa,
   javaJdbc,
-  "com.h2database"            % "h2"                  % "2.2.222",
+  "com.h2database"            % "h2"                  % "2.2.224",
   "org.hibernate"             % "hibernate-core"      % "6.4.4.Final",
   javaWs                      % "test",
-  "org.awaitility"            % "awaitility"          % "4.2.0"         % "test",
+  "org.awaitility"            % "awaitility"          % "4.2.1"         % "test",
   "org.assertj"               % "assertj-core"        % "3.25.3"        % "test",
-  "org.mockito"               % "mockito-core"        % "5.10.0"        % "test",
-  "org.webjars"               % "bootstrap"           % "5.3.2",
+  "org.mockito"               % "mockito-core"        % "5.11.0"        % "test",
+  "org.webjars"               % "bootstrap"           % "5.3.3",
   "com.adrianhurt"            %%"play-bootstrap"      % "1.6.1-P28-B4",
-  "org.webjars"               % "jquery"              % "3.6.4"
+  "org.webjars"               % "jquery"              % "3.7.1"
 )
 
 Assets / LessKeys.less / includeFilter:= "*.less"
