@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 // TODO finish the model and db based in tutorial https://github.com/playframework/play-samples/blob/3.0.x/play-java-jpa-example/conf/application.conf
 
 @Entity
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

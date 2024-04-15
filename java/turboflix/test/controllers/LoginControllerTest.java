@@ -5,7 +5,7 @@ import com.typesafe.config.ConfigFactory;
 import models.user.User;
 import models.user.UserRepository;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
-import org.junit.Assert;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import play.Application;
 import play.data.FormFactory;
@@ -87,8 +87,9 @@ public class LoginControllerTest extends WithApplication {
         CompletionStage<Result> stage = controller.submit(request);
 
         await().atMost(1, SECONDS).untilAsserted(
-                () -> Assert.assertThat(stage.toCompletableFuture()).isCompletedWithValueMatching(
-        );
+                () -> assertThat(stage.toCompletableFuture()).isCompletedWithValueMatching(
+                        result -> result.status() == SEE_OTHER, "Should redirect to home after login"
+        ));
     }
 
 }
