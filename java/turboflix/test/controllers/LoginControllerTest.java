@@ -39,6 +39,7 @@ import javax.validation.ValidatorFactory;
 
 public class LoginControllerTest extends WithApplication {
     // This creates a simple test application https://www.playframework.com/documentation/2.9.x/JavaFunctionalTest
+    // Working with hibernate is not moving forward, so would try two different approach https://mybatis.org/mybatis-3/ and https://sproket.github.io/Persism/manual2.html
     @Override
     protected Application provideApplication() { return new GuiceApplicationBuilder().build();}
 
