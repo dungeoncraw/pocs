@@ -1,0 +1,7 @@
+[0m[[0m[0minfo[0m] [0m[0mAnnotation processing is enabled because one or more processors were found[0m
+[0m[[0m[0minfo[0m] [0m[0m  on the class path. A future release of javac may disable annotation processing[0m
+[0m[[0m[0minfo[0m] [0m[0m  unless at least one processor is specified by name (-processor), or a search[0m
+[0m[[0m[0minfo[0m] [0m[0m  path is specified (--processor-path, --processor-module-path), or annotation[0m
+[0m[[0m[0minfo[0m] [0m[0m  processing is enabled explicitly (-proc:only, -proc:full).[0m
+[0m[[0m[0minfo[0m] [0m[0m  Use -Xlint:-options to suppress this message.[0m
+[0m[[0m[0minfo[0m] [0m[0m  Use -proc:none to disable annotation processing.[0m

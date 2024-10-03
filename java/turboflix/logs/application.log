@@ -1,0 +1,81 @@
+2024-04-16 10:20:52 [31mWARN [0;39m [36mplay.api.Configuration$[0;39m [35m[0;39m application.conf @ file:/Users/thiagonascimento/Projects/pocs/java/turboflix/target/scala-2.13/classes/application.conf: 30: user is deprecated, use username instead
+2024-04-16 10:20:52 [34mINFO [0;39m [36mplay.api.db.DefaultDBApi[0;39m [35m[0;39m Database [default] initialized
+2024-04-16 10:20:52 [34mINFO [0;39m [36mplay.api.db.HikariCPConnectionPool[0;39m [35m[0;39m Creating Pool for datasource 'default'
+2024-04-16 10:20:52 [34mINFO [0;39m [36mplay.api.db.HikariCPConnectionPool[0;39m [35m[0;39m datasource [default] bound to JNDI as DefaultDS
+2024-04-16 10:20:52 [34mINFO [0;39m [36mplay.api.http.EnabledFilters[0;39m [35m[0;39m Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2024-04-16 10:20:52 [34mINFO [0;39m [36mplay.api.Play[0;39m [35m[0;39m Application started (Dev) (no global state)
+2024-04-16 10:21:03 [1;31mERROR[0;39m [36mp.api.http.DefaultHttpErrorHandler[0;39m [35m[0;39m 
+
+! @85826f1nm - Internal server error, for (POST) [/login] ->
+ 
+play.api.PlayException: Execution exception[[CompletionException: java.lang.IllegalArgumentException: org.hibernate.query.SyntaxException: At 1:7 and token '*', no viable alternative at input 'Select ** from User u where email = :email and password = :password' [Select * from User u where email = :email and password = :password]]]
+	at play.api.http.HttpErrorHandlerExceptions$.$anonfun$convertToPlayException$3(HttpErrorHandler.scala:407)
+	at scala.Option.getOrElse(Option.scala:201)
+	at play.api.http.HttpErrorHandlerExceptions$.convertToPlayException(HttpErrorHandler.scala:407)
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:390)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:267)
+	at play.core.server.PekkoHttpServer$$anonfun$invokeAction$1$1.applyOrElse(PekkoHttpServer.scala:482)
+	at play.core.server.PekkoHttpServer$$anonfun$invokeAction$1$1.applyOrElse(PekkoHttpServer.scala:474)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:490)
+	at org.apache.pekko.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:73)
+	at org.apache.pekko.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:110)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:94)
+	at org.apache.pekko.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:110)
+	at org.apache.pekko.dispatch.TaskInvocation.run(AbstractDispatcher.scala:59)
+	at org.apache.pekko.dispatch.ForkJoinExecutorConfigurator$PekkoForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:57)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)
+Caused by: java.util.concurrent.CompletionException: java.lang.IllegalArgumentException: org.hibernate.query.SyntaxException: At 1:7 and token '*', no viable alternative at input 'Select ** from User u where email = :email and password = :password' [Select * from User u where email = :email and password = :password]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1770)
+	at org.apache.pekko.dispatch.TaskInvocation.run(AbstractDispatcher.scala:59)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.IllegalArgumentException: org.hibernate.query.SyntaxException: At 1:7 and token '*', no viable alternative at input 'Select ** from User u where email = :email and password = :password' [Select * from User u where email = :email and password = :password]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:143)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:167)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:173)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:848)
+	at org.hibernate.internal.SessionImpl.createQuery(SessionImpl.java:198)
+	at models.user.UserRepositoryJPA.login(UserRepositoryJPA.java:41)
+	at models.user.UserRepositoryJPA.lambda$login$3(UserRepositoryJPA.java:37)
+	at play.db.jpa.DefaultJPAApi.withTransaction(DefaultJPAApi.java:167)
+	at play.db.jpa.DefaultJPAApi.withTransaction(DefaultJPAApi.java:124)
+	at play.db.jpa.DefaultJPAApi.withTransaction(DefaultJPAApi.java:99)
+	at models.user.UserRepositoryJPA.wrap(UserRepositoryJPA.java:51)
+	at models.user.UserRepositoryJPA.lambda$login$4(UserRepositoryJPA.java:37)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768)
+	... 4 common frames omitted
+Caused by: org.hibernate.query.SyntaxException: At 1:7 and token '*', no viable alternative at input 'Select ** from User u where email = :email and password = :password' [Select * from User u where email = :email and password = :password]
+	at org.hibernate.query.hql.internal.StandardHqlTranslator$1.syntaxError(StandardHqlTranslator.java:108)
+	at org.antlr.v4.runtime.ProxyErrorListener.syntaxError(ProxyErrorListener.java:41)
+	at org.antlr.v4.runtime.Parser.notifyErrorListeners(Parser.java:544)
+	at org.antlr.v4.runtime.DefaultErrorStrategy.reportNoViableAlternative(DefaultErrorStrategy.java:310)
+	at org.antlr.v4.runtime.DefaultErrorStrategy.reportError(DefaultErrorStrategy.java:136)
+	at org.hibernate.grammars.hql.HqlParser.queryExpression(HqlParser.java:1809)
+	at org.hibernate.grammars.hql.HqlParser.selectStatement(HqlParser.java:407)
+	at org.hibernate.grammars.hql.HqlParser.statement(HqlParser.java:337)
+	at org.hibernate.query.hql.internal.StandardHqlTranslator.parseHql(StandardHqlTranslator.java:132)
+	at org.hibernate.query.hql.internal.StandardHqlTranslator.translate(StandardHqlTranslator.java:67)
+	at org.hibernate.query.internal.QueryInterpretationCacheStandardImpl.createHqlInterpretation(QueryInterpretationCacheStandardImpl.java:165)
+	at org.hibernate.query.internal.QueryInterpretationCacheStandardImpl.resolveHqlInterpretation(QueryInterpretationCacheStandardImpl.java:147)
+	at org.hibernate.internal.AbstractSharedSessionContract.interpretHql(AbstractSharedSessionContract.java:790)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:840)
+	... 13 common frames omitted
+2024-04-16 10:43:06 [34mINFO [0;39m [36mp.a.i.l.c.CoordinatedShutdownSupport[0;39m [35m[0;39m Starting synchronous coordinated shutdown with ServerStoppedReason reason and 40000 milliseconds timeout
+2024-04-16 10:43:06 [34mINFO [0;39m [36mplay.core.server.PekkoHttpServer[0;39m [35m[0;39m Stopping Pekko HTTP server...
+2024-04-16 10:43:06 [34mINFO [0;39m [36mplay.core.server.PekkoHttpServer[0;39m [35m[0;39m Unbinding /[0:0:0:0:0:0:0:0]:9000
+2024-04-16 10:43:06 [34mINFO [0;39m [36mplay.core.server.PekkoHttpServer[0;39m [35m[0;39m Terminating server binding for /[0:0:0:0:0:0:0:0]:9000
+2024-04-16 10:43:06 [34mINFO [0;39m [36mplay.api.db.HikariCPConnectionPool[0;39m [35m[0;39m Shutting down connection pool.
+2024-04-16 10:43:06 [34mINFO [0;39m [36mplay.core.server.PekkoHttpServer[0;39m [35m[0;39m Running provided shutdown stop hooks

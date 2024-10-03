@@ -1,0 +1,43 @@
+[0m[[0m[0mdebug[0m] [0m[0mjavaOptions: Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mForking tests - parallelism = false[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreate a single-thread test executor[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunner for com.novocode.junit.JUnitFramework produced 2 initial tasks for 2 tests.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.HomeControllerTest, sbt.ForkMain$AnnotatedFingerscan@45c8e616, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[34mTest run [0mcontrollers.[33mHomeControllerTest[0m[34m started[0m[0m
+[0m[[0m[0minfo[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndex[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndex[0m finished, took 1.728 sec[0m
+[0m[[0m[0minfo[0m] [0m[0m[34mTest run [0mcontrollers.[33mHomeControllerTest[0m[34m finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 1.731s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 1 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.LoginControllerTest, sbt.ForkMain$AnnotatedFingerscan@4cdbe50f, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[34mTest run [0mcontrollers.[33mLoginControllerTest[0m[34m started[0m[0m
+[0m[[0m[0minfo[0m] [0m[0mTest controllers.[33mLoginControllerTest[0m.[36mloginUser[0m started[0m
+[0m[[0m[31merror[0m] [0m[0mTest controllers.[33mLoginControllerTest[0m.[31mloginUser[0m failed: java.lang.[31mRuntimeException[0m: No CSRF token was generated for this request! Is the CSRF filter installed?, took 0.677 sec[0m
+[0m[[0m[31merror[0m] [0m[0m    at scala.sys.package$.error(package.scala:27)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.helper.CSRF$.$anonfun$getToken$1(CSRF.scala:17)[0m
+[0m[[0m[31merror[0m] [0m[0m    at scala.Option.getOrElse(Option.scala:201)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.helper.CSRF$.getToken(CSRF.scala:17)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.helper.CSRF$.formField(CSRF.scala:35)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.b4.formCSRF$.$anonfun$apply$1(formCSRF.template.scala:27)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.b4.form$.apply(form.template.scala:27)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.b4.formCSRF$.apply(formCSRF.template.scala:29)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.b4.vertical.package$.formCSRF(package.scala:63)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.login.index$.apply(index.template.scala:45)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.login.index$.render(index.template.scala:57)[0m
+[0m[[0m[31merror[0m] [0m[0m    at views.html.login.index.render(index.template.scala)[0m
+[0m[[0m[31merror[0m] [0m[0m    at controllers.LoginController.submit(LoginController.java:44)[0m
+[0m[[0m[31merror[0m] [0m[0m    at controllers.LoginControllerTest.loginUser([35mLoginControllerTest.java[0m:[33m87[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)[0m
+[0m[[0m[31merror[0m] [0m[0m    at java.lang.reflect.Method.invoke(Method.java:580)[0m
+[0m[[0m[31merror[0m] [0m[0m    ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mLoginControllerTest[0m.[36mloginUser[0m finished, took 0.679 sec[0m
+[0m[[0m[0minfo[0m] [0m[0mTest controllers.[33mLoginControllerTest[0m.[36mtestIndex[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mLoginControllerTest[0m.[36mtestIndex[0m finished, took 0.219 sec[0m
+[0m[[0m[0minfo[0m] [0m[0m[34mTest run [0mcontrollers.[33mLoginControllerTest[0m[34m finished: [0m[31m1 failed[0m[34m, [0m[34m0 ignored[0m[34m, 2 total, 0.899s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 2 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0mSummary for JUnit not available.[0m
+[0m[[0m[31merror[0m] [0m[0mFailed: Total 3, Failed 1, Errors 0, Passed 2[0m
+[0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	controllers.HomeControllerTest[0m
+[0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
+[0m[[0m[31merror[0m] [0m[0m	controllers.LoginControllerTest[0m
+[0m[[0m[31merror[0m] [0m[0m(Test / [31mtest[0m) sbt.TestsFailedException: Tests unsuccessful[0m
