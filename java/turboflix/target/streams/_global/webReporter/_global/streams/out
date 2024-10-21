@@ -1,4 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/thiagonascimento/Projects/pocs/java/turboflix/app/assets/stylesheets/main.less:1:1: Properties must be inside selector blocks. They cannot be in the root[0m
-[0m[[0m[31merror[0m] [0m[0m// THIS WOULD BE COMPILED INTO MAIN.CSS FILE BY PLAY FRAMEWORK[0m
-[0m[[0m[31merror[0m] [0m[0m^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m

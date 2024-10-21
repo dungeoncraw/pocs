@@ -1,0 +1,9 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /Users/thiagonascimento/Projects/pocs/languages/scala/zio/target/scala-3.5.1/scala-3-project-template_3-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MyApp$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/zio/target/scala-3.5.1/classes/MyApp$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MyApp.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/zio/target/scala-3.5.1/classes/MyApp.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MyApp.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/zio/target/scala-3.5.1/classes/MyApp.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
