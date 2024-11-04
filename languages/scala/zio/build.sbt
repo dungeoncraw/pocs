@@ -12,6 +12,7 @@ lazy val root = project
       "org.scalameta" %% "munit" % "1.0.0" % Test,
       "dev.zio"      %% "zio" % "2.1.11",
       "dev.zio"      %% "zio-streams" % "2.1.11",
+      "dev.zio"      %% "zio-http" % "3.0.1",
     )
 
   )

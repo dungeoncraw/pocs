@@ -1,14 +1,25 @@
 import zio._
-import zio.Console._
 
-object MyApp extends ZIOAppDefault {
+import zio.http._
 
-  def run = myAppLogic
+object RequestStreaming extends ZIOAppDefault {
 
-  val myAppLogic =
-    for {
-      _    <- printLine("Hello! What is your name?")
-      name <- readLine
-      _    <- printLine(s"Hello, ${name}, welcome to ZIO!")
-    } yield ()
+  // Create HTTP route which echos back the request body
+  val app = Routes(Method.POST / "echo" -> handler { (req: Request) =>
+    // Returns a stream of bytes from the request
+    // The stream supports back-pressure
+    val stream = req.body.asStream
+
+    // Creating HttpData from the stream
+    // This works for file of any size
+    val data = Body.fromStreamChunked(stream)
+
+    println(data)
+    
+    Response(body = data)
+  })
+
+  // Run it like any simple app
+  val run: UIO[ExitCode] =
+    Server.serve(app).provide(Server.default).exitCode
 }
