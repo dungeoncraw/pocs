@@ -1,20 +1,41 @@
 import zio._
 
 import zio.http._
+import zio.schema._
+
+import zio.stream._
+import scala.util.Random
+import java.io.*
+
+
 
 object RequestStreaming extends ZIOAppDefault {
 
+  def printLine(line: String): UIO[Unit] =
+    ZIO.succeed(println(line))
   // Create HTTP route which echos back the request body
   val app = Routes(Method.POST / "echo" -> handler { (req: Request) =>
-    // Returns a stream of bytes from the request
-    // The stream supports back-pressure
     val stream = req.body.asStream
 
-    // Creating HttpData from the stream
-    // This works for file of any size
-    val data = Body.fromStreamChunked(stream)
 
-    println(data)
+    // tried to get this from body but without luck
+    val chunkSize = 10
+    val fillValue = 3
+
+    val chunk: Chunk[Int] = Chunk.fill(chunkSize)(fillValue * Random.between(1, 30))
+    
+    val s3: ZStream[Any, Throwable, Int]    = ZStream.fromChunk(chunk)
+
+    // s3.filter(_ % 2 == 0).run(ZSink.sum)
+    // s3.filter(_ % 2 == 0).tap(x => printLine(s"after mapping: $x"))
+    s3.tap(x => printLine(s"after mapping: $x"))
+    
+    val streamz: ZStream[Any, IOException, Int] =
+      ZStream(1, 2, 3)
+        .tap(x => printLine(s"before mapping: $x"))
+        .map(_ * 2)
+        .tap(x => printLine(s"after mapping: $x"))
+    val data = Body.fromStreamChunked(stream)
     
     Response(body = data)
   })
