@@ -1,4 +1,4 @@
-package com.startstopactors
+package com.pekko.startstop
 
 import org.apache.pekko.actor.typed.{ActorSystem, Behavior, PostStop, Signal}
 import org.apache.pekko.actor.typed.scaladsl.{AbstractBehavior, ActorContext, Behaviors}
