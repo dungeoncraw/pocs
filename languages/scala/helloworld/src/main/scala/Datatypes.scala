@@ -14,7 +14,7 @@ def datatypes(): Unit = {
 
     println("Enter a number")
 
-    val input = StdIn.readline()
+    val input = StdIn.readLine()
 
     // converting number to some data types
     val myByte = input.toByte
