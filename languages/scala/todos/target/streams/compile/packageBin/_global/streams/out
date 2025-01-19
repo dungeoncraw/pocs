@@ -1,0 +1,17 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /Users/thiagonascimento/Projects/pocs/languages/scala/todos/target/scala-3.6.3/todos_3-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/todos/target/scala-3.6.3/classes/com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/tetokeguii[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/todos/target/scala-3.6.3/classes/com/tetokeguii[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/tetokeguii/helloWorld.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/todos/target/scala-3.6.3/classes/com/tetokeguii/helloWorld.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/tetokeguii/helloWorld.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/todos/target/scala-3.6.3/classes/com/tetokeguii/helloWorld.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/tetokeguii/main$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/todos/target/scala-3.6.3/classes/com/tetokeguii/main$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/tetokeguii/main$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/todos/target/scala-3.6.3/classes/com/tetokeguii/main$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/tetokeguii/main$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/thiagonascimento/Projects/pocs/languages/scala/todos/target/scala-3.6.3/classes/com/tetokeguii/main$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
