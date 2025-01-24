@@ -1,8 +1,8 @@
-[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: /Users/thiagonascimento/Projects/pocs/languages/scala/todos/src/main/scala/modules/todo.scala:9:13 [0m[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m9 |[0m    todoList = todoList.concat(List(item))[0m
-[0m[[0m[31merror[0m] [0m[0m[31m[31m  |[0m    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m  |[0m    Found:    Unit[0m
-[0m[[0m[31merror[0m] [0m[0m[31m  |[0m    Required: List[com.tetokeguii.modules.todo.Todo][0m
-[0m[[0m[31merror[0m] [0m[0m[31m  |[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m  |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: /Users/thiagonascimento/Projects/pocs/languages/scala/todos/src/main/scala/modules/todo.scala:21:68 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m21 |[0m    todoList = todoList.filterNot(_.code == item.code).appended(List(item))[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                                                                ^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                        Found:    [1m[31mList[0m[1m[31m[[0mcom.tetokeguii.modules.todo.Todo[1m[31m][0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                        Required: com.tetokeguii.modules.todo.Todo[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m longer explanation available when compiling with `-explain`[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
