@@ -1,0 +1,18 @@
+meta {
+  name: PUT Category
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{adminurl}}/api/categories/1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Category 1",
+    "description": "Category 1 changed description"
+  }
+}

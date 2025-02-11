@@ -1,0 +1,18 @@
+meta {
+  name: DELETE Transaction
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{adminurl}}/api/transactions/1
+  body: none
+  auth: inherit
+}
+
+body:json {
+  {
+    "memo": "This is not a dummy transaction",
+    "description": "Nothing else matters"
+  }
+}

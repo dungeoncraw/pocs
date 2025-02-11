@@ -6,6 +6,6 @@ create table if not exists users(
     lastname varchar(255) not null,
     password varchar(255) not null,
     balance bigint not null default 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP not null,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP not null
 );

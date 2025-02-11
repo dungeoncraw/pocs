@@ -1,0 +1,21 @@
+meta {
+  name: POST Transaction
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{adminurl}}/api/transactions
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "category_id": 1,
+    "type": "candy",
+    "amount": 1000,
+    "memo": "This is a dummy transaction",
+    "description": "Nothing"
+  }
+}

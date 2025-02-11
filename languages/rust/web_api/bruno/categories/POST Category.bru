@@ -1,0 +1,18 @@
+meta {
+  name: POST Category
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{adminurl}}/api/categories
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Category 1",
+    "description": "Category 1 description"
+  }
+}

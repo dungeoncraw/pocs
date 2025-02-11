@@ -1,0 +1,20 @@
+meta {
+  name: Sign-up
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{adminurl}}/auth/sign-up
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "test@mail.com",
+    "password": "pass",
+    "first_name": "name",
+    "last_name": "lastz"
+  }
+}

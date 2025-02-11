@@ -1,0 +1,18 @@
+meta {
+  name: PUT Transaction
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{adminurl}}/api/transactions/1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "memo": "This is not a dummy transaction",
+    "description": "Nothing else matters"
+  }
+}
