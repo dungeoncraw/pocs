@@ -72,6 +72,9 @@ cargo run
 ```
 The application will be available at `http://127.0.0.1:8080`.
 
+### 6. SQLX prepare
+In order to push the code to a docker image without having database directly access, need to use the command `cargo sqlx prepare` to generate .sqlx statements and generate some cached definitions for queries
+
 ---
 
 ## API Endpoints
