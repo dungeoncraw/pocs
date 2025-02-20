@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/todos.iml" filepath="$PROJECT_DIR$/.idea/modules/todos.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/todos-build.iml" filepath="$PROJECT_DIR$/.idea/modules/todos-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/todos.todos-build.iml" filepath="$PROJECT_DIR$/.idea/modules/todos.todos-build.iml" />
     </modules>
   </component>
 </project>

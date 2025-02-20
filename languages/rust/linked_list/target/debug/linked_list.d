@@ -1,0 +1,1 @@
+/Users/thiagonascimento/Projects/pocs/languages/rust/linked_list/target/debug/linked_list: /Users/thiagonascimento/Projects/pocs/languages/rust/linked_list/src/lib/first.rs /Users/thiagonascimento/Projects/pocs/languages/rust/linked_list/src/lib/mod.rs /Users/thiagonascimento/Projects/pocs/languages/rust/linked_list/src/main.rs
