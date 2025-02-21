@@ -55,7 +55,7 @@ impl Drop for List {
 mod test {
     use super::List;
     #[test]
-    fn basics() {
+    fn first_test() {
         let mut list = List::new();
 
         assert_eq!(list.pop(), None);
