@@ -62,4 +62,31 @@ def collections(): Unit = {
   println(mutableSet)
   mutableSet.addAll(List(5, 6, 7, 8, 7))
   println(mutableSet)
+
+  // maps
+  val m1 = Map(1 -> "one", 2 -> "two")
+  val m2 = Map(("k1", "one"), ("k2", "two"))
+  val m3 = Map[Int, String](1 -> "one", 2 -> "two")
+  val m4 = Map()
+  println(m1(1))
+  println(m2("k1"))
+  println(m2.keySet)
+  println(m2.values)
+  println(m2.keys)
+
+  val hm1 = mutable.HashMap(1 -> "one", 2 -> "two")
+  hm1 += (3 -> "three")
+  hm1.addOne(4 -> "four")
+  println(hm1)
+
+  hm1 ++= Map(5 -> "five", 6 -> "six")
+  hm1.addAll(Map(7 -> "seven", 8 -> "eight"))
+  hm1.remove(5)
+  hm1 --= Set(3, 7, 8)
+  println(hm1)
+  println(hm1.size)
+  println(hm1.contains(1))
+  println(hm1.contains(3))
+  println(hm1.head)
+  println(hm1.tail)
 }
