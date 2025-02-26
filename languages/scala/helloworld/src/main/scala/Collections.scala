@@ -89,4 +89,17 @@ def collections(): Unit = {
   println(hm1.contains(3))
   println(hm1.head)
   println(hm1.tail)
+
+  val t1 = (1, "one")
+  val t2 = Tuple2(2, "two")
+  val t3 = Tuple3[Int, String, Boolean](3, "three", true)
+  println(t1(1))
+  // this pattern _N get the element by position starting in 1, not by index like arrays
+  println(t2._2)
+  // modify value of element on copy
+  val cont = t3.copy(_2 = "four")
+  println(cont.productArity)
+
+  // concat tuples and create a new one
+  println(t1 ++ t2)
 }
