@@ -102,4 +102,21 @@ def collections(): Unit = {
 
   // concat tuples and create a new one
   println(t1 ++ t2)
+
+  // ranges
+  // those include the last item of range
+  val r1 = 1 to 10
+  val r2 = 'a' to 'z'
+  // those don't include the last item of range
+  val r3 = 1 until 10
+  val r4 = 'a' until 'z'
+
+  // step
+  val r5 = 1 to 10 by 2
+  val r6 = 'a' to 'z' by 2
+
+  // negative range
+  val r7 = 10 to 1 by -1
+  val r8 = (1 to 10).reverse
+
 }
