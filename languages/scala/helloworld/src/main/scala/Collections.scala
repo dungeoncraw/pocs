@@ -119,4 +119,23 @@ def collections(): Unit = {
   val r7 = 10 to 1 by -1
   val r8 = (1 to 10).reverse
 
+  for (i <- r8)
+    println(i)
+  // this is really nice
+  for (row <- 1 to 5; column <- 3 to 9)
+    println(s"x = $row, y = $column")
+
+  // multiple filters
+  for (r <- r1 if r % 2 == 0; if r > 5)
+    println(r)
+  // yield a value returned from FOR loop
+  val output = for(v <- r7 if v % 2 == 0) yield v
+  println(output)
+
+  val items = 10
+  var sum = 0
+  while(sum < items) {
+    sum += 1
+    println(sum)
+  }
 }
