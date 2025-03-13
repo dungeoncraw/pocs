@@ -10,6 +10,12 @@ def functions(): Unit = {
   // splat operator
   sayHello(listUser*)
 
+  val values = 1 to 10
+  doMultiple(values*)
+
+  val longValues = List(1.toLong, 2.toLong, 3L)
+  doMultiple(longValues*)
+
   // lambdas
   val myLambda = (a: Int) => a * 2
   myLambda(10)
@@ -48,3 +54,17 @@ def sayHello(people: Iterable[String]): Unit =
 def sayHello(names: String*): Unit =
   for(name <- names)
     println(s"Hello $name")
+
+def doMultiple(values: Int*): Int =
+  var sumMultiple = 1
+  for(value <- values)
+    sumMultiple *= value
+  println(s"multiple: $sumMultiple")
+  sumMultiple
+
+def doMultiple(values: Long*): Long =
+  var sumMultiple = 1.toLong
+  for(value <- values)
+    sumMultiple *= value
+  println(s"long: $sumMultiple")
+  sumMultiple
