@@ -2,7 +2,9 @@
 def oop(): Unit =
   val postItNote = PostItNote()
   println(postItNote.message)
+  println(postItNote.getSize())
   postItNote.updateMessage("Just update internal values")
+  println(postItNote.getSize())
   println(postItNote.message)
   postItNote.updateMessage("Some new values")
   postItNote.printMessage()
@@ -16,11 +18,29 @@ def oop(): Unit =
   car3.start()
   car4.start()
 
+  val airplane = Airplane()
+  airplane.up()
+  airplane.down()
+  airplane.down()
+
 class PostItNote:
   var message: String = "No Message"
+  // this is initialization of parameters
+  println("PostItNote class created")
+  printMessage()
+
+  // only available for same package
+  protected var color: String = "black"
+  private var size: Int = 10
+
+  private def changeSize(v: Int) =
+    size = v
+
+  def getSize() = size
 
   def updateMessage(message: String) =
     this.message = message
+    changeSize(15)
 
   def printMessage() =
     // could use this or variable name inside a class
@@ -33,3 +53,26 @@ class Car(brand: String, model: String, topSpeed: Int):
   def this() = this("Ford", "Mustang", 250)
 
   def start() = println(s"Car $brand started with top speed $topSpeed")
+
+class Airplane:
+  import Airplane.*
+  private val brand: String = "Boeing"
+  private var altitude: Int = 1000
+
+  def up() =
+    altitude += 1000
+    println(s"$brand ascending to: $altitude")
+
+  def down() =
+    if (checkDescending(altitude))
+      altitude -= 1000
+      println(s"$brand descending to: $altitude")
+
+object Airplane:
+  def checkDescending(altitude: Int) =
+    if (altitude <= 1000)
+      println("Can't go below 1000")
+      false
+    else
+      println("Can go below 1000")
+      true
