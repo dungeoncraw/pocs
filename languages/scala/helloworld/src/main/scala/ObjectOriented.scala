@@ -76,3 +76,16 @@ object Airplane:
     else
       println("Can go below 1000")
       true
+
+// open to inheritance
+open class Person(nationality: String):
+  val hairColor: String = "black"
+  val eyeColor: String = "blue"
+
+  def speak(message: String) = println(s"Hello $message, I am $nationality")
+
+//Constructor of inherited class
+class Keeper(nationality: String) extends Person(nationality):
+  override val hairColor = "blonde"
+
+  override def speak(message: String) = println(s"Hello $message, I am $nationality and I am a keeper")
