@@ -72,7 +72,7 @@ mod test {
     use super::List;
 
     #[test]
-    fn basics() {
+    fn third_test() {
         let list = List::new();
         assert_eq!(list.head(), None);
 
