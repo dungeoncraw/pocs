@@ -1,3 +1,5 @@
+import scala.util.Random
+
 @main
 def oop(): Unit =
   val postItNote = PostItNote()
@@ -22,6 +24,17 @@ def oop(): Unit =
   airplane.up()
   airplane.down()
   airplane.down()
+
+  def getContainer(): Container =
+    if (Random.nextInt(2) % 2 == 0)
+      Bottle()
+    else
+      Jug()
+
+  for (i <- 1 to 10)
+    val container = getContainer()
+    container.open()
+    container.close()
 
 class PostItNote:
   var message: String = "No Message"
@@ -88,4 +101,18 @@ open class Person(nationality: String):
 class Keeper(nationality: String) extends Person(nationality):
   override val hairColor = "blonde"
 
-  override def speak(message: String) = println(s"Hello $message, I am $nationality and I am a keeper")
+  override def speak(message: String) =
+    val newMessage = s"New message: $message"
+    super.speak(newMessage)
+
+abstract class Container:
+  def open() = println("Opening container")
+  def close() = println("Closing container")
+
+class Bottle extends Container:
+  override def open() = println("Opening bottle")
+  override def close() = println("Closing bottle")
+
+class Jug extends Container:
+  override def open() = println("Opening jug")
+  override def close() = println("Closing jug")
