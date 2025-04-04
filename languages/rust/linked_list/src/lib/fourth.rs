@@ -1,5 +1,5 @@
 use std::rc::Rc;
-use std::cell::RefCell;
+use std::cell::{Ref, RefCell};
 
 pub struct List<T> {
     head: Link<T>,
@@ -61,6 +61,17 @@ impl<T> List<T> {
             Rc::try_unwrap(old_head).ok().unwrap().into_inner().elem
         })
     }
+    // this is really difficult to understand
+    // if we try to borrow the value from RefCells, got lost as it must need to return a reference to node
+    // but because of lifetime defined in fn borrow<'a>(&'a self) -> Ref<'a, T>
+    // the Ref is kept until return 'a borrowed value and once executed, the lifetime ends and then the Ref got out of scope
+    // so the solution is to create a new Ref, transforming from &T to &U, keeping the borrow referencing
+    // this is really nuts
+    pub fn peek_front(&self) -> Option<Ref<T>> {
+        self.head.as_ref().map(|node| {
+            Ref::map(node.borrow(), |node| &node.elem)
+        })
+    }
 }
 impl<T> Drop for List<T> {
     fn drop(&mut self) {
@@ -99,5 +110,13 @@ mod test {
         // Check exhaustion
         assert_eq!(list.pop_front(), Some(1));
         assert_eq!(list.pop_front(), None);
+    }
+    #[test]
+    fn peek() {
+        let mut list = List::new();
+        assert!(list.peek_front().is_none());
+        list.push_front(1); list.push_front(2); list.push_front(3);
+
+        assert_eq!(&*list.peek_front().unwrap(), &3);
     }
 }
