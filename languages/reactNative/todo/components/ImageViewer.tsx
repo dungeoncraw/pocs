@@ -1,18 +1,20 @@
-import { StyleSheet } from 'react-native';
-import { Image, type ImageSource} from "expo-image";
+import {StyleSheet} from 'react-native';
+import {Image, type ImageSource} from "expo-image";
 
 type Props = {
-  source: ImageSource;
+    source: ImageSource;
+    selectedImage?: string;
 };
 
-export default function ImageViewer({source}: Props) {
-    return <Image source={source} style={styles.image} />;
+export default function ImageViewer({source, selectedImage}: Props) {
+    const imageSource = selectedImage ? {uri: selectedImage} : source;
+    return <Image source={imageSource} style={styles.image}/>;
 }
 
 const styles = StyleSheet.create({
-  image: {
-    width: 320,
-    height: 440,
-      borderRadius: 18,
-  },
+    image: {
+        width: 320,
+        height: 440,
+        borderRadius: 18,
+    },
 });
