@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fddf077a-97dd-4706-bfa1-690451ba55f0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../c/loops/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../c/loops/.idea/editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tabs/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/tabs/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ImageViewer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ImageViewer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="fddf077a-97dd-4706-bfa1-690451ba55f0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,7 +118,7 @@
       <workItem from="1743292041115" duration="3164000" />
       <workItem from="1743337779041" duration="3760000" />
       <workItem from="1743371032693" duration="7000" />
-      <workItem from="1743981329127" duration="875000" />
+      <workItem from="1743981329127" duration="1006000" />
     </task>
     <servers />
   </component>
