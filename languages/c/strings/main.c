@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 void str_copy_comp() {
     char message1[20] = "Hello";
@@ -28,7 +29,21 @@ void str_copy_comp() {
     }
 }
 
+void string_to_upper(char str[]) {
+    // this is for the end of string \0
+    for (int i =0; str[i] != '\0'; i++) {
+        str[i] = toupper(str[i]);
+    }
+}
+
+void str_upper_example() {
+    char str[20] = "Hello World";
+    string_to_upper(str);
+    printf("str after string_to_upper: %s\n", str);
+}
+
 int main(void) {
     str_copy_comp();
+    str_upper_example();
     return 0;
 }
