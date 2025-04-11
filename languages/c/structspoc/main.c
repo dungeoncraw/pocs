@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 struct Employee {
@@ -65,9 +66,49 @@ void array_struct_example() {
         printf("\n");
     }
 }
+void move_point(struct Point *p, int delta_x, int delta_y) {
+    // same as (*p).x
+    p->x += delta_x;
+    // same as (*p).y
+    p->y += delta_y;
+}
+void mutable_struct() {
+    struct Point *point_ptr = (struct Point *)malloc(sizeof(struct Point));
+    if (point_ptr == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed\n");
+        return;
+    }
+    point_ptr->x = 5;
+    point_ptr->y = 8;
+
+    printf("Point before moving: (%d, %d)\n", point_ptr->x, point_ptr->y);
+    move_point(point_ptr, 10, 20);
+    printf("Point after moving: (%d, %d)\n", point_ptr->x, point_ptr->y);
+    free(point_ptr);
+}
+
+union Value {
+    int id;
+    char name[30];
+};
+
+void union_example() {
+    union Value val;
+
+    val.id = 123;
+    printf("ID: %d\n", val.id);
+    strcpy(val.name, "John Doe");
+
+    printf("Name: %s\n", val.name);
+
+    printf("Value as ID (after setting name - value is completely random): %d\n", val.id);
+}
+
 int main(void) {
     struct_example();
     nested_struct_example();
     array_struct_example();
+    mutable_struct();
+    union_example();
     return 0;
 }
