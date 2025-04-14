@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fddf077a-97dd-4706-bfa1-690451ba55f0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../scala/db/slick/slickpoc/src/main/scala/Tables.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../scala/db/slick/slickpoc/src/main/scala/Tables.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../scala/db/slick/slickpoc/src/main/scala/main.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../scala/db/slick/slickpoc/src/main/scala/main.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +126,7 @@
       <workItem from="1744497825623" duration="4000" />
       <workItem from="1744589952886" duration="2099000" />
       <workItem from="1744592116814" duration="1843000" />
+      <workItem from="1744643303413" duration="592000" />
     </task>
     <servers />
   </component>
