@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/tabs/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/tabs/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Button.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +123,9 @@
       <workItem from="1743337779041" duration="3760000" />
       <workItem from="1743371032693" duration="7000" />
       <workItem from="1743981329127" duration="1006000" />
-      <workItem from="1744493772838" duration="1517000" />
+      <workItem from="1744493772838" duration="1654000" />
+      <workItem from="1744497825623" duration="4000" />
+      <workItem from="1744589952886" duration="2099000" />
     </task>
     <servers />
   </component>
