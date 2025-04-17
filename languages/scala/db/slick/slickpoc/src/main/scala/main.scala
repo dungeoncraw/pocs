@@ -31,8 +31,24 @@ def main(): Unit =
         // === is slick DSL for SQL equality
         providers.filter(_.zip === "90210")
 
-      println("Generated SQL: \n"+filterQuery.result.statements)
       db.run(filterQuery.result).map(println)
+      println("Getting with join\n")
+      val qjoin = for {
+        c <- coffees if c.price < 9.0
+        // === for equality in slick
+        s <- providers if s.id === c.providerId
+      } yield (c.name, c.price, c.providerId, s.name, s.id )
+
+      db.stream(qjoin.result).foreach(println)
+
+      println("Getting with join but prices different than 2.00\n")
+      val qexclusive = for {
+        // =!= for getting values different from 2.00
+        c <- coffees if c.price =!= 2.00
+        s <- providers if s.id === c.providerId
+      } yield (c.name, c.price, c.providerId, s.name, s.id )
+
+      db.stream(qexclusive.result).foreach(println)
     }
     Await.result(f, Duration.Inf)
   }
