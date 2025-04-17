@@ -118,9 +118,55 @@ void single_linked_list_example() {
     insert_at_beginning(90);
     print_linked_list();
 }
+
+struct NodeLinked {
+    int data;
+    struct NodeLinked *next;
+    struct NodeLinked *previous;
+};
+// struct NodeLinked** head pass the pointer not a copy of it
+void insert_at_beginning_doubly(int data, struct NodeLinked** head, struct NodeLinked** tail) {
+    struct NodeLinked *newNode = malloc(sizeof(struct NodeLinked));
+    if (newNode == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+    newNode -> data = data;
+    newNode -> previous = NULL;
+    // getting pointer *head
+    newNode -> next = *head;
+    if (*head != NULL) {
+        (*head) -> previous = newNode;
+    } else {
+        *tail = newNode;
+    }
+    *head = newNode;
+    if (tail == NULL) {
+        *tail = *head;
+    }
+}
+
+void print_linked_list_forward(struct NodeLinked *head) {
+    struct NodeLinked *current = head;
+    printf("Linked list forward:\n");
+    while (current != NULL) {
+        printf("%d <->", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+void double_linked_list_example() {
+    struct NodeLinked* head = NULL;
+    struct NodeLinked* tail = NULL;
+    insert_at_beginning_doubly(10, &head, &tail);
+    insert_at_beginning_doubly(50, &head, &tail);
+    insert_at_beginning_doubly(30, &head, &tail);
+    print_linked_list_forward(head);
+}
 int main(void) {
     simple_list_example();
     sorted_list_example();
     single_linked_list_example();
+    double_linked_list_example();
     return 0;
 }
