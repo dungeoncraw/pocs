@@ -1,14 +1,14 @@
-
-import slick.basic.DatabasePublisher
 import slick.jdbc.H2Profile.api.*
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.{Duration}
+import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
+import scala.util.{Success, Failure}
 
 @main
 def main(): Unit =
   val db = Database.forConfig("h2mem")
+  // also can use the URL for getting it like Database.forURL("jdbc:h2:mem:test1;DB_CLOSE_DELAY=-1", driver="org.h2.Driver")
   try {
     val providers: TableQuery[Provider] = TableQuery[Provider]
     val coffees: TableQuery[Coffees] = TableQuery[Coffees]
@@ -51,6 +51,23 @@ def main(): Unit =
       db.stream(qexclusive.result).foreach(println)
     }
     Await.result(f, Duration.Inf)
+
+    val maxPrice: Rep[Option[Double]] = coffees.map(_.price).max
+    // maxPrice is now Rep.forNode[Option[Double']]
+    val maxPriceResult: Future[Option[Double]] = db.run(maxPrice.result)
+    maxPriceResult.onComplete {
+      // TODO this is showing NONE instead of value, need to handle futures
+      case Success(v) => println(s"Max price: $v")
+      case Failure(e) => e.printStackTrace()
+    }
+
+    val q = for (c <- coffees) yield c.name
+    val a = q.result
+    val f2: Future[Seq[String]] = db.run(a)
+    f2.onComplete {
+      case Success(v) => println(s"Result: $v")
+      case Failure(e) => e.printStackTrace()
+    }
   }
   finally db.close()
 

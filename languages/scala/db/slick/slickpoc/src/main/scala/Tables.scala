@@ -2,7 +2,7 @@ import slick.jdbc.H2Profile.api._
 import slick.lifted.{ProvenShape, ForeignKeyQuery}
 
 class Provider(tag: Tag) extends Table[(Int, String, String, String, String, String)](tag, "PROVIDER") {
-  def id: Rep[Int] = column[Int]("ID", O.PrimaryKey)
+  def id: Rep[Int] = column[Int]("ID", O.PrimaryKey, O.AutoInc)
   def name: Rep[String] = column[String]("NAME")
   def street: Rep[String] = column[String]("STREET")
   def city: Rep[String] = column[String]("CITY")
