@@ -19,55 +19,48 @@ def main(): Unit =
     )
     val setupFuture: Future[Unit] = db.run(setup)
     val f = setupFuture.flatMap{ _ =>
+      // String, Int, Double, Int, Int
       val insertAction: DBIO[Option[Int]] = coffees ++= Seq(
-        ( "Latte", 101, 2.50, 100, 250),
-        ("Colombian", 102, 3.00, 100, 300),
-        ("Espresso", 102, 1.50, 100, 150),
-        ("Cappuccino", 101, 2.00, 100, 200),
-        ("French_Roast", 102, 2.50, 100, 250),
+        ( "Latte", 1, 2.50, 100, 250),
+        ("Colombian", 2, 3.00, 100, 300),
+        ("Espresso", 1, 1.50, 100, 150),
+        ("Cappuccino", 1, 2.00, 100, 200),
+        ("French_Roast", 2, 2.50, 100, 250),
       )
       db.run(insertAction)
-      val filterQuery: Query[Provider, (Int, String, String, String, String, String), Seq] =
-        // === is slick DSL for SQL equality
-        providers.filter(_.zip === "90210")
-
-      db.run(filterQuery.result).map(println)
-      println("Getting with join\n")
-      val qjoin = for {
-        c <- coffees if c.price < 9.0
-        // === for equality in slick
-        s <- providers if s.id === c.providerId
-      } yield (c.name, c.price, c.providerId, s.name, s.id )
-
-      db.stream(qjoin.result).foreach(println)
-
-      println("Getting with join but prices different than 2.00\n")
-      val qexclusive = for {
-        // =!= for getting values different from 2.00
-        c <- coffees if c.price =!= 2.00
-        s <- providers if s.id === c.providerId
-      } yield (c.name, c.price, c.providerId, s.name, s.id )
-
-      db.stream(qexclusive.result).foreach(println)
     }
     Await.result(f, Duration.Inf)
 
-    val maxPrice: Rep[Option[Double]] = coffees.map(_.price).max
-    // maxPrice is now Rep.forNode[Option[Double']]
-    val maxPriceResult: Future[Option[Double]] = db.run(maxPrice.result)
-    maxPriceResult.onComplete {
-      // TODO this is showing NONE instead of value, need to handle futures
-      case Success(v) => println(s"Max price: $v")
-      case Failure(e) => e.printStackTrace()
-    }
+    val filterQuery: Query[Provider, (Int, String, String, String, String, String), Seq] =
+      // === is slick DSL for SQL equality
+      providers.filter(_.zip === "90210")
 
-    val q = for (c <- coffees) yield c.name
-    val a = q.result
-    val f2: Future[Seq[String]] = db.run(a)
-    f2.onComplete {
-      case Success(v) => println(s"Result: $v")
-      case Failure(e) => e.printStackTrace()
-    }
+    db.run(filterQuery.result).map(p => println(s"Providers: $p\n"))
+
+    val filterCoffeeQuery: Query[Coffees, (String, Int, Double, Int, Int), Seq] =
+      // === is slick DSL for SQL equality
+      coffees.filter(_.price < 3.00)
+
+    db.run(filterCoffeeQuery.result).map(p => println(s"Coffees: $p\n"))
+
+    println("Getting with join but prices different than 2.00\n")
+    val qexclusive = for {
+      // =!= for getting values different from 2.00
+      c <- coffees if c.price =!= 2.00
+      s <- c.provider
+    } yield (c.name, c.price, c.providerId, s.name, s.id)
+
+    db.run(qexclusive.result).foreach(t => println(s"Item exclusive join: $t\n"))
+
+    println("Getting with join\n")
+    val qjoin = for {
+      c <- coffees if c.price < 3.0
+      // === for equality in slick
+      s <- c.provider
+    } yield (c.name, c.price, c.providerId, s.name, s.id)
+
+    db.run(qjoin.result).foreach(t => println(s"Item join: $t\n"))
+
   }
   finally db.close()
 
