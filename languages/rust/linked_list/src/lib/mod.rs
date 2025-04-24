@@ -1,5 +1,6 @@
 pub mod first;
 pub mod second;
-mod third;
-mod fourth;
-mod fifth;
+pub mod third;
+pub mod fourth;
+pub mod fifth;
+pub mod miri_example;
