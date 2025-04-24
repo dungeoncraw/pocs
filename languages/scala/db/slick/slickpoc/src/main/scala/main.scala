@@ -12,8 +12,9 @@ def main(): Unit =
   try {
     val providers: TableQuery[Provider] = TableQuery[Provider]
     val coffees: TableQuery[Coffees] = TableQuery[Coffees]
+    val sales: TableQuery[Sales] = TableQuery[Sales]
     val setup: DBIO[Unit] = DBIO.seq(
-      (providers.schema ++ coffees.schema).create,
+      (providers.schema ++ coffees.schema ++ sales.schema).create,
       providers += (101, "Acme", "123 Main St", "Anytown", "CA", "90210" ),
       providers += (102, "Nops", "456 Main St", "Anytown", "CA", "90210")
     )
@@ -21,13 +22,20 @@ def main(): Unit =
     val f = setupFuture.flatMap{ _ =>
       // String, Int, Double, Int, Int
       val insertAction: DBIO[Option[Int]] = coffees ++= Seq(
-        ( "Latte", 1, 2.50, 100, 250),
-        ("Colombian", 2, 3.00, 100, 300),
-        ("Espresso", 1, 1.50, 100, 150),
-        ("Cappuccino", 1, 2.00, 100, 200),
-        ("French_Roast", 2, 2.50, 100, 250),
+        (1,  "Latte", 1, 2.50, 100, 250),
+        (2, "Colombian", 2, 3.00, 100, 300),
+        (3, "Espresso", 1, 1.50, 100, 150),
+        (4, "Cappuccino", 1, 2.00, 100, 200),
+        (5, "French_Roast", 2, 2.50, 100, 250),
       )
       db.run(insertAction)
+      val insertSales: DBIO[Option[Int]] = sales ++= Seq(
+        Sale(Some(1), "John", 1, 1, "Cash"),
+        Sale(Some(2), "Jane", 2, 2, "Cash"),
+        Sale(Some(3), "Jill", 1, 3, "Jullian"),
+        Sale(Some(4), "Andy", 2, 4, "Donavan"),
+      )
+      db.run(insertSales)
     }
     Await.result(f, Duration.Inf)
 
@@ -37,7 +45,7 @@ def main(): Unit =
 
     db.run(filterQuery.result).map(p => println(s"Providers: $p\n"))
 
-    val filterCoffeeQuery: Query[Coffees, (String, Int, Double, Int, Int), Seq] =
+    val filterCoffeeQuery: Query[Coffees, (Int, String, Int, Double, Int, Int), Seq] =
       // === is slick DSL for SQL equality
       coffees.filter(_.price < 3.00)
 
