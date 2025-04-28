@@ -69,6 +69,49 @@ def main(): Unit =
 
     db.run(qjoin.result).foreach(t => println(s"Item join: $t\n"))
 
+    println("Pagination case using drop")
+    // this is offset 1 and limit 2
+    val qdrop = coffees.sortBy(_.name).drop(1).take(2)
+    db.run(qdrop.result).foreach(t => println(s"Item drop: $t\n"))
+
+    println("Query with OR conditions")
+    val criteriaColombian = Option("Colombian")
+    val criteriaCapuccino = Option("Cappuccino")
+    val qor = coffees.filter{
+      coffee =>
+        List(
+          criteriaColombian.map(coffee.name === _),
+          criteriaCapuccino.map(coffee.name === _),
+        )
+          .collect({case Some(criteria) => criteria})
+          // slick DSL for OR operation
+          // for a case AND would be reduceLeftOption(_ && _)
+          .reduceLeftOption(_ || _)
+          .getOrElse(true: Rep[Boolean])
+    }
+    db.run(qor.result).foreach(t => println(s"Item or: $t\n"))
+
+    // JOINS
+    val crossJoin = for {
+      (c, s) <- coffees join providers
+    } yield (c.name, s.name)
+    db.run(crossJoin.result).foreach(t => println(s"Cross join: $t\n"))
+
+    val innerJoin = for {
+      (c, s) <- coffees join providers on (_.providerId === _.id)
+    } yield (c.name, s.name)
+    db.run(innerJoin.result).foreach(t => println(s"Inner join: $t\n"))
+
+    val leftOuterJoin = for {
+      (c, s) <- coffees joinLeft providers on (_.providerId === _.id)
+    } yield (c.name, s.map(_.name).getOrElse("No provider"))
+    db.run(leftOuterJoin.result).foreach(t => println(s"Left outer join: $t\n"))
+
+    val rightOuterJoin = for {
+      (c, s) <- coffees joinRight providers on (_.providerId === _.id)
+    } yield (c.map(_.name).getOrElse("No coffee"), s.name)
+    db.run(rightOuterJoin.result).foreach(t => println(s"Right outer join: $t\n"))
+
   }
   finally db.close()
 

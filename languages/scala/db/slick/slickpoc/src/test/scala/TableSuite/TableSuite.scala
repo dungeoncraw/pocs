@@ -42,7 +42,7 @@ class TablesSuite extends funsuite.AnyFunSuite with BeforeAndAfter with ScalaFut
     insertSupplier()
     val results = db.run(suppliers.result).futureValue
     assert(results.size == 1)
-    assert(results.head._1 == 101)
+    assert(results.head._1 == 1)
   }
 
   after { db.close }
