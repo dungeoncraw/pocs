@@ -6,9 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="fddf077a-97dd-4706-bfa1-690451ba55f0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/tabs/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/tabs/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../scala/todos/.bsp/sbt.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../scala/todos/.bsp/sbt.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../scala/todos/.idea/sbt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../scala/todos/.idea/sbt.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../scala/todos/project/target/config-classes/$8faba65ef8b3d213bcf1$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../scala/todos/project/target/config-classes/$8faba65ef8b3d213bcf1.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../scala/todos/project/target/config-classes/$8faba65ef8b3d213bcf1.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,22 +42,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/thiagonascimento/Projects/pocs/languages/reactNative/todo/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.start.executor": "Run",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -135,7 +141,8 @@
       <workItem from="1745104661821" duration="973000" />
       <workItem from="1745403210207" duration="53000" />
       <workItem from="1745403301991" duration="133000" />
-      <workItem from="1745713321402" duration="602000" />
+      <workItem from="1745713321402" duration="623000" />
+      <workItem from="1745796364849" duration="3001000" />
     </task>
     <servers />
   </component>
