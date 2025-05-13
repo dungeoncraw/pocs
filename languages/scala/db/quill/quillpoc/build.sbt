@@ -11,3 +11,8 @@ lazy val root = (project in file("."))
   .settings(
     name := "quillpoc"
   )
+// enable SBT Native Packager
+enablePlugins(JavaAppPackaging)
+enablePlugins(DockerPlugin)
+
+dockerExposedPorts := Seq(8080)
