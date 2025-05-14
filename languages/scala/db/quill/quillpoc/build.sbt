@@ -12,7 +12,12 @@ lazy val root = (project in file("."))
     name := "quillpoc"
   )
 // enable SBT Native Packager
-enablePlugins(JavaAppPackaging)
-enablePlugins(DockerPlugin)
+enablePlugins(
+  JavaAppPackaging,
+  DockerPlugin
+)
 
+Docker / packageName := "dungeoncraw/docker-test"
 dockerExposedPorts := Seq(8080)
+dockerExposedVolumes := Seq("/opt/docker/.logs", "/opt/docker/.keys")
+
