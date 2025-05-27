@@ -22,11 +22,14 @@ object DataService {
  */
 object Main extends ZIOAppDefault {
   override def run = {
+    // Configuration to connect to PostgreSQL
+    val dataSourceLayer = Quill.DataSource.fromPrefix("myDbConfig")
+
     DataService.getPeople
       .provide(
         DataService.live,
         Quill.Postgres.fromNamingStrategy(SnakeCase),
-        Quill.DataSource.fromPrefix("myDbConfig")
+        dataSourceLayer
       )
       .debug("Results")
       .exitCode

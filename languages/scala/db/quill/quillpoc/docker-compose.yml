@@ -2,11 +2,25 @@ version: '3.1'
 services:
   quillpoc:
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     image: dungeoncraw/docker-test:0.1.0-SNAPSHOT
+    environment:
+      MYDBCONFIG_JDBC_URL: "jdbc:postgresql://postgres:5432/postgres"
+      MYDBCONFIG_JDBC_DRIVER: "org.postgresql.Driver"
+      MYDBCONFIG_JDBC_USER: "postgres"
+      MYDBCONFIG_JDBC_PASSWORD: "postgres"
+      LOG_LEVEL: DEBUG
   postgres:
     image: postgres
     environment:
       POSTGRES_PASSWORD: "postgres"
     ports:
       - "5433:5432"
+    volumes:
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

@@ -20,4 +20,4 @@ enablePlugins(
 Docker / packageName := "dungeoncraw/docker-test"
 dockerExposedPorts := Seq(8080)
 dockerExposedVolumes := Seq("/opt/docker/.logs", "/opt/docker/.keys")
-
+dockerBaseImage := "openjdk:11-jre-slim"
