@@ -40,3 +40,8 @@ Folder structure
 
 
 
+### Building
+
+`gcc $(pkg-config --cflags gtk4) -o netrunning ./src/main.c $(pkg-config --libs gtk4)`
+
+`./netrunning`
