@@ -20,7 +20,7 @@ Folder structure
 * **Netrunner**
   - Name
   - Level
-  - Deck type - poor (five programs), good (seven programs), excellent (nine programs)
+  - Deck type—poor (five programs), good (seven programs), excellent (nine programs)
   > Deck can also have hardware slots, this would be added in the future
 * **Program**
     - Name
@@ -30,11 +30,16 @@ Folder structure
         - Attack - Program/Black Ice/Demon
         - Defense - Program/Black Ice/Demon
         - Rez - Program/Black Ice/Demon
-        - DV (Difficult Value) - list of 4 DV predefined - Floor
+        - DV (Difficult Value)—list of 4 DV predefined—Floor
 * **Floor**
     - Name
     - Architecture (List of Programs/Black Ice/Demon/Floor)
     - EB cost
+
+### Designs
+
+![Home](./netrunning_1.svg "Home")
+![Net Architecture](./netrunning_2.svg "Net Architecture")
 
 > main article https://rtalsoriangames.com/wp-content/uploads/2021/10/RTG-CPR-NetrunningDeck-Instructionsv1.1.pdf
 
