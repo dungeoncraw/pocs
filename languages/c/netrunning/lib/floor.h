@@ -6,3 +6,5 @@ typedef struct Floor {
   int cost;
   Program program[];
 } Floor;
+
+#endif

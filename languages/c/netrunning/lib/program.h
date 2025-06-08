@@ -15,5 +15,13 @@ typedef struct Program {
     char name[16];
     char description[220];
     enum CBR_PROGRAM_TYPE type[];
-    struct Stats stats[];
+    Stats stats[];
+    int cost;
 } Program;
+
+
+int calculate_cost(Program *program);
+int play_attack(Program *program);
+void set_damage(Program *program, int damage);
+
+#endif
