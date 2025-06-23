@@ -8,3 +8,17 @@ image:
 service:
   type: ClusterIP
   port: 80
+
+configmap:
+  message: "Welcome to sample project"
+
+secret:
+  # TODO remove this hardcoded
+  username: superuser
+  password: somerandompass
+
+ingress:
+  enabled: true
+  classname: "nginx"
+  host: "sample.local"
+  path: /
