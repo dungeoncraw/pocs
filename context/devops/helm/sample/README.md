@@ -61,7 +61,7 @@ kubectl get svc
 Using Minikube:
 
 ```bash
-minikube service hello-release-service
+minikube service bread-release-service
 ```
 
 Add the host to etc config
@@ -78,6 +78,26 @@ helm uninstall hello-release
 minikube stop
 ```
 
+## Adding grafana
+
+```bash
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+```
+
+```bash
+helm install grafana grafana/grafana -f grafana-values.yaml
+```
+
+Access the minikub ip
+```bash
+minikube ip
+```
+
+Accessing grafana
+```bash
+http://<minikube-ip>:30001
+```
 ## ✅ Next Steps
 
 - Add Ingress Controller

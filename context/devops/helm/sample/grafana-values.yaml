@@ -1,0 +1,77 @@
+adminUser: "grafana-admin"
+adminPassword: "StrongPass123"
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30001
+
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClassName: "standard"
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+      - name: 'default'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        updateIntervalSeconds: 10
+        options:
+          path: /var/lib/grafana/dashboards/default
+
+dashboards:
+  default:
+    sample-dashboard:
+      json: |
+        {
+          "annotations": {
+            "list": [
+              {
+                "builtIn": 1,
+                "type": "dashboard"
+              }
+            ]
+          },
+          "panels": [
+            {
+              "type": "text",
+              "title": "Welcome",
+              "gridPos": {
+                "h": 3,
+                "w": 12,
+                "x": 0,
+                "y": 0
+              },
+              "options": {
+                "content": "Grafana Helm Chart Setup Successful",
+                "mode": "markdown"
+              }
+            }
+          ],
+          "title": "Sample Dashboard",
+          "schemaVersion": 26,
+          "version": 1
+        }
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server
+        access: proxy
+        isDefault: true
