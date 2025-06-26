@@ -1,0 +1,38 @@
+
+pipeline {
+    agent any
+
+    environment {
+        RELEASE_NAME = "my-app"
+        CHART_PATH = "./charts/build-app"
+        NAMESPACE = "default"
+        IMAGE_TAG = "1.0.${BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Build version ${IMAGE_TAG}"
+                sh "echo 'docker build . -t build-app:${IMAGE_TAG}'"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Tests"
+                sh "echo 'running tests...'"
+            }
+        }
+
+        stage('Helm Deploy') {
+            steps {
+                echo "Deploy from helm to Kubernetes"
+                sh '''
+                    helm upgrade --install ${RELEASE_NAME} ${CHART_PATH} \
+                      --namespace ${NAMESPACE} \
+                      --set image.tag=${IMAGE_TAG}
+                '''
+            }
+        }
+    }
+}
