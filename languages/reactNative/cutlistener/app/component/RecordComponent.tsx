@@ -1,4 +1,4 @@
-import {Button, Text, SafeAreaView, PermissionsAndroid, Platform} from "react-native";
+import {Button, Text, SafeAreaView, Platform} from "react-native";
 import AudioRecorderPlayer, {
     AudioEncoderAndroidType,
     AudioSet,
@@ -6,6 +6,7 @@ import AudioRecorderPlayer, {
     AVEncoderAudioQualityIOSType, AVEncodingOption, OutputFormatAndroidType, RecordBackType
 } from "react-native-audio-recorder-player";
 import {useState} from "react";
+import {requestMicrophonePermission} from "@/app/helper/requestPermission";
 
 export enum PluginType {
     REACT_NATIVE_AUDIO_RECORDER_PLAYER = "RECORDER_PLAYER",
@@ -23,26 +24,10 @@ export default function RecordComponent ({text, pluginType}: IProps) {
         if (pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
             if (Platform.OS === 'android') {
                 try {
-                    const grants = await PermissionsAndroid.requestMultiple([
-                        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-                        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-                        PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
-                    ]);
+                    const hasPermissions = await requestMicrophonePermission();
 
-                    console.log('write external stroage', grants);
-
-                    if (
-                        grants['android.permission.WRITE_EXTERNAL_STORAGE'] ===
-                        PermissionsAndroid.RESULTS.GRANTED &&
-                        grants['android.permission.READ_EXTERNAL_STORAGE'] ===
-                        PermissionsAndroid.RESULTS.GRANTED &&
-                        grants['android.permission.RECORD_AUDIO'] ===
-                        PermissionsAndroid.RESULTS.GRANTED
-                    ) {
-                        console.log('permissions granted');
-                    } else {
-                        console.log('All required permissions not granted');
-
+                    if (!hasPermissions) {
+                        console.log('Permission not granted');
                         return;
                     }
                 } catch (err) {
