@@ -3,7 +3,7 @@ import AudioRecorderPlayer, {
     AudioEncoderAndroidType,
     AudioSet,
     AudioSourceAndroidType,
-    AVEncoderAudioQualityIOSType, AVEncodingOption, OutputFormatAndroidType, RecordBackType
+    AVEncoderAudioQualityIOSType, AVEncodingOption, OutputFormatAndroidType, PlayBackType, RecordBackType
 } from "react-native-audio-recorder-player";
 import {useState} from "react";
 import {requestMicrophonePermission} from "@/app/helper/requestPermission";
@@ -17,9 +17,23 @@ type IProps = {
     pluginType: PluginType;
 }
 
-export default function RecordComponent ({text, pluginType}: IProps) {
-    const [recordSecs, setRecordSecs] = useState({recordSecs: 0, recordTime: '00:00'});
-    console.log('recordSecs', recordSecs);
+export default function RecordComponent({text, pluginType}: IProps) {
+    const [recordSecs, setRecordSecs] = useState<{ recordSecs: number, recordTime: string }>({
+        recordSecs: 0,
+        recordTime: '00:00'
+    });
+    const [playbackMeta, setPlaybackMeta] = useState<{
+        currentPositionSec: number,
+        currentDurationSec: number,
+        playTime: string,
+        duration: string
+    }>({currentPositionSec: 0, currentDurationSec: 0, playTime: '00:00', duration: '00:00'});
+    // THIS NEEDS TO BE REFACTORED TO HANDLE NEW PLUGIN
+    const audioRecordPLayer = new AudioRecorderPlayer();
+    const path = Platform.select({
+        ios: undefined,
+        android: undefined
+    });
     const onPressRecord = async () => {
         if (pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
             if (Platform.OS === 'android') {
@@ -47,11 +61,6 @@ export default function RecordComponent ({text, pluginType}: IProps) {
             };
 
             console.log('audioSet', audioSet);
-            const path = Platform.select({
-                ios: undefined,
-                android: undefined
-            })
-            const audioRecordPLayer = new AudioRecorderPlayer();
             const uri = await audioRecordPLayer.startRecorder(
                 path,
                 audioSet,
@@ -68,10 +77,32 @@ export default function RecordComponent ({text, pluginType}: IProps) {
             console.log(`uri: ${uri}`);
         }
     };
-    return(
+
+    const onPressStop = async () => {
+        const result = await audioRecordPLayer.stopRecorder();
+        audioRecordPLayer.removeRecordBackListener();
+        setRecordSecs({...recordSecs, recordSecs: 0});
+        console.log(`result: ${result}`);
+    }
+    const onPressPlay = async () => {
+        const msg = await audioRecordPLayer.startPlayer(path);
+        const volume = await audioRecordPLayer.setVolume(1.0);
+        console.log(`msg: ${msg}, volume: ${volume}`);
+        audioRecordPLayer.addPlayBackListener((e: PlayBackType) => {
+            setPlaybackMeta({
+                currentPositionSec: e.currentPosition,
+                currentDurationSec: e.duration,
+                playTime: audioRecordPLayer.mmssss((Math.floor(e.currentPosition))),
+                duration: audioRecordPLayer.mmssss((Math.floor(e.duration))),
+            });
+        });
+    }
+    return (
         <SafeAreaView>
             <Text>{text}</Text>
             <Button title="Start Recording" onPress={onPressRecord}/>
+            <Button title="Stop Recording" onPress={onPressStop}/>
+            <Button title="Play Recording" onPress={onPressPlay}/>
         </SafeAreaView>
     )
 }
