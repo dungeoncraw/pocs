@@ -1,4 +1,4 @@
-import {Button, Text, SafeAreaView, Platform} from "react-native";
+import {Button, Text, SafeAreaView, Platform, StyleSheet} from "react-native";
 import AudioRecorderPlayer, {
     AudioEncoderAndroidType,
     AudioSet,
@@ -98,11 +98,27 @@ export default function RecordComponent({text, pluginType}: IProps) {
         });
     }
     return (
-        <SafeAreaView>
-            <Text>{text}</Text>
-            <Button title="Start Recording" onPress={onPressRecord}/>
-            <Button title="Stop Recording" onPress={onPressStop}/>
+        <SafeAreaView style={styles.component}>
+            <Text style={styles.subHeader}>{text}</Text>
+            <Button color='#1ac10d' title="Start Recording" onPress={onPressRecord}/>
+            <Button color='#c10d10' title="Stop Recording" onPress={onPressStop}/>
             <Button title="Play Recording" onPress={onPressPlay}/>
         </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    subHeader: {
+        fontSize: 18,
+        fontFamily: "Roboto",
+    },
+    component: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#f9f6ea",
+        borderColor: "#dceaf9",
+        borderWidth: 2,
+        borderRadius: 10,
+        width: "100%",
+    },
+});
