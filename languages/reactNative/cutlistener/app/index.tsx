@@ -10,6 +10,10 @@ const AVAILABLE_PLUGINS = [
         id: PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER,
         label: "React Native Audio Recorder Player",
     },
+    {
+        id: PluginType.EXPO_AUDIO,
+        label: "Expo Audio",
+    },
 ];
 
 export default function Index() {
@@ -25,7 +29,7 @@ export default function Index() {
             <Text style={styles.main}>Testing recording audio plugins</Text>
             <Separator/>
             <PluginSelect data={AVAILABLE_PLUGINS} onSelect={(item) => setSelectedPlugin(item.id)}/>
-            <RecordComponent text={"RN Audio Recorder Player"}
+            <RecordComponent text={AVAILABLE_PLUGINS.find((t) => t.id === selectedPlugin)?.label ?? "No Plugin Selected"}
                              pluginType={selectedPlugin}/>
         </View>
     );

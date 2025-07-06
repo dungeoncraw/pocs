@@ -10,6 +10,7 @@ import {requestMicrophonePermission} from "@/app/helper/requestPermission";
 
 export enum PluginType {
     REACT_NATIVE_AUDIO_RECORDER_PLAYER = "RECORDER_PLAYER",
+    EXPO_AUDIO = "EXPO_AUDIO",
 }
 
 type IProps = {
@@ -28,6 +29,7 @@ export default function RecordComponent({text, pluginType}: IProps) {
         playTime: string,
         duration: string
     }>({currentPositionSec: 0, currentDurationSec: 0, playTime: '00:00', duration: '00:00'});
+
     // THIS NEEDS TO BE REFACTORED TO HANDLE NEW PLUGIN
     const audioRecordPLayer = new AudioRecorderPlayer();
     const path = Platform.select({
