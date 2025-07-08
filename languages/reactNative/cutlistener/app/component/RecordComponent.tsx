@@ -1,17 +1,12 @@
 import {Button, Text, SafeAreaView, Platform, StyleSheet} from "react-native";
 import RecordProvider from "@/app/helper/recordProvider";
+import {pluginSelectAtom} from "@/app/state/PluginSelectAtom";
+import { useAtomValue } from 'jotai'
+import {AVAILABLE_PLUGINS} from "@/app/(tabs)/settings";
 
-export enum PluginType {
-    REACT_NATIVE_AUDIO_RECORDER_PLAYER = "RECORDER_PLAYER",
-    EXPO_AUDIO = "EXPO_AUDIO",
-}
+export default function RecordComponent() {
+    const pluginType = useAtomValue(pluginSelectAtom);
 
-type IProps = {
-    text: string;
-    pluginType: PluginType;
-}
-
-export default function RecordComponent({text, pluginType}: IProps) {
     const path = Platform.select({
         ios: undefined,
         android: undefined
@@ -30,7 +25,7 @@ export default function RecordComponent({text, pluginType}: IProps) {
     }
     return (
         <SafeAreaView style={styles.component}>
-            <Text style={styles.subHeader}>{text}</Text>
+            <Text style={styles.subHeader}>{AVAILABLE_PLUGINS.find((t) => t.id === pluginType)?.label}</Text>
             <Button color='#1ac10d' title="Start Recording" onPress={onPressRecord}/>
             <Button color='#c10d10' title="Stop Recording" onPress={onPressStop}/>
             <Button title="Play Recording" onPress={onPressPlay}/>

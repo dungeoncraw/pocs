@@ -1,0 +1,4 @@
+export enum PluginType {
+    REACT_NATIVE_AUDIO_RECORDER_PLAYER = "RECORDER_PLAYER",
+    EXPO_AUDIO = "EXPO_AUDIO",
+}

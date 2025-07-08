@@ -1,4 +1,3 @@
-import {PluginType} from "@/app/component/RecordComponent";
 import AudioRecorderPlayer, {
     AudioEncoderAndroidType,
     AudioSet,
@@ -12,6 +11,7 @@ import AudioRecorderPlayer, {
 import {createAudioPlayer} from "expo-audio";
 import {Platform} from "react-native";
 import {requestMicrophonePermission} from "@/app/helper/requestPermission";
+import {PluginType} from "@/app/types/types";
 
 class RecordProvider {
     pluginType: PluginType;
