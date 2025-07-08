@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Modal, FlatList, Text, View, StyleSheet } from 'react-native';
-import { PluginType } from "@/app/component/RecordComponent";
+import { PluginType } from "@/app/types/types";
 
 interface SelectProps {
     data: { id: PluginType; label: string }[];

@@ -14,8 +14,8 @@ export default function Index() {
             style={styles.view}
         >
             <Text style={styles.main}>Testing recording audio plugins</Text>
-            <Separator/>
-            <RecordComponent />
+            <Separator testID="separator"/>
+            <RecordComponent testID="record-component"/>
         </View>
     );
 }

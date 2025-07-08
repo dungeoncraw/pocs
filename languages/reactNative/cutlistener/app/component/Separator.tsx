@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ViewProps } from 'react-native';
 
-const Separator = () => (
-    <View style={styles.line} />
+interface SeparatorProps extends ViewProps {
+    testID?: string;
+}
+
+const Separator = ({ testID = 'separator', ...props }: SeparatorProps) => (
+    <View style={styles.line} testID={testID} {...props} />
 );
 
 const styles = StyleSheet.create({

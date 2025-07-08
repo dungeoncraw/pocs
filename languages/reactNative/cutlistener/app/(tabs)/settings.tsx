@@ -23,7 +23,7 @@ export default function Settings() {
             style={styles.view}
         >
             <Text style={styles.main}>Available plugins</Text>
-            <Separator/>
+            <Separator testID="separator"/>
             <PluginSelect data={AVAILABLE_PLUGINS} onSelect={(item) => setPlugin(item.id)}/>
         </View>
     );

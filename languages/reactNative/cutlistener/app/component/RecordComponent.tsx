@@ -24,7 +24,7 @@ export default function RecordComponent() {
         await audioRecordPLayer.onPlay();
     }
     return (
-        <SafeAreaView style={styles.component}>
+        <SafeAreaView style={styles.component} testID="record-component">
             <Text style={styles.subHeader}>{AVAILABLE_PLUGINS.find((t) => t.id === pluginType)?.label}</Text>
             <Button color='#1ac10d' title="Start Recording" onPress={onPressRecord}/>
             <Button color='#c10d10' title="Stop Recording" onPress={onPressStop}/>
