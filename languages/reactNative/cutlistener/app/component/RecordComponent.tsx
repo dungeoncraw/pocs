@@ -1,34 +1,64 @@
-import {Button, Text, SafeAreaView, Platform, StyleSheet} from "react-native";
+import { TouchableOpacity, SafeAreaView, StyleSheet, Text } from "react-native";
 import RecordProvider from "@/app/helper/recordProvider";
 import {pluginSelectAtom} from "@/app/state/PluginSelectAtom";
-import { useAtomValue } from 'jotai'
+import {useAtomValue} from 'jotai'
 import {AVAILABLE_PLUGINS} from "@/app/(tabs)/settings";
+import {FontAwesome} from "@expo/vector-icons";
+import {useState} from "react";
+// ... outros imports permanecem os mesmos
 
-export default function RecordComponent() {
+interface RecordComponentProps {
+    testID?: string
+}
+
+export default function RecordComponent({testID}: RecordComponentProps) {
     const pluginType = useAtomValue(pluginSelectAtom);
+    const [isRecording, setIsRecording] = useState(false);
 
-    const path = Platform.select({
-        ios: undefined,
-        android: undefined
-    });
-    const audioRecordPLayer = new RecordProvider(pluginType, path);
+    const audioRecordPLayer = new RecordProvider(pluginType);
 
     const onPressRecord = async () => {
+        setIsRecording(true);
         await audioRecordPLayer.onRecord();
     };
 
     const onPressStop = async () => {
+        setIsRecording(false);
         await audioRecordPLayer.onStop();
     }
     const onPressPlay = async () => {
         await audioRecordPLayer.onPlay();
     }
+
     return (
-        <SafeAreaView style={styles.component} testID="record-component">
-            <Text style={styles.subHeader}>{AVAILABLE_PLUGINS.find((t) => t.id === pluginType)?.label}</Text>
-            <Button color='#1ac10d' title="Start Recording" onPress={onPressRecord}/>
-            <Button color='#c10d10' title="Stop Recording" onPress={onPressStop}/>
-            <Button title="Play Recording" onPress={onPressPlay}/>
+        <SafeAreaView style={styles.component} testID={testID || "record-component"}>
+            <Text style={styles.subHeader}>
+                {AVAILABLE_PLUGINS.find((t) => t.id === pluginType)?.label}
+            </Text>
+            
+            <TouchableOpacity 
+                onPress={onPressRecord}
+                style={styles.iconButton}
+                testID="record-button"
+            >
+                <FontAwesome name="microphone" size={24} color="#1ac10d" />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+                onPress={onPressStop}
+                style={styles.iconButton}
+                testID="stop-button"
+            >
+                <FontAwesome name="stop" size={24} color="#c10d10" />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+                onPress={onPressPlay}
+                style={styles.iconButton}
+                testID="play-button"
+            >
+                <FontAwesome name="play" size={24} color="#000" />
+            </TouchableOpacity>
         </SafeAreaView>
     )
 }
@@ -37,14 +67,30 @@ const styles = StyleSheet.create({
     subHeader: {
         fontSize: 18,
         fontFamily: "Roboto",
+        marginBottom: 10,
     },
     component: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#f9f6ea",
-        borderColor: "#dceaf9",
+        backgroundColor: "#dceaf9",
+        borderColor: "#97a3b4",
         borderWidth: 2,
         borderRadius: 10,
         width: "100%",
+        padding: 10,
+    },
+    iconButton: {
+        padding: 10,
+        marginVertical: 5,
+        borderRadius: 25,
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
 });

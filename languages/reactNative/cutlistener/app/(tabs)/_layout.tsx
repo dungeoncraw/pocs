@@ -3,12 +3,10 @@ import {FontAwesome} from "@expo/vector-icons";
 
 export default function TabLayout() {
     return (
-        <Tabs 
-            testID="tabs"
+        <Tabs
             screenOptions={{tabBarActiveTintColor: 'blue'}}
         >
             <Tabs.Screen 
-                testID="tab-screen-index"
                 name="index" 
                 options={{
                     title: 'Home',
@@ -17,7 +15,6 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen 
-                testID="tab-screen-settings"
                 name="settings" 
                 options={{
                     title: 'Settings',

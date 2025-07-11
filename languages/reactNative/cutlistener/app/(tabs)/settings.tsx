@@ -31,7 +31,7 @@ export default function Settings() {
 
 const styles = StyleSheet.create({
     main: {
-        fontSize: 25,
+        fontSize: 20,
         fontFamily: "Roboto",
     },
     view: {

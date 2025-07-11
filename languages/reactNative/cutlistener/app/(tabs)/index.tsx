@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     main: {
         fontSize: 25,
         fontFamily: "Roboto",
+        color: "#dceaf9",
     },
     select: {
         fontSize: 18,
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "center",
-        backgroundColor: "#f9f6ea",
+        backgroundColor: "#14161a",
         borderColor: "#dceaf9",
         borderWidth: 2,
         borderRadius: 10,
