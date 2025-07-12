@@ -70,6 +70,12 @@ class RecordProvider {
                 this.path,
                 audioSet,
             );
+
+            this.recordPLugin.addRecordBackListener((e: RecordBackType) => {
+                this.recordSecs = e.currentPosition;
+                this.recordTime = this.recordPLugin.mmssss(Math.floor(e.currentPosition));
+            });
+
             console.log(`Gravação iniciada: ${uri}`);
         }
     } catch (error) {

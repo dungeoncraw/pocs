@@ -1,11 +1,10 @@
-import { TouchableOpacity, SafeAreaView, StyleSheet, Text } from "react-native";
+import {TouchableOpacity, SafeAreaView, StyleSheet, Text} from "react-native";
 import RecordProvider from "@/app/helper/recordProvider";
 import {pluginSelectAtom} from "@/app/state/PluginSelectAtom";
 import {useAtomValue} from 'jotai'
 import {AVAILABLE_PLUGINS} from "@/app/(tabs)/settings";
 import {FontAwesome} from "@expo/vector-icons";
-import {useState} from "react";
-// ... outros imports permanecem os mesmos
+import {useEffect, useRef, useState} from "react";
 
 interface RecordComponentProps {
     testID?: string
@@ -14,20 +13,31 @@ interface RecordComponentProps {
 export default function RecordComponent({testID}: RecordComponentProps) {
     const pluginType = useAtomValue(pluginSelectAtom);
     const [isRecording, setIsRecording] = useState(false);
+    const audioRecordPlayerRef = useRef<RecordProvider | null>(null);
 
-    const audioRecordPLayer = new RecordProvider(pluginType);
+    useEffect(() => {
+        audioRecordPlayerRef.current = new RecordProvider(pluginType);
+        return () => {
+            if (audioRecordPlayerRef.current) {
+                audioRecordPlayerRef.current.onStop();
+            }
+        };
+    }, [pluginType]);
 
     const onPressRecord = async () => {
+        if (!audioRecordPlayerRef.current) return;
         setIsRecording(true);
-        await audioRecordPLayer.onRecord();
+        await audioRecordPlayerRef.current.onRecord();
     };
 
     const onPressStop = async () => {
+        if (!audioRecordPlayerRef.current) return;
         setIsRecording(false);
-        await audioRecordPLayer.onStop();
+        await audioRecordPlayerRef.current.onStop();
     }
     const onPressPlay = async () => {
-        await audioRecordPLayer.onPlay();
+        if (!audioRecordPlayerRef.current) return;
+        await audioRecordPlayerRef.current.onPlay();
     }
 
     return (
@@ -35,29 +45,30 @@ export default function RecordComponent({testID}: RecordComponentProps) {
             <Text style={styles.subHeader}>
                 {AVAILABLE_PLUGINS.find((t) => t.id === pluginType)?.label}
             </Text>
-            
-            <TouchableOpacity 
-                onPress={onPressRecord}
-                style={styles.iconButton}
-                testID="record-button"
-            >
-                <FontAwesome name="microphone" size={24} color="#1ac10d" />
-            </TouchableOpacity>
+            {isRecording ?
+                <TouchableOpacity
+                    onPress={onPressStop}
+                    style={styles.iconButton}
+                    testID="stop-button"
+                >
+                    <FontAwesome name="stop" size={24} color="#c10d10"/>
+                </TouchableOpacity>
+                :
+                <TouchableOpacity
+                    onPress={onPressRecord}
+                    style={styles.iconButton}
+                    testID="record-button"
+                >
+                    <FontAwesome name="microphone" size={24} color="#1ac10d"/>
+                </TouchableOpacity>
+            }
 
-            <TouchableOpacity 
-                onPress={onPressStop}
-                style={styles.iconButton}
-                testID="stop-button"
-            >
-                <FontAwesome name="stop" size={24} color="#c10d10" />
-            </TouchableOpacity>
-
-            <TouchableOpacity 
+            <TouchableOpacity
                 onPress={onPressPlay}
                 style={styles.iconButton}
                 testID="play-button"
             >
-                <FontAwesome name="play" size={24} color="#000" />
+                <FontAwesome name="play" size={24} color="#000"/>
             </TouchableOpacity>
         </SafeAreaView>
     )
