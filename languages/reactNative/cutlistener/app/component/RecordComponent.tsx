@@ -19,7 +19,10 @@ export default function RecordComponent({testID}: RecordComponentProps) {
         audioRecordPlayerRef.current = new RecordProvider(pluginType);
         return () => {
             if (audioRecordPlayerRef.current) {
-                audioRecordPlayerRef.current.onStop();
+                // Call cleanup to properly release all audio resources
+                audioRecordPlayerRef.current.cleanup().catch(err => 
+                    console.error('Error during cleanup:', err)
+                );
             }
         };
     }, [pluginType]);
