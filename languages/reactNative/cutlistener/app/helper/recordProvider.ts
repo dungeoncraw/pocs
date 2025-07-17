@@ -10,6 +10,7 @@ import AudioRecorderPlayer, {
 } from "react-native-audio-recorder-player";
 import {createAudioPlayer, AudioModule, requestRecordingPermissionsAsync, AudioStatus, RecorderState, AudioQuality, IOSOutputFormat, setAudioModeAsync, setIsAudioActiveAsync} from "expo-audio";
 import {Platform} from "react-native";
+import * as FileSystem from 'expo-file-system';
 import {requestMicrophonePermission} from "@/app/helper/requestPermission";
 import {PluginType} from "@/app/types/types";
 
@@ -24,12 +25,25 @@ class RecordProvider {
     currentDurationSec= 0;
     playTime=  '00:00';
     duration= '00:00';
+    private readonly RECORDINGS_DIRECTORY = `${FileSystem.documentDirectory}cutlistener/recordings/`;
+    private readonly RECORDING_EXTENSION = '.m4a';
+
+    private async ensureDirectoryExists() {
+        const dirInfo = await FileSystem.getInfoAsync(this.RECORDINGS_DIRECTORY);
+        if (!dirInfo.exists) {
+            await FileSystem.makeDirectoryAsync(this.RECORDINGS_DIRECTORY, { intermediates: true });
+        }
+    }
+
     constructor(pluginType: PluginType, path?: string) {
         this.pluginType = pluginType;
-        this.path = path || Platform.select({
-            ios: undefined,
-            android: undefined
-        });
+        this.ensureDirectoryExists().catch(console.error);
+        if (!path) {
+            const timestamp = new Date().getTime();
+            this.path = `${this.RECORDINGS_DIRECTORY}recording_${timestamp}${this.RECORDING_EXTENSION}`;
+        } else {
+            this.path = path;
+        }
         switch (pluginType) {
             case PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER:
                 this.recordPLugin = new AudioRecorderPlayer();
@@ -177,7 +191,15 @@ class RecordProvider {
             const result = await this.recordPLugin.stopRecorder();
             this.recordPLugin.removeRecordBackListener();
             this.recordSecs = 0;
-            console.log(`result: ${result}`);
+            if (result && result !== this.path) {
+                const newPath = `${this.RECORDINGS_DIRECTORY}recording_${Date.now()}${this.RECORDING_EXTENSION}`;
+                await FileSystem.moveAsync({
+                    from: result,
+                    to: newPath
+                });
+                this.path = newPath;
+            }
+            console.log(`record saved at: ${this.path}`);
         } else if (this.pluginType === PluginType.EXPO_AUDIO) {
             try {
                 const result = await this.recordRecorder.stop();
@@ -190,7 +212,12 @@ class RecordProvider {
                 console.log(`Recording stopped: ${result}`);
 
                 if (this.recordRecorder.uri) {
-                    this.path = this.recordRecorder.uri;
+                    const newPath = `${this.RECORDINGS_DIRECTORY}recording_${Date.now()}${this.RECORDING_EXTENSION}`;
+                    await FileSystem.moveAsync({
+                        from: this.recordRecorder.uri,
+                        to: newPath
+                    });
+                    this.path = newPath;
                 }
 
                 // Deactivate audio session when not recording
@@ -260,12 +287,31 @@ class RecordProvider {
             }
         }
     }
+
     async getPlayList() {
-        if (this.pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
-            const list = await this.recordPLugin.getPlayList();
-            console.log(`list: ${list}`);
-            return list;
+        try {
+            await this.ensureDirectoryExists();
+
+            if (this.pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
+                if (Platform.OS === 'android') {
+                    // Para Android, podemos usar o método nativo e também verificar o diretório
+                    const nativeList = await this.recordPLugin.getPlayList() || [];
+                    const filesInDirectory = await this.getRecordingsFromDirectory();
+                    return [...new Set([...nativeList, ...filesInDirectory])];
+                } else {
+                    // Para iOS, usamos apenas o sistema de arquivos
+                    return await this.getRecordingsFromDirectory();
+                }
+            } else if (this.pluginType === PluginType.EXPO_AUDIO) {
+                return await this.getRecordingsFromDirectory();
+            }
+
+            return [];
+        } catch (error) {
+            console.error('Erro ao obter lista de reprodução:', error);
+            return [];
         }
+
     }
 
     async cleanup() {
@@ -294,6 +340,28 @@ class RecordProvider {
             console.error('Error cleaning up audio resources:', error);
         }
     }
+
+    private async getRecordingsFromDirectory(): Promise<{ uri: string, name: string, duration?: number }[]> {
+        try {
+            const files = await FileSystem.readDirectoryAsync(this.RECORDINGS_DIRECTORY);
+            const recordings = files
+                .filter(file => file.endsWith(this.RECORDING_EXTENSION))
+                .map(async (file) => {
+                    const uri = `${this.RECORDINGS_DIRECTORY}${file}`;
+                    const fileInfo = await FileSystem.getInfoAsync(uri);
+                    return {
+                        uri: fileInfo.uri,
+                        name: file,
+                    };
+                });
+
+            return await Promise.all(recordings);
+        } catch (error) {
+            console.error('Erro ao ler diretório de gravações:', error);
+            return [];
+        }
+    }
+
 
 }
 

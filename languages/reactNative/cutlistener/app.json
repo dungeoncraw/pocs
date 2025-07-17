@@ -12,7 +12,13 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.tetokeguii.cutlistener",
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "Need access to your microphone"
+        "NSMicrophoneUsageDescription": "Need access to your microphone",
+        "NSDocumentsFolderUsageDescription": "Need access to save and manage your audio recordings",
+        "NSMediaLibraryUsageDescription": "Need access to your media library to save recordings",
+        "UIBackgroundModes": ["audio"],
+        "UIFileSharingEnabled": true,
+        "LSSupportsOpeningDocumentsInPlace": true
+
       }
     },
     "android": {
