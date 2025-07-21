@@ -5,6 +5,8 @@ import {useAtomValue} from 'jotai'
 import {AVAILABLE_PLUGINS} from "@/app/(tabs)/settings";
 import {FontAwesome} from "@expo/vector-icons";
 import {useEffect, useRef, useState} from "react";
+import ListComponent from "@/app/component/ListComponent";
+import {ListItemProps, Recordings} from "@/app/types/types";
 
 interface RecordComponentProps {
     testID?: string
@@ -13,10 +15,18 @@ interface RecordComponentProps {
 export default function RecordComponent({testID}: RecordComponentProps) {
     const pluginType = useAtomValue(pluginSelectAtom);
     const [isRecording, setIsRecording] = useState(false);
+    const [recordings, setRecordings] = useState<ListItemProps[]>([]);
     const audioRecordPlayerRef = useRef<RecordProvider | null>(null);
 
     useEffect(() => {
         audioRecordPlayerRef.current = new RecordProvider(pluginType);
+        audioRecordPlayerRef.current.getPlayList().then((r: Recordings[]) => {
+            setRecordings(r.map((record) => ({
+                id: record.name,
+                title: record.name,
+                recording: record
+            })))
+        });
         return () => {
             if (audioRecordPlayerRef.current) {
                 // Call cleanup to properly release all audio resources
@@ -73,6 +83,7 @@ export default function RecordComponent({testID}: RecordComponentProps) {
             >
                 <FontAwesome name="play" size={24} color="#000"/>
             </TouchableOpacity>
+            <ListComponent data={recordings} onItemPress={() => {}}/>
         </SafeAreaView>
     )
 }

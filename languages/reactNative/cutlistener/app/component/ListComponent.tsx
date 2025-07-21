@@ -1,0 +1,66 @@
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import {ListComponentProps, ListItemProps} from "@/app/types/types";
+
+
+const ListItem = ({ item, onPress }: { item: ListItemProps; onPress: () => void }) => (
+    <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
+        <View style={styles.itemContent}>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.description}>{item.description}</Text>
+        </View>
+        <FontAwesome name="chevron-right" size={16} color="#97a3b4" />
+    </TouchableOpacity>
+);
+
+export default function ListComponent({ data, onItemPress }: ListComponentProps) {
+    const renderItem = ({ item }: { item: ListItemProps }) => (
+        <ListItem item={item} onPress={() => onItemPress(item)} />
+    );
+
+    return (
+        <FlatList
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={styles.listContainer}
+            showsVerticalScrollIndicator={false}
+        />
+    );
+}
+
+const styles = StyleSheet.create({
+    listContainer: {
+        padding: 16,
+    },
+    itemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 16,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        marginBottom: 8,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    itemContent: {
+        flex: 1,
+    },
+    title: {
+        fontSize: 16,
+        fontFamily: 'Roboto',
+        fontWeight: 'bold',
+        marginBottom: 4,
+    },
+    description: {
+        fontSize: 14,
+        fontFamily: 'Roboto',
+        color: '#666',
+    },
+});

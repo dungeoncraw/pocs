@@ -12,7 +12,7 @@ import {createAudioPlayer, AudioModule, requestRecordingPermissionsAsync, AudioS
 import {Platform} from "react-native";
 import * as FileSystem from 'expo-file-system';
 import {requestMicrophonePermission} from "@/app/helper/requestPermission";
-import {PluginType} from "@/app/types/types";
+import {PluginType, Recordings} from "@/app/types/types";
 
 class RecordProvider {
     pluginType: PluginType;
@@ -294,12 +294,10 @@ class RecordProvider {
 
             if (this.pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
                 if (Platform.OS === 'android') {
-                    // Para Android, podemos usar o método nativo e também verificar o diretório
                     const nativeList = await this.recordPLugin.getPlayList() || [];
                     const filesInDirectory = await this.getRecordingsFromDirectory();
                     return [...new Set([...nativeList, ...filesInDirectory])];
                 } else {
-                    // Para iOS, usamos apenas o sistema de arquivos
                     return await this.getRecordingsFromDirectory();
                 }
             } else if (this.pluginType === PluginType.EXPO_AUDIO) {
@@ -341,7 +339,7 @@ class RecordProvider {
         }
     }
 
-    private async getRecordingsFromDirectory(): Promise<{ uri: string, name: string, duration?: number }[]> {
+    private async getRecordingsFromDirectory(): Promise<Recordings[]> {
         try {
             const files = await FileSystem.readDirectoryAsync(this.RECORDINGS_DIRECTORY);
             const recordings = files
