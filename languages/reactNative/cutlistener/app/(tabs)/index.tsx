@@ -10,12 +10,14 @@ export default function Index() {
     }, []);
 
     return (
-        <View
-            style={styles.view}
-        >
-            <Text style={styles.main}>Testing recording audio plugins</Text>
-            <Separator testID="separator"/>
-            <RecordComponent testID="record-component"/>
+        <View style={styles.container}>
+            <View
+                style={styles.view}
+            >
+                <Text style={styles.main}>Testing recording audio plugins</Text>
+                <Separator testID="separator"/>
+                <RecordComponent testID="record-component"/>
+            </View>
         </View>
     );
 }
@@ -34,10 +36,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "center",
-        backgroundColor: "#14161a",
-        borderColor: "#dceaf9",
-        borderWidth: 2,
-        borderRadius: 10,
+        backgroundColor: "#02205c",
         paddingTop: 10,
+        width: "100%",
     },
+    container: {
+        flex: 1,
+        backgroundColor: '#02205c',
+    },
+
 });

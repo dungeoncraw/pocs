@@ -21,6 +21,7 @@ export default function RecordComponent({testID}: RecordComponentProps) {
     useEffect(() => {
         audioRecordPlayerRef.current = new RecordProvider(pluginType);
         audioRecordPlayerRef.current.getPlayList().then((r: Recordings[]) => {
+            console.log(r);
             setRecordings(r.map((record) => ({
                 id: record.name,
                 title: record.name,
@@ -61,26 +62,29 @@ export default function RecordComponent({testID}: RecordComponentProps) {
             {isRecording ?
                 <TouchableOpacity
                     onPress={onPressStop}
-                    style={styles.iconButton}
+                    style={[styles.iconButton, styles.buttonContent]}
                     testID="stop-button"
                 >
+                    <Text>Stop</Text>
                     <FontAwesome name="stop" size={24} color="#c10d10"/>
                 </TouchableOpacity>
                 :
                 <TouchableOpacity
                     onPress={onPressRecord}
-                    style={styles.iconButton}
+                    style={[styles.iconButton, styles.buttonContent]}
                     testID="record-button"
                 >
+                    <Text style={styles.buttonText}>Record</Text>
                     <FontAwesome name="microphone" size={24} color="#1ac10d"/>
                 </TouchableOpacity>
             }
 
             <TouchableOpacity
                 onPress={onPressPlay}
-                style={styles.iconButton}
+                style={[styles.iconButton, styles.buttonContent]}
                 testID="play-button"
             >
+                <Text style={styles.buttonText}>Play</Text>
                 <FontAwesome name="play" size={24} color="#000"/>
             </TouchableOpacity>
             <ListComponent data={recordings} onItemPress={() => {}}/>
@@ -117,5 +121,17 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+        width: '80%',
+    },
+    buttonContent: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    buttonText: {
+        fontSize: 16,
+        fontFamily: 'Roboto',
+        color: '#666',
+        marginRight: 10,
     },
 });

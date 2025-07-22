@@ -3,21 +3,21 @@ import { FontAwesome } from '@expo/vector-icons';
 import {ListComponentProps, ListItemProps} from "@/app/types/types";
 
 
-const ListItem = ({ item, onPress }: { item: ListItemProps; onPress: () => void }) => (
+const ListItem = ({ item, onPress }: { item: ListItemProps; onPress: () => void }) => {
+    console.log('itemmm', item);
+    return (
     <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
         <View style={styles.itemContent}>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.description}>{item.description}</Text>
+            <Text style={styles.title}>ahhhhhhhhhhhhhhhh{item.id}</Text>
         </View>
         <FontAwesome name="chevron-right" size={16} color="#97a3b4" />
     </TouchableOpacity>
-);
+)};
 
 export default function ListComponent({ data, onItemPress }: ListComponentProps) {
     const renderItem = ({ item }: { item: ListItemProps }) => (
         <ListItem item={item} onPress={() => onItemPress(item)} />
     );
-
     return (
         <FlatList
             data={data}
@@ -32,6 +32,7 @@ export default function ListComponent({ data, onItemPress }: ListComponentProps)
 const styles = StyleSheet.create({
     listContainer: {
         padding: 16,
+        flex: 1,
     },
     itemContainer: {
         flexDirection: 'row',
@@ -48,15 +49,19 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 3.84,
         elevation: 5,
+        height: 80,
+        width: '100%',
     },
     itemContent: {
         flex: 1,
+        width: '100%',
     },
     title: {
         fontSize: 16,
         fontFamily: 'Roboto',
         fontWeight: 'bold',
         marginBottom: 4,
+        width: '80%'
     },
     description: {
         fontSize: 14,
