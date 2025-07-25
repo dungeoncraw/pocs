@@ -6,7 +6,7 @@ import {AVAILABLE_PLUGINS} from "@/app/(tabs)/settings";
 import {FontAwesome} from "@expo/vector-icons";
 import {useEffect, useRef, useState} from "react";
 import ListComponent from "@/app/component/ListComponent";
-import {ListItemProps, Recordings} from "@/app/types/types";
+import {ListItemProps} from "@/app/types/types";
 
 interface RecordComponentProps {
     testID?: string
@@ -19,19 +19,25 @@ export default function RecordComponent({testID}: RecordComponentProps) {
     const audioRecordPlayerRef = useRef<RecordProvider | null>(null);
 
     useEffect(() => {
-        audioRecordPlayerRef.current = new RecordProvider(pluginType);
-        audioRecordPlayerRef.current.getPlayList().then((r: Recordings[]) => {
-            console.log(r);
-            setRecordings(r.map((record) => ({
-                id: record.name,
-                title: record.name,
-                recording: record
-            })))
-        });
+        const initializeRecorder = async () => {
+            try {
+                audioRecordPlayerRef.current = new RecordProvider(pluginType);
+                const recordings = await audioRecordPlayerRef.current.getPlayList();
+                setRecordings(recordings.map((record) => ({
+                    id: record.name,
+                    title: record.name,
+                    recording: record
+                })));
+            } catch (error) {
+                console.error('Error starting record component:', error);
+            }
+        };
+
+        initializeRecorder();
+
         return () => {
             if (audioRecordPlayerRef.current) {
-                // Call cleanup to properly release all audio resources
-                audioRecordPlayerRef.current.cleanup().catch(err => 
+                audioRecordPlayerRef.current.cleanup().catch(err =>
                     console.error('Error during cleanup:', err)
                 );
             }
@@ -40,18 +46,47 @@ export default function RecordComponent({testID}: RecordComponentProps) {
 
     const onPressRecord = async () => {
         if (!audioRecordPlayerRef.current) return;
-        setIsRecording(true);
-        await audioRecordPlayerRef.current.onRecord();
+
+        try {
+            setIsRecording(true);
+            await audioRecordPlayerRef.current.onRecord();
+        } catch (error) {
+            console.error('Error starting record:', error);
+            setIsRecording(false);
+        }
     };
 
     const onPressStop = async () => {
         if (!audioRecordPlayerRef.current) return;
-        setIsRecording(false);
-        await audioRecordPlayerRef.current.onStop();
-    }
-    const onPressPlay = async () => {
+
+        try {
+            await audioRecordPlayerRef.current.onStop();
+            setIsRecording(false);
+
+            const updatedRecordings = await audioRecordPlayerRef.current.getPlayList();
+            setRecordings(updatedRecordings.map((record) => ({
+                id: record.name,
+                title: record.name,
+                recording: record
+            })));
+        } catch (error) {
+            console.error('Error stopping record:', error);
+        }
+    };
+    const onPressPlay = async (recordPath?: string) => {
         if (!audioRecordPlayerRef.current) return;
-        await audioRecordPlayerRef.current.onPlay();
+        await audioRecordPlayerRef.current.onPlay(recordPath);
+    }
+
+    const onDeleteRecord = async (recordPath: string) => {
+        if(!audioRecordPlayerRef.current) return;
+        await audioRecordPlayerRef.current.removeRecord(recordPath);
+        const updatedRecordings = await audioRecordPlayerRef.current.getPlayList();
+        setRecordings(updatedRecordings.map((record) => ({
+            id: record.name,
+            title: record.name,
+            recording: record
+        })));
     }
 
     return (
@@ -80,14 +115,18 @@ export default function RecordComponent({testID}: RecordComponentProps) {
             }
 
             <TouchableOpacity
-                onPress={onPressPlay}
+                onPress={() => onPressPlay()}
                 style={[styles.iconButton, styles.buttonContent]}
                 testID="play-button"
             >
                 <Text style={styles.buttonText}>Play</Text>
                 <FontAwesome name="play" size={24} color="#000"/>
             </TouchableOpacity>
-            <ListComponent data={recordings} onItemPress={() => {}}/>
+            <ListComponent
+                data={recordings}
+                onItemPress={(item) => onPressPlay(item.recording.uri)}
+                onDelete={(item) => onDeleteRecord(item.recording.uri)}
+            />
         </SafeAreaView>
     )
 }

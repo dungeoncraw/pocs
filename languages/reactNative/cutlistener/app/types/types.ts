@@ -18,4 +18,5 @@ export interface ListItemProps {
 export interface ListComponentProps {
     data: ListItemProps[];
     onItemPress: (item: ListItemProps) => void;
+    onDelete: (item: ListItemProps) => void;
 }

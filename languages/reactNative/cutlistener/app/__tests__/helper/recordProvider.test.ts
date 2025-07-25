@@ -87,8 +87,8 @@ describe('RecordProvider', () => {
       await provider.onRecord();
 
       expect(requestMicrophonePermission).toHaveBeenCalled();
-      expect(provider.recordPLugin.startRecorder).toHaveBeenCalled();
-      expect(provider.recordPLugin.addRecordBackListener).toHaveBeenCalled();
+      expect(provider.recordPlugin.startRecorder).toHaveBeenCalled();
+      expect(provider.recordPlugin.addRecordBackListener).toHaveBeenCalled();
     });
 
     it('should not start recording on Android when permissions are denied', async () => {
@@ -102,7 +102,7 @@ describe('RecordProvider', () => {
       await provider.onRecord();
 
       expect(requestMicrophonePermission).toHaveBeenCalled();
-      expect(provider.recordPLugin.startRecorder).not.toHaveBeenCalled();
+      expect(provider.recordPlugin.startRecorder).not.toHaveBeenCalled();
     });
 
     it('should start recording on iOS without checking permissions', async () => {
@@ -113,8 +113,8 @@ describe('RecordProvider', () => {
       await provider.onRecord();
 
       expect(requestMicrophonePermission).not.toHaveBeenCalled();
-      expect(provider.recordPLugin.startRecorder).toHaveBeenCalled();
-      expect(provider.recordPLugin.addRecordBackListener).toHaveBeenCalled();
+      expect(provider.recordPlugin.startRecorder).toHaveBeenCalled();
+      expect(provider.recordPlugin.addRecordBackListener).toHaveBeenCalled();
     });
 
     it('should handle record back listener callback', async () => {
@@ -124,14 +124,14 @@ describe('RecordProvider', () => {
       const provider = new RecordProvider(PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER, 'test/path');
 
       // Mock the addRecordBackListener to capture and execute the callback
-      provider.recordPLugin.addRecordBackListener = jest.fn().mockImplementation((callback) => {
+      provider.recordPlugin.addRecordBackListener = jest.fn().mockImplementation((callback) => {
         callback({ currentPosition: 1000 });
       });
 
       await provider.onRecord();
 
       expect(provider.recordSecs).toBe(1000);
-      expect(provider.recordPLugin.mmssss).toHaveBeenCalledWith(1000);
+      expect(provider.recordPlugin.mmssss).toHaveBeenCalledWith(1000);
     });
 
     it('should do nothing for EXPO_AUDIO plugin', async () => {
@@ -147,8 +147,8 @@ describe('RecordProvider', () => {
       const provider = new RecordProvider(PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER, 'test/path');
       await provider.onStop();
 
-      expect(provider.recordPLugin.stopRecorder).toHaveBeenCalled();
-      expect(provider.recordPLugin.removeRecordBackListener).toHaveBeenCalled();
+      expect(provider.recordPlugin.stopRecorder).toHaveBeenCalled();
+      expect(provider.recordPlugin.removeRecordBackListener).toHaveBeenCalled();
       expect(provider.recordSecs).toBe(0);
     });
 
@@ -165,21 +165,21 @@ describe('RecordProvider', () => {
       const provider = new RecordProvider(PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER, 'test/path');
 
       // Mock the addPlayBackListener to capture and execute the callback
-      provider.recordPLugin.addPlayBackListener = jest.fn().mockImplementation((callback) => {
+      provider.recordPlugin.addPlayBackListener = jest.fn().mockImplementation((callback) => {
         callback({ currentPosition: 1000, duration: 5000 });
       });
 
       await provider.onPlay();
 
-      expect(provider.recordPLugin.startPlayer).toHaveBeenCalledWith('test/path');
-      expect(provider.recordPLugin.setVolume).toHaveBeenCalledWith(1.0);
-      expect(provider.recordPLugin.addPlayBackListener).toHaveBeenCalled();
+      expect(provider.recordPlugin.startPlayer).toHaveBeenCalledWith('test/path');
+      expect(provider.recordPlugin.setVolume).toHaveBeenCalledWith(1.0);
+      expect(provider.recordPlugin.addPlayBackListener).toHaveBeenCalled();
 
       // Check that the playback listener updated the state
       expect(provider.currentPositionSec).toBe(1000);
       expect(provider.currentDurationSec).toBe(5000);
-      expect(provider.recordPLugin.mmssss).toHaveBeenCalledWith(1000);
-      expect(provider.recordPLugin.mmssss).toHaveBeenCalledWith(5000);
+      expect(provider.recordPlugin.mmssss).toHaveBeenCalledWith(1000);
+      expect(provider.recordPlugin.mmssss).toHaveBeenCalledWith(5000);
     });
 
     it('should do nothing for EXPO_AUDIO plugin', async () => {

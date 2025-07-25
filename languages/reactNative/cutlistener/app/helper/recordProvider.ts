@@ -8,7 +8,17 @@ import AudioRecorderPlayer, {
     PlayBackType,
     RecordBackType
 } from "react-native-audio-recorder-player";
-import {createAudioPlayer, AudioModule, requestRecordingPermissionsAsync, AudioStatus, RecorderState, AudioQuality, IOSOutputFormat, setAudioModeAsync, setIsAudioActiveAsync} from "expo-audio";
+import {
+    createAudioPlayer,
+    AudioModule,
+    requestRecordingPermissionsAsync,
+    AudioStatus,
+    RecorderState,
+    AudioQuality,
+    IOSOutputFormat,
+    setAudioModeAsync,
+    setIsAudioActiveAsync
+} from "expo-audio";
 import {Platform} from "react-native";
 import * as FileSystem from 'expo-file-system';
 import {requestMicrophonePermission} from "@/app/helper/requestPermission";
@@ -16,22 +26,22 @@ import {PluginType, Recordings} from "@/app/types/types";
 
 class RecordProvider {
     pluginType: PluginType;
-    recordPLugin: any;
+    recordPlugin: any;
     recordRecorder: any;
     path: string | undefined;
     recordSecs = 0;
     recordTime = '00:00';
-    currentPositionSec= 0;
-    currentDurationSec= 0;
-    playTime=  '00:00';
-    duration= '00:00';
+    currentPositionSec = 0;
+    currentDurationSec = 0;
+    playTime = '00:00';
+    duration = '00:00';
     private readonly RECORDINGS_DIRECTORY = `${FileSystem.documentDirectory}cutlistener/recordings/`;
     private readonly RECORDING_EXTENSION = '.m4a';
 
     private async ensureDirectoryExists() {
         const dirInfo = await FileSystem.getInfoAsync(this.RECORDINGS_DIRECTORY);
         if (!dirInfo.exists) {
-            await FileSystem.makeDirectoryAsync(this.RECORDINGS_DIRECTORY, { intermediates: true });
+            await FileSystem.makeDirectoryAsync(this.RECORDINGS_DIRECTORY, {intermediates: true});
         }
     }
 
@@ -46,7 +56,7 @@ class RecordProvider {
         }
         switch (pluginType) {
             case PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER:
-                this.recordPLugin = new AudioRecorderPlayer();
+                this.recordPlugin = new AudioRecorderPlayer();
                 break;
             case PluginType.EXPO_AUDIO:
                 // Configure audio session for recording
@@ -68,117 +78,116 @@ class RecordProvider {
                 // Activate audio session
                 setIsAudioActiveAsync(true);
 
-                this.recordPLugin = createAudioPlayer();
+                this.recordPlugin = createAudioPlayer();
                 this.recordRecorder = new AudioModule.AudioRecorder({});
         }
     }
 
     async onRecord() {
-    try {
-        if (this.pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
-            if (Platform.OS === 'android') {
-                try {
-                    const hasPermissions = await requestMicrophonePermission();
+        try {
+            if (this.pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
+                if (Platform.OS === 'android') {
+                    try {
+                        const hasPermissions = await requestMicrophonePermission();
 
-                    if (!hasPermissions) {
-                        console.log('Permission not granted');
+                        if (!hasPermissions) {
+                            console.log('Permission not granted');
+                            return;
+                        }
+                    } catch (err) {
+                        console.warn(err);
                         return;
                     }
-                } catch (err) {
-                    console.warn(err);
-                    return;
                 }
-            }
 
-            const audioSet: AudioSet = {
-                AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
-                AudioSourceAndroid: AudioSourceAndroidType.MIC,
-                AVEncoderAudioQualityKeyIOS: AVEncoderAudioQualityIOSType.high,
-                AVNumberOfChannelsKeyIOS: 2,
-                AVFormatIDKeyIOS: AVEncodingOption.aac,
-                OutputFormatAndroid: OutputFormatAndroidType.AAC_ADTS,
-            };
+                const audioSet: AudioSet = {
+                    AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
+                    AudioSourceAndroid: AudioSourceAndroidType.MIC,
+                    AVEncoderAudioQualityKeyIOS: AVEncoderAudioQualityIOSType.high,
+                    AVNumberOfChannelsKeyIOS: 2,
+                    AVFormatIDKeyIOS: AVEncodingOption.aac,
+                    OutputFormatAndroid: OutputFormatAndroidType.AAC_ADTS,
+                };
 
-            console.log('audioSet', audioSet);
-            const uri = await this.recordPLugin.startRecorder(
-                this.path,
-                audioSet,
-            );
+                console.log('audioSet', audioSet);
+                const uri = await this.recordPlugin.startRecorder(
+                    this.path,
+                    audioSet,
+                );
 
-            this.recordPLugin.addRecordBackListener((e: RecordBackType) => {
-                this.recordSecs = e.currentPosition;
-                this.recordTime = this.recordPLugin.mmssss(Math.floor(e.currentPosition));
-            });
+                this.recordPlugin.addRecordBackListener((e: RecordBackType) => {
+                    this.recordSecs = e.currentPosition;
+                    this.recordTime = this.recordPlugin.mmssss(Math.floor(e.currentPosition));
+                });
 
-            console.log(`Gravação iniciada: ${uri}`);
-        } else if (this.pluginType === PluginType.EXPO_AUDIO) {
-            // Check permissions and configure audio session
-            if (Platform.OS === 'android') {
-                try {
-                    const permissionResponse = await requestRecordingPermissionsAsync();
+                console.log(`Gravação iniciada: ${uri}`);
+            } else if (this.pluginType === PluginType.EXPO_AUDIO) {
+                if (Platform.OS === 'android') {
+                    try {
+                        const permissionResponse = await requestRecordingPermissionsAsync();
 
-                    if (!permissionResponse.granted) {
-                        console.log('Permission not granted');
+                        if (!permissionResponse.granted) {
+                            console.log('Permission not granted');
+                            return;
+                        }
+                    } catch (err) {
+                        console.warn(err);
                         return;
                     }
-                } catch (err) {
-                    console.warn(err);
-                    return;
-                }
-            } else if (Platform.OS === 'ios') {
-                try {
-                    // Ensure audio session is configured for recording
-                    await setAudioModeAsync({
-                        playsInSilentMode: true,
-                        interruptionMode: 'mixWithOthers',
-                        allowsRecording: true,
-                        shouldPlayInBackground: false
-                    });
+                } else if (Platform.OS === 'ios') {
+                    try {
+                        // Ensure the audio session is configured for recording
+                        await setAudioModeAsync({
+                            playsInSilentMode: true,
+                            interruptionMode: 'mixWithOthers',
+                            allowsRecording: true,
+                            shouldPlayInBackground: false
+                        });
 
-                    // Activate audio session
-                    await setIsAudioActiveAsync(true);
-                } catch (err) {
-                    console.error('Error configuring audio session:', err);
-                    return;
+                        // Activate audio session
+                        await setIsAudioActiveAsync(true);
+                    } catch (err) {
+                        console.error('Error configuring audio session:', err);
+                        return;
+                    }
                 }
-            }
 
-            await this.recordRecorder.prepareToRecordAsync({
-                extension: '.m4a',
-                sampleRate: 44100,
-                numberOfChannels: 2,
-                bitRate: 128000,
-                android: {
+                await this.recordRecorder.prepareToRecordAsync({
                     extension: '.m4a',
-                    outputFormat: 'aac_adts',
-                    audioEncoder: 'aac',
-                },
-                ios: {
-                    extension: '.m4a',
-                    outputFormat: IOSOutputFormat.MPEG4AAC,
-                    audioQuality: AudioQuality.HIGH,
                     sampleRate: 44100,
                     numberOfChannels: 2,
                     bitRate: 128000,
-                    linearPCMBitDepth: 16,
-                    linearPCMIsBigEndian: false,
-                    linearPCMIsFloat: false,
-                },
-            });
+                    android: {
+                        extension: '.m4a',
+                        outputFormat: 'aac_adts',
+                        audioEncoder: 'aac',
+                    },
+                    ios: {
+                        extension: '.m4a',
+                        outputFormat: IOSOutputFormat.MPEG4AAC,
+                        audioQuality: AudioQuality.HIGH,
+                        sampleRate: 44100,
+                        numberOfChannels: 2,
+                        bitRate: 128000,
+                        linearPCMBitDepth: 16,
+                        linearPCMIsBigEndian: false,
+                        linearPCMIsFloat: false,
+                    },
+                });
 
-            this.recordRecorder.record();
+                this.recordRecorder.record();
 
-            this.recordRecorder.addListener('recordingStatusUpdate', (status: RecorderState) => {
-                this.recordSecs = status.durationMillis / 1000;
-                this.recordTime = this.formatTime(Math.floor(this.recordSecs));
-            });
+                this.recordRecorder.addListener('recordingStatusUpdate', (status: RecorderState) => {
+                    this.recordSecs = status.durationMillis / 1000;
+                    this.recordTime = this.formatTime(Math.floor(this.recordSecs));
+                });
 
-            console.log(`Gravação iniciada com expo-audio`);
+                console.log(`Gravação iniciada com expo-audio`);
+            }
+        } catch (error) {
+            console.error('Erro ao iniciar gravação:', error);
         }
-    } catch (error) {
-        console.error('Erro ao iniciar gravação:', error);
     }
-}
 
     formatTime(seconds: number): string {
         const mins = Math.floor(seconds / 60);
@@ -188,8 +197,8 @@ class RecordProvider {
 
     async onStop() {
         if (this.pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
-            const result = await this.recordPLugin.stopRecorder();
-            this.recordPLugin.removeRecordBackListener();
+            const result = await this.recordPlugin.stopRecorder();
+            this.recordPlugin.removeRecordBackListener();
             this.recordSecs = 0;
             if (result && result !== this.path) {
                 const newPath = `${this.RECORDINGS_DIRECTORY}recording_${Date.now()}${this.RECORDING_EXTENSION}`;
@@ -230,16 +239,16 @@ class RecordProvider {
         }
     }
 
-    async onPlay() {
+    async onPlay(recordPath?: string) {
         if (this.pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
-            const msg = await this.recordPLugin.startPlayer(this.path);
-            const volume = await this.recordPLugin.setVolume(1.0);
+            const msg = await this.recordPlugin.startPlayer(recordPath ?? this.path);
+            const volume = await this.recordPlugin.setVolume(1.0);
             console.log(`msg: ${msg}, volume: ${volume}`);
-            this.recordPLugin.addPlayBackListener((e: PlayBackType) => {
-                    this.currentPositionSec = e.currentPosition;
-                    this.currentDurationSec =  e.duration;
-                    this.playTime = this.recordPLugin.mmssss((Math.floor(e.currentPosition)));
-                    this.duration = this.recordPLugin.mmssss((Math.floor(e.duration)));
+            this.recordPlugin.addPlayBackListener((e: PlayBackType) => {
+                this.currentPositionSec = e.currentPosition;
+                this.currentDurationSec = e.duration;
+                this.playTime = this.recordPlugin.mmssss((Math.floor(e.currentPosition)));
+                this.duration = this.recordPlugin.mmssss((Math.floor(e.duration)));
             });
         } else if (this.pluginType === PluginType.EXPO_AUDIO) {
             try {
@@ -261,13 +270,13 @@ class RecordProvider {
                     await setIsAudioActiveAsync(true);
                 }
 
-                this.recordPLugin.replace({ uri: this.path });
+                this.recordPlugin.replace({uri: this.path});
 
-                this.recordPLugin.volume = 1.0;
+                this.recordPlugin.volume = 1.0;
 
-                this.recordPLugin.play();
+                this.recordPlugin.play();
 
-                this.recordPLugin.addListener('playbackStatusUpdate', (status: AudioStatus) => {
+                this.recordPlugin.addListener('playbackStatusUpdate', (status: AudioStatus) => {
                     this.currentPositionSec = status.currentTime * 1000;
                     this.currentDurationSec = status.duration * 1000;
                     this.playTime = this.formatTime(Math.floor(status.currentTime));
@@ -275,7 +284,7 @@ class RecordProvider {
 
                     // Deactivate audio session when playback finishes
                     if (status.didJustFinish && Platform.OS === 'ios') {
-                        setIsAudioActiveAsync(false).catch(err => 
+                        setIsAudioActiveAsync(false).catch(err =>
                             console.error('Error deactivating audio session:', err)
                         );
                     }
@@ -288,13 +297,22 @@ class RecordProvider {
         }
     }
 
+    async removeRecord(recordPath: string) {
+        try {
+            await FileSystem.deleteAsync(recordPath);
+            console.log(`Record deleted: ${recordPath}`);
+        } catch (error) {
+            console.error('Error deleting record:', error);
+        }
+    }
+
     async getPlayList() {
         try {
             await this.ensureDirectoryExists();
 
             if (this.pluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER) {
                 if (Platform.OS === 'android') {
-                    const nativeList = await this.recordPLugin.getPlayList() || [];
+                    const nativeList = await this.recordPlugin.getPlayList() || [];
                     const filesInDirectory = await this.getRecordingsFromDirectory();
                     return [...new Set([...nativeList, ...filesInDirectory])];
                 } else {
@@ -322,9 +340,9 @@ class RecordProvider {
                 }
 
                 // Stop any ongoing playback
-                if (this.recordPLugin && this.recordPLugin.playing) {
-                    this.recordPLugin.pause();
-                    this.recordPLugin.removeAllListeners();
+                if (this.recordPlugin && this.recordPlugin.playing) {
+                    this.recordPlugin.pause();
+                    this.recordPlugin.removeAllListeners();
                 }
 
                 // Deactivate audio session
