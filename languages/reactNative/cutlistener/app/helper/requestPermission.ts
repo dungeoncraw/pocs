@@ -18,7 +18,7 @@ export const requestMicrophonePermission = async () => {
         if (hasNeverAskAgain) {
             Alert.alert(
                 'Permission required',
-                'To record audio, app need access to microphone and storage. Please grant the access on settings.',
+                'To record audio, the app needs access to microphone and storage. Please grant the access in settings.',
                 [
                     {
                         text: 'Cancel',

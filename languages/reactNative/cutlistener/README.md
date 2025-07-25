@@ -1,81 +1,84 @@
 # CutListener
 
-## 📱 Sobre o Aplicativo
-CutListener é um aplicativo móvel inovador disponível para dispositivos iOS e Android.
+## 📱 About the App
+CutListener is an innovative mobile application available for iOS and Android devices.
 
 ## 📲 Download
 
-### Para usuários Android:
-- Versão mínima do Android requerida: [Verificar na Google Play Store]
-- Disponível na [Google Play Store](link-da-play-store)
-- Tamanho do aplicativo: [Tamanho]
+### For Android users:
+- Minimum Android version required: [Check on Google Play Store]
+- Available on [Google Play Store](link-to-play-store)
+- App size: [Size]
 
-### Para usuários iOS:
-- Requer iOS 12.0 ou superior
-- Compatível com iPhone e iPad
-- Disponível na [App Store](link-da-app-store)
-- Tamanho do aplicativo: [Tamanho]
+### For iOS users:
+- Requires iOS 12.0 or higher
+- Compatible with iPhone and iPad
+- Available on [App Store](link-to-app-store)
+- App size: [Size]
 
-## ✨ Recursos
+## ✨ Features
 
-- Interface intuitiva e moderna
-- Suporte a modo claro e escuro automático
-- Gravação de áudio com alta qualidade
-- Design otimizado para diferentes dispositivos
-- Suporte completo para tablets (iOS)
+- Intuitive and modern interface
+- Automatic light and dark mode support
+- High-quality audio recording
+- Design optimized for different devices
+- Full tablet support (iOS)
 
-## 🔐 Permissões Necessárias
-
-### iOS:
-- Microfone: Necessário para gravação de áudio
-- [Outras permissões relevantes]
-
-### Android:
-- Microfone
-- [Outras permissões relevantes]
-
-## 💫 Versão
-
-Versão atual: 1.0.0
-
-## 📱 Compatibilidade
+## 🔐 Required Permissions
 
 ### iOS:
-- iPhone com iOS 12.0 ou superior
-- iPad com iOS 12.0 ou superior
-- Otimizado para todas as resoluções de tela
+- Microphone: Required for audio recording
+- [Other relevant permissions]
 
 ### Android:
-- Android [versão mínima]
-- Suporte a diversos tamanhos de tela
-- Interface adaptativa
+- Microphone
+- [Other relevant permissions]
 
-## ❓ Suporte
+## 💫 Version
 
-Para suporte técnico ou dúvidas:
-- Email: [email de suporte]
+Current version: 1.0.0
+
+## 📱 Compatibility
+
+### iOS:
+- iPhone with iOS 12.0 or higher
+- iPad with iOS 12.0 or higher
+- Optimized for all screen resolutions
+
+### Android:
+- Android [minimum version]
+- Support for various screen sizes
+- Adaptive interface
+
+## ❓ Support
+
+For technical support or questions:
+- Email: [support email]
 - Website: [website]
 
-## 🔒 Privacidade
+## 🔒 Privacy
 
-- O aplicativo solicita apenas as permissões necessárias para seu funcionamento
-- Suas gravações não são compartilhadas sem sua permissão
-- Para mais detalhes, consulte nossa [Política de Privacidade](link)
+- The app only requests permissions necessary for its operation
+- Your recordings are not shared without your permission
+- For more details, see our [Privacy Policy](link)
 
-## ⚖️ Termos de Uso
+## ⚖️ Terms of Use
 
-Para informações sobre os termos de uso do aplicativo, visite:
-[Link para Termos de Uso]
+For information about the app's terms of use, visit:
+[Link to Terms of Use]
 
-## 📝 Notas da Versão
+## 📝 Release Notes
 
-### Versão 1.0.0
-- Lançamento inicial do aplicativo
-- [Principais recursos e funcionalidades]
-- [Correções e melhorias]
+### Version 1.0.0
+- Initial app release
+- [Main features and functionalities]
+- [Fixes and improvements]
 
-## 🌟 Avalie o Aplicativo
+## 🌟 Rate the App
 
-Sua opinião é importante para nós! Se você está gostando do CutListener, por favor, nos avalie na:
+Your opinion is important to us! If you're enjoying CutListener, please rate us on:
 - [App Store](link-app-store)
 - [Google Play Store](link-play-store)
+
+## References
+- [Real-time Audio Processing with Expo and Native Code](https://expo.dev/blog/real-time-audio-processing-with-expo-and-native-code)

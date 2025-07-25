@@ -1,69 +1,57 @@
 import {TouchableOpacity, SafeAreaView, StyleSheet, Text} from "react-native";
-import RecordProvider from "@/app/helper/recordProvider";
-import {pluginSelectAtom} from "@/app/state/PluginSelectAtom";
-import {useAtomValue} from 'jotai'
-import {AVAILABLE_PLUGINS} from "@/app/(tabs)/settings";
 import {FontAwesome} from "@expo/vector-icons";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import ListComponent from "@/app/component/ListComponent";
 import {ListItemProps} from "@/app/types/types";
+import useRecordProvider from "@/app/hooks/useRecordProvider";
 
 interface RecordComponentProps {
     testID?: string
 }
 
 export default function RecordComponent({testID}: RecordComponentProps) {
-    const pluginType = useAtomValue(pluginSelectAtom);
-    const [isRecording, setIsRecording] = useState(false);
     const [recordings, setRecordings] = useState<ListItemProps[]>([]);
-    const audioRecordPlayerRef = useRef<RecordProvider | null>(null);
+    
+    // Use the new hook instead of class-based RecordProvider
+    const {
+        isRecording,
+        onRecord,
+        onStop,
+        onPlay,
+        removeRecord,
+        getPlayList,
+    } = useRecordProvider();
 
     useEffect(() => {
-        const initializeRecorder = async () => {
+        const loadRecordings = async () => {
             try {
-                audioRecordPlayerRef.current = new RecordProvider(pluginType);
-                const recordings = await audioRecordPlayerRef.current.getPlayList();
-                setRecordings(recordings.map((record) => ({
+                const recordingsList = await getPlayList();
+                setRecordings(recordingsList.map((record) => ({
                     id: record.name,
                     title: record.name,
                     recording: record
                 })));
             } catch (error) {
-                console.error('Error starting record component:', error);
+                console.error('Error loading recordings:', error);
             }
         };
 
-        initializeRecorder();
-
-        return () => {
-            if (audioRecordPlayerRef.current) {
-                audioRecordPlayerRef.current.cleanup().catch(err =>
-                    console.error('Error during cleanup:', err)
-                );
-            }
-        };
-    }, [pluginType]);
+        loadRecordings();
+    }, [getPlayList]);
 
     const onPressRecord = async () => {
-        if (!audioRecordPlayerRef.current) return;
-
         try {
-            setIsRecording(true);
-            await audioRecordPlayerRef.current.onRecord();
+            await onRecord();
         } catch (error) {
             console.error('Error starting record:', error);
-            setIsRecording(false);
         }
     };
 
     const onPressStop = async () => {
-        if (!audioRecordPlayerRef.current) return;
-
         try {
-            await audioRecordPlayerRef.current.onStop();
-            setIsRecording(false);
+            await onStop();
 
-            const updatedRecordings = await audioRecordPlayerRef.current.getPlayList();
+            const updatedRecordings = await getPlayList();
             setRecordings(updatedRecordings.map((record) => ({
                 id: record.name,
                 title: record.name,
@@ -73,15 +61,14 @@ export default function RecordComponent({testID}: RecordComponentProps) {
             console.error('Error stopping record:', error);
         }
     };
+    
     const onPressPlay = async (recordPath?: string) => {
-        if (!audioRecordPlayerRef.current) return;
-        await audioRecordPlayerRef.current.onPlay(recordPath);
+        await onPlay(recordPath);
     }
 
     const onDeleteRecord = async (recordPath: string) => {
-        if(!audioRecordPlayerRef.current) return;
-        await audioRecordPlayerRef.current.removeRecord(recordPath);
-        const updatedRecordings = await audioRecordPlayerRef.current.getPlayList();
+        await removeRecord(recordPath);
+        const updatedRecordings = await getPlayList();
         setRecordings(updatedRecordings.map((record) => ({
             id: record.name,
             title: record.name,
@@ -92,7 +79,7 @@ export default function RecordComponent({testID}: RecordComponentProps) {
     return (
         <SafeAreaView style={styles.component} testID={testID || "record-component"}>
             <Text style={styles.subHeader}>
-                {AVAILABLE_PLUGINS.find((t) => t.id === pluginType)?.label}
+                Expo Audio Recorder
             </Text>
             {isRecording ?
                 <TouchableOpacity

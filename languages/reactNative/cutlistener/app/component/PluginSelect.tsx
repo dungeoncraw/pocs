@@ -12,7 +12,7 @@ interface SelectProps {
 const PluginSelect: React.FC<SelectProps> = ({
                                            data,
                                            onSelect,
-                                           placeholder = 'Selecione uma opção',
+                                           placeholder = 'Select an option',
                                            selectedItem = null,
                                        }) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -45,7 +45,7 @@ const PluginSelect: React.FC<SelectProps> = ({
                             style={styles.closeButton}
                             onPress={() => setModalVisible(false)}
                         >
-                            <Text style={styles.closeButtonText}>Fechar</Text>
+                            <Text style={styles.closeButtonText}>Close</Text>
                         </TouchableOpacity>
 
                         <FlatList

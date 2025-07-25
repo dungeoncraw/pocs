@@ -120,7 +120,7 @@ class RecordProvider {
                     this.recordTime = this.recordPlugin.mmssss(Math.floor(e.currentPosition));
                 });
 
-                console.log(`Gravação iniciada: ${uri}`);
+                console.log(`Recording with RN Audio Recorder: ${uri}`);
             } else if (this.pluginType === PluginType.EXPO_AUDIO) {
                 if (Platform.OS === 'android') {
                     try {
@@ -151,41 +151,45 @@ class RecordProvider {
                         return;
                     }
                 }
-
-                await this.recordRecorder.prepareToRecordAsync({
-                    extension: '.m4a',
-                    sampleRate: 44100,
-                    numberOfChannels: 2,
-                    bitRate: 128000,
-                    android: {
+                try {
+                    await this.recordRecorder.prepareToRecordAsync({
                         extension: '.m4a',
-                        outputFormat: 'aac_adts',
-                        audioEncoder: 'aac',
-                    },
-                    ios: {
-                        extension: '.m4a',
-                        outputFormat: IOSOutputFormat.MPEG4AAC,
-                        audioQuality: AudioQuality.HIGH,
                         sampleRate: 44100,
                         numberOfChannels: 2,
                         bitRate: 128000,
-                        linearPCMBitDepth: 16,
-                        linearPCMIsBigEndian: false,
-                        linearPCMIsFloat: false,
-                    },
-                });
+                        android: {
+                            extension: '.m4a',
+                            outputFormat: 'aac_adts',
+                            audioEncoder: 'aac',
+                        },
+                        ios: {
+                            extension: '.m4a',
+                            outputFormat: IOSOutputFormat.MPEG4AAC,
+                            audioQuality: AudioQuality.HIGH,
+                            sampleRate: 44100,
+                            numberOfChannels: 2,
+                            bitRate: 128000,
+                            linearPCMBitDepth: 16,
+                            linearPCMIsBigEndian: false,
+                            linearPCMIsFloat: false,
+                        },
+                    });
 
-                this.recordRecorder.record();
+                    this.recordRecorder.record();
 
-                this.recordRecorder.addListener('recordingStatusUpdate', (status: RecorderState) => {
-                    this.recordSecs = status.durationMillis / 1000;
-                    this.recordTime = this.formatTime(Math.floor(this.recordSecs));
-                });
+                    this.recordRecorder.addListener('recordingStatusUpdate', (status: RecorderState) => {
+                        this.recordSecs = status.durationMillis / 1000;
+                        this.recordTime = this.formatTime(Math.floor(this.recordSecs));
+                    });
 
-                console.log(`Gravação iniciada com expo-audio`);
+                    console.log(`Recording with com expo-audio`);
+                } catch (err) {
+                    console.error('Error starting recording:', err);
+                    return;
+                }
             }
         } catch (error) {
-            console.error('Erro ao iniciar gravação:', error);
+            console.error('Error on recording:', error);
         }
     }
 
@@ -324,7 +328,7 @@ class RecordProvider {
 
             return [];
         } catch (error) {
-            console.error('Erro ao obter lista de reprodução:', error);
+            console.error('Error getting playlist:', error);
             return [];
         }
 
@@ -373,7 +377,7 @@ class RecordProvider {
 
             return await Promise.all(recordings);
         } catch (error) {
-            console.error('Erro ao ler diretório de gravações:', error);
+            console.error('Error reading recordings directory:', error);
             return [];
         }
     }

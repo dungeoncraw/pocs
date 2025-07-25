@@ -6,7 +6,8 @@ export enum PluginType {
 export interface Recordings {
     uri: string;
     name: string;
-    duration?: number
+    duration?: number;
+    size?: number;
 }
 
 export interface ListItemProps {
