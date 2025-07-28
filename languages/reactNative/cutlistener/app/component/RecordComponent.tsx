@@ -1,8 +1,8 @@
-import {TouchableOpacity, SafeAreaView, StyleSheet, Text} from "react-native";
+import {TouchableOpacity, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import {FontAwesome} from "@expo/vector-icons";
 import {useEffect, useState} from "react";
 import ListComponent from "@/app/component/ListComponent";
-import {ListItemProps} from "@/app/types/types";
+import {ListItemProps, PluginType} from "@/app/types/types";
 import useRecordProvider from "@/app/hooks/useRecordProvider";
 
 interface RecordComponentProps {
@@ -11,8 +11,9 @@ interface RecordComponentProps {
 
 export default function RecordComponent({testID}: RecordComponentProps) {
     const [recordings, setRecordings] = useState<ListItemProps[]>([]);
+    const [currentPluginType, setCurrentPluginType] = useState<PluginType>(PluginType.EXPO_AUDIO);
     
-    // Use the new hook instead of class-based RecordProvider
+    // Use the new hook with the selected plugin type
     const {
         isRecording,
         onRecord,
@@ -20,7 +21,7 @@ export default function RecordComponent({testID}: RecordComponentProps) {
         onPlay,
         removeRecord,
         getPlayList,
-    } = useRecordProvider();
+    } = useRecordProvider({ pluginType: currentPluginType });
 
     useEffect(() => {
         const loadRecordings = async () => {
@@ -76,11 +77,67 @@ export default function RecordComponent({testID}: RecordComponentProps) {
         })));
     }
 
+    const onPluginSwitch = (pluginType: PluginType) => {
+        if (!isRecording) {
+            setCurrentPluginType(pluginType);
+        }
+    }
+
+    const getPluginDisplayName = (pluginType: PluginType): string => {
+        switch (pluginType) {
+            case PluginType.EXPO_AUDIO:
+                return "Expo Audio Recorder";
+            case PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER:
+                return "RN Audio Recorder Player";
+            default:
+                return "Audio Recorder";
+        }
+    }
+
     return (
         <SafeAreaView style={styles.component} testID={testID || "record-component"}>
             <Text style={styles.subHeader}>
-                Expo Audio Recorder
+                {getPluginDisplayName(currentPluginType)}
             </Text>
+            
+            {/* Plugin Selection Controls */}
+            <View style={styles.pluginSelector}>
+                <TouchableOpacity
+                    style={[
+                        styles.pluginButton,
+                        currentPluginType === PluginType.EXPO_AUDIO && styles.activePluginButton,
+                        isRecording && styles.disabledButton
+                    ]}
+                    onPress={() => onPluginSwitch(PluginType.EXPO_AUDIO)}
+                    disabled={isRecording}
+                    testID="expo-audio-button"
+                >
+                    <Text style={[
+                        styles.pluginButtonText,
+                        currentPluginType === PluginType.EXPO_AUDIO && styles.activePluginButtonText
+                    ]}>
+                        Expo Audio
+                    </Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                    style={[
+                        styles.pluginButton,
+                        currentPluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER && styles.activePluginButton,
+                        isRecording && styles.disabledButton
+                    ]}
+                    onPress={() => onPluginSwitch(PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER)}
+                    disabled={isRecording}
+                    testID="rn-audio-button"
+                >
+                    <Text style={[
+                        styles.pluginButtonText,
+                        currentPluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER && styles.activePluginButtonText
+                    ]}>
+                        RN Audio
+                    </Text>
+                </TouchableOpacity>
+            </View>
             {isRecording ?
                 <TouchableOpacity
                     onPress={onPressStop}
@@ -133,6 +190,36 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: "100%",
         padding: 10,
+    },
+    pluginSelector: {
+        flexDirection: 'row',
+        marginBottom: 15,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 20,
+        padding: 3,
+    },
+    pluginButton: {
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+        borderRadius: 17,
+        marginHorizontal: 2,
+        backgroundColor: 'transparent',
+    },
+    activePluginButton: {
+        backgroundColor: '#007AFF',
+    },
+    disabledButton: {
+        opacity: 0.5,
+    },
+    pluginButtonText: {
+        fontSize: 14,
+        fontFamily: 'Roboto',
+        color: '#666',
+        fontWeight: '500',
+    },
+    activePluginButtonText: {
+        color: '#fff',
+        fontWeight: '600',
     },
     iconButton: {
         padding: 10,
