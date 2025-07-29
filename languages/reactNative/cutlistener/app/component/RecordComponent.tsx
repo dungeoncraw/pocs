@@ -1,9 +1,9 @@
 import {TouchableOpacity, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import {FontAwesome} from "@expo/vector-icons";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import ListComponent from "@/app/component/ListComponent";
 import {ListItemProps, PluginType} from "@/app/types/types";
-import useRecordProvider from "@/app/hooks/useRecordProvider";
+import RecordProvider from "@/app/helper/recordProvider";
 
 interface RecordComponentProps {
     testID?: string
@@ -11,22 +11,29 @@ interface RecordComponentProps {
 
 export default function RecordComponent({testID}: RecordComponentProps) {
     const [recordings, setRecordings] = useState<ListItemProps[]>([]);
-    const [currentPluginType, setCurrentPluginType] = useState<PluginType>(PluginType.EXPO_AUDIO);
+    const [isRecording, setIsRecording] = useState<boolean>(false);
     
-    // Use the new hook with the selected plugin type
-    const {
-        isRecording,
-        onRecord,
-        onStop,
-        onPlay,
-        removeRecord,
-        getPlayList,
-    } = useRecordProvider({ pluginType: currentPluginType });
+    // Create RecordProvider instance
+    const recordProviderRef = useRef<RecordProvider | null>(null);
+
+    // Initialize RecordProvider
+    useEffect(() => {
+        // Create new instance
+        recordProviderRef.current = new RecordProvider(PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER);
+        
+        // Cleanup on unmount
+        return () => {
+            if (recordProviderRef.current) {
+                recordProviderRef.current.cleanup();
+            }
+        };
+    }, []);
 
     useEffect(() => {
         const loadRecordings = async () => {
             try {
-                const recordingsList = await getPlayList();
+                if (!recordProviderRef.current) return;
+                const recordingsList = await recordProviderRef.current.getPlayList();
                 setRecordings(recordingsList.map((record) => ({
                     id: record.name,
                     title: record.name,
@@ -38,11 +45,13 @@ export default function RecordComponent({testID}: RecordComponentProps) {
         };
 
         loadRecordings();
-    }, [getPlayList]);
+    }, []);
 
     const onPressRecord = async () => {
         try {
-            await onRecord();
+            if (!recordProviderRef.current) return;
+            await recordProviderRef.current.onRecord();
+            setIsRecording(recordProviderRef.current.isRecording);
         } catch (error) {
             console.error('Error starting record:', error);
         }
@@ -50,9 +59,11 @@ export default function RecordComponent({testID}: RecordComponentProps) {
 
     const onPressStop = async () => {
         try {
-            await onStop();
+            if (!recordProviderRef.current) return;
+            await recordProviderRef.current.onStop();
+            setIsRecording(recordProviderRef.current.isRecording);
 
-            const updatedRecordings = await getPlayList();
+            const updatedRecordings = await recordProviderRef.current.getPlayList();
             setRecordings(updatedRecordings.map((record) => ({
                 id: record.name,
                 title: record.name,
@@ -64,12 +75,14 @@ export default function RecordComponent({testID}: RecordComponentProps) {
     };
     
     const onPressPlay = async (recordPath?: string) => {
-        await onPlay(recordPath);
+        if (!recordProviderRef.current) return;
+        await recordProviderRef.current.onPlay(recordPath);
     }
 
     const onDeleteRecord = async (recordPath: string) => {
-        await removeRecord(recordPath);
-        const updatedRecordings = await getPlayList();
+        if (!recordProviderRef.current) return;
+        await recordProviderRef.current.removeRecord(recordPath);
+        const updatedRecordings = await recordProviderRef.current.getPlayList();
         setRecordings(updatedRecordings.map((record) => ({
             id: record.name,
             title: record.name,
@@ -77,67 +90,12 @@ export default function RecordComponent({testID}: RecordComponentProps) {
         })));
     }
 
-    const onPluginSwitch = (pluginType: PluginType) => {
-        if (!isRecording) {
-            setCurrentPluginType(pluginType);
-        }
-    }
-
-    const getPluginDisplayName = (pluginType: PluginType): string => {
-        switch (pluginType) {
-            case PluginType.EXPO_AUDIO:
-                return "Expo Audio Recorder";
-            case PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER:
-                return "RN Audio Recorder Player";
-            default:
-                return "Audio Recorder";
-        }
-    }
 
     return (
         <SafeAreaView style={styles.component} testID={testID || "record-component"}>
             <Text style={styles.subHeader}>
-                {getPluginDisplayName(currentPluginType)}
+                RN Audio Recorder Player
             </Text>
-            
-            {/* Plugin Selection Controls */}
-            <View style={styles.pluginSelector}>
-                <TouchableOpacity
-                    style={[
-                        styles.pluginButton,
-                        currentPluginType === PluginType.EXPO_AUDIO && styles.activePluginButton,
-                        isRecording && styles.disabledButton
-                    ]}
-                    onPress={() => onPluginSwitch(PluginType.EXPO_AUDIO)}
-                    disabled={isRecording}
-                    testID="expo-audio-button"
-                >
-                    <Text style={[
-                        styles.pluginButtonText,
-                        currentPluginType === PluginType.EXPO_AUDIO && styles.activePluginButtonText
-                    ]}>
-                        Expo Audio
-                    </Text>
-                </TouchableOpacity>
-                
-                <TouchableOpacity
-                    style={[
-                        styles.pluginButton,
-                        currentPluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER && styles.activePluginButton,
-                        isRecording && styles.disabledButton
-                    ]}
-                    onPress={() => onPluginSwitch(PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER)}
-                    disabled={isRecording}
-                    testID="rn-audio-button"
-                >
-                    <Text style={[
-                        styles.pluginButtonText,
-                        currentPluginType === PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER && styles.activePluginButtonText
-                    ]}>
-                        RN Audio
-                    </Text>
-                </TouchableOpacity>
-            </View>
             {isRecording ?
                 <TouchableOpacity
                     onPress={onPressStop}
@@ -190,36 +148,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: "100%",
         padding: 10,
-    },
-    pluginSelector: {
-        flexDirection: 'row',
-        marginBottom: 15,
-        backgroundColor: '#f0f0f0',
-        borderRadius: 20,
-        padding: 3,
-    },
-    pluginButton: {
-        paddingHorizontal: 15,
-        paddingVertical: 8,
-        borderRadius: 17,
-        marginHorizontal: 2,
-        backgroundColor: 'transparent',
-    },
-    activePluginButton: {
-        backgroundColor: '#007AFF',
-    },
-    disabledButton: {
-        opacity: 0.5,
-    },
-    pluginButtonText: {
-        fontSize: 14,
-        fontFamily: 'Roboto',
-        color: '#666',
-        fontWeight: '500',
-    },
-    activePluginButtonText: {
-        color: '#fff',
-        fontWeight: '600',
     },
     iconButton: {
         padding: 10,

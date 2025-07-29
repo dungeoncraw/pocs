@@ -44,9 +44,6 @@ jest.mock('react-native-audio-recorder-player', () => {
   );
 });
 
-jest.mock('expo-audio', () => ({
-  createAudioPlayer: jest.fn().mockReturnValue({})
-}));
 
 jest.mock('@/app/helper/requestPermission', () => ({
   requestMicrophonePermission: jest.fn()
@@ -66,13 +63,6 @@ describe('RecordProvider', () => {
       expect(AudioRecorderPlayer).toHaveBeenCalled();
     });
 
-    it('should initialize with EXPO_AUDIO plugin', () => {
-      const provider = new RecordProvider(PluginType.EXPO_AUDIO, 'test/path');
-
-      expect(provider.pluginType).toBe(PluginType.EXPO_AUDIO);
-      expect(provider.path).toBe('test/path');
-      expect(require('expo-audio').createAudioPlayer).toHaveBeenCalled();
-    });
   });
 
   describe('onRecord', () => {
@@ -134,12 +124,6 @@ describe('RecordProvider', () => {
       expect(provider.recordPlugin.mmssss).toHaveBeenCalledWith(1000);
     });
 
-    it('should do nothing for EXPO_AUDIO plugin', async () => {
-      const provider = new RecordProvider(PluginType.EXPO_AUDIO, 'test/path');
-      await provider.onRecord();
-
-      // No expectations needed as the method should do nothing for EXPO_AUDIO
-    });
   });
 
   describe('onStop', () => {
@@ -152,12 +136,6 @@ describe('RecordProvider', () => {
       expect(provider.recordSecs).toBe(0);
     });
 
-    it('should do nothing for EXPO_AUDIO plugin', async () => {
-      const provider = new RecordProvider(PluginType.EXPO_AUDIO, 'test/path');
-      await provider.onStop();
-
-      // No expectations needed as the method should do nothing for EXPO_AUDIO
-    });
   });
 
   describe('onPlay', () => {
@@ -182,11 +160,5 @@ describe('RecordProvider', () => {
       expect(provider.recordPlugin.mmssss).toHaveBeenCalledWith(5000);
     });
 
-    it('should do nothing for EXPO_AUDIO plugin', async () => {
-      const provider = new RecordProvider(PluginType.EXPO_AUDIO, 'test/path');
-      await provider.onPlay();
-
-      // No expectations needed as the method should do nothing for EXPO_AUDIO
-    });
   });
 });
