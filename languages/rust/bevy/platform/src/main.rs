@@ -92,14 +92,15 @@ fn setup(
     ));
 
     // Ok this is a not ready sample, but is what can be found
-    let texture = asset_server.load("character/running_sample.png");
+    let texture = asset_server.load("character/worm-run-idle.png");
 
-    // The sprite sheet has 6 sprites arranged in a row, and they are all 32px x 32px
-    let layout = TextureAtlasLayout::from_grid(UVec2::splat(32), 6, 1, None, None);
+    // Ok finally got the idea here, so the character sheet has a 16x20px animation with 31 frames
+    // And the TextureAtlasLayout::from_grid return a zero-indexed layout, so the first animation must start with zero index value
+    let layout = TextureAtlasLayout::from_grid(UVec2::new(16, 20), 31, 1, None, None);
     let texture_atlas_layout = texture_atlas_layouts.add(layout);
 
     // The first (left-hand) sprite runs at 10 FPS
-    let animation_config_1 = AnimationConfig::new(1, 5, 10);
+    let animation_config_1 = AnimationConfig::new(0, 30, 10);
 
     // Create the first (left-hand) sprite
     commands.spawn((
@@ -117,7 +118,7 @@ fn setup(
     ));
 
     // The second (right-hand) sprite runs at 20 FPS
-    let animation_config_2 = AnimationConfig::new(1, 5, 20);
+    let animation_config_2 = AnimationConfig::new(0, 30, 30);
 
     // Create the second (right-hand) sprite
     commands.spawn((
