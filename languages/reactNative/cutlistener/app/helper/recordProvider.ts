@@ -84,6 +84,8 @@ class RecordProvider {
             this.recordPlugin.addRecordBackListener((e: RecordBackType) => {
                 this.recordSecs = e.currentPosition;
                 this.recordTime = this.recordPlugin.mmssss(Math.floor(e.currentPosition));
+                // here's the tricky, need to play a count time over the record, so user known which set he is
+                // first count from one to ten, with 10 seconds between each number count, so can record the draw of sword
             });
 
             this.isRecording = true;
@@ -91,12 +93,6 @@ class RecordProvider {
         } catch (error) {
             console.error('Error on recording:', error);
         }
-    }
-
-    formatTime(seconds: number): string {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
     async onStop() {

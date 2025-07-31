@@ -1,4 +1,4 @@
-import {TouchableOpacity, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {TouchableOpacity, SafeAreaView, StyleSheet, Text} from "react-native";
 import {FontAwesome} from "@expo/vector-icons";
 import {useEffect, useState, useRef} from "react";
 import ListComponent from "@/app/component/ListComponent";
@@ -13,15 +13,15 @@ export default function RecordComponent({testID}: RecordComponentProps) {
     const [recordings, setRecordings] = useState<ListItemProps[]>([]);
     const [isRecording, setIsRecording] = useState<boolean>(false);
     
-    // Create RecordProvider instance
+    // Create a RecordProvider instance
     const recordProviderRef = useRef<RecordProvider | null>(null);
 
     // Initialize RecordProvider
     useEffect(() => {
-        // Create new instance
+        // Create a new instance
         recordProviderRef.current = new RecordProvider(PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER);
         
-        // Cleanup on unmount
+        // Cleanup on unmounting
         return () => {
             if (recordProviderRef.current) {
                 recordProviderRef.current.cleanup();
@@ -111,7 +111,7 @@ export default function RecordComponent({testID}: RecordComponentProps) {
                     style={[styles.iconButton, styles.buttonContent]}
                     testID="record-button"
                 >
-                    <Text style={styles.buttonText}>Record</Text>
+                    <Text style={styles.buttonText}>Record 10 cuts</Text>
                     <FontAwesome name="microphone" size={24} color="#1ac10d"/>
                 </TouchableOpacity>
             }
