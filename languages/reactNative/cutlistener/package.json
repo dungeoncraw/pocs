@@ -9,7 +9,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "test": "jest"
+    "test": "jest",
+    "load-assets": "npx react-native link"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
@@ -41,6 +42,7 @@
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
+    "react-native-sound": "^0.12.0",
     "react-native-web": "~0.20.0",
     "react-native-webview": "13.13.5"
   },

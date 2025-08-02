@@ -12,6 +12,7 @@ import {Platform} from "react-native";
 import * as FileSystem from 'expo-file-system';
 import {requestMicrophonePermission} from "@/app/helper/requestPermission";
 import {PluginType, Recordings} from "@/app/types/types";
+import SequentialAudioPlayer from "@/app/helper/sequentialPlayer";
 
 class RecordProvider {
     pluginType: PluginType;
@@ -76,12 +77,14 @@ class RecordProvider {
             };
 
             console.log('audioSet', audioSet);
+            const audioPlayer = new SequentialAudioPlayer(['one.m4a', 'two.mp3', 'three.mp3']);
+            audioPlayer.start();
             const uri = await this.recordPlugin.startRecorder(
                 this.path,
                 audioSet,
             );
 
-            this.recordPlugin.addRecordBackListener((e: RecordBackType) => {
+            this.recordPlugin.addRecordBackListener(async (e: RecordBackType) => {
                 this.recordSecs = e.currentPosition;
                 this.recordTime = this.recordPlugin.mmssss(Math.floor(e.currentPosition));
                 // here's the tricky, need to play a count time over the record, so user known which set he is
