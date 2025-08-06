@@ -2,7 +2,6 @@ mod modules;
 
 use bevy::{input::common_conditions::input_just_pressed, prelude::*};
 use modules::animation;
-use modules::animation::AnimationConfig;
 use modules::sprite::{LeftSprite, RightSprite};
 use crate::modules::sprite::{generate_sprite_atlas, SpriteMap};
 
@@ -41,10 +40,7 @@ fn setup(
         },
     ));
 
-    let (worm_texture, worm_texture_atlas_layout) = generate_sprite_atlas(&asset_server, &mut texture_atlas_layouts, SpriteMap::Worm);
-
-    // The first (left-hand) sprite runs at 10 FPS
-    let animation_config_1 = AnimationConfig::new(0, 30, 10);
+    let (worm_texture, worm_texture_atlas_layout, animation_config_1) = generate_sprite_atlas(&asset_server, &mut texture_atlas_layouts, SpriteMap::Worm);
 
     // Create the first (left-hand) sprite
     commands.spawn((
@@ -61,9 +57,7 @@ fn setup(
         animation_config_1,
     ));
 
-    let (character_texture, character_texture_atlas_layout) = generate_sprite_atlas(&asset_server, &mut texture_atlas_layouts, SpriteMap::Character);
-    // The second (right-hand) sprite runs at 30 FPS
-    let animation_config_2 = AnimationConfig::new(0, 30, 30);
+    let (character_texture, character_texture_atlas_layout, animation_config_2) = generate_sprite_atlas(&asset_server, &mut texture_atlas_layouts, SpriteMap::Character);
 
     // Create the second (right-hand) sprite
     commands.spawn((
