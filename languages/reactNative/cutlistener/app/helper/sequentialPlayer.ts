@@ -26,7 +26,7 @@ export default class SequentialAudioPlayer {
 
         const sound = new Sound(filename, Sound.MAIN_BUNDLE, (error) => {
             if (error) {
-                console.log(`Error ${filename}:`, error);
+                console.log(`Error playCurrentAudio ${filename}:`, error);
                 this.scheduleNext();
                 return;
             }
