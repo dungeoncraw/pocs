@@ -1,12 +1,13 @@
 mod modules;
 
+use crate::modules::sprite::{SpriteMap, generate_sprite_atlas};
 use bevy::{input::common_conditions::input_just_pressed, prelude::*};
 use modules::animation;
 use modules::sprite::{LeftSprite, RightSprite};
-use crate::modules::sprite::{generate_sprite_atlas, SpriteMap};
 
 fn main() {
     App::new()
+        // TODO make full screen
         .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest())) // prevents blurry sprites
         .add_systems(Startup, setup)
         .add_systems(Update, animation::execute_animations)
@@ -14,9 +15,11 @@ fn main() {
             Update,
             (
                 // Press the right arrow key to animate the right sprite
-                animation::trigger_animation::<RightSprite>.run_if(input_just_pressed(KeyCode::ArrowRight)),
+                animation::trigger_animation::<RightSprite>
+                    .run_if(input_just_pressed(KeyCode::ArrowRight)),
                 // Press the left arrow key to animate the left sprite
-                animation::trigger_animation::<LeftSprite>.run_if(input_just_pressed(KeyCode::ArrowLeft)),
+                animation::trigger_animation::<LeftSprite>
+                    .run_if(input_just_pressed(KeyCode::ArrowLeft)),
             ),
         )
         .run();
@@ -40,7 +43,8 @@ fn setup(
         },
     ));
 
-    let (worm_texture, worm_texture_atlas_layout, animation_config_1) = generate_sprite_atlas(&asset_server, &mut texture_atlas_layouts, SpriteMap::Worm);
+    let (worm_texture, worm_texture_atlas_layout, animation_config_1) =
+        generate_sprite_atlas(&asset_server, &mut texture_atlas_layouts, SpriteMap::Worm);
 
     // Create the first (left-hand) sprite
     commands.spawn((
@@ -57,7 +61,12 @@ fn setup(
         animation_config_1,
     ));
 
-    let (character_texture, character_texture_atlas_layout, animation_config_2) = generate_sprite_atlas(&asset_server, &mut texture_atlas_layouts, SpriteMap::Character);
+    let (character_texture, character_texture_atlas_layout, animation_config_2) =
+        generate_sprite_atlas(
+            &asset_server,
+            &mut texture_atlas_layouts,
+            SpriteMap::Character,
+        );
 
     // Create the second (right-hand) sprite
     commands.spawn((
@@ -67,6 +76,8 @@ fn setup(
                 layout: character_texture_atlas_layout.clone(),
                 index: animation_config_2.first_sprite_index,
             }),
+            // TODO this flips the character, so need to make it based on the keyboard input
+            flip_x: true,
             ..Default::default()
         },
         Transform::from_scale(Vec3::splat(6.0)).with_translation(Vec3::new(70.0, 0.0, 0.0)),
