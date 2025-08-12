@@ -64,6 +64,7 @@ fn setup(
     asset_server: Res<AssetServer>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
 ) {
+    // TODO: using 3d camera got a blank screen, using 2d camera show the sprite but follow the cursor need to test the 3d camera with sprite
     commands.spawn((Camera3d::default(), CameraSensitivity::default()));
 
     // let (worm_texture, worm_texture_atlas_layout, animation_config_1) =
@@ -104,23 +105,15 @@ fn setup(
             // flip_x: true,
             ..Default::default()
         },
-        Transform::from_scale(Vec3::splat(0.3)),
-        // RightSprite,
+        // this defines the size of the sprite
+        Transform::from_scale(Vec3::splat(1.3)),
+        RightSprite,
         animation_config_2,
         AccumulatedInput::default(),
         Velocity::default(),
         PhysicalTranslation::default(),
         PreviousPhysicalTranslation::default(),
     ));
-    // commands.spawn((
-    //     Name::new("Player"),
-    //     Sprite::from_image(asset_server.load("icon.png")),
-    //     Transform::from_scale(Vec3::splat(0.3)),
-    //     AccumulatedInput::default(),
-    //     Velocity::default(),
-    //     PhysicalTranslation::default(),
-    //     PreviousPhysicalTranslation::default(),
-    // ));
 }
 
 fn rotate_camera(
@@ -169,7 +162,7 @@ fn accumulate_input(
     player: Single<(&mut AccumulatedInput, &mut Velocity)>,
     camera: Single<&Transform, With<Camera>>,
 ) {
-    const SPEED: f32 = 4.0;
+    const SPEED: f32 = 24.0;
     let (mut input, mut velocity) = player.into_inner();
     input.movement = Vec2::ZERO;
     if keyboard_input.pressed(KeyCode::KeyW) {
