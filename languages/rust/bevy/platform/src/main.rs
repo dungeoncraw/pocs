@@ -5,7 +5,6 @@ use bevy::{color::palettes::tailwind, input::mouse::AccumulatedMouseMotion, prel
 use bevy::{input::common_conditions::input_just_pressed, prelude::*};
 use modules::animation;
 use modules::sprite::{LeftSprite, RightSprite};
-use std::f32::consts::FRAC_PI_2;
 
 fn main() {
     App::new()
@@ -20,7 +19,7 @@ fn main() {
         .add_systems(
             RunFixedMainLoop,
             (
-                (rotate_camera, accumulate_input)
+                (accumulate_input)
                     .chain()
                     .in_set(RunFixedMainLoopSystem::BeforeFixedMainLoop),
                 (
@@ -65,7 +64,7 @@ fn setup(
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
 ) {
     // TODO: using 3d camera got a blank screen, using 2d camera show the sprite but follow the cursor need to test the 3d camera with sprite
-    commands.spawn((Camera3d::default(), CameraSensitivity::default()));
+    commands.spawn((Camera2d::default(), CameraSensitivity::default()));
 
     // let (worm_texture, worm_texture_atlas_layout, animation_config_1) =
     //     generate_sprite_atlas(&asset_server, &mut texture_atlas_layouts, SpriteMap::Worm);
@@ -116,36 +115,6 @@ fn setup(
     ));
 }
 
-fn rotate_camera(
-    accumulated_mouse_motion: Res<AccumulatedMouseMotion>,
-    player: Single<(&mut Transform, &CameraSensitivity), With<Camera>>,
-) {
-    let (mut transform, camera_sensitivity) = player.into_inner();
-
-    let delta = accumulated_mouse_motion.delta;
-
-    if delta != Vec2::ZERO {
-        // Note that we are not multiplying by delta time here.
-        // The reason is that for mouse movement, we already get the full movement that happened since the last frame.
-        // This means that if we multiply by delta time, we will get a smaller rotation than intended by the user.
-        let delta_yaw = -delta.x * camera_sensitivity.x;
-        let delta_pitch = -delta.y * camera_sensitivity.y;
-
-        let (yaw, pitch, roll) = transform.rotation.to_euler(EulerRot::YXZ);
-        let yaw = yaw + delta_yaw;
-
-        // If the pitch was ±¹⁄₂ π, the camera would look straight up or down.
-        // When the user wants to move the camera back to the horizon, which way should the camera face?
-        // The camera has no way of knowing what direction was "forward" before landing in that extreme position,
-        // so the direction picked will for all intents and purposes be arbitrary.
-        // Another issue is that for mathematical reasons, the yaw will effectively be flipped when the pitch is at the extremes.
-        // To not run into these issues, we clamp the pitch to a safe range.
-        const PITCH_LIMIT: f32 = FRAC_PI_2 - 0.01;
-        let pitch = (pitch + delta_pitch).clamp(-PITCH_LIMIT, PITCH_LIMIT);
-
-        transform.rotation = Quat::from_euler(EulerRot::YXZ, yaw, pitch, roll);
-    }
-}
 #[derive(Debug, Component, Deref, DerefMut)]
 struct CameraSensitivity(Vec2);
 
@@ -159,34 +128,48 @@ impl Default for CameraSensitivity {
 
 fn accumulate_input(
     keyboard_input: Res<ButtonInput<KeyCode>>,
-    player: Single<(&mut AccumulatedInput, &mut Velocity)>,
-    camera: Single<&Transform, With<Camera>>,
+    mut player: Single<(
+        &mut AccumulatedInput,
+        &mut Velocity,
+        &mut Sprite,
+        &animation::AnimationConfig,
+        Entity,
+    )>,
+    mut commands: Commands,
 ) {
-    const SPEED: f32 = 24.0;
-    let (mut input, mut velocity) = player.into_inner();
+    const SPEED: f32 = 100.0;
+    let (mut input, mut velocity, mut sprite, anim_config, entity) = player.into_inner();
+
+    // Reset and collect only horizontal input for 2D
     input.movement = Vec2::ZERO;
-    if keyboard_input.pressed(KeyCode::KeyW) {
-        input.movement.y += 1.0;
-    }
-    if keyboard_input.pressed(KeyCode::KeyS) {
-        input.movement.y -= 1.0;
-    }
-    if keyboard_input.pressed(KeyCode::KeyA) {
-        input.movement.x -= 1.0;
-    }
-    if keyboard_input.pressed(KeyCode::KeyD) {
-        input.movement.x += 1.0;
+    let left = keyboard_input.pressed(KeyCode::KeyA);
+    let right = keyboard_input.pressed(KeyCode::KeyD);
+    // identify if it is moving be left or right using bitwise XOR
+    let moving = (left as u8 ^ right as u8) == 1;
+    let dir = if right { 1.0 } else if left { -1.0 } else { 0.0 };
+
+    // Set horizontal velocity in 2D (X axis), no vertical movement
+    velocity.0 = Vec3::new(dir * SPEED, 0.0, 0.0);
+
+    // Flip sprite based on a direction: left => flip_x, right => not flipped
+    if moving {
+        sprite.flip_x = left;
     }
 
-    let input_3d = Vec3 {
-        x: input.movement.x,
-        y: 0.0,
-        z: -input.movement.y,
-    };
-
-    let rotated_input = camera.rotation * input_3d;
-
-    velocity.0 = rotated_input.clamp_length_max(1.0) * SPEED;
+    // Toggle animation marker based on movement
+    if moving {
+        if let Ok(mut ew) = commands.get_entity(entity) {
+            ew.insert(animation::Animate);
+        }
+    } else {
+        if let Ok(mut ew) = commands.get_entity(entity) {
+            ew.remove::<animation::Animate>();
+        }
+        // Reset to idle frame when not moving
+        if let Some(atlas) = &mut sprite.texture_atlas {
+            atlas.index = anim_config.first_sprite_index;
+        }
+    }
 }
 
 #[derive(Resource, Debug, Deref, DerefMut, Default)]
@@ -252,12 +235,4 @@ fn interpolate_rendered_transform(
         let rendered_translation = previous.lerp(current, alpha);
         transform.translation = rendered_translation;
     }
-}
-
-// Sync the camera's position with the player's interpolated position
-fn translate_camera(
-    mut camera: Single<&mut Transform, With<Camera>>,
-    player: Single<&Transform, (With<AccumulatedInput>, Without<Camera>)>,
-) {
-    camera.translation = player.translation;
 }

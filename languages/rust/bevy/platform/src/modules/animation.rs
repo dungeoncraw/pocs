@@ -9,6 +9,11 @@ pub struct AnimationConfig {
     fps: u8,
     frame_timer: Timer,
 }
+
+// Marker to indicate that an entity's animation should be advanced this frame (e.g., when moving)
+#[derive(Component)]
+pub struct Animate;
+
 pub fn trigger_animation<S: Component>(mut animation: Single<&mut AnimationConfig, With<S>>) {
     // We create a new timer when the animation is triggered
     animation.frame_timer = AnimationConfig::timer_from_fps(animation.fps);
@@ -31,9 +36,12 @@ impl AnimationConfig {
 
 // This system loops through all the sprites in the `TextureAtlas`, from `first_sprite_index` to
 // `last_sprite_index` (both defined in `AnimationConfig`).
-pub fn execute_animations(time: Res<Time>, mut query: Query<(&mut AnimationConfig, &mut Sprite)>) {
+// It only runs for entities that currently have the `Animate` marker.
+pub fn execute_animations(
+    time: Res<Time>,
+    mut query: Query<(&mut AnimationConfig, &mut Sprite), With<Animate>>,
+) {
     for (mut config, mut sprite) in &mut query {
-
         config.frame_timer.tick(time.delta());
 
         if config.frame_timer.just_finished() {

@@ -38,7 +38,7 @@ fn map_from_sprite_map(sprite_map: SpriteMap) -> (String, SpriteGrid, AnimationC
                 padding: Some(UVec2::new(3, 0)),
                 offset: Some(UVec2::new(6, 3)),
             },
-            AnimationConfig::new(0, 5, 2),
+            AnimationConfig::new(0, 5, 30),
         ),
         SpriteMap::Worm => (
             "character/worm.png".to_string(),
@@ -49,7 +49,7 @@ fn map_from_sprite_map(sprite_map: SpriteMap) -> (String, SpriteGrid, AnimationC
                 padding: None,
                 offset: None,
             },
-            AnimationConfig::new(0, 30, 10),
+            AnimationConfig::new(0, 30, 30),
         ),
     }
 }
