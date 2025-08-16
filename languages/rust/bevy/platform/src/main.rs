@@ -58,31 +58,15 @@ struct PhysicalTranslation(Vec3);
 #[derive(Debug, Component, Clone, Copy, PartialEq, Default, Deref, DerefMut)]
 struct PreviousPhysicalTranslation(Vec3);
 
+#[derive(Debug, Component, Clone, Copy, PartialEq, Default, Deref, DerefMut)]
+struct Grounded(bool);
+
 fn setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
 ) {
-    // TODO: using 3d camera got a blank screen, using 2d camera show the sprite but follow the cursor need to test the 3d camera with sprite
     commands.spawn((Camera2d::default(), CameraSensitivity::default()));
-
-    // let (worm_texture, worm_texture_atlas_layout, animation_config_1) =
-    //     generate_sprite_atlas(&asset_server, &mut texture_atlas_layouts, SpriteMap::Worm);
-    //
-    // // Create the first (left-hand) sprite
-    // commands.spawn((
-    //     Sprite {
-    //         image: worm_texture.clone(),
-    //         texture_atlas: Some(TextureAtlas {
-    //             layout: worm_texture_atlas_layout.clone(),
-    //             index: animation_config_1.first_sprite_index,
-    //         }),
-    //         ..default()
-    //     },
-    //     Transform::from_scale(Vec3::splat(6.0)).with_translation(Vec3::new(-70.0, 250.0, 0.0)),
-    //     LeftSprite,
-    //     animation_config_1,
-    // ));
 
     let (character_texture, character_texture_atlas_layout, animation_config_2) =
         generate_sprite_atlas(
@@ -91,7 +75,6 @@ fn setup(
             SpriteMap::Character,
         );
 
-    // Create the second (right-hand) sprite
     commands.spawn((
         Name::new("Player"),
         Sprite {
@@ -100,8 +83,6 @@ fn setup(
                 layout: character_texture_atlas_layout.clone(),
                 index: animation_config_2.first_sprite_index,
             }),
-            // TODO this flips the character, so need to make it based on the keyboard input
-            // flip_x: true,
             ..Default::default()
         },
         // this defines the size of the sprite
@@ -112,6 +93,7 @@ fn setup(
         Velocity::default(),
         PhysicalTranslation::default(),
         PreviousPhysicalTranslation::default(),
+        Grounded(true),
     ));
 }
 
@@ -133,23 +115,32 @@ fn accumulate_input(
         &mut Velocity,
         &mut Sprite,
         &animation::AnimationConfig,
+        &mut Grounded,
         Entity,
     )>,
     mut commands: Commands,
 ) {
     const SPEED: f32 = 100.0;
-    let (mut input, mut velocity, mut sprite, anim_config, entity) = player.into_inner();
+    const JUMP_SPEED: f32 = 300.0;
+    let (mut input, mut velocity, mut sprite, anim_config, mut grounded, entity) = player.into_inner();
 
     // Reset and collect only horizontal input for 2D
     input.movement = Vec2::ZERO;
     let left = keyboard_input.pressed(KeyCode::KeyA);
     let right = keyboard_input.pressed(KeyCode::KeyD);
+    let jump = keyboard_input.just_pressed(KeyCode::Space);
     // identify if it is moving be left or right using bitwise XOR
     let moving = (left as u8 ^ right as u8) == 1;
     let dir = if right { 1.0 } else if left { -1.0 } else { 0.0 };
 
-    // Set horizontal velocity in 2D (X axis), no vertical movement
-    velocity.0 = Vec3::new(dir * SPEED, 0.0, 0.0);
+    // Set horizontal velocity in 2D (X axis), preserve vertical for jump/gravity
+    velocity.0.x = dir * SPEED;
+
+    // Handle jump on spacebar if grounded
+    if jump && grounded.0 {
+        velocity.0.y = JUMP_SPEED;
+        grounded.0 = false;
+    }
 
     // Flip sprite based on a direction: left => flip_x, right => not flipped
     if moving {
@@ -205,14 +196,32 @@ fn advance_physics(
     mut query: Query<(
         &mut PhysicalTranslation,
         &mut PreviousPhysicalTranslation,
-        &Velocity,
+        &mut Velocity,
+        &mut Grounded,
     )>,
 ) {
-    for (mut current_physical_translation, mut previous_physical_translation, velocity) in
+    const GRAVITY: f32 = -900.0;
+    let dt = fixed_time.delta_secs();
+    for (mut current_physical_translation, mut previous_physical_translation, mut velocity, mut grounded) in
         query.iter_mut()
     {
+        // Apply gravity
+        velocity.0.y += GRAVITY * dt;
+
+        // Save previous and integrate
         previous_physical_translation.0 = current_physical_translation.0;
-        current_physical_translation.0 += velocity.0 * fixed_time.delta_secs();
+        current_physical_translation.0 += velocity.0 * dt;
+
+        // Simple ground at y = 0
+        if current_physical_translation.0.y <= 0.0 {
+            current_physical_translation.0.y = 0.0;
+            if velocity.0.y < 0.0 {
+                velocity.0.y = 0.0;
+            }
+            grounded.0 = true;
+        } else {
+            grounded.0 = false;
+        }
     }
 }
 

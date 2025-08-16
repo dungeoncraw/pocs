@@ -47,7 +47,7 @@ pub fn execute_animations(
         if config.frame_timer.just_finished() {
             if let Some(atlas) = &mut sprite.texture_atlas {
                 if atlas.index == config.last_sprite_index {
-                    atlas.index -= 1;
+                    atlas.index = config.first_sprite_index;
                     config.frame_timer = AnimationConfig::timer_from_fps(config.fps);
                 } else {
                     atlas.index += 1;
