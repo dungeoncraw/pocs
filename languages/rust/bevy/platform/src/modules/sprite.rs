@@ -1,3 +1,4 @@
+// Sprite utilities: loading sprite sheets and creating texture atlas layouts.
 use crate::modules::animation::AnimationConfig;
 use bevy::asset::{AssetServer, Assets, Handle};
 use bevy::image::{Image, TextureAtlasLayout};
@@ -18,6 +19,7 @@ struct SpriteGrid {
     offset: Option<UVec2>,
 }
 
+/// Logical names for built-in sprite sheets used by the demo.
 pub enum SpriteMap {
     Character,
     Worm,
@@ -54,6 +56,7 @@ fn map_from_sprite_map(sprite_map: SpriteMap) -> (String, SpriteGrid, AnimationC
     }
 }
 // TODO load spriteatlas as this example https://github.com/bevyengine/bevy/blob/latest/examples/2d/texture_atlas.rs
+/// Loads an image and builds a TextureAtlasLayout from grid settings for the given SpriteMap.
 pub fn generate_sprite_atlas(
     asset_server: &Res<AssetServer>,
     texture_atlas_layouts: &mut ResMut<Assets<TextureAtlasLayout>>,

@@ -3,19 +3,30 @@ mod modules;
 use crate::modules::sprite::{SpriteMap, generate_sprite_atlas};
 use bevy::{color::palettes::tailwind, input::mouse::AccumulatedMouseMotion, prelude::*};
 use bevy::{input::common_conditions::input_just_pressed, prelude::*};
+use bevy::render::mesh::{Indices, Mesh, Mesh2d};
+use bevy::render::render_resource::PrimitiveTopology;
+use bevy_sprite::{ColorMaterial, MeshMaterial2d};
 use modules::animation;
 use modules::sprite::{LeftSprite, RightSprite};
 
+// Entry point: sets up Bevy app, resources, and systems.
+// Uses a fixed main loop for physics and interpolation for smooth rendering.
 fn main() {
     App::new()
         // TODO make full screen
         .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest())) // prevents blurry sprites
         .init_resource::<DidFixedTimestepRunThisFrame>()
+        .init_resource::<FireTimer>()
         .add_systems(Startup, setup)
         .add_systems(PreUpdate, clear_fixed_timestep_flag)
         .add_systems(FixedPreUpdate, set_fixed_time_step_flag)
         .add_systems(FixedUpdate, advance_physics)
-        .add_systems(Update, animation::execute_animations)
+        .add_systems(Update, (
+            animation::execute_animations,
+            auto_fire_system,
+            bullet_movement_system,
+            bullet_despawn_system,
+        ))
         .add_systems(
             RunFixedMainLoop,
             (
@@ -60,6 +71,22 @@ struct PreviousPhysicalTranslation(Vec3);
 
 #[derive(Debug, Component, Clone, Copy, PartialEq, Default, Deref, DerefMut)]
 struct Grounded(bool);
+
+#[derive(Resource)]
+struct FireTimer(Timer);
+
+impl Default for FireTimer {
+    fn default() -> Self {
+        // Auto-fire every 1 second
+        Self(Timer::from_seconds(1.0, TimerMode::Repeating))
+    }
+}
+
+#[derive(Component)]
+struct Bullet {
+    dir: f32,
+    lifetime: Timer,
+}
 
 fn setup(
     mut commands: Commands,
@@ -108,6 +135,8 @@ impl Default for CameraSensitivity {
     }
 }
 
+// Gathers player input for left/right movement and jump, updates velocity,
+// flips sprite orientation, and toggles animation marker based on movement.
 fn accumulate_input(
     keyboard_input: Res<ButtonInput<KeyCode>>,
     mut player: Single<(
@@ -191,6 +220,8 @@ fn clear_input(mut input: Single<&mut AccumulatedInput>) {
     **input = AccumulatedInput::default();
 }
 
+// Fixed-timestep physics: integrates velocity with gravity, applies ground constraint,
+// and tracks previous/current physical translations for later interpolation.
 fn advance_physics(
     fixed_time: Res<Time<Fixed>>,
     mut query: Query<(
@@ -225,6 +256,8 @@ fn advance_physics(
     }
 }
 
+// Interpolates the visible transform between previous/current physics states
+// to achieve smooth rendering even when physics runs at a fixed timestep.
 fn interpolate_rendered_transform(
     fixed_time: Res<Time<Fixed>>,
     mut query: Query<(
@@ -243,5 +276,87 @@ fn interpolate_rendered_transform(
 
         let rendered_translation = previous.lerp(current, alpha);
         transform.translation = rendered_translation;
+    }
+}
+
+fn make_triangle_mesh(size: f32) -> Mesh {
+    // Create a simple 2D triangle in the XY plane
+    let half = size * 0.5;
+    let points = vec![
+        // Up point
+        [0.0, half, 0.0],
+        // Bottom-left
+        [-half, -half, 0.0],
+        // Bottom-right
+        [half, -half, 0.0],
+    ];
+
+    let mut mesh = Mesh::new(PrimitiveTopology::TriangleList, default());
+    mesh.insert_attribute(Mesh::ATTRIBUTE_POSITION, points);
+    // Single triangle indices
+    mesh.insert_indices(Indices::U32(vec![0, 1, 2]));
+    mesh
+}
+
+// Spawns a simple triangular bullet every time the repeating timer finishes.
+// Bullet direction follows the player's facing (flip_x). Lifetime and world-bounds cleanup are handled elsewhere.
+fn auto_fire_system(
+    time: Res<Time>,
+    mut timer: ResMut<FireTimer>,
+    player_q: Single<(&Transform, &Sprite)>,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<ColorMaterial>>,
+    mut commands: Commands,
+) {
+    timer.0.tick(time.delta());
+    if !timer.0.just_finished() {
+        return;
+    }
+
+    let (player_transform, player_sprite) = player_q.into_inner();
+
+    // If flip_x = true, means the player is facing left, so we need to move the bullet to the right
+    let dir = if player_sprite.flip_x { -1.0 } else { 1.0 };
+
+    let mesh_handle = meshes.add(make_triangle_mesh(10.0));
+    let material_handle = materials.add(ColorMaterial::from_color(tailwind::ORANGE_400));
+
+    // translation gets the position of the player
+    let spawn_pos = player_transform.translation + Vec3::new(12.0 * dir, 12.0, 0.0);
+
+    commands.spawn((
+        Name::new("Bullet"),
+        Mesh2d(mesh_handle),
+        MeshMaterial2d(material_handle),
+        Transform::from_translation(spawn_pos).with_scale(Vec3::splat(1.0)),
+        Bullet {
+            dir,
+            lifetime: Timer::from_seconds(3.0, TimerMode::Once),
+        },
+    ));
+}
+
+// Moves bullets horizontally based on their direction at a constant speed.
+fn bullet_movement_system(time: Res<Time>, mut q: Query<(&mut Transform, &Bullet)>) {
+    const SPEED: f32 = 400.0;
+    let dt = time.delta_secs();
+    for (mut transform, bullet) in &mut q {
+        transform.translation.x += bullet.dir * SPEED * dt;
+    }
+}
+
+// Despawns bullets once their lifetime ends or if they travel too far (world-bounds heuristic).
+fn bullet_despawn_system(
+    time: Res<Time>,
+    mut commands: Commands,
+    mut q: Query<(Entity, &mut Bullet, &Transform)>,
+) {
+    // World bounds heuristic for despawn (in case lifetime misses)
+    const MAX_X: f32 = 2000.0;
+    for (entity, mut bullet, transform) in &mut q {
+        bullet.lifetime.tick(time.delta());
+        if bullet.lifetime.finished() || transform.translation.x.abs() > MAX_X {
+            let _ = commands.get_entity(entity).map(|mut ew| ew.despawn());
+        }
     }
 }

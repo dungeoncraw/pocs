@@ -1,8 +1,13 @@
+// Animation module: provides a simple frame-based animation for TextureAtlas sprites.
+// Entities animate only when they have the `Animate` marker component.
 use bevy::prelude::{Component, Query, Res, Single, Time, Timer, TimerMode, With};
 use bevy_sprite::Sprite;
 use std::time::Duration;
 
 #[derive(Component)]
+/// Animation settings for a single sprite atlas row/sequence.
+/// - first_sprite_index..=last_sprite_index define the inclusive range in the atlas
+/// - fps determines the speed; a one-shot timer is recreated per frame
 pub struct AnimationConfig {
     pub(crate) first_sprite_index: usize,
     last_sprite_index: usize,
