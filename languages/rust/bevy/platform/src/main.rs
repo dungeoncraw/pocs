@@ -1,13 +1,13 @@
 mod modules;
 
-use crate::modules::sprite::{SpriteMap, generate_sprite_atlas};
+use crate::modules::sprite::{SpriteMap, generate_sprite_atlas, LeftSprite, RightSprite};
 use bevy::{color::palettes::tailwind, input::mouse::AccumulatedMouseMotion, prelude::*};
 use bevy::{input::common_conditions::input_just_pressed, prelude::*};
+use bevy::log::info;
 use bevy::render::mesh::{Indices, Mesh, Mesh2d};
 use bevy::render::render_resource::PrimitiveTopology;
 use bevy_sprite::{ColorMaterial, MeshMaterial2d};
 use modules::animation;
-use modules::sprite::{LeftSprite, RightSprite};
 
 // Entry point: sets up Bevy app, resources, and systems.
 // Uses a fixed main loop for physics and interpolation for smooth rendering.
@@ -26,6 +26,11 @@ fn main() {
             auto_fire_system,
             bullet_movement_system,
             bullet_despawn_system,
+            bullet_enemy_collision_system,
+            enemy_spawn_system,
+            enemy_movement_system,
+            enemy_collision_system,
+            enemy_despawn_system,
         ))
         .add_systems(
             RunFixedMainLoop,
@@ -88,6 +93,34 @@ struct Bullet {
     lifetime: Timer,
 }
 
+#[derive(Component)]
+struct Player;
+
+#[derive(Component, Debug, Clone, Copy)]
+struct Collider {
+    // Half extents (width/2, height/2)
+    half: Vec2,
+}
+
+#[derive(Component)]
+struct Enemy {
+    dir: f32,
+    speed: f32,
+}
+
+#[derive(Resource)]
+struct EnemyAssets {
+    texture: Handle<Image>,
+    layout: Handle<TextureAtlasLayout>,
+    anim: animation::AnimationConfig,
+}
+
+#[derive(Resource)]
+struct EnemySpawnState {
+    timer: Timer,
+    spawn_left_next: bool,
+}
+
 fn setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
@@ -102,8 +135,28 @@ fn setup(
             SpriteMap::Character,
         );
 
+    // Load enemy (worm) atlas and store as a resource for future spawns
+    let (worm_texture, worm_layout, worm_anim) = generate_sprite_atlas(
+        &asset_server,
+        &mut texture_atlas_layouts,
+        SpriteMap::Worm,
+    );
+    commands.insert_resource(EnemyAssets {
+        texture: worm_texture,
+        layout: worm_layout,
+        anim: worm_anim,
+    });
+    // Enemy spawn timer and alternating state
+    commands.insert_resource(EnemySpawnState {
+        timer: Timer::from_seconds(2.0, TimerMode::Repeating),
+        spawn_left_next: true,
+    });
+
+    // Player entity
+    let player_scale = 1.3;
     commands.spawn((
         Name::new("Player"),
+        Player,
         Sprite {
             image: character_texture.clone(),
             texture_atlas: Some(TextureAtlas {
@@ -113,7 +166,7 @@ fn setup(
             ..Default::default()
         },
         // this defines the size of the sprite
-        Transform::from_scale(Vec3::splat(1.3)),
+        Transform::from_scale(Vec3::splat(player_scale)),
         RightSprite,
         animation_config_2,
         AccumulatedInput::default(),
@@ -121,6 +174,8 @@ fn setup(
         PhysicalTranslation::default(),
         PreviousPhysicalTranslation::default(),
         Grounded(true),
+        // Collider based on character sprite size (32x38) scaled by player_scale
+        Collider { half: Vec2::new(32.0, 38.0) * player_scale * 0.5 },
     ));
 }
 
@@ -146,7 +201,7 @@ fn accumulate_input(
         &animation::AnimationConfig,
         &mut Grounded,
         Entity,
-    )>,
+    ), With<Player>>,
     mut commands: Commands,
 ) {
     const SPEED: f32 = 100.0;
@@ -303,9 +358,9 @@ fn make_triangle_mesh(size: f32) -> Mesh {
 fn auto_fire_system(
     time: Res<Time>,
     mut timer: ResMut<FireTimer>,
-    player_q: Single<(&Transform, &Sprite)>,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
+    player_q: Single<(&Transform, &Sprite), With<Player>>,
+    mut meshes: ResMut<Assets<Mesh>>, 
+    mut materials: ResMut<Assets<ColorMaterial>>, 
     mut commands: Commands,
 ) {
     timer.0.tick(time.delta());
@@ -329,6 +384,8 @@ fn auto_fire_system(
         Mesh2d(mesh_handle),
         MeshMaterial2d(material_handle),
         Transform::from_translation(spawn_pos).with_scale(Vec3::splat(1.0)),
+        // Simple collider for bullet triangle (approximate AABB)
+        Collider { half: Vec2::new(5.0, 5.0) },
         Bullet {
             dir,
             lifetime: Timer::from_seconds(3.0, TimerMode::Once),
@@ -357,6 +414,113 @@ fn bullet_despawn_system(
         bullet.lifetime.tick(time.delta());
         if bullet.lifetime.finished() || transform.translation.x.abs() > MAX_X {
             let _ = commands.get_entity(entity).map(|mut ew| ew.despawn());
+        }
+    }
+}
+
+// Detect collisions between bullets and enemies using simple AABB checks.
+fn bullet_enemy_collision_system(
+    mut commands: Commands,
+    mut bullets_q: Query<(Entity, &Transform, &Collider), With<Bullet>>,
+    mut enemies_q: Query<(Entity, &Transform, &Collider), With<Enemy>>,
+) {
+    for (b_entity, b_t, b_c) in &mut bullets_q {
+        let mut bullet_despawned = false;
+        for (e_entity, e_t, e_c) in &mut enemies_q {
+            let dx = (b_t.translation.x - e_t.translation.x).abs();
+            let dy = (b_t.translation.y - e_t.translation.y).abs();
+            if dx <= (b_c.half.x + e_c.half.x) && dy <= (b_c.half.y + e_c.half.y) {
+                // Despawn enemy and bullet
+                if let Ok(mut ew) = commands.get_entity(e_entity) { ew.despawn(); }
+                if let Ok(mut bw) = commands.get_entity(b_entity) { bw.despawn(); }
+                info!("Bullet hit enemy: both despawned");
+                bullet_despawned = true;
+                break;
+            }
+        }
+        if bullet_despawned { continue; }
+    }
+}
+
+// === Enemy systems ===
+fn enemy_spawn_system(
+    time: Res<Time>,
+    mut state: ResMut<EnemySpawnState>,
+    enemy_assets: Res<EnemyAssets>,
+    player_q: Single<&Transform, With<Player>>,
+    mut commands: Commands,
+) {
+    state.timer.tick(time.delta());
+    if !state.timer.just_finished() {
+        return;
+    }
+    let player_transform = player_q.into_inner();
+    // spawn offset from player so they come from left or right of user
+    let offset_x = 500.0;
+    let from_left = state.spawn_left_next;
+    state.spawn_left_next = !state.spawn_left_next;
+
+    let dir = if from_left { 1.0 } else { -1.0 };
+    let spawn_x = player_transform.translation.x + if from_left { -offset_x } else { offset_x };
+    let spawn_y = 0.0; // ground level
+
+    let scale = 2.0; // make worm a bit larger
+
+    commands.spawn((
+        Name::new("EnemyWorm"),
+        Sprite {
+            image: enemy_assets.texture.clone(),
+            texture_atlas: Some(TextureAtlas {
+                layout: enemy_assets.layout.clone(),
+                index: enemy_assets.anim.first_sprite_index,
+            }),
+            ..Default::default()
+        },
+        Transform::from_translation(Vec3::new(spawn_x, spawn_y, 0.0)).with_scale(Vec3::splat(scale)),
+        Enemy { dir, speed: 80.0 },
+        // Worm size from sprite.rs: 16x20
+        Collider { half: Vec2::new(16.0, 20.0) * scale * 0.5 },
+    ));
+}
+
+fn enemy_movement_system(time: Res<Time>, mut q: Query<(&mut Transform, &Enemy)>) {
+    let dt = time.delta_secs();
+    for (mut transform, enemy) in &mut q {
+        transform.translation.x += enemy.dir * enemy.speed * dt;
+    }
+}
+
+fn enemy_collision_system(
+    mut commands: Commands,
+    player_q: Single<(&Transform, &Collider), With<Player>>,
+    enemies_q: Query<(Entity, &Transform, &Collider), With<Enemy>>,
+) {
+    let (player_t, player_c) = player_q.into_inner();
+    for (entity, et, ec) in &enemies_q {
+        let dx = (player_t.translation.x - et.translation.x).abs();
+        let dy = (player_t.translation.y - et.translation.y).abs();
+        if dx <= (player_c.half.x + ec.half.x) && dy <= (player_c.half.y + ec.half.y) {
+            // Collision detected: despawn enemy and log
+            if let Ok(mut ew) = commands.get_entity(entity) {
+                ew.despawn();
+            }
+            info!("Enemy collided with player!");
+        }
+    }
+}
+
+fn enemy_despawn_system(
+    mut commands: Commands,
+    player_q: Single<&Transform, With<Player>>,
+    enemies_q: Query<(Entity, &Transform), With<Enemy>>,
+) {
+    let player_t = player_q.into_inner();
+    let max_distance = 1500.0;
+    for (entity, et) in &enemies_q {
+        if (et.translation.x - player_t.translation.x).abs() > max_distance {
+            if let Ok(mut ew) = commands.get_entity(entity) {
+                ew.despawn();
+            }
         }
     }
 }
