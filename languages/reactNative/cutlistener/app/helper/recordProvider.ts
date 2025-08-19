@@ -77,9 +77,6 @@ class RecordProvider {
             };
 
             console.log('audioSet', audioSet);
-            // THIS IS PAINFUL, ACCESSING A SOUND ON ASSETS FOLDER DON'T WORK WITH THIS APPROACH
-            const audioPlayer = new SequentialAudioPlayer([require('../../assets/sounds/one.mp3'), require('../../assets/sounds/two.mp3'), require('../../assets/sounds/three.mp3')]);
-            audioPlayer.start();
             const uri = await this.recordPlugin.startRecorder(
                 this.path,
                 audioSet,

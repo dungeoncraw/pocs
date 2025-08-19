@@ -24,7 +24,8 @@ export default class SequentialAudioPlayer {
         const filename = this.audioList[this.currentIndex];
         console.log(`Playing: ${filename}`);
 
-        const sound = new Sound(filename, Sound.MAIN_BUNDLE, (error) => {
+        // Try to load from bundle first, then from assets folder
+        const sound = new Sound(filename, (error) => {
             if (error) {
                 console.log(`Error playCurrentAudio ${filename}:`, error);
                 this.scheduleNext();
@@ -50,7 +51,7 @@ export default class SequentialAudioPlayer {
         if (this.currentIndex < this.audioList.length && this.isPlaying) {
             this.timeoutId = setTimeout(() => {
                 this.playCurrentAudio();
-            }, 10000);
+            }, 5000);
         } else {
             console.log('All set.');
             this.isPlaying = false;

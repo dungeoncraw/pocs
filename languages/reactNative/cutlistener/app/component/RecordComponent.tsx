@@ -4,6 +4,7 @@ import {useEffect, useState, useRef} from "react";
 import ListComponent from "@/app/component/ListComponent";
 import {ListItemProps, PluginType} from "@/app/types/types";
 import RecordProvider from "@/app/helper/recordProvider";
+import SequentialAudioPlayer from "@/app/helper/sequentialPlayer";
 
 interface RecordComponentProps {
     testID?: string
@@ -15,16 +16,26 @@ export default function RecordComponent({testID}: RecordComponentProps) {
     
     // Create a RecordProvider instance
     const recordProviderRef = useRef<RecordProvider | null>(null);
+    
+    // Create a separate provider for playing sounds from assets/sounds folder
+    const assetSoundPlayerRef = useRef<SequentialAudioPlayer | null>(null);
 
-    // Initialize RecordProvider
+    // Initialize RecordProvider and AssetSoundPlayer
     useEffect(() => {
-        // Create a new instance
+        // Create a new RecordProvider instance
         recordProviderRef.current = new RecordProvider(PluginType.REACT_NATIVE_AUDIO_RECORDER_PLAYER);
+        
+        // Create a new SequentialAudioPlayer instance for asset sounds
+        const assetSounds = ['one.mp3', 'two.mp3', 'three.mp3'];
+        assetSoundPlayerRef.current = new SequentialAudioPlayer(assetSounds);
         
         // Cleanup on unmounting
         return () => {
             if (recordProviderRef.current) {
                 recordProviderRef.current.cleanup();
+            }
+            if (assetSoundPlayerRef.current) {
+                assetSoundPlayerRef.current.stop();
             }
         };
     }, []);
@@ -49,7 +60,12 @@ export default function RecordComponent({testID}: RecordComponentProps) {
 
     const onPressRecord = async () => {
         try {
-            if (!recordProviderRef.current) return;
+            if (!recordProviderRef.current || !assetSoundPlayerRef.current) return;
+            
+            // Start playing asset sounds with 5-second intervals
+            assetSoundPlayerRef.current.start();
+            
+            // Start recording
             await recordProviderRef.current.onRecord();
             setIsRecording(recordProviderRef.current.isRecording);
         } catch (error) {
@@ -60,6 +76,13 @@ export default function RecordComponent({testID}: RecordComponentProps) {
     const onPressStop = async () => {
         try {
             if (!recordProviderRef.current) return;
+            
+            // Stop asset sound player
+            if (assetSoundPlayerRef.current) {
+                assetSoundPlayerRef.current.stop();
+            }
+            
+            // Stop recording
             await recordProviderRef.current.onStop();
             setIsRecording(recordProviderRef.current.isRecording);
 
