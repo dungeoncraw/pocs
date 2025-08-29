@@ -1,36 +1,47 @@
 package com.example.alive;
 
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.GenericContainer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.util.TestPropertyValues;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ContextConfiguration(initializers = AliveAppContainerIT.Initializer.class)
 public class AliveAppContainerIT {
     @Container
-    private static final GenericContainer<?> appContainer = new GenericContainer<>("alive-app:latest")
-            .withExposedPorts(8080);
+    public static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
+            .withDatabaseName("alivedb")
+            .withUsername("aliveuser")
+            .withPassword("alivepass");
+
+    static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+        @Override
+        public void initialize(ConfigurableApplicationContext context) {
+            TestPropertyValues.of(
+                    "spring.datasource.url=" + postgres.getJdbcUrl(),
+                    "spring.datasource.username=" + postgres.getUsername(),
+                    "spring.datasource.password=" + postgres.getPassword()
+            ).applyTo(context.getEnvironment());
+        }
+    }
+
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Test
-    void testAliveEndpoint() throws IOException, InterruptedException {
-        appContainer.start();
-        Integer port = appContainer.getMappedPort(8080);
-        String address = "http://localhost:" + port + "/alive";
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(address)).build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        assertEquals(200, response.statusCode());
-        assertEquals("It's alive", response.body());
+    void aliveEndpointShouldReturnUUID() {
+        String response = restTemplate.getForObject("/alive", String.class);
+        assertThat(response).isNotNull();
+        assertThat(response).matches("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
     }
 }
-
