@@ -5,10 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="989529b1-7ccc-476f-8f72-f7a563e38c45" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/docker-run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/docker-run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/DungeonGameContainerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/DungeonGameContainerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/DungeonGameDockerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/DungeonGameDockerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/DungeonGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/DungeonGameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/GameControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/GameControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/dungeon/src/test/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/src/test/resources/application-test.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Teeth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Teeth.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metro.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/metro.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,25 +49,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/thiagonascimento/Projects/pocs/languages/reactNative/threejs&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/thiagonascimento/Projects/pocs/languages/reactNative/threejs/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/thiagonascimento/Projects/pocs/languages/reactNative/threejs",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "/Users/thiagonascimento/Projects/pocs/languages/reactNative/threejs/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -82,7 +94,9 @@
       <updated>1755815403689</updated>
       <workItem from="1755815404855" duration="4899000" />
       <workItem from="1756038142904" duration="6205000" />
-      <workItem from="1756117238804" duration="3570000" />
+      <workItem from="1756117238804" duration="3599000" />
+      <workItem from="1756678227113" duration="1804000" />
+      <workItem from="1756682012227" duration="2779000" />
     </task>
     <servers />
   </component>

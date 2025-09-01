@@ -2,14 +2,17 @@ import React from 'react';
 import { useGLTF } from "@react-three/drei";
 
 export default function Teeth() {
-    // TODO fix this typescript issue on importing glb
-    const { scene, nodes, materials } = useGLTF(require('../../assets/models/free_teeth_base_mesh.glb'));
+    const { scene, nodes, materials } = useGLTF('/assets/models/free_teeth_base_mesh.glb') as any;
 
     if (!scene) return null;
-
+    console.log(scene);
+    console.log(nodes);
+    console.log(materials);
     return (
-        <group position={[-0.42, 0.51, -0.62]} rotation={[Math.PI / 2, 0, 0]}>
-            <primitive object={scene} />
-        </group>
+        <>
+            <primitive object={nodes.Cube001} position={[0, 0, 0]} scale={[0.3, 0.3, 0.3]}/>
+            <primitive object={nodes.Cube002} position={[2, 0, 0]} scale={[0.3, 0.3, 0.3]}/>
+            <primitive object={nodes.Cube003} position={[-2, 0, 0]} scale={[0.3, 0.3, 0.3]}/>
+        </>
     );
 }

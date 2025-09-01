@@ -19,7 +19,7 @@ export default function Index() {
                 }
 
             >
-                <ambientLight intensity={Math.PI / 2}/>
+                <ambientLight intensity={Math.PI / 2} color={'yellow'}/>
                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI}/>
                 <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI}/>
                 <Teeth/>
