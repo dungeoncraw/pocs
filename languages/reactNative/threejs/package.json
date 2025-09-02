@@ -19,6 +19,7 @@
     "@react-three/fiber": "^9.3.0",
     "@types/three": "^0.179.0",
     "expo": "~53.0.20",
+    "expo-asset": "~11.1.7",
     "expo-blur": "~14.1.5",
     "expo-constants": "~17.1.7",
     "expo-font": "~13.3.2",
