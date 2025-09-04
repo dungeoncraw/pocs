@@ -1,37 +1,55 @@
-import React from 'react'
-import {Canvas} from '@react-three/fiber'
-import {View, Text, StyleSheet} from 'react-native'
+import React, {useEffect, useState} from 'react';
+import {Canvas} from '@react-three/fiber/native';
+import {View, Text, StyleSheet} from 'react-native';
+import {Camera, CameraView} from 'expo-camera';
 import Teeth from './components/Teeth';
 
 export default function Index() {
+    const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        Camera.requestCameraPermissionsAsync().then(({status}) => {
+            setHasPermission(status === 'granted');
+        });
+    }, []);
+
+    if (hasPermission === null) return null;
+    if (hasPermission === false) return (
+        <View style={styles.container}>
+            <Text style={styles.debugText}>Sem permissão para usar a câmera</Text>
+        </View>
+    );
+
     return (
         <View style={styles.container}>
-            <Text style={styles.debugText}>Canvas Loading...</Text>
-            <Canvas
-                style={styles.canvasContainer}
-                gl={{antialias: true}}
-                camera={
-                    {
-                        position: [0, 0, 5],
-                        // FOV = field of view, the extent of the scene displayed at any moment
-                        fov: 50
+            <CameraView style={StyleSheet.absoluteFillObject} facing="back"/>
+            <View style={styles.overlay} pointerEvents="none">
+                <Canvas
+                    style={styles.canvasContainer}
+                    gl={{antialias: true}}
+                    camera={
+                        {
+                            position: [0, 0, 5],
+                            // FOV = field of view, the extent of the scene displayed at any moment
+                            fov: 50
+                        }
                     }
-                }
 
-            >
-                <ambientLight intensity={Math.PI / 2} color={'yellow'}/>
-                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI}/>
-                <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI}/>
-                <Teeth/>
-            </Canvas>
+                >
+                    <ambientLight intensity={Math.PI / 2} color={'yellow'}/>
+                    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI}/>
+                    <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI}/>
+                    <Teeth/>
+                </Canvas>
+            </View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: 'transparent',
     },
     debugText: {
         color: 'white',
@@ -44,6 +62,11 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: '100%',
-
+        backgroundColor: 'transparent',
     },
-})
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        pointerEvents: 'none',
+        zIndex: 10,
+    },
+});
