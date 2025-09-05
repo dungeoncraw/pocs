@@ -17,10 +17,8 @@
       <change beforePath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/GameControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/src/test/java/org/tetokeguii/GameControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../java/dungeon/src/test/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/dungeon/src/test/resources/application-test.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Teeth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Teeth.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +105,8 @@
       <workItem from="1756771248140" duration="1496000" />
       <workItem from="1756851112725" duration="1668000" />
       <workItem from="1756947075158" duration="274000" />
-      <workItem from="1756947382121" duration="1105000" />
+      <workItem from="1756947382121" duration="1221000" />
+      <workItem from="1757030271517" duration="1647000" />
     </task>
     <servers />
   </component>

@@ -2,9 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from 'three';
+import {GLTF} from "three-stdlib";
 
 export default function Teeth() {
-    const { scene } = useGLTF(require('../../assets/models/teeth.glb'));
+    const { scene } = useGLTF(require('../../assets/models/teeth.glb')) as GLTF;
     const groupRef = useRef<THREE.Group>(null);
 
     useEffect(() => {

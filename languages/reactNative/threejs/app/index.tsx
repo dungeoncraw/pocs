@@ -26,7 +26,15 @@ export default function Index() {
             <View style={styles.overlay} pointerEvents="none">
                 <Canvas
                     style={styles.canvasContainer}
-                    gl={{antialias: true}}
+                    gl={{
+                        antialias: true,
+                        // turn on alpha for transparent backgrounds
+                        alpha: true,
+                        // preserve buffer between frames for transparent backgrounds
+                        preserveDrawingBuffer: true,
+                        // turn off premultiplied alpha for transparent backgrounds
+                        premultipliedAlpha: false
+                    }}
                     camera={
                         {
                             position: [0, 0, 5],
@@ -34,6 +42,10 @@ export default function Index() {
                             fov: 50
                         }
                     }
+                    onCreated={({gl}) => {
+                        gl.setClearColor(0x000000, 0);
+                    }}
+
 
                 >
                     <ambientLight intensity={Math.PI / 2} color={'yellow'}/>
@@ -68,5 +80,7 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         pointerEvents: 'none',
         zIndex: 10,
+        backgroundColor: 'transparent'
+
     },
 });
