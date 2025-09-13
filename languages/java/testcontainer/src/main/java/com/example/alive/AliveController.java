@@ -16,9 +16,9 @@ public class AliveController {
     }
 
     @GetMapping("/alive")
-    public String alive() {
+    public NonUserEntity alive() {
         UUID uuid = UUID.randomUUID();
-        nonUserRepository.save(new NonUserEntity(uuid));
-        return uuid.toString();
+        NonUserEntity entity = new NonUserEntity(uuid);
+        return nonUserRepository.save(entity);
     }
 }
