@@ -46,17 +46,6 @@ fn main() {
                     .in_set(RunFixedMainLoopSystem::AfterFixedMainLoop),
             ),
         )
-        // .add_systems(
-        //     Update,
-        //     (
-        //         // Press the right arrow key to animate the right sprite
-        //         animation::trigger_animation::<RightSprite>
-        //             .run_if(input_just_pressed(KeyCode::ArrowRight)),
-        //         // Press the left arrow key to animate the left sprite
-        //         animation::trigger_animation::<LeftSprite>
-        //             .run_if(input_just_pressed(KeyCode::ArrowLeft)),
-        //     ),
-        // )
         .run();
 }
 
@@ -132,7 +121,7 @@ fn setup(
         generate_sprite_atlas(
             &asset_server,
             &mut texture_atlas_layouts,
-            SpriteMap::Character,
+            SpriteMap::Bill,
         );
 
     // Load enemy (worm) atlas and store as a resource for future spawns

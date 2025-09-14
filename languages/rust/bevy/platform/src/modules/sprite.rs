@@ -23,6 +23,7 @@ struct SpriteGrid {
 pub enum SpriteMap {
     Character,
     Worm,
+    Bill
 }
 /// * `tile_size` - Just a simple size of the character, this is not so easy to get
 /// * `columns` - Numbers of columns for animation
@@ -53,6 +54,16 @@ fn map_from_sprite_map(sprite_map: SpriteMap) -> (String, SpriteGrid, AnimationC
             },
             AnimationConfig::new(0, 30, 30),
         ),
+        SpriteMap::Bill => (
+            "character/bill.png".to_string(),
+            SpriteGrid {
+                tile_size: UVec2::new(30, 36),
+                columns: 6,
+                rows: 1,
+                padding: Some(UVec2::new(0, 0)),
+                offset: Some(UVec2::new(0, 121))
+            },
+            AnimationConfig::new(0, 5, 15),)
     }
 }
 // TODO load spriteatlas as this example https://github.com/bevyengine/bevy/blob/latest/examples/2d/texture_atlas.rs
