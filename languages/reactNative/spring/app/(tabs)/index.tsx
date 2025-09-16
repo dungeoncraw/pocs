@@ -1,79 +1,55 @@
-import {Pressable, StyleSheet, View, Text} from 'react-native';
+import {Pressable, StyleSheet, View, Text, Dimensions} from 'react-native';
 import {useSpring, animated} from "@react-spring/native";
 import {useSpringRef} from "@react-spring/core";
 
+const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
+
 export default function HomeScreen() {
-    const colorApi = useSpringRef();
-    const colorSpring = useSpring({
-        ref: colorApi,
-        from: {color: 'rgba(235, 64, 52, 1)'},
-    });
-
-    const scaleApi = useSpringRef();
-    const scaleSpring = useSpring({
-        ref: scaleApi,
-        from: {scale: 1},
-    });
-
     const moveApi = useSpringRef();
     const moveSpring = useSpring({
         ref: moveApi,
-        from: {translateX: 0},
+        from: {translateX: 0, translateY: 0},
     });
 
-    const handleColorClick = () => {
-        colorApi.start({
-            to: {
-                color: colorSpring.color.get() === 'rgba(235, 64, 52, 1)' 
-                    ? 'rgba(52, 104, 235, 1)' 
-                    : 'rgba(235, 64, 52, 1)'
-            },
-        });
-    };
+    const generateRandomPosition = () => {
+        const buttonWidth = 150;
+        const buttonHeight = 50;
+        const margin = 20;
 
-    const handleScaleClick = () => {
-        scaleApi.start({
-            to: {
-                scale: scaleSpring.scale.get() === 1 ? 1.5 : 1
-            },
-            config: { tension: 300, friction: 10 }
-        });
+        const maxX = screenWidth - buttonWidth - margin;
+        const maxY = screenHeight - buttonHeight - margin - 120;
+
+        const randomX = Math.random() * maxX - (screenWidth / 2 - buttonWidth / 2);
+        const randomY = Math.random() * maxY - (screenHeight / 2 - buttonHeight / 2);
+
+        return {x: randomX, y: randomY};
     };
 
     const handleMoveClick = () => {
+        const newPosition = generateRandomPosition();
         moveApi.start({
             to: {
-                translateX: moveSpring.translateX.get() === 0 ? 50 : 0
+                translateX: newPosition.x,
+                translateY: newPosition.y
             },
-            config: { tension: 200, friction: 25 }
+            // lower tension, lower speed on animation, 
+            // less friction, more bounce effect
+            config: { tension: 100, friction: 5 }
         });
     };
 
     return (
         <View style={styles.container}>
-            <View style={styles.buttonContainer}>
-                <Pressable onPress={handleColorClick} style={styles.button}>
-                    <animated.Text style={[styles.buttonText, colorSpring]}>
-                        Color animation
-                    </animated.Text>
+            <animated.View style={{
+                transform: [
+                    {translateX: moveSpring.translateX},
+                    {translateY: moveSpring.translateY}
+                ]
+            }}>
+                <Pressable onPress={handleMoveClick} style={styles.button}>
+                    <Text style={styles.buttonText}>Toque para mover!</Text>
                 </Pressable>
-
-                <Pressable onPress={handleScaleClick} style={styles.button}>
-                    <animated.View style={[styles.animatedButton, {
-                        transform: [{scale: scaleSpring.scale}]
-                    }]}>
-                        <Text style={styles.buttonText}>Scale animation</Text>
-                    </animated.View>
-                </Pressable>
-
-                <animated.View style={{
-                    transform: [{translateX: moveSpring.translateX}]
-                }}>
-                    <Pressable onPress={handleMoveClick} style={styles.button}>
-                        <Text style={styles.buttonText}>Move animation</Text>
-                    </Pressable>
-                </animated.View>
-            </View>
+            </animated.View>
         </View>
     );
 }
@@ -81,17 +57,13 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#f5f5f5',
     },
-    buttonContainer: {
-        gap: 30,
-        alignItems: 'center',
-    },
     button: {
         padding: 15,
+        paddingHorizontal: 25,
         backgroundColor: '#fff',
         borderRadius: 10,
         shadowColor: '#000',
@@ -102,9 +74,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-    },
-    animatedButton: {
-        padding: 0,
+        minWidth: 150,
     },
     buttonText: {
         fontSize: 16,
