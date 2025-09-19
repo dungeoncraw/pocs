@@ -16,17 +16,24 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
       }}>
+        <Tabs.Screen
+            name="index"
+            options={{
+                // this just hides the tab. Can keep the tab file and index file.
+                href: null,
+            }}
+        />
       <Tabs.Screen
-        name="index"
+        name="pedometer"
         options={{
-          title: 'Home',
+          title: 'Sensor1',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="accelerometer"
         options={{
-          title: 'Explore',
+          title: 'Sensor2',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
