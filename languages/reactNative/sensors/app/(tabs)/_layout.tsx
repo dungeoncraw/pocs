@@ -37,6 +37,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="compass"
+        options={{
+          title: 'Sensor3',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="location.north.fill" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }
