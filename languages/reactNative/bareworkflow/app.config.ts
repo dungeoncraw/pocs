@@ -43,7 +43,13 @@ module.exports = () => {
                     }
                 }
             ],
-            "./plugins/withPlugin.ts"
+            // need to wrap the plugin in an array to pass parameters
+            [
+                "./plugins/withPlugin.ts",
+                {
+                    message: "Hello world, from settings plugin!"
+                }
+            ]
         ],
         "experiments": {
             "typedRoutes": true,

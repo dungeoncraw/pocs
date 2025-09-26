@@ -1,7 +1,11 @@
 import { ConfigPlugin, withAndroidManifest } from 'expo/config-plugins';
 
-const withAndroidPlugin: ConfigPlugin = config => {
-    const message = 'Hello world, from Expo plugin!';
+type AndroidProps = {
+    message?: string;
+};
+
+const withAndroidPlugin: ConfigPlugin<AndroidProps> = (config, options = {}) => {
+    const message = options.message || 'Hello world, from Expo plugin!';
 
     return withAndroidManifest(config, config => {
         const mainApplication = config?.modResults?.manifest?.application?.[0];

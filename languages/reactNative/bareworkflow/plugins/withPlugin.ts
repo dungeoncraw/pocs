@@ -2,9 +2,9 @@ import { ConfigPlugin } from 'expo/config-plugins';
 import withAndroidPlugin from './withAndroidPlugin';
 import withIosPlugin from './withIosPlugin';
 
-const withPlugin: ConfigPlugin = config => {
-    config = withAndroidPlugin(config);
-    return withIosPlugin(config);
+const withPlugin: ConfigPlugin<{message?: string}> = (config, options = {}) => {
+    config = withAndroidPlugin(config, options);
+    return withIosPlugin(config, options);
 };
 
 export default withPlugin;
