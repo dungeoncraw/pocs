@@ -6,8 +6,7 @@ type AndroidProps = {
 
 const withAndroidPlugin: ConfigPlugin<AndroidProps> = (config, options = {}) => {
     const message = options.message || 'Hello world, from Expo plugin!';
-
-    return withAndroidManifest(config, config => {
+    config = withAndroidManifest(config, config => {
         const mainApplication = config?.modResults?.manifest?.application?.[0];
 
         if (mainApplication) {
@@ -22,9 +21,9 @@ const withAndroidPlugin: ConfigPlugin<AndroidProps> = (config, options = {}) => 
                 },
             });
         }
-
         return config;
     });
+    return config;
 };
 
 export default withAndroidPlugin;
