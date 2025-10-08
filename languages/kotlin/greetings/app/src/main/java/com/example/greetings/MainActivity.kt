@@ -18,16 +18,14 @@ import androidx.compose.ui.unit.dp
 import com.example.greetings.ui.theme.GreetingsTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Row
 import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +50,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         Row{
             Text(
                 text = "Hi, my name is $name!",
-                modifier = modifier.padding(24.dp)
+                modifier = modifier.padding(24.dp),
+                fontSize = 120.sp,
+                lineHeight = 116.sp,
             )
             Text(
                 text = "This remembers flutter"
@@ -91,6 +91,8 @@ fun Card(msg: Message) {
         }
     }
 }
+
+// this is available only on android studio design
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
