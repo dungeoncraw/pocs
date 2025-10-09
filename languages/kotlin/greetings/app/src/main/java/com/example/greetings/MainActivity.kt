@@ -18,12 +18,14 @@ import androidx.compose.ui.unit.dp
 import com.example.greetings.ui.theme.GreetingsTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.sp
 
@@ -47,16 +49,24 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Surface(color = Color.Red) {
-        Row{
-            Text(
-                text = "Hi, my name is $name!",
-                modifier = modifier.padding(24.dp),
-                fontSize = 120.sp,
-                lineHeight = 116.sp,
-            )
-            Text(
-                text = "This remembers flutter"
-            )
+        Row {
+            Column (
+                verticalArrangement = Arrangement.Center,
+                modifier = modifier.padding(8.dp)
+            ) {
+                Text(
+                    text = "Hi, my name is $name!",
+                    modifier = modifier.padding(24.dp),
+                    fontSize = 90.sp,
+                    lineHeight = 86.sp,
+                )
+                Text(
+                    text = "This remembers flutter",
+                    modifier = modifier.padding(24.dp).align(
+                        alignment = Alignment.End
+                    ),
+                )
+            }
         }
         Row {
             Card(
