@@ -1,0 +1,39 @@
+.child-component {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  background: white;
+  transition: background-color 0.3s ease;
+}
+
+.child-component:hover {
+  background: #f8f8f8;
+}
+
+@keyframes highlight {
+  0% {
+    background: #fff7e6;
+  }
+  100% {
+    background: white;
+  }
+}
+
+.highlight {
+  animation: highlight 1s ease-out;
+}
+
+button {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background: #0052a3;
+}
