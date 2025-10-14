@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">greetings</string>
+    <string name="simple_party_image_this_string_is_for_talkback">Simple party image, this string is for talkback</string>
 </resources>

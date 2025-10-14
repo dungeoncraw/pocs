@@ -19,6 +19,7 @@ import com.example.greetings.ui.theme.GreetingsTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -27,6 +28,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
@@ -39,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    GreetingImage(message = "HBD", from = "Myself")
                 }
             }
         }
@@ -47,24 +51,27 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(message: String, from: String, modifier: Modifier = Modifier) {
     Surface(color = Color.Red) {
         Row {
-            Column (
+            Column(
                 verticalArrangement = Arrangement.Center,
                 modifier = modifier.padding(8.dp)
             ) {
                 Text(
-                    text = "Hi, my name is $name!",
+                    text = message,
                     modifier = modifier.padding(24.dp),
                     fontSize = 90.sp,
                     lineHeight = 86.sp,
+                    textAlign = TextAlign.Center
                 )
                 Text(
-                    text = "This remembers flutter",
-                    modifier = modifier.padding(24.dp).align(
-                        alignment = Alignment.End
-                    ),
+                    text = "From $from",
+                    modifier = modifier
+                        .padding(24.dp)
+                        .align(
+                            alignment = Alignment.CenterHorizontally
+                        ),
                 )
             }
         }
@@ -77,6 +84,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 }
 
 data class Message(val author: String, val body: String)
+
 @Composable
 fun Card(msg: Message) {
     Row(modifier = Modifier.padding(all = 8.dp)) {
@@ -102,11 +110,27 @@ fun Card(msg: Message) {
     }
 }
 
+@Composable
+fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
+    val image = painterResource(R.drawable.androidparty)
+    Box(modifier) {
+        Image(
+            painter = image,
+            // this is nice, extract and use XML for holding labels and other fixed strings
+            contentDescription = stringResource(R.string.simple_party_image_this_string_is_for_talkback),
+            contentScale = ContentScale.Crop,
+            alpha = 0.5f
+        )
+        Greeting(message, from)
+    }
+
+}
+
 // this is available only on android studio design
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     GreetingsTheme {
-        Greeting("Android")
+        Greeting("My my", "Don")
     }
 }
