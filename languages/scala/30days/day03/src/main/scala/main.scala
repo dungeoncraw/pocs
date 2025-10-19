@@ -17,7 +17,12 @@ def main(): Unit = {
       println(s"Error: ${e.getMessage}")
       Failure(e)
   }
-
+  def foo(a: Int, b: Int): Option[Int] = if b == 0 then None else Some(a/b)
+  def parseInt(s: String): Try[Int] = Try(s.toInt)
+  val result = parseInt("10").toEither.left.map(_.getMessage)
+  val resultLeft = parseInt("um").toEither.left.map(_.getMessage)
+  println(result)
+  println(resultLeft)
   // try catch must pick up NonFatal errors and throw fatal errors
   try {
     throw new OutOfMemoryError("OOM")
