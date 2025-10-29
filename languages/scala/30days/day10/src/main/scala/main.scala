@@ -26,6 +26,9 @@ class Lion extends Animal {
 class PetContainer[P <:Pet](p:P):
   def pet: P = p
 
+trait Producer[+T] {
+  def get(): T
+}
 
 @main
 def main(): Unit = {
@@ -45,6 +48,22 @@ def main(): Unit = {
   val catContainer = PetContainer[Cat](Cat())
   //  the next line fails as the generic type is not a subtype defined on upper bound
   //  val lionContainer = PetContainer[Lion](Lion())
+
+
+  val dogProducer: Producer[Dog] = new Producer[Dog] {
+    def get(): Dog = new Dog
+  }
+  // covariant of Producer
+  val animalProducer: Producer[Animal] = dogProducer
+  val animal: Animal = animalProducer.get()
+
+  // List is covariant
+  val dogs: List[Dog] = List(new Dog, new Dog)
+  val animals: List[Animal] = dogs // ✓ Works
+
+  // Vector is covariant
+  val dogVector: Vector[Dog] = Vector(new Dog)
+  val animalVector: Vector[Animal] = dogVector // ✓ Works
 
 }
 
