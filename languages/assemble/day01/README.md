@@ -5,7 +5,7 @@ This is a simple set for using assembly on MAC os, it runs using nasm arm64 arch
 
 ## How to run
 
-install nasm
+install nasm (not required, can use clang)
 
 ```bash
 brew install nasm
@@ -14,7 +14,6 @@ brew install nasm
 Then compile the hello world
 
 ```bash
-nasm -f macho64 hello.asm -o hello.o
 clang -o hello hello.s -Wl,-e,_start -Wl,-no_pie
 ./hello
 ```
