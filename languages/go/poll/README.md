@@ -19,6 +19,7 @@ Quick links
 
 ## Table of Contents
 - [Quick start](#quick-start)
+- [Docker](#docker)
 - [Configuration](#configuration)
 - [API overview](#api-overview)
 - [Swagger / API docs](#swagger--api-docs)
@@ -54,6 +55,45 @@ Quick links
    ```bash
    curl -s "http://localhost:8080/poll?id=11111111-1111-1111-1111-111111111111" | jq
    ```
+
+## Docker
+
+Build the image and run the service with 4 CPU cores and 8GB RAM.
+
+Using Docker Compose (recommended):
+
+```bash
+docker compose up --build
+```
+
+This uses docker-compose.yml which sets resource limits to 4 CPUs and 8GB RAM and maps port 8080.
+
+Environment variables you may want to pass (examples):
+
+```bash
+STORE_BACKEND=memory \
+REDIS_URL=redis://localhost:6379/0 \
+REDIS_QUEUE_NAME=votes \
+DB_URL=postgres://user:pass@localhost:5432/poll?sslmode=disable \
+docker compose up --build
+```
+
+Run with plain docker (explicit limits):
+
+```bash
+docker build -t poll-service:local .
+docker run --rm -p 8080:8080 \
+  --cpus=4 \
+  --memory=8g \
+  -e PORT=8080 \
+  -e STORE_BACKEND=memory \
+  poll-service:local
+```
+
+Notes:
+- The image exposes port 8080 and provides a healthcheck hitting /swagger.json.
+- For Swarm/Kubernetes, enforce the same limits via the orchestrator (Compose includes deploy.resources.limits for Swarm).
+ - When using a .env file with Docker Compose, only lines starting with '#' are treated as comments; do not use ';' for comments.
 
 ## Configuration
 - PORT: Port number for the HTTP server (default: 8080).

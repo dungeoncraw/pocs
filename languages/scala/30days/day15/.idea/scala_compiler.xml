@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <option name="separateProdTestSources" value="true" />
-    <profile name="sbt 1" modules="day15,day15.main,day15.test" />
+    <profile name="sbt 1" modules="day15" />
+    <profile name="sbt 2" modules="day15.main,day15.test">
+      <parameters>
+        <parameter value="-Xprint:inlining" />
+      </parameters>
+    </profile>
   </component>
 </project>
