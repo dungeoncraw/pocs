@@ -1,0 +1,4 @@
+some text for reading
+using multiple lines
+and maybe crash the app
+using $#@!*&/|\
