@@ -11,10 +11,9 @@ install nasm (not required, can use clang)
 brew install nasm
 ```
 
-Then compile the hello world
+Then compile the factorial example
 
 ```bash
-clang -o loop loop.s -Wl,-e,_start -Wl,-no_pie
-./loop
+clang -o factorial factorial.s -Wl,-e,_start -Wl,-no_pie
+./factorial
 ```
-
