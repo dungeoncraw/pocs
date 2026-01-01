@@ -15,6 +15,12 @@ class Server(publicDir: os.Path, val overridePort: Int) extends Routes:
     val path = request.remainingPathSegments.mkString("/")
     StaticFile( (publicDir / ProjectPaths.Assets.path / path).toString, headers = Nil )
 
+  @get("/search.html")
+  def search() = Templates.search("Search") // This is a bit hacky, title should come from config
+
+  @get("/tags/:name")
+  def tag(name: String) = StaticFile( (publicDir / ProjectPaths.Tags.path / name).toString, headers = Seq("Content-Type" -> "text/html"))
+
   @get("/search-index.json")
   def searchIndex() = StaticFile( (publicDir / ProjectPaths.SearchIndexJson.path).toString, headers = Seq("Content-Type" -> "application/json"))
 
@@ -30,10 +36,32 @@ class Server(publicDir: os.Path, val overridePort: Int) extends Routes:
   @get("/__stats")
   def stats() = 
     val stats = Map(
-      "uptime" -> "unknown",
-      "posts_count" -> os.list(publicDir / ProjectPaths.Posts.path).size.toString
+      "uptime_ms" -> (System.currentTimeMillis() - startTime).toString,
+      "posts_count" -> os.list(publicDir / ProjectPaths.Posts.path).size.toString,
+      "tags_count" -> (if (os.exists(publicDir / ProjectPaths.Tags.path)) os.list(publicDir / ProjectPaths.Tags.path).size.toString else "0"),
+      "public_dir_size_bytes" -> os.walk(publicDir).filter(os.isFile).map(os.size).sum.toString
     )
     upickle.default.write(stats)
+
+  private val clients = java.util.concurrent.ConcurrentHashMap.newKeySet[java.io.PrintWriter]()
+
+  @get("/sse")
+  def sse() =
+    cask.Response(
+      data = "data: connected\n\n",
+      headers = Seq(
+        "Content-Type" -> "text/event-stream",
+        "Cache-Control" -> "no-cache",
+        "Connection" -> "keep-alive"
+      )
+    )
+
+  def notifyReload(): Unit =
+    clients.forEach { writer =>
+      writer.println("data: reload\n")
+    }
+
+  private val startTime = System.currentTimeMillis()
 
   initialize()
 

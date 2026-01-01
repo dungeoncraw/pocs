@@ -9,13 +9,23 @@ object Templates:
       head(
         scalatags.Text.tags2.title(s"$titleStr | $siteTitle"),
         meta(charset := "utf-8"),
-        meta(name := "viewport", content := "width=device-width, initial-scale=1")
+        meta(name := "viewport", content := "width=device-width, initial-scale=1"),
+        script(raw("""
+          const eventSource = new EventSource('/sse');
+          eventSource.onmessage = function(event) {
+            if (event.data === 'reload') {
+              window.location.reload();
+            }
+          };
+        """))
       ),
       body(
         tag("header")(
           h1(siteTitle),
           nav(
-            a(href := "/", "Home")
+            a(href := "/", "Home"),
+            raw(" | "),
+            a(href := "/search.html", "Search")
           )
         ),
         mainTag(contentBody),
@@ -49,5 +59,49 @@ object Templates:
             a(href := s"/${ProjectPaths.Posts.path}/$slug.html", fm.title),
             span(s" - ${fm.date}")
           )
+      ),
+      h3("Tags"),
+      div({
+        val allTags = posts.flatMap(_._1.tags).distinct.sorted
+        for tagStr <- allTags yield
+          a(href := s"/tags/$tagStr.html", style := "margin-right: 10px")(tagStr)
+      })
+    )
+
+  def tagPage(tag: String, posts: List[(FrontMatter, String)], siteTitle: String): String =
+    layout(s"Tag: $tag", siteTitle)(
+      h2(s"Posts tagged with '$tag'"),
+      ul(
+        for (fm, slug) <- posts yield
+          li(
+            a(href := s"/${ProjectPaths.Posts.path}/$slug.html", fm.title),
+            span(s" - ${fm.date}")
+          )
       )
+    )
+
+  def search(siteTitle: String): String =
+    layout("Search", siteTitle)(
+      h2("Search"),
+      input(id := "search-input", `type` := "text", placeholder := "Search..."),
+      div(id := "search-results"),
+      script(raw("""
+        async function search() {
+          const query = document.getElementById('search-input').value.toLowerCase();
+          const response = await fetch('/search-index.json');
+          const index = await response.json();
+          const results = index.filter(item => 
+            item.title.toLowerCase().includes(query) || 
+            item.content.toLowerCase().includes(query)
+          );
+          const resultsDiv = document.getElementById('search-results');
+          resultsDiv.innerHTML = results.map(item => `
+            <div>
+              <h3><a href="/posts/${item.slug}.html">${item.title}</a></h3>
+              <p>${item.content}...</p>
+            </div>
+          `).join('');
+        }
+        document.getElementById('search-input').addEventListener('input', search);
+      """))
     )

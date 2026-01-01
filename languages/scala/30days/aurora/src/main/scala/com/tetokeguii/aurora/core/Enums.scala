@@ -11,3 +11,5 @@ enum ProjectPaths(val path: String):
   case SitemapXml extends ProjectPaths("sitemap.xml")
   case SearchIndexJson extends ProjectPaths("search-index.json")
   case BuildReportJson extends ProjectPaths("build-report.json")
+  case Tags extends ProjectPaths("tags")
+  case SearchHtml extends ProjectPaths("search.html")
