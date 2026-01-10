@@ -1,0 +1,8 @@
+[project]
+name = "iterators"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.14"
+dependencies = [
+    "faker>=30.0.0"
+]
