@@ -28,5 +28,3 @@ if __name__ == '__main__':
     print(bake_naked_cake(2, 100))
     print(bake_vanilla_cake(num_eggs=2, ml_milk=100))
     print(bake_nothing())
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
