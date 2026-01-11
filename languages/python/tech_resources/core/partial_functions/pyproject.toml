@@ -1,8 +1,6 @@
 [project]
-name = "iterators"
+name = "partial-functions"
 version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.14"
-dependencies = [
-    "faker>=30.0.0"
-]
+dependencies = []
