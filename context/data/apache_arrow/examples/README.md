@@ -65,6 +65,37 @@ This client demonstrates a 3-stage pipeline to maximize throughput:
 python3 pipeline_parallelism.py
 ```
 
+### 4. Run Rust and Go Clients
+
+New clients in Rust and Go have been added to demonstrate the same pipeline parallelism.
+
+#### Rust Client
+
+The Rust client uses `tokio` for async orchestration and `arrow-flight` crate.
+
+**Prerequisites:**
+- Rust installed (`rustc`, `cargo`)
+
+**Run:**
+```bash
+# You can run it directly with cargo if you have a Cargo.toml, 
+# or use a script that sets up dependencies.
+# For a quick run, assuming arrow and tokio are available:
+cargo run --example pipeline_parallelism # if part of a cargo project
+```
+
+#### Go Client
+
+The Go client uses goroutines and channels for the pipeline stages.
+
+**Prerequisites:**
+- Go installed
+
+**Run:**
+```bash
+go run pipeline_parallelism.go
+```
+
 ## Flow Control and Parallelism
 
 - **Sequential Client (`consumes_file.py`)**: Demonstrates manual flow control by pausing processing to simulate backpressure management.
