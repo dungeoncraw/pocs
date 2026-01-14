@@ -31,6 +31,11 @@ class FeatherFlightServer(fl.FlightServerBase):
             return fl.RecordBatchStream(self._table)
         raise fl.FlightError(f"Unknown ticket {key}")
 
+    def do_put(self, context, descriptor, reader, writer):
+        # Read the incoming data stream and convert it to a table
+        self._table = reader.read_all()
+        print(f"Table updated with {self._table.num_rows} rows.")
+
 
 def main():
     USE_HTTP = False
@@ -40,7 +45,7 @@ def main():
     else:
         location = "grpc://localhost:8815"
 
-    file_path = "sql_data.feather"
+    file_path = os.path.join(os.path.dirname(__file__), "..", "sql_data.feather")
 
     if not os.path.exists(file_path):
         print(f"Error: {file_path} not found.")

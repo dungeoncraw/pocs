@@ -4,18 +4,25 @@ This project demonstrates Apache Arrow Flight server and client implementations 
 
 ## Project Structure
 
-- `generate_feather.py`: Generates a sample `sql_data.feather` file.
-- `flight_server.py`: A gRPC Flight server that loads the Feather file and serves it.
-- `consumes_file.py`: A standard Flight client that connects to the server and processes data sequentially with basic flow control.
-- `pipeline_parallelism.py`: An advanced Flight client demonstrating pipeline parallelism with multiple stages (Network, Compute, Sink) using threads and queues.
+- `file/`: Contains file-based Arrow Flight examples.
+    - `generate_feather.py`: Generates a sample `sql_data.feather` file in the root directory.
+    - `flight_server.py`: A gRPC Flight server that loads the Feather file and serves it.
+    - `consumes_file.py`: A standard Flight client that connects to the server and processes data sequentially.
+    - `pipeline_parallelism.py`: An advanced Flight client demonstrating pipeline parallelism in Python.
+    - `pipeline_parallelism.go`: Pipeline parallelism implementation in Go.
+    - `pipeline_parallelism.rs`: Pipeline parallelism implementation in Rust.
+- `sql/`: Contains SQL-based Arrow Flight examples.
+    - `flight_sql_server.py`: A Flight server that supports SQL queries using DuckDB over the Feather data.
+    - `flight_sql_client.py`: A Flight client that sends SQL queries to the server.
+    - `flight_sql_consumer.py`: A more advanced consumer for Flight SQL that executes multiple queries.
 - `pyproject.toml`: Project configuration and dependencies.
 
 ## Prerequisites
 
-Ensure you have Python installed. This project uses `pyarrow` and `pandas`. You can install the dependencies using `pip`:
+Ensure you have Python installed. This project uses `pyarrow`, `pandas`, and `duckdb`. You can install the dependencies using `pip`:
 
 ```bash
-pip install pyarrow pandas
+pip install pyarrow pandas duckdb
 ```
 
 Note: This project was tested with `pyarrow>=22.0.0`.
@@ -29,7 +36,7 @@ Follow these steps in order:
 First, create the Feather file that the server will use:
 
 ```bash
-python3 generate_feather.py
+python3 file/generate_feather.py
 ```
 This will create a file named `sql_data.feather` in the current directory.
 
@@ -38,7 +45,7 @@ This will create a file named `sql_data.feather` in the current directory.
 Start the Arrow Flight server:
 
 ```bash
-python3 flight_server.py
+python3 file/flight_server.py
 ```
 The server will start listening on `grpc://localhost:8815`. Keep this terminal window open.
 
@@ -51,7 +58,7 @@ You can run either the standard client or the pipeline parallelism client in a n
 The client will connect to the server, retrieve the schema, and process the data batches. It includes a simple flow control mechanism that pauses after every 2 batches.
 
 ```bash
-python3 consumes_file.py
+python3 file/consumes_file.py
 ```
 
 #### Option B: Pipeline Parallelism Client
@@ -62,7 +69,32 @@ This client demonstrates a 3-stage pipeline to maximize throughput:
 3. **Stage C (Sink)**: Handles results, e.g., logging (I/O bound).
 
 ```bash
-python3 pipeline_parallelism.py
+python3 file/pipeline_parallelism.py
+```
+
+#### Option C: Flight SQL Client
+
+This client executes a SQL query against the Feather file through a Flight SQL server powered by DuckDB.
+
+1. Start the Flight SQL server:
+```bash
+python3 sql/flight_sql_server.py
+```
+
+2. Run the client in another terminal:
+```bash
+python3 sql/flight_sql_client.py
+```
+
+#### Option D: Flight SQL Consumer
+
+This consumer demonstrates executing multiple types of queries (filtering, aggregation) against the Flight SQL server.
+
+1. Ensure the Flight SQL server is running (`python3 sql/flight_sql_server.py`).
+
+2. Run the consumer:
+```bash
+python3 sql/flight_sql_consumer.py
 ```
 
 ### 4. Run Rust and Go Clients
@@ -78,8 +110,7 @@ The Rust client uses `tokio` for async orchestration and `arrow-flight` crate.
 
 **Run:**
 ```bash
-# You can run it directly with cargo if you have a Cargo.toml, 
-# or use a script that sets up dependencies.
+# Assuming you are in the file/ directory or have the necessary setup
 # For a quick run, assuming arrow and tokio are available:
 cargo run --example pipeline_parallelism # if part of a cargo project
 ```
@@ -93,10 +124,10 @@ The Go client uses goroutines and channels for the pipeline stages.
 
 **Run:**
 ```bash
-go run pipeline_parallelism.go
+go run file/pipeline_parallelism.go
 ```
 
 ## Flow Control and Parallelism
 
-- **Sequential Client (`consumes_file.py`)**: Demonstrates manual flow control by pausing processing to simulate backpressure management.
-- **Pipeline Client (`pipeline_parallelism.py`)**: Uses Python `queue.Queue` to decouple I/O and CPU-bound tasks, allowing the next batch to be fetched while the current one is being processed.
+- **Sequential Client (`file/consumes_file.py`)**: Demonstrates manual flow control by pausing processing to simulate backpressure management.
+- **Pipeline Client (`file/pipeline_parallelism.py`)**: Uses Python `queue.Queue` to decouple I/O and CPU-bound tasks, allowing the next batch to be fetched while the current one is being processed.

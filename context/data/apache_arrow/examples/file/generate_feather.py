@@ -1,5 +1,6 @@
 import pyarrow as pa
 import pyarrow.feather as feather
+import os
 
 records = [
     {"id": 1, "is_active": True, "name": "Alice", "metadata": {"dept": "IT"}},
@@ -11,7 +12,7 @@ records = [
 # PyArrow automatically infers types: int64, bool, string, and struct (for dictionaries)
 table = pa.Table.from_pylist(records)
 
-file_path = 'sql_data.feather'
+file_path = os.path.join(os.path.dirname(__file__), "..", 'sql_data.feather')
 try:
     feather.write_feather(table, file_path)
     print(f"Success! '{file_path}' created from record list.")
