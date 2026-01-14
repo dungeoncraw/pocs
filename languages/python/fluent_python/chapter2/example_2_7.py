@@ -14,3 +14,8 @@ if __name__ == '__main__':
     print(a == b) # true
     b[-1].append(3)
     print(a == b) # false
+
+    a, b, *rest = range(5)
+    print(a, b, rest)
+    a, b, *rest = range(2)
+    print(a, b, rest)
