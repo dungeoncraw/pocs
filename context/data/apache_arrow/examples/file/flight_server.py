@@ -52,7 +52,7 @@ def main():
         return
 
     # Create the Location object explicitly to ensure compatibility
-    fl_location = fl.Location.from_uri(location)
+    fl_location = fl.Location(location)
 
     server = FeatherFlightServer(fl_location, file_path)
     print(f"Flight server started at {location}")

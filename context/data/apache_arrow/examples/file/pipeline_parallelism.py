@@ -1,6 +1,7 @@
 import queue
 import threading
 import time
+import pyarrow.compute as pc
 import pyarrow.flight as fl
 
 # Configuration to match flight_server.py
@@ -54,10 +55,23 @@ def stage_b_compute():
         # Simulate heavy processing
         time.sleep(0.6)
 
-        # Example transformation: count nulls (like your previous example)
-        null_counts = {batch.schema.names[i]: batch.column(i).null_count for i in range(batch.num_columns)}
+        # Example transformation: Filter for Age > 18 and City == 'New York'
+        # 1. Create a mask for Age > 18
+        # Result: [True, False, True, ...] (one boolean per row)
+        age_mask = pc.greater(batch.column("age"), 18)
 
-        q_compute_to_sink.put((batch_id, null_counts))
+        # 2. Create a mask for City == 'New York'
+        city_mask = pc.equal(batch.column("city"), "New York")
+
+        # 3. Combine them using bitwise AND
+        # Only rows where BOTH are True remain True
+        final_mask = pc.and_(age_mask, city_mask)
+
+        # 4. Filter the batch
+        # This returns a new batch containing ONLY the matching rows
+        filtered_batch = batch.filter(final_mask)
+
+        q_compute_to_sink.put((batch_id, filtered_batch))
 
 
 def stage_c_sink():
@@ -68,8 +82,10 @@ def stage_c_sink():
             print("[Stage C] Task complete.")
             break
 
-        batch_id, results = item
-        print(f"    [Stage C] Writing results of batch #{batch_id}: {results}")
+        batch_id, filtered_batch = item
+        print(f"    [Stage C] Writing results of batch #{batch_id}: {filtered_batch.num_rows} rows match")
+        if filtered_batch.num_rows > 0:
+            print(f"    [Stage C] Sample match: {filtered_batch.to_pylist()[0]}")
 
         # Simulate writing to a database or logs
         time.sleep(0.4)

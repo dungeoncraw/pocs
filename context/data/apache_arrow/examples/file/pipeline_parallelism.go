@@ -9,7 +9,10 @@ import (
 	"time"
 
 	"github.com/apache/arrow/go/v15/arrow"
+	"github.com/apache/arrow/go/v15/arrow/array"
+	"github.com/apache/arrow/go/v15/arrow/compute"
 	"github.com/apache/arrow/go/v15/arrow/flight"
+	"github.com/apache/arrow/go/v15/arrow/memory"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -27,7 +30,7 @@ type BatchItem struct {
 
 type ResultItem struct {
 	ID      int
-	Results map[string]int
+	Batch   arrow.Record
 }
 
 func main() {
@@ -112,30 +115,76 @@ func stageANetwork(out chan<- BatchItem) error {
 }
 
 func stageBCompute(in <-chan BatchItem, out chan<- ResultItem) {
+	mem := memory.DefaultAllocator
 	for item := range in {
 		fmt.Printf("  [Stage B] Processing batch #%d...\n", item.ID)
 
 		// Simulate heavy processing
 		time.Sleep(600 * time.Millisecond)
 
-		// Example transformation: count nulls
-		nullCounts := make(map[string]int)
-		schema := item.Batch.Schema()
+		ctx := context.Background()
+
+		// 1. Create a mask for Age > 18
+		ageCol := item.Batch.Column(int(item.Batch.Schema().FieldIndices("age")[0]))
+		ageMask, err := compute.Greater(ctx, compute.ScalarOptions{Value: arrow.NewInt64Scalar(18)}, &compute.Datum{Kind: compute.KindArray, Array: ageCol.Data()})
+		if err != nil {
+			log.Printf("Error computing age mask: %v", err)
+			item.Batch.Release()
+			continue
+		}
+		defer ageMask.Release()
+
+		// 2. Create a mask for City == 'New York'
+		cityCol := item.Batch.Column(int(item.Batch.Schema().FieldIndices("city")[0]))
+		cityMask, err := compute.Equal(ctx, compute.ScalarOptions{Value: arrow.NewStringScalar("New York")}, &compute.Datum{Kind: compute.KindArray, Array: cityCol.Data()})
+		if err != nil {
+			log.Printf("Error computing city mask: %v", err)
+			item.Batch.Release()
+			continue
+		}
+		defer cityMask.Release()
+
+		// 3. Combine them using bitwise AND
+		finalMask, err := compute.And(ctx, ageMask, cityMask)
+		if err != nil {
+			log.Printf("Error computing final mask: %v", err)
+			item.Batch.Release()
+			continue
+		}
+		defer finalMask.Release()
+
+		// 4. Filter the batch
+		// In Go, Filter usually works on arrays. To filter a whole Record, we filter each column.
+		filterArr := finalMask.(*compute.Datum).Array
+		var filteredCols []arrow.Array
 		for i := 0; i < int(item.Batch.NumCols()); i++ {
-			name := schema.Field(i).Name
-			nullCount := item.Batch.Column(i).NullN()
-			nullCounts[name] = nullCount
+			col := item.Batch.Column(i)
+			filtered, err := compute.FilterArray(ctx, col, filterArr, compute.DefaultFilterOptions())
+			if err != nil {
+				log.Printf("Error filtering column %d: %v", i, err)
+				continue
+			}
+			filteredCols = append(filteredCols, filtered)
+		}
+
+		filteredBatch := array.NewRecord(item.Batch.Schema(), filteredCols, filteredCols[0].Len())
+		for _, col := range filteredCols {
+			col.Release()
 		}
 
 		item.Batch.Release() // Release after processing
-		out <- ResultItem{ID: item.ID, Results: nullCounts}
+		out <- ResultItem{ID: item.ID, Batch: filteredBatch}
 	}
 	fmt.Println("[Stage B] No more data. Stopping.")
 }
 
 func stageCSink(in <-chan ResultItem) {
 	for item := range in {
-		fmt.Printf("    [Stage C] Writing results of batch #%d: %v\n", item.ID, item.Results)
+		fmt.Printf("    [Stage C] Writing results of batch #%d: %d rows match\n", item.ID, item.Batch.NumRows())
+		if item.Batch.NumRows() > 0 {
+			fmt.Printf("    [Stage C] Sample match: %v\n", item.Batch)
+		}
+		item.Batch.Release()
 
 		// Simulate writing to a database or logs
 		time.Sleep(400 * time.Millisecond)

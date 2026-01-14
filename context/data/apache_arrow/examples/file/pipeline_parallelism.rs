@@ -1,4 +1,5 @@
-use arrow::array::Array;
+use arrow::array::{Array, Int64Array, StringArray};
+use arrow::compute::{and, eq_scalar, filter_record_batch, gt_scalar};
 use arrow_flight::decode::FlightRecordBatchStream;
 use arrow_flight::flight_service_client::FlightServiceClient;
 use arrow_flight::{FlightDescriptor, Ticket};
@@ -88,7 +89,7 @@ async fn stage_a_network(
 
 async fn stage_b_compute(
     mut rx: mpsc::Receiver<(usize, arrow::record_batch::RecordBatch)>,
-    tx: mpsc::Sender<(usize, HashMap<String, usize>)>,
+    tx: mpsc::Sender<(usize, arrow::record_batch::RecordBatch)>,
 ) {
     while let Some((batch_id, batch)) = rx.recv().await {
         println!("  [Stage B] Processing batch #{}...", batch_id);
@@ -96,16 +97,29 @@ async fn stage_b_compute(
         // Simulate heavy processing
         tokio::time::sleep(Duration::from_millis(600)).await;
 
-        // Example transformation: count nulls
-        let mut null_counts = HashMap::new();
-        let schema = batch.schema();
-        for i in 0..batch.num_columns() {
-            let name = schema.field(i).name().clone();
-            let null_count = batch.column(i).null_count();
-            null_counts.insert(name, null_count);
-        }
+        // 1. Create a mask for Age > 18
+        let age_col = batch
+            .column(batch.schema().column_with_name("age").unwrap().0)
+            .as_any()
+            .downcast_ref::<Int64Array>()
+            .unwrap();
+        let age_mask = gt_scalar(age_col, 18).unwrap();
 
-        if let Err(e) = tx.send((batch_id, null_counts)).await {
+        // 2. Create a mask for City == 'New York'
+        let city_col = batch
+            .column(batch.schema().column_with_name("city").unwrap().0)
+            .as_any()
+            .downcast_ref::<StringArray>()
+            .unwrap();
+        let city_mask = eq_scalar(city_col, "New York").unwrap();
+
+        // 3. Combine them using bitwise AND
+        let final_mask = and(&age_mask, &city_mask).unwrap();
+
+        // 4. Filter the batch
+        let filtered_batch = filter_record_batch(&batch, &final_mask).unwrap();
+
+        if let Err(e) = tx.send((batch_id, filtered_batch)).await {
             eprintln!("[Stage B] Send error: {:?}", e);
             break;
         }
@@ -113,12 +127,16 @@ async fn stage_b_compute(
     println!("[Stage B] No more data. Stopping.");
 }
 
-async fn stage_c_sink(mut rx: mpsc::Receiver<(usize, HashMap<String, usize>)>) {
-    while let Some((batch_id, results)) = rx.recv().await {
+async fn stage_c_sink(mut rx: mpsc::Receiver<(usize, arrow::record_batch::RecordBatch)>) {
+    while let Some((batch_id, filtered_batch)) = rx.recv().await {
         println!(
-            "    [Stage C] Writing results of batch #{}: {:?}",
-            batch_id, results
+            "    [Stage C] Writing results of batch #{}: {} rows match",
+            batch_id,
+            filtered_batch.num_rows()
         );
+        if filtered_batch.num_rows() > 0 {
+            println!("    [Stage C] Sample match: {:?}", filtered_batch);
+        }
 
         // Simulate writing to a database or logs
         tokio::time::sleep(Duration::from_millis(400)).await;
