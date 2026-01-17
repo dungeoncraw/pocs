@@ -8,4 +8,4 @@ This repository contains examples and notes from the book "Fluent Python: Clear,
 - [Chapter 2: An Array of Sequences](chapter2/)
 
 
-## pages read = 55
+## pages read = 62

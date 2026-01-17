@@ -17,7 +17,7 @@ class FeatherFlightSQLServer(fl.FlightServerBase):
         self._db.register('feather_table', self._table)
 
     def get_flight_info(self, context, descriptor):
-        # To mimic Flight SQL without the library, we'll use a Command descriptor.
+        # Command descriptor.
         if descriptor.descriptor_type == fl.DescriptorType.CMD:
             command = descriptor.command.decode('utf-8')
             # Expecting a JSON command or just the SQL string
