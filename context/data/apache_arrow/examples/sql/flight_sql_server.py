@@ -52,7 +52,7 @@ def main():
         print(f"Error: {file_path} not found. Please run generate_feather.py first.")
         return
 
-    fl_location = fl.Location.from_uri(location)
+    fl_location = fl.Location(location)
     server = FeatherFlightSQLServer(fl_location, file_path)
     print(f"Flight SQL (simulated) server started at {location}")
     print("Registered table: 'feather_table'")
