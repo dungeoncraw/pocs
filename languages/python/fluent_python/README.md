@@ -6,6 +6,7 @@ This repository contains examples and notes from the book "Fluent Python: Clear,
 
 - [Chapter 1: The Python Data Model](chapter1/)
 - [Chapter 2: An Array of Sequences](chapter2/)
+- [Chapter 3: Dictionaries and Sets](chapter3/)
 
 
-## pages read = 64
+## pages read = 80
