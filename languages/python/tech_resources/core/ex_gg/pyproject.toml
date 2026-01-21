@@ -1,0 +1,17 @@
+[project]
+name = "brainrot-info"
+version = "0.1.0"
+description = "Library for Steal a Brainrot Wiki information"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "build>=1.4.0",
+    "twine>=6.2.0",
+]
+
+[tool.setuptools.package-data]
+brainrot_info = ["*.json"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"

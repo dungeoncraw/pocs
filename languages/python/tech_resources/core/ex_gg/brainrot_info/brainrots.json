@@ -1,0 +1,1378 @@
+{
+    "1x1x1x1": {
+        "name": "1x1x1x1",
+        "rarity": "SECRET"
+    },
+    "25": {
+        "name": "25",
+        "rarity": "SECRET"
+    },
+    "67": {
+        "name": "67",
+        "rarity": "SECRET"
+    },
+    "admin lucky block": {
+        "name": "Admin Lucky Block",
+        "rarity": "ADMIN"
+    },
+    "agarrini la palini": {
+        "name": "Agarrini la Palini",
+        "rarity": "SECRET"
+    },
+    "alessio": {
+        "name": "Alessio",
+        "rarity": "BRAINROT_GOD"
+    },
+    "anpali babel": {
+        "name": "Anpali Babel",
+        "rarity": "BRAINROT_GOD"
+    },
+    "antonio": {
+        "name": "Antonio",
+        "rarity": "BRAINROT_GOD"
+    },
+    "aquanaut": {
+        "name": "Aquanaut",
+        "rarity": "BRAINROT_GOD"
+    },
+    "avocadini antilopini": {
+        "name": "Avocadini Antilopini",
+        "rarity": "EPIC"
+    },
+    "avocadini guffo": {
+        "name": "Avocadini Guffo",
+        "rarity": "EPIC"
+    },
+    "avocadorilla": {
+        "name": "Avocadorilla",
+        "rarity": "MYTHIC"
+    },
+    "ay mi gatito": {
+        "name": "Ay Mi Gatito",
+        "rarity": "ADMIN"
+    },
+    "ballerina cappuccina": {
+        "name": "Ballerina Cappuccina",
+        "rarity": "LEGENDARY"
+    },
+    "ballerina peppermintina": {
+        "name": "Ballerina Peppermintina",
+        "rarity": "BRAINROT_GOD"
+    },
+    "ballerino lololo": {
+        "name": "Ballerino Lololo",
+        "rarity": "BRAINROT_GOD"
+    },
+    "bambini crostini": {
+        "name": "Bambini Crostini",
+        "rarity": "EPIC"
+    },
+    "bambu bambu sahur": {
+        "name": "Bambu Bambu Sahur",
+        "rarity": "BRAINROT_GOD"
+    },
+    "bananita dolphinita": {
+        "name": "Bananita Dolphinita",
+        "rarity": "EPIC"
+    },
+    "bananito bandito": {
+        "name": "Bananito Bandito",
+        "rarity": "MYTHIC"
+    },
+    "bandito axolito": {
+        "name": "Bandito Axolito",
+        "rarity": "EPIC"
+    },
+    "bandito bobritto": {
+        "name": "Bandito Bobritto",
+        "rarity": "RARE"
+    },
+    "belula beluga": {
+        "name": "Belula Beluga",
+        "rarity": "BRAINROT_GOD"
+    },
+    "bisonte giuppitere": {
+        "name": "Bisonte Giuppitere",
+        "rarity": "SECRET"
+    },
+    "blackhole goat": {
+        "name": "Blackhole Goat",
+        "rarity": "SECRET"
+    },
+    "blueberrinni octopusini": {
+        "name": "Blueberrinni Octopusini",
+        "rarity": "LEGENDARY"
+    },
+    "boatito auratito": {
+        "name": "Boatito Auratito",
+        "rarity": "SECRET"
+    },
+    "bombardini tortinii": {
+        "name": "Bombardini Tortinii",
+        "rarity": "BRAINROT_GOD"
+    },
+    "bombardiro crocodilo": {
+        "name": "Bombardiro Crocodilo",
+        "rarity": "MYTHIC"
+    },
+    "bombombini gusini": {
+        "name": "Bombombini Gusini",
+        "rarity": "MYTHIC"
+    },
+    "boneca ambalabu": {
+        "name": "Boneca Ambalabu",
+        "rarity": "RARE"
+    },
+    "brainrot god lucky block": {
+        "name": "Brainrot God Lucky Block",
+        "rarity": "BRAINROT_GOD"
+    },
+    "brasilini berimbini": {
+        "name": "Brasilini Berimbini",
+        "rarity": "BRAINROT_GOD"
+    },
+    "brr brr patapim": {
+        "name": "Brr Brr Patapim",
+        "rarity": "EPIC"
+    },
+    "brr es teh patipum": {
+        "name": "Brr es Teh Patipum",
+        "rarity": "BRAINROT_GOD"
+    },
+    "brri brri bicus dicus bombicus": {
+        "name": "Brri Brri Bicus Dicus Bombicus",
+        "rarity": "EPIC"
+    },
+    "brunito marsito": {
+        "name": "Brunito Marsito",
+        "rarity": "SECRET"
+    },
+    "brutto gialutto": {
+        "name": "Brutto Gialutto",
+        "rarity": "MYTHIC"
+    },
+    "buho de fuego": {
+        "name": "Buho de Fuego",
+        "rarity": "LEGENDARY"
+    },
+    "buho de noelo": {
+        "name": "Buho de Noelo",
+        "rarity": "BRAINROT_GOD"
+    },
+    "bulbito bandito traktorito": {
+        "name": "Bulbito Bandito Traktorito",
+        "rarity": "BRAINROT_GOD"
+    },
+    "bunito bunito spinito": {
+        "name": "Bunito Bunito Spinito",
+        "rarity": "SECRET"
+    },
+    "bunnyman": {
+        "name": "Bunnyman",
+        "rarity": "SECRET"
+    },
+    "burbaloni loliloli": {
+        "name": "Burbaloni Loliloli",
+        "rarity": "LEGENDARY"
+    },
+    "burguro and fryuro": {
+        "name": "Burguro And Fryuro",
+        "rarity": "SECRET"
+    },
+    "burrito bandito": {
+        "name": "Burrito Bandito",
+        "rarity": "SECRET"
+    },
+    "cacasito satalito": {
+        "name": "Cacasito Satalito",
+        "rarity": "BRAINROT_GOD"
+    },
+    "cachorrito melonito": {
+        "name": "Cachorrito Melonito",
+        "rarity": "MYTHIC"
+    },
+    "cacto hipopotamo": {
+        "name": "Cacto Hipopotamo",
+        "rarity": "RARE"
+    },
+    "capi taco": {
+        "name": "Capi Taco",
+        "rarity": "BRAINROT_GOD"
+    },
+    "capitano moby": {
+        "name": "Capitano Moby",
+        "rarity": "SECRET"
+    },
+    "cappuccino assassino": {
+        "name": "Cappuccino Assassino",
+        "rarity": "EPIC"
+    },
+    "cappuccino clownino": {
+        "name": "Cappuccino Clownino",
+        "rarity": "BRAINROT_GOD"
+    },
+    "caramello filtrello": {
+        "name": "Caramello Filtrello",
+        "rarity": "LEGENDARY"
+    },
+    "carloo": {
+        "name": "Carloo",
+        "rarity": "MYTHIC"
+    },
+    "carrotini brainini": {
+        "name": "Carrotini Brainini",
+        "rarity": "MYTHIC"
+    },
+    "cavallo virtuoso": {
+        "name": "Cavallo Virtuoso",
+        "rarity": "MYTHIC"
+    },
+    "celularcini viciosini": {
+        "name": "Celularcini Viciosini",
+        "rarity": "SECRET"
+    },
+    "centrucci nuclucci": {
+        "name": "Centrucci Nuclucci",
+        "rarity": "MYTHIC"
+    },
+    "cerberus": {
+        "name": "Cerberus",
+        "rarity": "SECRET"
+    },
+    "chachechi": {
+        "name": "Chachechi",
+        "rarity": "SECRET"
+    },
+    "chef crabracadabra": {
+        "name": "Chef Crabracadabra",
+        "rarity": "LEGENDARY"
+    },
+    "chicleteira bicicleteira": {
+        "name": "Chicleteira Bicicleteira",
+        "rarity": "SECRET"
+    },
+    "chicleteira noelteira": {
+        "name": "Chicleteira Noelteira",
+        "rarity": "SECRET"
+    },
+    "chicleteirina bicicleteirina": {
+        "name": "Chicleteirina Bicicleteirina",
+        "rarity": "SECRET"
+    },
+    "chihuanini taconini": {
+        "name": "Chihuanini Taconini",
+        "rarity": "BRAINROT_GOD"
+    },
+    "chillin chili": {
+        "name": "Chillin Chili",
+        "rarity": "SECRET"
+    },
+    "chimnino": {
+        "name": "Chimnino",
+        "rarity": "SECRET"
+    },
+    "chimpanzini bananini": {
+        "name": "Chimpanzini Bananini",
+        "rarity": "LEGENDARY"
+    },
+    "chimpanzini spiderini": {
+        "name": "Chimpanzini Spiderini",
+        "rarity": "ADMIN"
+    },
+    "chipso and queso": {
+        "name": "Chipso and Queso",
+        "rarity": "SECRET"
+    },
+    "chocco bunny": {
+        "name": "Chocco Bunny",
+        "rarity": "LEGENDARY"
+    },
+    "clickerino crabo": {
+        "name": "Clickerino Crabo",
+        "rarity": "LEGENDARY"
+    },
+    "cocoa assassino": {
+        "name": "Cocoa Assassino",
+        "rarity": "BRAINROT_GOD"
+    },
+    "cocofanto elefanto": {
+        "name": "Cocofanto Elefanto",
+        "rarity": "BRAINROT_GOD"
+    },
+    "cocosini mama": {
+        "name": "Cocosini Mama",
+        "rarity": "LEGENDARY"
+    },
+    "coffin tung tung tung sahur": {
+        "name": "Coffin Tung Tung Tung Sahur",
+        "rarity": "SECRET"
+    },
+    "cooki and milki": {
+        "name": "Cooki and Milki",
+        "rarity": "SECRET"
+    },
+    "corn corn corn sahur": {
+        "name": "Corn Corn Corn Sahur",
+        "rarity": "BRAINROT_GOD"
+    },
+    "crabbo limonetta": {
+        "name": "Crabbo Limonetta",
+        "rarity": "BRAINROT_GOD"
+    },
+    "crocodildo penisini": {
+        "name": "Crocodildo Penisini",
+        "rarity": "ADMIN"
+    },
+    "cuadramat and pakrahmatmamat": {
+        "name": "Cuadramat and Pakrahmatmamat",
+        "rarity": "SECRET"
+    },
+    "cupcake koala": {
+        "name": "Cupcake Koala",
+        "rarity": "RARE"
+    },
+    "developini braziliaspidini": {
+        "name": "Developini Braziliaspidini",
+        "rarity": "ADMIN"
+    },
+    "doi doi do": {
+        "name": "Doi Doi Do",
+        "rarity": "EPIC"
+    },
+    "donkeyturbo express": {
+        "name": "Donkeyturbo Express",
+        "rarity": "SECRET"
+    },
+    "dragon cannelloni": {
+        "name": "Dragon Cannelloni",
+        "rarity": "SECRET"
+    },
+    "dug dug dug": {
+        "name": "Dug dug dug",
+        "rarity": "BRAINROT_GOD"
+    },
+    "dul dul dul": {
+        "name": "Dul Dul Dul",
+        "rarity": "SECRET"
+    },
+    "elefanto frigo": {
+        "name": "Elefanto Frigo",
+        "rarity": "MYTHIC"
+    },
+    "esok sekolah": {
+        "name": "Esok Sekolah",
+        "rarity": "SECRET"
+    },
+    "espresso signora": {
+        "name": "Espresso Signora",
+        "rarity": "BRAINROT_GOD"
+    },
+    "events": {
+        "name": "Events",
+        "rarity": "ADMIN"
+    },
+    "eviledon": {
+        "name": "Eviledon",
+        "rarity": "SECRET"
+    },
+    "extinct ballerina": {
+        "name": "Extinct Ballerina",
+        "rarity": "BRAINROT_GOD"
+    },
+    "extinct matteo": {
+        "name": "Extinct Matteo",
+        "rarity": "SECRET"
+    },
+    "extinct tralalero": {
+        "name": "Extinct Tralalero",
+        "rarity": "SECRET"
+    },
+    "festive 67": {
+        "name": "Festive 67",
+        "rarity": "SECRET"
+    },
+    "festive lucky block": {
+        "name": "Festive Lucky Block",
+        "rarity": "ADMIN"
+    },
+    "fishino clownino": {
+        "name": "Fishino Clownino",
+        "rarity": "SECRET"
+    },
+    "fluriflura": {
+        "name": "Fluriflura",
+        "rarity": "COMMON"
+    },
+    "fragola la la la": {
+        "name": "Fragola La La La",
+        "rarity": "SECRET"
+    },
+    "fragrama and chocrama": {
+        "name": "Fragrama and Chocrama",
+        "rarity": "SECRET"
+    },
+    "frankentteo": {
+        "name": "Frankentteo",
+        "rarity": "SECRET"
+    },
+    "frigo camelo": {
+        "name": "Frigo Camelo",
+        "rarity": "MYTHIC"
+    },
+    "frio ninja": {
+        "name": "Frio Ninja",
+        "rarity": "BRAINROT_GOD"
+    },
+    "frogato pirato": {
+        "name": "Frogato Pirato",
+        "rarity": "EPIC"
+    },
+    "frogo elfo": {
+        "name": "Frogo Elfo",
+        "rarity": "RARE"
+    },
+    "ganganzelli trulala": {
+        "name": "Ganganzelli Trulala",
+        "rarity": "MYTHIC"
+    },
+    "gangster footera": {
+        "name": "Gangster Footera",
+        "rarity": "RARE"
+    },
+    "garama and madundung": {
+        "name": "Garama and Madundung",
+        "rarity": "SECRET"
+    },
+    "gattatino neonino": {
+        "name": "Gattatino Neonino",
+        "rarity": "ADMIN"
+    },
+    "gattatino nyanino": {
+        "name": "Gattatino Nyanino",
+        "rarity": "BRAINROT_GOD"
+    },
+    "gattito tacoto": {
+        "name": "Gattito Tacoto",
+        "rarity": "BRAINROT_GOD"
+    },
+    "giftini spyderini": {
+        "name": "Giftini Spyderini",
+        "rarity": "SECRET"
+    },
+    "ginger cisterna": {
+        "name": "Ginger Cisterna",
+        "rarity": "BRAINROT_GOD"
+    },
+    "ginger globo": {
+        "name": "Ginger Globo",
+        "rarity": "BRAINROT_GOD"
+    },
+    "girafa celestre": {
+        "name": "Girafa Celestre",
+        "rarity": "BRAINROT_GOD"
+    },
+    "glorbo fruttodrillo": {
+        "name": "Glorbo Fruttodrillo",
+        "rarity": "LEGENDARY"
+    },
+    "goat": {
+        "name": "GOAT",
+        "rarity": "SECRET"
+    },
+    "gobblino uniciclino": {
+        "name": "Gobblino Uniciclino",
+        "rarity": "SECRET"
+    },
+    "gold elf": {
+        "name": "Gold Elf",
+        "rarity": "ADMIN"
+    },
+    "gorillo subwoofero": {
+        "name": "Gorillo Subwoofero",
+        "rarity": "MYTHIC"
+    },
+    "gorillo watermelondrillo": {
+        "name": "Gorillo Watermelondrillo",
+        "rarity": "MYTHIC"
+    },
+    "graipuss medussi": {
+        "name": "Graipuss Medussi",
+        "rarity": "SECRET"
+    },
+    "granchiello spiritell": {
+        "name": "Granchiello Spiritell",
+        "rarity": "BRAINROT_GOD"
+    },
+    "guerriro digitale": {
+        "name": "Guerriro Digitale",
+        "rarity": "SECRET"
+    },
+    "guest 666": {
+        "name": "Guest 666",
+        "rarity": "SECRET"
+    },
+    "headless horseman": {
+        "name": "Headless Horseman",
+        "rarity": "SECRET"
+    },
+    "ho ho ho sahur": {
+        "name": "Ho Ho Ho Sahur",
+        "rarity": "SECRET"
+    },
+    "horegini boom": {
+        "name": "Horegini Boom",
+        "rarity": "SECRET"
+    },
+    "hydra dragon": {
+        "name": "Hydra Dragon",
+        "rarity": "ADMIN"
+    },
+    "index": {
+        "name": "Index",
+        "rarity": "ADMIN"
+    },
+    "jacko jack jack": {
+        "name": "Jacko Jack Jack",
+        "rarity": "BRAINROT_GOD"
+    },
+    "jacko spaventosa": {
+        "name": "Jacko Spaventosa",
+        "rarity": "MYTHIC"
+    },
+    "jackorilla": {
+        "name": "Jackorilla",
+        "rarity": "SECRET"
+    },
+    "jingle jingle sahur": {
+        "name": "Jingle Jingle Sahur",
+        "rarity": "MYTHIC"
+    },
+    "job job job sahur": {
+        "name": "Job Job Job Sahur",
+        "rarity": "SECRET"
+    },
+    "john pork": {
+        "name": "John Pork",
+        "rarity": "ADMIN"
+    },
+    "jolly jolly sahur": {
+        "name": "Jolly Jolly Sahur",
+        "rarity": "SECRET"
+    },
+    "karker sahur": {
+        "name": "Karker Sahur",
+        "rarity": "SECRET"
+    },
+    "karkerkar kurkur": {
+        "name": "Karkerkar Kurkur",
+        "rarity": "SECRET"
+    },
+    "ketchuru and musturu": {
+        "name": "Ketchuru and Musturu",
+        "rarity": "SECRET"
+    },
+    "ketupat kepat": {
+        "name": "Ketupat Kepat",
+        "rarity": "SECRET"
+    },
+    "kings coleslaw": {
+        "name": "Kings Coleslaw",
+        "rarity": "ADMIN"
+    },
+    "krupuk pagi pagi": {
+        "name": "Krupuk Pagi Pagi",
+        "rarity": "BRAINROT_GOD"
+    },
+    "la casa boo": {
+        "name": "La Casa Boo",
+        "rarity": "SECRET"
+    },
+    "la cucaracha": {
+        "name": "La Cucaracha",
+        "rarity": "SECRET"
+    },
+    "la extinct grande": {
+        "name": "La Extinct Grande",
+        "rarity": "SECRET"
+    },
+    "la ginger sekolah": {
+        "name": "La Ginger Sekolah",
+        "rarity": "SECRET"
+    },
+    "la grande combinasion": {
+        "name": "La Grande Combinasion",
+        "rarity": "SECRET"
+    },
+    "la jolly grande": {
+        "name": "La Jolly Grande",
+        "rarity": "SECRET"
+    },
+    "la karkerkar combinasion": {
+        "name": "La Karkerkar Combinasion",
+        "rarity": "SECRET"
+    },
+    "la sahur combinasion": {
+        "name": "La Sahur Combinasion",
+        "rarity": "SECRET"
+    },
+    "la secret combinasion": {
+        "name": "La Secret Combinasion",
+        "rarity": "SECRET"
+    },
+    "la spooky grande": {
+        "name": "La Spooky Grande",
+        "rarity": "SECRET"
+    },
+    "la supreme combinasion": {
+        "name": "La Supreme Combinasion",
+        "rarity": "SECRET"
+    },
+    "la taco combinasion": {
+        "name": "La Taco Combinasion",
+        "rarity": "SECRET"
+    },
+    "la vacca jacko linterino": {
+        "name": "La Vacca Jacko Linterino",
+        "rarity": "SECRET"
+    },
+    "la vacca prese presente": {
+        "name": "La Vacca Prese Presente",
+        "rarity": "SECRET"
+    },
+    "la vacca saturno saturnita": {
+        "name": "La Vacca Saturno Saturnita",
+        "rarity": "ADMIN"
+    },
+    "las capuchinas": {
+        "name": "Las Capuchinas",
+        "rarity": "BRAINROT_GOD"
+    },
+    "las sis": {
+        "name": "Las Sis",
+        "rarity": "SECRET"
+    },
+    "las tralaleritas": {
+        "name": "Las Tralaleritas",
+        "rarity": "SECRET"
+    },
+    "las vaquitas saturnitas": {
+        "name": "Las Vaquitas Saturnitas",
+        "rarity": "SECRET"
+    },
+    "lavadorito spinito": {
+        "name": "Lavadorito Spinito",
+        "rarity": "SECRET"
+    },
+    "lerulerulerule": {
+        "name": "Lerulerulerule",
+        "rarity": "MYTHIC"
+    },
+    "lionel cactuseli": {
+        "name": "Lionel Cactuseli",
+        "rarity": "LEGENDARY"
+    },
+    "liril\u00ec laril\u00e0": {
+        "name": "Liril\u00ec Laril\u00e0",
+        "rarity": "COMMON"
+    },
+    "list list list sahur": {
+        "name": "List List List Sahur",
+        "rarity": "SECRET"
+    },
+    "los 25": {
+        "name": "Los 25",
+        "rarity": "SECRET"
+    },
+    "los 67": {
+        "name": "Los 67",
+        "rarity": "SECRET"
+    },
+    "los bombinitos": {
+        "name": "Los Bombinitos",
+        "rarity": "BRAINROT_GOD"
+    },
+    "los bros": {
+        "name": "Los Bros",
+        "rarity": "SECRET"
+    },
+    "los burritos": {
+        "name": "Los Burritos",
+        "rarity": "SECRET"
+    },
+    "los candies": {
+        "name": "Los Candies",
+        "rarity": "SECRET"
+    },
+    "los chicleteiras": {
+        "name": "Los Chicleteiras",
+        "rarity": "SECRET"
+    },
+    "los chihuaninis": {
+        "name": "Los Chihuaninis",
+        "rarity": "BRAINROT_GOD"
+    },
+    "los combinasionas": {
+        "name": "Los Combinasionas",
+        "rarity": "SECRET"
+    },
+    "los crocodillitos": {
+        "name": "Los Crocodillitos",
+        "rarity": "BRAINROT_GOD"
+    },
+    "los cucarachas": {
+        "name": "Los Cucarachas",
+        "rarity": "SECRET"
+    },
+    "los gattitos": {
+        "name": "Los Gattitos",
+        "rarity": "BRAINROT_GOD"
+    },
+    "los hotspotsitos": {
+        "name": "Los Hotspotsitos",
+        "rarity": "SECRET"
+    },
+    "los jobcitos": {
+        "name": "Los Jobcitos",
+        "rarity": "SECRET"
+    },
+    "los jolly combinasionas": {
+        "name": "Los Jolly Combinasionas",
+        "rarity": "SECRET"
+    },
+    "los karkeritos": {
+        "name": "Los Karkeritos",
+        "rarity": "SECRET"
+    },
+    "los lucky blocks": {
+        "name": "Los Lucky Blocks",
+        "rarity": "ADMIN"
+    },
+    "los matteos": {
+        "name": "Los Matteos",
+        "rarity": "SECRET"
+    },
+    "los mobilis": {
+        "name": "Los Mobilis",
+        "rarity": "SECRET"
+    },
+    "los noobinis": {
+        "name": "Los Noobinis",
+        "rarity": "MYTHIC"
+    },
+    "los nooo my hotspotsitos": {
+        "name": "Los Nooo My Hotspotsitos",
+        "rarity": "SECRET"
+    },
+    "los orcalitos": {
+        "name": "Los Orcalitos",
+        "rarity": "BRAINROT_GOD"
+    },
+    "los planitos": {
+        "name": "Los Planitos",
+        "rarity": "SECRET"
+    },
+    "los primos": {
+        "name": "Los Primos",
+        "rarity": "SECRET"
+    },
+    "los puggies": {
+        "name": "Los Puggies",
+        "rarity": "SECRET"
+    },
+    "los quesadillas": {
+        "name": "Los Quesadillas",
+        "rarity": "SECRET"
+    },
+    "los spaghettis": {
+        "name": "Los Spaghettis",
+        "rarity": "SECRET"
+    },
+    "los spooky combinasionas": {
+        "name": "Los Spooky Combinasionas",
+        "rarity": "SECRET"
+    },
+    "los spyderinis": {
+        "name": "Los Spyderinis",
+        "rarity": "SECRET"
+    },
+    "los taco blocks": {
+        "name": "Los Taco Blocks",
+        "rarity": "ADMIN"
+    },
+    "los tacoritas": {
+        "name": "Los Tacoritas",
+        "rarity": "SECRET"
+    },
+    "los tipi tacos": {
+        "name": "Los Tipi Tacos",
+        "rarity": "BRAINROT_GOD"
+    },
+    "los tortus": {
+        "name": "Los Tortus",
+        "rarity": "SECRET"
+    },
+    "los tralaleritos": {
+        "name": "Los Tralaleritos",
+        "rarity": "SECRET"
+    },
+    "los tungtungtungcitos": {
+        "name": "Los Tungtungtungcitos",
+        "rarity": "BRAINROT_GOD"
+    },
+    "lucky blocks": {
+        "name": "Lucky Blocks",
+        "rarity": "ADMIN"
+    },
+    "machines": {
+        "name": "Machines",
+        "rarity": "ADMIN"
+    },
+    "magi ribbitini": {
+        "name": "Magi Ribbitini",
+        "rarity": "MYTHIC"
+    },
+    "malame amarele": {
+        "name": "Malame Amarele",
+        "rarity": "EPIC"
+    },
+    "mangolini parrocini": {
+        "name": "Mangolini Parrocini",
+        "rarity": "EPIC"
+    },
+    "mariachi corazoni": {
+        "name": "Mariachi Corazoni",
+        "rarity": "SECRET"
+    },
+    "mastodontico telepiedone": {
+        "name": "Mastodontico Telepiedone",
+        "rarity": "BRAINROT_GOD"
+    },
+    "matteo": {
+        "name": "Matteo",
+        "rarity": "BRAINROT_GOD"
+    },
+    "meowl": {
+        "name": "Meowl",
+        "rarity": "ADMIN"
+    },
+    "mieteteira bicicleteira": {
+        "name": "Mieteteira Bicicleteira",
+        "rarity": "SECRET"
+    },
+    "money money man": {
+        "name": "Money Money Man",
+        "rarity": "BRAINROT_GOD"
+    },
+    "money money puggy": {
+        "name": "Money Money Puggy",
+        "rarity": "SECRET"
+    },
+    "money money reindeer": {
+        "name": "Money Money Reindeer",
+        "rarity": "SECRET"
+    },
+    "mummio rappitto": {
+        "name": "Mummio Rappitto",
+        "rarity": "EPIC"
+    },
+    "mummy ambalabu": {
+        "name": "Mummy Ambalabu",
+        "rarity": "BRAINROT_GOD"
+    },
+    "mutations": {
+        "name": "Mutations",
+        "rarity": "ADMIN"
+    },
+    "mythic lucky block": {
+        "name": "Mythic Lucky Block",
+        "rarity": "ADMIN"
+    },
+    "naughty naughty": {
+        "name": "Naughty Naughty",
+        "rarity": "SECRET"
+    },
+    "noo la polizia": {
+        "name": "Noo La Polizia",
+        "rarity": "BRAINROT_GOD"
+    },
+    "noo my candy": {
+        "name": "Noo my Candy",
+        "rarity": "SECRET"
+    },
+    "noo my examine": {
+        "name": "Noo my examine",
+        "rarity": "SECRET"
+    },
+    "noo my present": {
+        "name": "Noo my Present",
+        "rarity": "SECRET"
+    },
+    "noobini pizzanini": {
+        "name": "Noobini Pizzanini",
+        "rarity": "COMMON"
+    },
+    "noobini santanini": {
+        "name": "Noobini Santanini",
+        "rarity": "COMMON"
+    },
+    "nooo my hotspot": {
+        "name": "Nooo My Hotspot",
+        "rarity": "SECRET"
+    },
+    "nuclearo dinossauro": {
+        "name": "Nuclearo Dinossauro",
+        "rarity": "SECRET"
+    },
+    "odin din din dun": {
+        "name": "Odin Din Din Dun",
+        "rarity": "BRAINROT_GOD"
+    },
+    "orangutini ananassini": {
+        "name": "Orangutini Ananassini",
+        "rarity": "MYTHIC"
+    },
+    "orcaledon": {
+        "name": "Orcaledon",
+        "rarity": "SECRET"
+    },
+    "orcalero orcala": {
+        "name": "Orcalero Orcala",
+        "rarity": "BRAINROT_GOD"
+    },
+    "orcalita orcala": {
+        "name": "Orcalita Orcala",
+        "rarity": "BRAINROT_GOD"
+    },
+    "pakrahmatmamat": {
+        "name": "Pakrahmatmamat",
+        "rarity": "BRAINROT_GOD"
+    },
+    "pakrahmatmatina": {
+        "name": "Pakrahmatmatina",
+        "rarity": "BRAINROT_GOD"
+    },
+    "pandaccini bananini": {
+        "name": "Pandaccini Bananini",
+        "rarity": "LEGENDARY"
+    },
+    "pandanini frostini": {
+        "name": "Pandanini Frostini",
+        "rarity": "BRAINROT_GOD"
+    },
+    "penguin tree": {
+        "name": "Penguin Tree",
+        "rarity": "EPIC"
+    },
+    "penguino cocosino": {
+        "name": "Penguino Cocosino",
+        "rarity": "EPIC"
+    },
+    "perochello lemonchello": {
+        "name": "Perochello Lemonchello",
+        "rarity": "EPIC"
+    },
+    "perrito burrito": {
+        "name": "Perrito Burrito",
+        "rarity": "SECRET"
+    },
+    "pi pi watermelon": {
+        "name": "Pi Pi Watermelon",
+        "rarity": "LEGENDARY"
+    },
+    "piccione macchina": {
+        "name": "Piccione Macchina",
+        "rarity": "BRAINROT_GOD"
+    },
+    "piccionetta machina": {
+        "name": "Piccionetta Machina",
+        "rarity": "BRAINROT_GOD"
+    },
+    "pinealotto fruttarino": {
+        "name": "Pinealotto Fruttarino",
+        "rarity": "RARE"
+    },
+    "pipi avocado": {
+        "name": "Pipi Avocado",
+        "rarity": "RARE"
+    },
+    "pipi corni": {
+        "name": "Pipi Corni",
+        "rarity": "COMMON"
+    },
+    "pipi kiwi": {
+        "name": "Pipi Kiwi",
+        "rarity": "COMMON"
+    },
+    "pipi potato": {
+        "name": "Pipi Potato",
+        "rarity": "LEGENDARY"
+    },
+    "pirulitoita bicicleteira": {
+        "name": "Pirulitoita Bicicleteira",
+        "rarity": "SECRET"
+    },
+    "please my present": {
+        "name": "Please my Present",
+        "rarity": "SECRET"
+    },
+    "pop pop sahur": {
+        "name": "Pop Pop Sahur",
+        "rarity": "BRAINROT_GOD"
+    },
+    "pot hotspot": {
+        "name": "Pot Hotspot",
+        "rarity": "SECRET"
+    },
+    "pot pumpkin": {
+        "name": "Pot Pumpkin",
+        "rarity": "SECRET"
+    },
+    "puffaball": {
+        "name": "Puffaball",
+        "rarity": "LEGENDARY"
+    },
+    "pumpkini spyderini": {
+        "name": "Pumpkini Spyderini",
+        "rarity": "SECRET"
+    },
+    "quackula": {
+        "name": "Quackula",
+        "rarity": "LEGENDARY"
+    },
+    "quesadilla crocodila": {
+        "name": "Quesadilla Crocodila",
+        "rarity": "SECRET"
+    },
+    "quesadillo vampiro": {
+        "name": "Quesadillo Vampiro",
+        "rarity": "SECRET"
+    },
+    "quivioli ameleonni": {
+        "name": "Quivioli Ameleonni",
+        "rarity": "LEGENDARY"
+    },
+    "raccooni jandelini": {
+        "name": "Raccooni Jandelini",
+        "rarity": "COMMON"
+    },
+    "rang ring bus": {
+        "name": "Rang Ring Bus",
+        "rarity": "SECRET"
+    },
+    "reindeer tralala": {
+        "name": "Reindeer Tralala",
+        "rarity": "SECRET"
+    },
+    "reinito sleighito": {
+        "name": "Reinito Sleighito",
+        "rarity": "SECRET"
+    },
+    "rhino helicopterino": {
+        "name": "Rhino Helicopterino",
+        "rarity": "MYTHIC"
+    },
+    "rhino toasterino": {
+        "name": "Rhino Toasterino",
+        "rarity": "MYTHIC"
+    },
+    "rocco disco": {
+        "name": "Rocco Disco",
+        "rarity": "SECRET"
+    },
+    "salamino penguino": {
+        "name": "Salamino Penguino",
+        "rarity": "EPIC"
+    },
+    "sammyni spyderini": {
+        "name": "Sammyni Spyderini",
+        "rarity": "SECRET"
+    },
+    "santa hotspot": {
+        "name": "Santa Hotspot",
+        "rarity": "SECRET"
+    },
+    "santteo": {
+        "name": "Santteo",
+        "rarity": "SECRET"
+    },
+    "sealo regalo": {
+        "name": "Sealo Regalo",
+        "rarity": "LEGENDARY"
+    },
+    "secret lucky block": {
+        "name": "Secret Lucky Block",
+        "rarity": "SECRET"
+    },
+    "sigma boy": {
+        "name": "Sigma Boy",
+        "rarity": "LEGENDARY"
+    },
+    "sigma girl": {
+        "name": "Sigma Girl",
+        "rarity": "LEGENDARY"
+    },
+    "signore carapace": {
+        "name": "Signore Carapace",
+        "rarity": "LEGENDARY"
+    },
+    "skibidi toilet": {
+        "name": "Skibidi Toilet",
+        "rarity": "OG"
+    },
+    "skull skull skull": {
+        "name": "Skull Skull Skull",
+        "rarity": "BRAINROT_GOD"
+    },
+    "smurf cat": {
+        "name": "Smurf Cat",
+        "rarity": "ADMIN"
+    },
+    "snailenzo": {
+        "name": "Snailenzo",
+        "rarity": "BRAINROT_GOD"
+    },
+    "spaghetti tualetti": {
+        "name": "Spaghetti Tualetti",
+        "rarity": "SECRET"
+    },
+    "spioniro golubiro": {
+        "name": "Spioniro Golubiro",
+        "rarity": "MYTHIC"
+    },
+    "spooky and pumpky": {
+        "name": "Spooky and Pumpky",
+        "rarity": "SECRET"
+    },
+    "spooky lucky block": {
+        "name": "Spooky Lucky Block",
+        "rarity": "ADMIN"
+    },
+    "squalanana": {
+        "name": "Squalanana",
+        "rarity": "BRAINROT_GOD"
+    },
+    "statutino libertino": {
+        "name": "Statutino Libertino",
+        "rarity": "ADMIN"
+    },
+    "stoppo luminino": {
+        "name": "Stoppo Luminino",
+        "rarity": "MYTHIC"
+    },
+    "strawberrelli flamingelli": {
+        "name": "Strawberrelli Flamingelli",
+        "rarity": "LEGENDARY"
+    },
+    "strawberry elephant": {
+        "name": "Strawberry Elephant",
+        "rarity": "ADMIN"
+    },
+    "svinina bombardino": {
+        "name": "Svinina Bombardino",
+        "rarity": "COMMON"
+    },
+    "swag soda": {
+        "name": "Swag Soda",
+        "rarity": "SECRET"
+    },
+    "swaggy bros": {
+        "name": "Swaggy Bros",
+        "rarity": "SECRET"
+    },
+    "ta ta ta ta sahur": {
+        "name": "Ta Ta Ta Ta Sahur",
+        "rarity": "RARE"
+    },
+    "taco lucky block": {
+        "name": "Taco Lucky Block",
+        "rarity": "ADMIN"
+    },
+    "tacorita bicicleta": {
+        "name": "Tacorita Bicicleta",
+        "rarity": "SECRET"
+    },
+    "talpa di fero": {
+        "name": "Talpa Di Fero",
+        "rarity": "COMMON"
+    },
+    "tang tang keletang": {
+        "name": "Tang Tang Keletang",
+        "rarity": "SECRET"
+    },
+    "tartaragno": {
+        "name": "Tartaragno",
+        "rarity": "COMMON"
+    },
+    "tartaruga cisterna": {
+        "name": "Tartaruga Cisterna",
+        "rarity": "BRAINROT_GOD"
+    },
+    "te te te sahur": {
+        "name": "Te Te Te Sahur",
+        "rarity": "MYTHIC"
+    },
+    "telemorte": {
+        "name": "Telemorte",
+        "rarity": "SECRET"
+    },
+    "tentacolo tecnico": {
+        "name": "Tentacolo Tecnico",
+        "rarity": "BRAINROT_GOD"
+    },
+    "ti ti ti sahur": {
+        "name": "Ti Ti Ti Sahur",
+        "rarity": "EPIC"
+    },
+    "tictac sahur": {
+        "name": "Tictac Sahur",
+        "rarity": "SECRET"
+    },
+    "tigrilini watermelini": {
+        "name": "Tigrilini Watermelini",
+        "rarity": "MYTHIC"
+    },
+    "tigroligre frutonni": {
+        "name": "Tigroligre Frutonni",
+        "rarity": "BRAINROT_GOD"
+    },
+    "tim cheese": {
+        "name": "Tim Cheese",
+        "rarity": "COMMON"
+    },
+    "tipi topi taco": {
+        "name": "Tipi Topi Taco",
+        "rarity": "BRAINROT_GOD"
+    },
+    "tirilikalika tirilikalako": {
+        "name": "Tirilikalika Tirilikalako",
+        "rarity": "LEGENDARY"
+    },
+    "to to to sahur": {
+        "name": "To to to Sahur",
+        "rarity": "SECRET"
+    },
+    "tob tobi tobi": {
+        "name": "Tob Tobi Tobi",
+        "rarity": "MYTHIC"
+    },
+    "toiletto focaccino": {
+        "name": "Toiletto Focaccino",
+        "rarity": "MYTHIC"
+    },
+    "tootini shrimpini": {
+        "name": "Tootini Shrimpini",
+        "rarity": "BRAINROT_GOD"
+    },
+    "torrtuginni dragonfrutini": {
+        "name": "Torrtuginni Dragonfrutini",
+        "rarity": "SECRET"
+    },
+    "tracoducotulu delapeladustuz": {
+        "name": "Tracoducotulu Delapeladustuz",
+        "rarity": "MYTHIC"
+    },
+    "tractoro dinosauro": {
+        "name": "Tractoro Dinosauro",
+        "rarity": "BRAINROT_GOD"
+    },
+    "traits": {
+        "name": "Traits",
+        "rarity": "ADMIN"
+    },
+    "tralaledon": {
+        "name": "Tralaledon",
+        "rarity": "SECRET"
+    },
+    "tralalero tralala": {
+        "name": "Tralalero Tralala",
+        "rarity": "BRAINROT_GOD"
+    },
+    "tralalita tralala": {
+        "name": "Tralalita Tralala",
+        "rarity": "BRAINROT_GOD"
+    },
+    "tree tree tree sahur": {
+        "name": "Tree Tree Tree Sahur",
+        "rarity": "MYTHIC"
+    },
+    "trenostruzzo turbo 3000": {
+        "name": "Trenostruzzo Turbo 3000",
+        "rarity": "BRAINROT_GOD"
+    },
+    "trenostruzzo turbo 4000": {
+        "name": "Trenostruzzo Turbo 4000",
+        "rarity": "SECRET"
+    },
+    "tric trac baraboom": {
+        "name": "Tric Trac Baraboom",
+        "rarity": "RARE"
+    },
+    "trickolino": {
+        "name": "Trickolino",
+        "rarity": "SECRET"
+    },
+    "triplito tralaleritos": {
+        "name": "Triplito Tralaleritos",
+        "rarity": "SECRET"
+    },
+    "trippi troppi": {
+        "name": "Trippi Troppi",
+        "rarity": "RARE"
+    },
+    "trippi troppi troppa trippa": {
+        "name": "Trippi Troppi Troppa Trippa",
+        "rarity": "BRAINROT_GOD"
+    },
+    "trulimero trulicina": {
+        "name": "Trulimero Trulicina",
+        "rarity": "EPIC"
+    },
+    "tuff toucan": {
+        "name": "Tuff Toucan",
+        "rarity": "SECRET"
+    },
+    "tukanno bananno": {
+        "name": "Tukanno Bananno",
+        "rarity": "BRAINROT_GOD"
+    },
+    "tung tung tung sahur": {
+        "name": "Tung Tung Tung Sahur",
+        "rarity": "SECRET"
+    },
+    "unclito samito": {
+        "name": "Unclito Samito",
+        "rarity": "BRAINROT_GOD"
+    },
+    "urubini flamenguini": {
+        "name": "Urubini Flamenguini",
+        "rarity": "BRAINROT_GOD"
+    },
+    "vulturino skeletono": {
+        "name": "Vulturino Skeletono",
+        "rarity": "SECRET"
+    },
+    "w or l": {
+        "name": "W or L",
+        "rarity": "SECRET"
+    },
+    "wombo rollo": {
+        "name": "Wombo Rollo",
+        "rarity": "EPIC"
+    },
+    "yess my examine": {
+        "name": "Yess my examine",
+        "rarity": "SECRET"
+    },
+    "yeti claus": {
+        "name": "Yeti Claus",
+        "rarity": "BRAINROT_GOD"
+    },
+    "zibra zubra zibralini": {
+        "name": "Zibra Zubra Zibralini",
+        "rarity": "MYTHIC"
+    },
+    "zombie tralala": {
+        "name": "Zombie Tralala",
+        "rarity": "SECRET"
+    }
+}
