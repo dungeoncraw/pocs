@@ -1,0 +1,9 @@
+[project]
+name = "sckt-learn-example"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.14"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "scikit-learn>=1.8.0",
+]
