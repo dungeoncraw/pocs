@@ -1,0 +1,85 @@
+# yaml
+services:
+  billing-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: billing_db
+      POSTGRES_USER: billing_user
+      POSTGRES_PASSWORD: <POSTGRES_PASSWORD_BILLING>
+    volumes:
+      - billing_db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U billing_user -d billing_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  patrons-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: patrons_db
+      POSTGRES_USER: patrons_user
+      POSTGRES_PASSWORD: <POSTGRES_PASSWORD_PATRONS>
+    volumes:
+      - patrons_db_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U patrons_user -d patrons_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  billing-api:
+    build:
+      context: ./services/billing
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DJANGO_SECRET_KEY: <DJANGO_SECRET_KEY_BILLING>
+      DEBUG: "true"
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1"
+      POSTGRES_DB: billing_db
+      POSTGRES_USER: billing_user
+      POSTGRES_PASSWORD: <POSTGRES_PASSWORD_BILLING>
+      POSTGRES_HOST: billing-db
+      POSTGRES_PORT: "5432"
+      POSTGRES_CONN_MAX_AGE: "60"
+    volumes:
+      - ./services/billing:/app
+    ports:
+      - "8001:8000"
+    depends_on:
+      billing-db:
+        condition: service_healthy
+    command: >
+      sh -c "poetry run python manage.py runserver 0.0.0.0:8000"
+
+  patrons-api:
+    build:
+      context: ./services/patrons
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DJANGO_SECRET_KEY: <DJANGO_SECRET_KEY_PATRONS>
+      DEBUG: "true"
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1"
+      POSTGRES_DB: patrons_db
+      POSTGRES_USER: patrons_user
+      POSTGRES_PASSWORD: <POSTGRES_PASSWORD_PATRONS>
+      POSTGRES_HOST: patrons-db
+      POSTGRES_PORT: "5432"
+      POSTGRES_CONN_MAX_AGE: "60"
+    volumes:
+      - ./services/patrons:/app
+    ports:
+      - "8002:8000"
+    depends_on:
+      patrons-db:
+        condition: service_healthy
+    command: >
+      sh -c "poetry run python manage.py runserver 0.0.0.0:8000"
+
+volumes:
+  billing_db_data:
+  patrons_db_data:
