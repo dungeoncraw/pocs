@@ -5,5 +5,6 @@ ThisBuild / scalaVersion := "3.8.1"
 lazy val root = (project in file("."))
   .settings(
     name := "func_examples",
-    idePackagePrefix := Some("com.dungeoncraw.func_examples")
+    idePackagePrefix := Some("com.dungeoncraw.func_examples"),
+    libraryDependencies += "org.scalameta" %% "munit" % "1.2.2" % Test
   )

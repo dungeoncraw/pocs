@@ -10,8 +10,14 @@ trait Encryptable:
 trait Loggable:
   def log(message: String): Unit = println(s"[LOG] $message")
 
-case class UserProfile(id: String, name: String, email: String) extends Resource with Encryptable
-case class SystemConfig(id: String, name: String, value: String) extends Resource with Loggable
+trait Hashable:
+  def hash(data: String): String
+
+case class UserProfile(id: String, name: String, email: String) extends Resource with Encryptable with Hashable:
+  def hash(data: String): String = data.hashCode.toString
+
+case class SystemConfig(id: String, name: String, value: String) extends Resource with Loggable with Hashable:
+  def hash(data: String): String = data.hashCode.toString
 
 case object GlobalRegistry extends Resource:
   val id = "ROOT_001"
@@ -57,3 +63,5 @@ def runSystem(): Unit =
   val names = items.map(_.name.toUpperCase)
   println(s"All resource names: ${names.mkString(", ")}")
 
+  println(s"Hash data for ${user.name}: ${user.hash(user.name)}")
+  println(s"Hash data for ${config.name}: ${config.hash(config.name)}")
