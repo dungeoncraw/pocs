@@ -9,4 +9,4 @@ This repository contains examples and notes from the book "Fluent Python: Clear,
 - [Chapter 3: Dictionaries and Sets](chapter3/)
 
 
-## pages read = 122
+## pages read = 130
