@@ -56,10 +56,9 @@ class UndyingTest extends FunSuite:
       "graves" -> "G-101,G-102,G-103",
       "intensity" -> "high"
     )
-    Undying.performRitual(scroll).map { result =>
-      result match
-        case Left(RitualError.BadFormat("intensity", _)) =>
-        case _ => fail(s"Expected BadFormat for intensity, got $result")
+    Undying.performRitual(scroll).map {
+      case Left(RitualError.BadFormat("intensity", _)) =>
+      case result => fail(s"Expected BadFormat for intensity, got $result")
     }
   }
 
@@ -109,5 +108,46 @@ class UndyingTest extends FunSuite:
     )
     Undying.performRitual(scroll).map { result =>
       assertEquals(result, Left(RitualError.Forbidden("zombie too strong: threat=25")))
+    }
+  }
+
+  test("performRitualAccumulating collects multiple validation errors") {
+    val scroll = Map(
+      "intensity" -> "11"
+    )
+    Undying.performRitualAccumulating(scroll).map {
+      case Left(errors) =>
+        assert(errors.contains(RitualError.Missing("graves")))
+        assert(errors.contains(RitualError.Forbidden("intensity must be 1..10")))
+      case result => fail(s"Expected Left with multiple errors, got $result")
+    }
+  }
+
+  test("performRitualAccumulating collects multiple grave errors") {
+    val scroll = Map(
+      "graves" -> "G-101,G-666,G-777",
+      "intensity" -> "5"
+    )
+    Undying.performRitualAccumulating(scroll).map {
+      case Left(errors) =>
+        assert(errors.contains(RitualError.GraveNotFound(GraveId("G-666"))))
+        assert(errors.contains(RitualError.GraveNotFound(GraveId("G-777"))))
+      case result => fail(s"Expected Left with multiple grave errors, got $result")
+    }
+  }
+
+  test("performRitualAccumulating collects multiple warding/threat errors") {
+    val scroll = Map(
+      "graves" -> "G-101,G-104,G-107",
+      "intensity" -> "10",
+      "moon" -> "blood"
+    )
+    Undying.performRitualAccumulating(scroll).map {
+      case Left(errors) =>
+        assertEquals(errors.size, 3)
+        errors.foreach { err =>
+          assert(err.isInstanceOf[RitualError.Forbidden])
+        }
+      case result => fail(s"Expected Left with multiple warding/threat errors, got $result")
     }
   }
