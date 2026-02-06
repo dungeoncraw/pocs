@@ -1,0 +1,731 @@
+Dockerfile       build.sbt        rust-profile-api target
+README.md        project          src
+../project:
+build.properties target
+../project/target:
+config-classes scala-2.12     streams
+../project/target/config-classes:
+$50cd37243c43799890fc$.class $9bc430b1fb51f88a6026$.class
+$50cd37243c43799890fc.cache  $9bc430b1fb51f88a6026.cache
+$50cd37243c43799890fc.class  $9bc430b1fb51f88a6026.class
+$8eaa9084f9a5e105cf73$.class $f5249e12fae89588f924$.class
+$8eaa9084f9a5e105cf73.cache  $f5249e12fae89588f924.cache
+$8eaa9084f9a5e105cf73.class  $f5249e12fae89588f924.class
+../project/target/scala-2.12:
+sbt-1.0
+../project/target/scala-2.12/sbt-1.0:
+sync   update
+../project/target/scala-2.12/sbt-1.0/sync:
+copy-resource
+../project/target/scala-2.12/sbt-1.0/update:
+update_cache_2.12
+../project/target/scala-2.12/sbt-1.0/update/update_cache_2.12:
+inputs output
+../project/target/streams:
+_global compile runtime
+../project/target/streams/_global:
+_global                  ivyConfiguration         scalaCompilerBridgeScope
+csrConfiguration         ivySbt                   update
+csrProject               moduleSettings
+dependencyPositions      projectDescriptors
+../project/target/streams/_global/_global:
+_global   csrLogger
+../project/target/streams/_global/_global/_global:
+streams
+../project/target/streams/_global/_global/_global/streams:
+out
+../project/target/streams/_global/_global/csrLogger:
+_global
+../project/target/streams/_global/_global/csrLogger/_global:
+streams
+../project/target/streams/_global/_global/csrLogger/_global/streams:
+out
+../project/target/streams/_global/csrConfiguration:
+_global
+../project/target/streams/_global/csrConfiguration/_global:
+streams
+../project/target/streams/_global/csrConfiguration/_global/streams:
+out
+../project/target/streams/_global/csrProject:
+_global
+../project/target/streams/_global/csrProject/_global:
+streams
+../project/target/streams/_global/csrProject/_global/streams:
+out
+../project/target/streams/_global/dependencyPositions:
+_global
+../project/target/streams/_global/dependencyPositions/_global:
+streams
+../project/target/streams/_global/dependencyPositions/_global/streams:
+update_cache_2.12
+../project/target/streams/_global/dependencyPositions/_global/streams/update_cache_2.12:
+input_dsp  output_dsp
+../project/target/streams/_global/ivyConfiguration:
+_global
+../project/target/streams/_global/ivyConfiguration/_global:
+streams
+../project/target/streams/_global/ivyConfiguration/_global/streams:
+out
+../project/target/streams/_global/ivySbt:
+_global
+../project/target/streams/_global/ivySbt/_global:
+streams
+../project/target/streams/_global/ivySbt/_global/streams:
+out
+../project/target/streams/_global/moduleSettings:
+_global
+../project/target/streams/_global/moduleSettings/_global:
+streams
+../project/target/streams/_global/moduleSettings/_global/streams:
+out
+../project/target/streams/_global/projectDescriptors:
+_global
+../project/target/streams/_global/projectDescriptors/_global:
+streams
+../project/target/streams/_global/projectDescriptors/_global/streams:
+out
+../project/target/streams/_global/scalaCompilerBridgeScope:
+_global
+../project/target/streams/_global/scalaCompilerBridgeScope/_global:
+streams
+../project/target/streams/_global/scalaCompilerBridgeScope/_global/streams:
+out
+../project/target/streams/_global/update:
+_global
+../project/target/streams/_global/update/_global:
+streams
+../project/target/streams/_global/update/_global/streams:
+out
+../project/target/streams/compile:
+_global                     externalDependencyClasspath
+bspReporter                 incOptions
+compile                     internalDependencyClasspath
+compileIncremental          managedClasspath
+copyResources               scalacOptions
+dependencyClasspath         unmanagedClasspath
+exportedProducts            unmanagedJars
+../project/target/streams/compile/_global:
+_global
+../project/target/streams/compile/_global/_global:
+compileOutputs        discoveredMainClasses
+../project/target/streams/compile/_global/_global/compileOutputs:
+previous
+../project/target/streams/compile/_global/_global/discoveredMainClasses:
+data
+../project/target/streams/compile/bspReporter:
+_global
+../project/target/streams/compile/bspReporter/_global:
+streams
+../project/target/streams/compile/bspReporter/_global/streams:
+out
+../project/target/streams/compile/compile:
+_global
+../project/target/streams/compile/compile/_global:
+streams
+../project/target/streams/compile/compile/_global/streams:
+out
+../project/target/streams/compile/compileIncremental:
+_global
+../project/target/streams/compile/compileIncremental/_global:
+streams
+../project/target/streams/compile/compileIncremental/_global/streams:
+export out
+../project/target/streams/compile/copyResources:
+_global
+../project/target/streams/compile/copyResources/_global:
+streams
+../project/target/streams/compile/copyResources/_global/streams:
+out
+../project/target/streams/compile/dependencyClasspath:
+_global
+../project/target/streams/compile/dependencyClasspath/_global:
+streams
+../project/target/streams/compile/dependencyClasspath/_global/streams:
+export
+../project/target/streams/compile/exportedProducts:
+_global
+../project/target/streams/compile/exportedProducts/_global:
+streams
+../project/target/streams/compile/exportedProducts/_global/streams:
+export
+../project/target/streams/compile/externalDependencyClasspath:
+_global
+../project/target/streams/compile/externalDependencyClasspath/_global:
+streams
+../project/target/streams/compile/externalDependencyClasspath/_global/streams:
+export
+../project/target/streams/compile/incOptions:
+_global
+../project/target/streams/compile/incOptions/_global:
+streams
+../project/target/streams/compile/incOptions/_global/streams:
+out
+../project/target/streams/compile/internalDependencyClasspath:
+_global
+../project/target/streams/compile/internalDependencyClasspath/_global:
+streams
+../project/target/streams/compile/internalDependencyClasspath/_global/streams:
+export out
+../project/target/streams/compile/managedClasspath:
+_global
+../project/target/streams/compile/managedClasspath/_global:
+streams
+../project/target/streams/compile/managedClasspath/_global/streams:
+export
+../project/target/streams/compile/scalacOptions:
+_global
+../project/target/streams/compile/scalacOptions/_global:
+streams
+../project/target/streams/compile/scalacOptions/_global/streams:
+out
+../project/target/streams/compile/unmanagedClasspath:
+_global
+../project/target/streams/compile/unmanagedClasspath/_global:
+streams
+../project/target/streams/compile/unmanagedClasspath/_global/streams:
+export out
+../project/target/streams/compile/unmanagedJars:
+_global
+../project/target/streams/compile/unmanagedJars/_global:
+streams
+../project/target/streams/compile/unmanagedJars/_global/streams:
+export
+../project/target/streams/runtime:
+dependencyClasspath         internalDependencyClasspath
+exportedProducts            managedClasspath
+externalDependencyClasspath unmanagedClasspath
+fullClasspath               unmanagedJars
+../project/target/streams/runtime/dependencyClasspath:
+_global
+../project/target/streams/runtime/dependencyClasspath/_global:
+streams
+../project/target/streams/runtime/dependencyClasspath/_global/streams:
+export
+../project/target/streams/runtime/exportedProducts:
+_global
+../project/target/streams/runtime/exportedProducts/_global:
+streams
+../project/target/streams/runtime/exportedProducts/_global/streams:
+export
+../project/target/streams/runtime/externalDependencyClasspath:
+_global
+../project/target/streams/runtime/externalDependencyClasspath/_global:
+streams
+../project/target/streams/runtime/externalDependencyClasspath/_global/streams:
+export
+../project/target/streams/runtime/fullClasspath:
+_global
+../project/target/streams/runtime/fullClasspath/_global:
+streams
+../project/target/streams/runtime/fullClasspath/_global/streams:
+export
+../project/target/streams/runtime/internalDependencyClasspath:
+_global
+../project/target/streams/runtime/internalDependencyClasspath/_global:
+streams
+../project/target/streams/runtime/internalDependencyClasspath/_global/streams:
+export out
+../project/target/streams/runtime/managedClasspath:
+_global
+../project/target/streams/runtime/managedClasspath/_global:
+streams
+../project/target/streams/runtime/managedClasspath/_global/streams:
+export
+../project/target/streams/runtime/unmanagedClasspath:
+_global
+../project/target/streams/runtime/unmanagedClasspath/_global:
+streams
+../project/target/streams/runtime/unmanagedClasspath/_global/streams:
+export out
+../project/target/streams/runtime/unmanagedJars:
+_global
+../project/target/streams/runtime/unmanagedJars/_global:
+streams
+../project/target/streams/runtime/unmanagedJars/_global/streams:
+export
+../rust-profile-api:
+Cargo.toml         docker-compose.yml rust-profile-api   src
+../rust-profile-api/rust-profile-api:
+Cargo.toml Dockerfile src
+../rust-profile-api/rust-profile-api/src:
+main.rs
+../rust-profile-api/src:
+main.rs
+../src:
+main test
+../src/main:
+scala
+../src/main/scala:
+com        main.scala
+../src/main/scala/com:
+induction
+../src/main/scala/com/induction:
+sdk
+../src/main/scala/com/induction/sdk:
+InductionSDK.scala models.scala       services.scala
+../src/test:
+scala
+../src/test/scala:
+com
+../src/test/scala/com:
+induction
+../src/test/scala/com/induction:
+sdk
+../src/test/scala/com/induction/sdk:
+InductionSDKTest.scala
+../target:
+bg-jobs             scala-3.8.1         task-temp-directory
+global-logging      streams             test-reports
+../target/bg-jobs:
+../target/global-logging:
+../target/scala-3.8.1:
+classes                  test-classes             update
+sdk_3-0.1.0-SNAPSHOT.jar test-sync                zinc
+sync                     test-zinc
+../target/scala-3.8.1/classes:
+com                        main$package.tasty
+main$package$$anon$1.class main.class
+main$package$.class        main.tasty
+main$package.class
+../target/scala-3.8.1/classes/com:
+induction
+../target/scala-3.8.1/classes/com/induction:
+sdk
+../target/scala-3.8.1/classes/com/induction/sdk:
+Action$$anon$5.class         Profile$.class
+Action$.class                Profile.class
+Action.class                 Profile.tasty
+Action.tasty                 ProfileFetcher.class
+Environment$.class           ProfileFetcher.tasty
+Environment.class            SimpleRequestMetadata$.class
+Environment.tasty            SimpleRequestMetadata.class
+HttpProfileFetcher.class     SimpleRequestMetadata.tasty
+HttpProfileFetcher.tasty     Transformation$$anon$1.class
+InductionSDK.class           Transformation$$anon$2.class
+InductionSDK.tasty           Transformation$.class
+Profile$$anon$3.class        Transformation.class
+Profile$$anon$4.class        Transformation.tasty
+../target/scala-3.8.1/sync:
+copy-resource
+../target/scala-3.8.1/test-classes:
+com
+../target/scala-3.8.1/test-classes/com:
+induction
+../target/scala-3.8.1/test-classes/com/induction:
+sdk
+../target/scala-3.8.1/test-classes/com/induction/sdk:
+InductionSDKTest$MockFetcher.class InductionSDKTest.tasty
+InductionSDKTest.class
+../target/scala-3.8.1/test-sync:
+copy-resource
+../target/scala-3.8.1/test-zinc:
+inc_compile_3.zip
+../target/scala-3.8.1/update:
+update_cache_3
+../target/scala-3.8.1/update/update_cache_3:
+inputs output
+../target/scala-3.8.1/zinc:
+inc_compile_3.zip
+../target/streams:
+_global compile runtime test
+../target/streams/_global:
+_global                  ivyConfiguration         scalaCompilerBridgeScope
+csrConfiguration         ivySbt                   update
+csrProject               moduleSettings           updateClassifiers
+dependencyPositions      projectDescriptors
+../target/streams/_global/_global:
+_global       csrLogger     dumpStructure
+../target/streams/_global/_global/_global:
+streams
+../target/streams/_global/_global/_global/streams:
+out
+../target/streams/_global/_global/csrLogger:
+_global
+../target/streams/_global/_global/csrLogger/_global:
+streams
+../target/streams/_global/_global/csrLogger/_global/streams:
+out
+../target/streams/_global/_global/dumpStructure:
+_global
+../target/streams/_global/_global/dumpStructure/_global:
+streams
+../target/streams/_global/_global/dumpStructure/_global/streams:
+out
+../target/streams/_global/csrConfiguration:
+_global
+../target/streams/_global/csrConfiguration/_global:
+streams
+../target/streams/_global/csrConfiguration/_global/streams:
+out
+../target/streams/_global/csrProject:
+_global
+../target/streams/_global/csrProject/_global:
+streams
+../target/streams/_global/csrProject/_global/streams:
+out
+../target/streams/_global/dependencyPositions:
+_global
+../target/streams/_global/dependencyPositions/_global:
+streams
+../target/streams/_global/dependencyPositions/_global/streams:
+update_cache_3
+../target/streams/_global/dependencyPositions/_global/streams/update_cache_3:
+input_dsp  output_dsp
+../target/streams/_global/ivyConfiguration:
+_global
+../target/streams/_global/ivyConfiguration/_global:
+streams
+../target/streams/_global/ivyConfiguration/_global/streams:
+out
+../target/streams/_global/ivySbt:
+_global
+../target/streams/_global/ivySbt/_global:
+streams
+../target/streams/_global/ivySbt/_global/streams:
+out
+../target/streams/_global/moduleSettings:
+_global
+../target/streams/_global/moduleSettings/_global:
+streams
+../target/streams/_global/moduleSettings/_global/streams:
+out
+../target/streams/_global/projectDescriptors:
+_global
+../target/streams/_global/projectDescriptors/_global:
+streams
+../target/streams/_global/projectDescriptors/_global/streams:
+out
+../target/streams/_global/scalaCompilerBridgeScope:
+_global
+../target/streams/_global/scalaCompilerBridgeScope/_global:
+streams
+../target/streams/_global/scalaCompilerBridgeScope/_global/streams:
+out
+../target/streams/_global/update:
+_global
+../target/streams/_global/update/_global:
+streams
+../target/streams/_global/update/_global/streams:
+out
+../target/streams/_global/updateClassifiers:
+_global
+../target/streams/_global/updateClassifiers/_global:
+streams
+../target/streams/_global/updateClassifiers/_global/streams:
+out            update_cache_3
+../target/streams/_global/updateClassifiers/_global/streams/update_cache_3:
+inputs output
+../target/streams/compile:
+_global                     incOptions
+bspReporter                 internalDependencyClasspath
+compile                     mainClass
+compileIncremental          managedClasspath
+copyResources               packageBin
+dependencyClasspath         scalacOptions
+exportedProductJars         unmanagedClasspath
+exportedProducts            unmanagedJars
+externalDependencyClasspath
+../target/streams/compile/_global:
+_global
+../target/streams/compile/_global/_global:
+compileOutputs        discoveredMainClasses
+../target/streams/compile/_global/_global/compileOutputs:
+previous
+../target/streams/compile/_global/_global/discoveredMainClasses:
+data
+../target/streams/compile/bspReporter:
+_global
+../target/streams/compile/bspReporter/_global:
+streams
+../target/streams/compile/bspReporter/_global/streams:
+out
+../target/streams/compile/compile:
+_global
+../target/streams/compile/compile/_global:
+streams
+../target/streams/compile/compile/_global/streams:
+out
+../target/streams/compile/compileIncremental:
+_global
+../target/streams/compile/compileIncremental/_global:
+streams
+../target/streams/compile/compileIncremental/_global/streams:
+export out
+../target/streams/compile/copyResources:
+_global
+../target/streams/compile/copyResources/_global:
+streams
+../target/streams/compile/copyResources/_global/streams:
+out
+../target/streams/compile/dependencyClasspath:
+_global
+../target/streams/compile/dependencyClasspath/_global:
+streams
+../target/streams/compile/dependencyClasspath/_global/streams:
+export
+../target/streams/compile/exportedProductJars:
+_global
+../target/streams/compile/exportedProductJars/_global:
+streams
+../target/streams/compile/exportedProductJars/_global/streams:
+export
+../target/streams/compile/exportedProducts:
+_global
+../target/streams/compile/exportedProducts/_global:
+streams
+../target/streams/compile/exportedProducts/_global/streams:
+export
+../target/streams/compile/externalDependencyClasspath:
+_global
+../target/streams/compile/externalDependencyClasspath/_global:
+streams
+../target/streams/compile/externalDependencyClasspath/_global/streams:
+export
+../target/streams/compile/incOptions:
+_global
+../target/streams/compile/incOptions/_global:
+streams
+../target/streams/compile/incOptions/_global/streams:
+out
+../target/streams/compile/internalDependencyClasspath:
+_global
+../target/streams/compile/internalDependencyClasspath/_global:
+streams
+../target/streams/compile/internalDependencyClasspath/_global/streams:
+export out
+../target/streams/compile/mainClass:
+_global
+../target/streams/compile/mainClass/_global:
+streams
+../target/streams/compile/mainClass/_global/streams:
+out
+../target/streams/compile/managedClasspath:
+_global
+../target/streams/compile/managedClasspath/_global:
+streams
+../target/streams/compile/managedClasspath/_global/streams:
+export
+../target/streams/compile/packageBin:
+_global
+../target/streams/compile/packageBin/_global:
+streams
+../target/streams/compile/packageBin/_global/streams:
+inputs out    output
+../target/streams/compile/scalacOptions:
+_global
+../target/streams/compile/scalacOptions/_global:
+streams
+../target/streams/compile/scalacOptions/_global/streams:
+out
+../target/streams/compile/unmanagedClasspath:
+_global
+../target/streams/compile/unmanagedClasspath/_global:
+streams
+../target/streams/compile/unmanagedClasspath/_global/streams:
+export out
+../target/streams/compile/unmanagedJars:
+_global
+../target/streams/compile/unmanagedJars/_global:
+streams
+../target/streams/compile/unmanagedJars/_global/streams:
+export
+../target/streams/runtime:
+dependencyClasspathAsJars   internalDependencyAsJars
+exportedProductJars         managedClasspath
+exportedProducts            unmanagedClasspath
+externalDependencyClasspath unmanagedJars
+fullClasspathAsJars
+../target/streams/runtime/dependencyClasspathAsJars:
+_global
+../target/streams/runtime/dependencyClasspathAsJars/_global:
+streams
+../target/streams/runtime/dependencyClasspathAsJars/_global/streams:
+export
+../target/streams/runtime/exportedProductJars:
+_global
+../target/streams/runtime/exportedProductJars/_global:
+streams
+../target/streams/runtime/exportedProductJars/_global/streams:
+export
+../target/streams/runtime/exportedProducts:
+_global
+../target/streams/runtime/exportedProducts/_global:
+streams
+../target/streams/runtime/exportedProducts/_global/streams:
+export
+../target/streams/runtime/externalDependencyClasspath:
+_global
+../target/streams/runtime/externalDependencyClasspath/_global:
+streams
+../target/streams/runtime/externalDependencyClasspath/_global/streams:
+export
+../target/streams/runtime/fullClasspathAsJars:
+_global
+../target/streams/runtime/fullClasspathAsJars/_global:
+streams
+../target/streams/runtime/fullClasspathAsJars/_global/streams:
+export
+../target/streams/runtime/internalDependencyAsJars:
+_global
+../target/streams/runtime/internalDependencyAsJars/_global:
+streams
+../target/streams/runtime/internalDependencyAsJars/_global/streams:
+export out
+../target/streams/runtime/managedClasspath:
+_global
+../target/streams/runtime/managedClasspath/_global:
+streams
+../target/streams/runtime/managedClasspath/_global/streams:
+export
+../target/streams/runtime/unmanagedClasspath:
+_global
+../target/streams/runtime/unmanagedClasspath/_global:
+streams
+../target/streams/runtime/unmanagedClasspath/_global/streams:
+export out
+../target/streams/runtime/unmanagedJars:
+_global
+../target/streams/runtime/unmanagedJars/_global:
+streams
+../target/streams/runtime/unmanagedJars/_global/streams:
+export
+../target/streams/test:
+_global                     incOptions
+bspReporter                 internalDependencyClasspath
+compile                     loadedTestFrameworks
+compileIncremental          managedClasspath
+copyResources               scalacOptions
+definedTests                test
+dependencyClasspath         testListeners
+exportedProducts            unmanagedClasspath
+externalDependencyClasspath unmanagedJars
+fullClasspath
+../target/streams/test/_global:
+_global
+../target/streams/test/_global/_global:
+compileOutputs           dependencyClasspathFiles
+definedTestNames         discoveredMainClasses
+../target/streams/test/_global/_global/compileOutputs:
+previous
+../target/streams/test/_global/_global/definedTestNames:
+data
+../target/streams/test/_global/_global/dependencyClasspathFiles:
+previous
+../target/streams/test/_global/_global/discoveredMainClasses:
+data
+../target/streams/test/bspReporter:
+_global
+../target/streams/test/bspReporter/_global:
+streams
+../target/streams/test/bspReporter/_global/streams:
+out
+../target/streams/test/compile:
+_global
+../target/streams/test/compile/_global:
+streams
+../target/streams/test/compile/_global/streams:
+out
+../target/streams/test/compileIncremental:
+_global
+../target/streams/test/compileIncremental/_global:
+streams
+../target/streams/test/compileIncremental/_global/streams:
+export out
+../target/streams/test/copyResources:
+_global
+../target/streams/test/copyResources/_global:
+streams
+../target/streams/test/copyResources/_global/streams:
+out
+../target/streams/test/definedTests:
+_global
+../target/streams/test/definedTests/_global:
+streams
+../target/streams/test/definedTests/_global/streams:
+out
+../target/streams/test/dependencyClasspath:
+_global
+../target/streams/test/dependencyClasspath/_global:
+streams
+../target/streams/test/dependencyClasspath/_global/streams:
+export
+../target/streams/test/exportedProducts:
+_global
+../target/streams/test/exportedProducts/_global:
+streams
+../target/streams/test/exportedProducts/_global/streams:
+export
+../target/streams/test/externalDependencyClasspath:
+_global
+../target/streams/test/externalDependencyClasspath/_global:
+streams
+../target/streams/test/externalDependencyClasspath/_global/streams:
+export
+../target/streams/test/fullClasspath:
+_global
+../target/streams/test/fullClasspath/_global:
+streams
+../target/streams/test/fullClasspath/_global/streams:
+export
+../target/streams/test/incOptions:
+_global
+../target/streams/test/incOptions/_global:
+streams
+../target/streams/test/incOptions/_global/streams:
+out
+../target/streams/test/internalDependencyClasspath:
+_global
+../target/streams/test/internalDependencyClasspath/_global:
+streams
+../target/streams/test/internalDependencyClasspath/_global/streams:
+export out
+../target/streams/test/loadedTestFrameworks:
+_global
+../target/streams/test/loadedTestFrameworks/_global:
+streams
+../target/streams/test/loadedTestFrameworks/_global/streams:
+out
+../target/streams/test/managedClasspath:
+_global
+../target/streams/test/managedClasspath/_global:
+streams
+../target/streams/test/managedClasspath/_global/streams:
+export
+../target/streams/test/scalacOptions:
+_global
+../target/streams/test/scalacOptions/_global:
+streams
+../target/streams/test/scalacOptions/_global/streams:
+out
+../target/streams/test/test:
+_global
+isModule=false name=com.induction.sdk.InductionSDKTest
+../target/streams/test/test/_global:
+streams
+../target/streams/test/test/_global/streams:
+out             succeeded_tests
+../target/streams/test/test/isModule=false name=com.induction.sdk.InductionSDKTest:
+test
+../target/streams/test/test/isModule=false name=com.induction.sdk.InductionSDKTest/test:
+out
+../target/streams/test/testListeners:
+_global
+../target/streams/test/testListeners/_global:
+streams
+../target/streams/test/testListeners/_global/streams:
+out
+../target/streams/test/unmanagedClasspath:
+_global
+../target/streams/test/unmanagedClasspath/_global:
+streams
+../target/streams/test/unmanagedClasspath/_global/streams:
+export out
+../target/streams/test/unmanagedJars:
+_global
+../target/streams/test/unmanagedJars/_global:
+streams
+../target/streams/test/unmanagedJars/_global/streams:
+export
+../target/task-temp-directory:
+../target/test-reports:
+TEST-com.induction.sdk.InductionSDKTest.xml

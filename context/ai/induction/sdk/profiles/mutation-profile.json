@@ -1,0 +1,10 @@
+{
+  "id": "mutation-profile",
+  "action": "Mutate",
+  "mutations": [
+    {
+      "field": "status",
+      "value": "INDUCED_SUCCESS"
+    }
+  ]
+}

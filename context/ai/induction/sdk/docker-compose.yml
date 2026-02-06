@@ -1,0 +1,34 @@
+services:
+  profile-api:
+    build:
+      context: ./rust-profile-api
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/profiles/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  sdk-app:
+    build:
+      context: .
+    environment:
+      - PROFILE_SERVER_URL=http://profile-api:3000
+      - APP_ENV=dev
+    depends_on:
+      profile-api:
+        condition: service_started
+
+  bun-server:
+    build:
+      context: ./bun-server
+    ports:
+      - "4000:4000"
+    environment:
+      - PROFILE_SERVER_URL=http://profile-api:3000
+      - APP_ENV=dev
+    depends_on:
+      profile-api:
+        condition: service_started
