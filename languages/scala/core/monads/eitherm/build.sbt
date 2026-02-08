@@ -4,5 +4,6 @@ ThisBuild / scalaVersion := "3.8.1"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "eitherm"
+    name := "eitherm",
+    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.18.0"
   )

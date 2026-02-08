@@ -1,4 +1,20 @@
+import org.scalacheck.Properties
+import org.scalacheck.Prop.{forAll, propBoolean}
+
 final case class User(name: String, age: Int)
+
+object UserCheck extends Properties("User"):
+  property("makeUser success") = forAll { (name: String, age: Int) =>
+    (name.trim.nonEmpty && age >= 0) ==> {
+      val result = makeUser(name, age.toString)
+      result.isRight && result.exists(_.name == name.trim) && result.exists(_.age == age)
+    }
+  }
+
+def demoScalaCheck(): Unit =
+  println("=== ScalaCheck example ===")
+  UserCheck.check()
+  println()
 
 def parseInt(s: String): Either[String, Int] =
   // to intOption don't throw error, return None if not an int
@@ -45,6 +61,7 @@ def main(): Unit = {
   println("=== Either monad: examples ===\n")
   demoFailFast()
   demoExceptionsEither()
+  demoScalaCheck()
   println("Done.")
 }
 
