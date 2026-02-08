@@ -56,12 +56,14 @@ source = { virtual = "." }
 dependencies = [
     { name = "numpy" },
     { name = "procedure" },
+    { name = "pyuca" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy", specifier = ">=2.4.1" },
     { name = "procedure", specifier = ">=0.0.3" },
+    { name = "pyuca", specifier = ">=1.2" },
 ]
 
 [[package]]
@@ -154,6 +156,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/d7/9c/e8dd58ec2ff774454abc4e41e4331f78c668c3585178f3a201abdb3b9450/procedure-0.0.3.tar.gz", hash = "sha256:e06d73e9ab465baad052b1fa85d8abcd51071534fdcd685ca7f88aafc0dcaeb8", size = 3762, upload-time = "2020-04-07T10:07:47.687Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/51/50/6a07a1d63090593ccde790abb341457fdfa3dbff4086f0f7bea8e7c020fa/procedure-0.0.3-py3-none-any.whl", hash = "sha256:4f366c368cb95e23472006c6b13c16520d4e598a9e6152563bb25cefbf6d2d1a", size = 4988, upload-time = "2020-04-07T10:07:46.772Z" },
+]
+
+[[package]]
+name = "pyuca"
+version = "1.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/30/32/95beca7e3308581c6da4735c7102b0c0cbb30a6b863cc1a8e44e6d2f5c3c/pyuca-1.2.tar.gz", hash = "sha256:8a382fe74627f08c0d18908c0713ca4a20aad5385f077579e56208beea2893b2", size = 1398641, upload-time = "2017-09-25T23:12:12.163Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/98/88/aeeee34d88f841aca712a8c18fbd62a33eaad8f2dbe535e87f3c829b02f9/pyuca-1.2-py2.py3-none-any.whl", hash = "sha256:abaa12e1bd2c7c68ca8396ff8383bc0654a739cef3ae68fd7af58bf29af0a91e", size = 1464896, upload-time = "2017-09-25T23:12:15.67Z" },
 ]
 
 [[package]]

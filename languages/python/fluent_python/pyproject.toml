@@ -6,4 +6,5 @@ requires-python = ">=3.14"
 dependencies = [
     "numpy>=2.4.1",
     "procedure>=0.0.3",
+    "pyuca>=1.2",
 ]
