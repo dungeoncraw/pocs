@@ -4,5 +4,7 @@ ThisBuild / scalaVersion := "3.8.1"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "cardoso"
+    name := "cardoso",
+    libraryDependencies += "org.scalameta" %% "munit" % "1.0.0" % Test,
+    Test / fork := true
   )
