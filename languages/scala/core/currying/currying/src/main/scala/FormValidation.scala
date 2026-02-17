@@ -1,6 +1,6 @@
 object FormValidation {
 
-  type Validator = String => Either[String, String]
+  private type Validator = String => Either[String, String]
 
   def validateField(fieldName: String)(rule: String => Boolean)(errorMessage: String): Validator = {
     (value: String) =>
@@ -12,8 +12,8 @@ object FormValidation {
   val minLength: Int => String => Boolean = min => _.length >= min
   val isEmail: String => Boolean = _.contains("@")
 
-  val validateUsername = validateField("Username")(minLength(3))("must be at least 3 characters long")
-  val validateEmail = validateField("Email")(isEmail)("must be a valid email address")
+  val validateUsername: Validator = validateField("Username")(minLength(3))("must be at least 3 characters long")
+  val validateEmail: Validator = validateField("Email")(isEmail)("must be a valid email address")
 
   def runExample(): Unit = {
     println("--- Multi-step Form Validation using Currying ---")
