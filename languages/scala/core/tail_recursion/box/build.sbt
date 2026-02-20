@@ -4,6 +4,5 @@ ThisBuild / scalaVersion := "3.8.1"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "time-machine",
-    libraryDependencies += "org.scalameta" %% "munit" % "1.0.0" % Test
+    name := "box"
   )
