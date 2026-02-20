@@ -24,8 +24,33 @@ struct Complex(Writable):
         else:
             writer.write(self.real, "+", self.imag, "i")
 
+    fn __add__(self, other: Self) -> Self:
+        """Adds two complex numbers."""
+        return Complex(self.real + other.real, self.imag + other.imag)
 
-fn main():
+    fn __sub__(self, other: Self) -> Self:
+        """Subtracts two complex numbers."""
+        return Complex(self.real - other.real, self.imag - other.imag)
+
+    fn __mul__(self, other: Self) -> Self:
+        """Multiplies two complex numbers."""
+        return Complex(
+            self.real * other.real - self.imag * other.imag,
+            self.real * other.imag + self.imag * other.real,
+        )
+
+    fn __truediv__(self, other: Self) raises -> Self:
+        """Divides two complex numbers."""
+        var denominator: Float64 = other.real * other.real + other.imag * other.imag
+        if denominator == 0:
+            raise Error("Cannot divide by zero in complex division.")
+        return Complex(
+            (self.real * other.real + self.imag * other.imag) / denominator,
+            (self.imag * other.real - self.real * other.imag) / denominator,
+        )
+
+
+fn main() raises:
     var c1 = Complex(3.0, 4.0)
     var c2 = Complex(1.0, -2.0)
     var c3 = Complex()
@@ -33,3 +58,13 @@ fn main():
     print("Complex number c1:", c1)
     print("Complex number c2:", c2)
     print("Complex number c3:", c3)
+
+    print("c1 + c2 =", c1 + c2)
+    print("c1 - c2 =", c1 - c2)
+    print("c1 * c2 =", c1 * c2)
+    print("c1 / c2 =", c1 / c2)
+
+    print("c1 + c3 =", c1 + c3)
+    print("c1 - c3 =", c1 - c3)
+    print("c1 * c3 =", c1 * c3)
+    print("c1 / c3 =:", c1 / c3)
