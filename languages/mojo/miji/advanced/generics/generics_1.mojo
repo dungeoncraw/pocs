@@ -5,11 +5,15 @@ trait Animal:
     def speech(self) -> String:
         ...
 
+trait Talkative:
+    def greet(self) -> None:
+        print("Hello!")
+
 trait Measurable:
     def length(self) -> Int:
         ...
 
-struct Cat(Animal, Measurable):
+struct Cat(Animal, Measurable, Talkative):
     var name: String
     var food: String
 
@@ -25,7 +29,7 @@ struct Cat(Animal, Measurable):
     def length(self) -> Int:
         return len(self.name)
 
-struct Bird(Animal, Measurable):
+struct Bird(Animal, Measurable, Talkative):
     var name: String
     var food: String
 
@@ -43,7 +47,7 @@ struct Bird(Animal, Measurable):
         return len(self.food)
 
 struct Human(
-    Animal, Measurable
+    Animal, Measurable, Talkative
 ):
     var name: String
     var food: String
@@ -61,6 +65,13 @@ struct Human(
     def length(self) -> Int:
         return len(self.name) + len(self.food)
 
+    def greet(self) -> None:
+        print(
+            "Hello! I am {}, I am a talkative person. I can say more than just"
+            " hello and I love talking about food and weather. My favorite food"
+            " is {}, a pan-fried baozi which is popular in Shanghai and Suzhou."
+            .format(self.name, self.food)
+        )
 
 def who_says_what[T: Animal & Measurable](animal: T):
     """
@@ -92,3 +103,7 @@ def main():
     who_says_what(saku)
     who_says_what(bili)
     who_says_what(yuhao)
+
+    saku.greet()
+    bili.greet()
+    yuhao.greet()
