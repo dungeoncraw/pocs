@@ -7,6 +7,7 @@ import org.springframework.context.annotation.{Bean, Configuration, ComponentSca
 class AppConfig {
   @Bean
   def messageService(): MessageService = {
+    // this is setter injection, so all the configuration is done before the service is created
     val service = new MessageService()
     service.setMessage("Hello from Setter!")
     service
