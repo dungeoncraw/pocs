@@ -1,0 +1,4 @@
+Email,Clicks,Opens,Nome,Sobrenome,Endereço,Telefone,Rating,"Last changed"
+test1@example.com,1,1,John,Doe,Street 1,123456789,5,"2026-03-09"
+test2@example.com,2,2,Jane,Smith,Street 2,987654321,4,"2026-03-09"
+test1@example.com,0,0,John,Duplicate,Street 1,123456789,3,"2026-03-08"
