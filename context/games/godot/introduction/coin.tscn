@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b6td4esom88lp"]
+
+[ext_resource type="Texture2D" uid="uid://dd57nkasxjaeu" path="res://Sprites/Coin.png" id="1_d5gmh"]
+
+[node name="Coin" type="Sprite2D" unique_id=227811215]
+modulate = Color(1, 0, 0.41960785, 1)
+texture = ExtResource("1_d5gmh")
