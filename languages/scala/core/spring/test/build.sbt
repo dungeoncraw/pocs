@@ -11,6 +11,7 @@ lazy val root = (project in file("."))
       "org.springframework.boot" % "spring-boot-starter-web" % springBootVersion,
       "org.springframework.boot" % "spring-boot-starter-test" % springBootVersion % Test,
       "org.springframework.boot" % "spring-boot-starter-webflux" % springBootVersion % Test,
-      "com.github.sbt" % "junit-interface" % "0.13.3" % Test
+      "com.github.sbt" % "junit-interface" % "0.13.3" % Test,
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.18.2"
     )
   )
