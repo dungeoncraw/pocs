@@ -1,0 +1,12 @@
+[workspace]
+authors = ["Thiago Nascimento <dungeoncraw@gmail.com>"]
+channels = ["https://conda.modular.com/max-nightly", "conda-forge"]
+name = "matrix"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+max = "*"
+mojo = ">=0.26.3.0.dev2026031305,<0.27"
