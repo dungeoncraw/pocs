@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c8cxmddlgptse"]
+
+[ext_resource type="Material" uid="uid://dtn5kpylyp04y" path="res://Material/first_material.tres" id="1_g22v7"]
+[ext_resource type="Material" uid="uid://brqh381aeaxo0" path="res://Material/second_material.tres" id="1_mac0m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_linea"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_g22v7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_linea"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mac0m"]
+
+[node name="Node3D" type="Node3D" unique_id=1111948142]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=940002693]
+transform = Transform3D(-0.0070572654, 0.33811095, -8.030915, -0.14447984, -0.031046271, 0.391475, -0.00029880553, 7.0253496, 0.38823485, 1.0320725, -0.88101864, -0.0924325)
+mesh = SubResource("BoxMesh_linea")
+
+[node name="Snow" type="Node3D" parent="." unique_id=1752219372]
+
+[node name="torso" type="MeshInstance3D" parent="Snow" unique_id=1240350546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015661478, 0.91478, 0.026707828)
+material_override = ExtResource("1_mac0m")
+mesh = SubResource("SphereMesh_g22v7")
+
+[node name="body" type="MeshInstance3D" parent="Snow" unique_id=1688189986]
+transform = Transform3D(1.4410988, 0, 0, 0, 1.1895919, 0, 0, 0, 1.4092106, 0, 0, 0)
+material_override = ExtResource("1_g22v7")
+mesh = SubResource("SphereMesh_linea")
+
+[node name="head" type="MeshInstance3D" parent="Snow" unique_id=1948670555]
+transform = Transform3D(0.6769211, 0, 0, 0, 0.6633912, 0, 0, 0, 0.65769035, 0, 1.6827486, 0)
+material_override = ExtResource("1_g22v7")
+mesh = SubResource("SphereMesh_mac0m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1238244121]
+transform = Transform3D(0.9943639, 0.091710374, 0.053194735, -0.10229024, 0.69794613, 0.70880735, 0.027877929, -0.7102537, 0.7033935, 0, 2.886995, 3.8672326)
+light_color = Color(1, 1, 0.20784314, 1)
+light_energy = 2.663
+shadow_enabled = true

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://d2fvrdr0mq0w7"]
+
+[ext_resource type="Material" uid="uid://brqh381aeaxo0" path="res://Material/second_material.tres" id="1_pmb3s"]
+[ext_resource type="Material" uid="uid://dtn5kpylyp04y" path="res://Material/first_material.tres" id="2_rcqr8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_linea"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_g22v7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_linea"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mac0m"]
+
+[node name="Node3D" type="Node3D" unique_id=1111948142]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=940002693]
+transform = Transform3D(-0.0070572654, 0.33811095, -8.030915, -0.14447984, -0.031046271, 0.391475, -0.00029880553, 7.0253496, 0.38823485, 1.0320725, -0.88101864, -0.0924325)
+mesh = SubResource("BoxMesh_linea")
+
+[node name="Snow" type="Node3D" parent="." unique_id=1752219372]
+
+[node name="torso" type="MeshInstance3D" parent="Snow" unique_id=1240350546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015661478, 0.91478, 0.026707828)
+material_override = ExtResource("1_pmb3s")
+mesh = SubResource("SphereMesh_g22v7")
+
+[node name="body" type="MeshInstance3D" parent="Snow" unique_id=1688189986]
+transform = Transform3D(1.4410988, 0, 0, 0, 1.1895919, 0, 0, 0, 1.4092106, 0, 0, 0)
+material_override = ExtResource("2_rcqr8")
+mesh = SubResource("SphereMesh_linea")
+
+[node name="head" type="MeshInstance3D" parent="Snow" unique_id=1948670555]
+transform = Transform3D(0.6769211, 0, 0, 0, 0.6633912, 0, 0, 0, 0.65769035, 0, 1.6827486, 0)
+material_override = ExtResource("2_rcqr8")
+mesh = SubResource("SphereMesh_mac0m")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=561543353]
+transform = Transform3D(0.98408026, -0.16371284, 0.069166385, 0.116743565, 0.88889915, 0.44297767, -0.13400309, -0.42785087, 0.8938607, 0.37488508, 1.3784823, 3.253827)
+light_color = Color(0.101960786, 1, 0, 1)
+light_energy = 6.782
+spot_range = 4.0808725
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=384243381]
+transform = Transform3D(1, 0, 0, 0, 0.84518725, 0.5344703, 0, -0.5344703, 0.84518725, 0, 2.2574587, 3.1538107)
+fov = 55.9

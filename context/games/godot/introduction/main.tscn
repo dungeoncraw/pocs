@@ -20,3 +20,7 @@ position = Vector2(649, 397)
 
 [node name="Coin4" parent="." unique_id=1168459658 instance=ExtResource("2_0xm2m")]
 position = Vector2(520, 278)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1119262652]
+position = Vector2(484, 416)
+zoom = Vector2(2, 2)
