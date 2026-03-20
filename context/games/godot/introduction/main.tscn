@@ -1,26 +1,50 @@
-[gd_scene format=3 uid="uid://b8krkx5hebsev"]
+[gd_scene format=3 uid="uid://d36rx8hi2pqev"]
 
+[ext_resource type="Script" uid="uid://bfaimikwf1rbs" path="res://Scripts/player.gd" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://2ckko5g85suu" path="res://Sprites/Player.png" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://b6td4esom88lp" path="res://coin.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bi02ruy7al1vo" path="res://Scene/collectable_coin.tscn" id="3_h2yge"]
 
-[node name="Main" type="Node2D" unique_id=1877362526]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(66, 92)
 
-[node name="Player" type="Sprite2D" parent="." unique_id=619551553]
-position = Vector2(500, 500)
+[node name="Main" type="Node2D" unique_id=659081781]
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=7628225]
+position = Vector2(594, 388)
+script = ExtResource("1_0xm2m")
+
+[node name="Sprite" type="Sprite2D" parent="Player" unique_id=1081478656]
 texture = ExtResource("1_ig7tw")
 
-[node name="Coin" parent="." unique_id=227811215 instance=ExtResource("2_0xm2m")]
-position = Vector2(317, 339)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=2109919842]
+shape = SubResource("RectangleShape2D_ig7tw")
 
-[node name="Coin2" parent="." unique_id=900658506 instance=ExtResource("2_0xm2m")]
-position = Vector2(317, 479)
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=291014479]
+zoom = Vector2(1.5, 1.5)
 
-[node name="Coin3" parent="." unique_id=599436966 instance=ExtResource("2_0xm2m")]
-position = Vector2(649, 397)
+[node name="Coin" parent="." unique_id=1264582964 instance=ExtResource("3_h2yge")]
+position = Vector2(279, 293)
 
-[node name="Coin4" parent="." unique_id=1168459658 instance=ExtResource("2_0xm2m")]
-position = Vector2(520, 278)
+[node name="Coin2" parent="." unique_id=1221897015 instance=ExtResource("3_h2yge")]
+position = Vector2(206, 558)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1119262652]
-position = Vector2(484, 416)
-zoom = Vector2(2, 2)
+[node name="Coin3" parent="." unique_id=1661249374 instance=ExtResource("3_h2yge")]
+position = Vector2(623, 225)
+
+[node name="Coin4" parent="." unique_id=740024958 instance=ExtResource("3_h2yge")]
+position = Vector2(783, 420)
+
+[node name="Coin5" parent="." unique_id=189783823 instance=ExtResource("3_h2yge")]
+position = Vector2(678, 567)
+
+[node name="Coin6" parent="." unique_id=966853051 instance=ExtResource("3_h2yge")]
+position = Vector2(465, 548)
+
+[node name="Coin7" parent="." unique_id=1417214381 instance=ExtResource("3_h2yge")]
+position = Vector2(448, 126)
+
+[node name="Coin8" parent="." unique_id=1199811438 instance=ExtResource("3_h2yge")]
+position = Vector2(1000, 99)
+
+[node name="Coin9" parent="." unique_id=1066671695 instance=ExtResource("3_h2yge")]
+position = Vector2(833, 223)
