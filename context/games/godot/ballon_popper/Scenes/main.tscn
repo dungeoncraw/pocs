@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://noplc128v2ua"]
+
+[ext_resource type="Material" uid="uid://dw1clw374lcjn" path="res://Resources/ballon_red.tres" id="1_bo1nx"]
+[ext_resource type="ArrayMesh" uid="uid://da1ageqnd47j1" path="res://Balloon.obj" id="1_jjgbg"]
+
+[sub_resource type="Environment" id="Environment_jjgbg"]
+background_mode = 1
+background_color = Color(0.80902904, 0.45945704, 0.677433, 1)
+
+[node name="Main" type="Node3D" unique_id=530876304]
+
+[node name="Balloon" type="MeshInstance3D" parent="." unique_id=649443902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120939255, 0, 0.12382674)
+material_override = ExtResource("1_bo1nx")
+mesh = ExtResource("1_jjgbg")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=831873764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.197832)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1025289961]
+transform = Transform3D(1, 0, 0, 0, 0.44476026, 0.8956496, 0, -0.8956496, 0.44476026, 0, 2.5475273, 4.5291643)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1249340397]
+environment = SubResource("Environment_jjgbg")
