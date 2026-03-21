@@ -1,4 +1,8 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1774046849
+::res://::1774128957
 Balloon.obj::Mesh::7212946822854404612::1774046849::1774046849::1::::<><><>0<>0<>db1d2e1f86c16d7287964e746672b6c4<>res://.godot/imported/Balloon.obj-438198813e5679d0466951fc88ea0c23.mesh<*>res://.godot/imported/Balloon.obj-438198813e5679d0466951fc88ea0c23.mesh::
 icon.svg::CompressedTexture2D::7598011414800455858::1774046561::1774046794::1::::<><><>0<>0<>e96d48fd2bb00c3dab5d0aa533c1ed28<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://Resources/::1774047738
+ballon_red.tres::StandardMaterial3D::8757232710701405679::1774047738::0::1::::<><><>0<>0<><>::
+::res://Scenes/::1774047738
+main.tscn::PackedScene::942286800959036588::1774047738::0::1::::<><><>0<>0<><>::uid://dw1clw374lcjn::::res://Resources/ballon_red.tres<>uid://da1ageqnd47j1::::res://Balloon.obj

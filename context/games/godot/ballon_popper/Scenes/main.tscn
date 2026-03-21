@@ -1,24 +1,51 @@
 [gd_scene format=3 uid="uid://noplc128v2ua"]
 
-[ext_resource type="Material" uid="uid://dw1clw374lcjn" path="res://Resources/ballon_red.tres" id="1_bo1nx"]
-[ext_resource type="ArrayMesh" uid="uid://da1ageqnd47j1" path="res://Balloon.obj" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://bmnf6tidhn5td" path="res://Scripts/balloon_manager.gd" id="1_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://c4qb5v0xsjg7" path="res://Scenes/balloon.tscn" id="2_bo1nx"]
 
 [sub_resource type="Environment" id="Environment_jjgbg"]
 background_mode = 1
-background_color = Color(0.80902904, 0.45945704, 0.677433, 1)
+background_color = Color(0.38292184, 0.68734366, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bo1nx"]
+font_size = 48
 
 [node name="Main" type="Node3D" unique_id=530876304]
-
-[node name="Balloon" type="MeshInstance3D" parent="." unique_id=649443902]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120939255, 0, 0.12382674)
-material_override = ExtResource("1_bo1nx")
-mesh = ExtResource("1_jjgbg")
+script = ExtResource("1_jjvhh")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=831873764]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.197832)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0786996, 1.7299907, 4.742189)
+fov = 56.7
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1025289961]
 transform = Transform3D(1, 0, 0, 0, 0.44476026, 0.8956496, 0, -0.8956496, 0.44476026, 0, 2.5475273, 4.5291643)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1249340397]
 environment = SubResource("Environment_jjgbg")
+
+[node name="Balloon" parent="." unique_id=698357412 instance=ExtResource("2_bo1nx")]
+
+[node name="Balloon2" parent="." unique_id=660200247 instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2509627, 0, 0)
+
+[node name="Balloon3" parent="." unique_id=362678187 instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2509627, 3.0031302, 0)
+
+[node name="Balloon4" parent="." unique_id=1442045731 instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3620377, 3.0031302, 0)
+
+[node name="Balloon5" parent="." unique_id=222430933 instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3620377, 0.9421873, 0)
+
+[node name="Balloon6" parent="." unique_id=999452318 instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2643192, 0.9421873, 0)
+
+[node name="Balloon7" parent="." unique_id=1287975708 instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2643192, 3.0122778, 0)
+
+[node name="ScoreText" type="Label" parent="." unique_id=223606724]
+offset_left = 13.0
+offset_top = 25.0
+offset_right = 141.0
+offset_bottom = 92.0
+label_settings = SubResource("LabelSettings_bo1nx")
