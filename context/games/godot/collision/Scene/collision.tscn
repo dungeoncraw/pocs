@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://bl81twiolh5be"]
+
+[ext_resource type="Script" uid="uid://cs5d60sexdwej" path="res://Script/player_movement.gd" id="1_blcp3"]
+[ext_resource type="ArrayMesh" uid="uid://cbuwpv1dlt3tr" path="res://character-female-b.obj" id="1_esagi"]
+[ext_resource type="PackedScene" uid="uid://bu85uu05khal8" path="res://Scene/tree.tscn" id="1_etmh8"]
+[ext_resource type="Material" uid="uid://bgb5rkp48cprk" path="res://Material/tree_leaves.tres" id="2_2dkvl"]
+[ext_resource type="Material" uid="uid://d2rkkcgcd787r" path="res://Material/tree_trunk.tres" id="2_xkxd4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_esagi"]
+friction = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_esagi"]
+size = Vector3(0.70739746, 0.69207764, 0.3710022)
+
+[sub_resource type="BoxMesh" id="BoxMesh_esagi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3tdwg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3tdwg"]
+size = Vector3(12, 0.3, 30)
+
+[sub_resource type="Environment" id="Environment_3tdwg"]
+background_mode = 1
+background_color = Color(0.28286383, 0.41920727, 0.83686894, 1)
+
+[node name="Main" type="Node3D" unique_id=1151806865]
+
+[node name="Player" type="RigidBody3D" parent="." unique_id=494406688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2429805, -43.289177)
+physics_material_override = SubResource("PhysicsMaterial_esagi")
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_blcp3")
+
+[node name="PlayerModel" type="MeshInstance3D" parent="Player" unique_id=504628128]
+mesh = ExtResource("1_esagi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1700058749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 0.342, 0)
+shape = SubResource("BoxShape3D_esagi")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=285595090]
+transform = Transform3D(-0.99993366, -0.01134984, 0.0019661784, -0.0088876095, 0.8687799, 0.4951189, -0.007327695, 0.49506852, -0.86882305, 0, 1.7940693, -1.2409935)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1959656114]
+transform = Transform3D(0.12514667, 0, 0, 0, 0.020694196, 0, 0, 0, 1, 0.08257419, 0, 0)
+material_override = ExtResource("2_xkxd4")
+mesh = SubResource("BoxMesh_esagi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player" unique_id=2126027754]
+transform = Transform3D(0.12493666, 0, 0, 0, 0.020694196, 0, 0, 0, 1, -0.071344614, 0, 0)
+material_override = ExtResource("2_2dkvl")
+mesh = SubResource("BoxMesh_esagi")
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=432560745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -31.58049)
+
+[node name="GroundModel" type="MeshInstance3D" parent="Ground" unique_id=950222525]
+transform = Transform3D(12, 0, 0, 0, 0.27933967, -10.940454, 0, 0.10940454, 27.933966, 0, 0, 0)
+mesh = SubResource("BoxMesh_3tdwg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1212495127]
+transform = Transform3D(1, 0, 0, 0, 0.9310558, -0.36487678, 0, 0.36487678, 0.9310558, 0, 0, 0)
+shape = SubResource("BoxShape3D_3tdwg")
+
+[node name="Ground2" type="StaticBody3D" parent="." unique_id=2085977923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.194783, -5.288973)
+
+[node name="GroundModel" type="MeshInstance3D" parent="Ground2" unique_id=544675849]
+transform = Transform3D(12, 0, 0, 0, 0.27933967, -10.940454, 0, 0.10940454, 27.933966, -0.037787437, 0.2005539, -0.84831715)
+mesh = SubResource("BoxMesh_3tdwg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2" unique_id=1216727283]
+transform = Transform3D(1, 0, 0, 0, 0.9310558, -0.36487678, 0, 0.36487678, 0.9310558, 0, 0, 0)
+shape = SubResource("BoxShape3D_3tdwg")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1787588485]
+environment = SubResource("Environment_3tdwg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=894475443]
+transform = Transform3D(1, 0, 0, 0, 0.97530377, 0.22086765, 0, -0.22086765, 0.97530377, 0, 2.268086, 15.3655615)
+shadow_enabled = true
+
+[node name="Tree" parent="." unique_id=88715535 instance=ExtResource("1_etmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8088102, -2.0008814, -18.853762)
+
+[node name="Tree2" parent="." unique_id=2141529320 instance=ExtResource("1_etmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320158, -2.0008814, -18.853762)
+
+[node name="Tree3" parent="." unique_id=1161087350 instance=ExtResource("1_etmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3342776, -1.1545889, -21.01828)
+
+[node name="Tree4" parent="." unique_id=914908806 instance=ExtResource("1_etmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09185171, -0.15327501, -23.846834)
+
+[node name="Tree5" parent="." unique_id=106929591 instance=ExtResource("1_etmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.435838, 1.1092935, -26.729713)
+
+[node name="Tree6" parent="." unique_id=963214597 instance=ExtResource("1_etmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.137836, 2.1281133, -29.565575)
+
+[node name="Tree7" parent="." unique_id=1373214984 instance=ExtResource("1_etmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.395705, 4.412162, -34.83498)
+
+[connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
