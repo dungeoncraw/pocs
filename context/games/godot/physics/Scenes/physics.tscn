@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://d0cepbynkyxqa"]
+
+[ext_resource type="Script" uid="uid://bsjv8skpvx0i5" path="res://Scripts/player.gd" id="1_ack0o"]
+[ext_resource type="Texture2D" uid="uid://bhmhsqkeg5der" path="res://Sprites/PhysicsCharacter.png" id="1_scu72"]
+[ext_resource type="PackedScene" uid="uid://caqdsi0duy88t" path="res://Scenes/crate.tscn" id="3_4hkfg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scu72"]
+size = Vector2(18, 19)
+
+[node name="Main" type="Node2D" unique_id=1761239638]
+
+[node name="Player" type="RigidBody2D" parent="." unique_id=1741329145]
+position = Vector2(35, 28)
+mass = 5.0
+gravity_scale = 0.0
+linear_damp = 1.0
+script = ExtResource("1_ack0o")
+
+[node name="Sprite" type="Sprite2D" parent="Player" unique_id=2009217446]
+texture = ExtResource("1_scu72")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=458239851]
+shape = SubResource("RectangleShape2D_scu72")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=147458542]
+zoom = Vector2(3, 3)
+
+[node name="Crate" parent="." unique_id=660542692 instance=ExtResource("3_4hkfg")]
+position = Vector2(71, 66)
+
+[node name="Crate2" parent="." unique_id=807116638 instance=ExtResource("3_4hkfg")]
+position = Vector2(-29, 76)
+
+[node name="Crate3" parent="." unique_id=1776743754 instance=ExtResource("3_4hkfg")]
+position = Vector2(74, 18)
+
+[node name="Crate4" parent="." unique_id=1971394283 instance=ExtResource("3_4hkfg")]
+position = Vector2(19, 64)
+
+[node name="Crate5" parent="." unique_id=1040805926 instance=ExtResource("3_4hkfg")]
+position = Vector2(10, -29)
+
+[node name="Crate6" parent="." unique_id=934775568 instance=ExtResource("3_4hkfg")]
+position = Vector2(-54, -26)
+
+[node name="Crate7" parent="." unique_id=301448861 instance=ExtResource("3_4hkfg")]
+position = Vector2(-61, 45)
+
+[node name="Crate8" parent="." unique_id=1904779549 instance=ExtResource("3_4hkfg")]
+position = Vector2(46, -38)
+
+[node name="Crate13" parent="." unique_id=236502067 instance=ExtResource("3_4hkfg")]
+position = Vector2(94, -44)
+
+[node name="Crate14" parent="." unique_id=742640751 instance=ExtResource("3_4hkfg")]
+position = Vector2(127, -10)
+
+[node name="Crate15" parent="." unique_id=1979719517 instance=ExtResource("3_4hkfg")]
+position = Vector2(124, 44)
+
+[node name="Crate9" parent="." unique_id=2132442134 instance=ExtResource("3_4hkfg")]
+position = Vector2(-28, -93)
+
+[node name="Crate10" parent="." unique_id=1077425141 instance=ExtResource("3_4hkfg")]
+position = Vector2(-90, -58)
+
+[node name="Crate11" parent="." unique_id=2076512845 instance=ExtResource("3_4hkfg")]
+position = Vector2(-101, -24)
+
+[node name="Crate12" parent="." unique_id=1324522093 instance=ExtResource("3_4hkfg")]
+position = Vector2(-103, 24)
