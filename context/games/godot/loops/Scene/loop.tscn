@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bc255fpqsc10a"]
+
+[ext_resource type="Script" uid="uid://ciae617x5i7os" path="res://Script/loop.gd" id="1_six6x"]
+
+[node name="Main" type="Node2D" unique_id=471443240]
+script = ExtResource("1_six6x")
+spawn_count = 120
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=685418424]
+zoom = Vector2(2, 2)

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://5a651njedswa"]
+
+[ext_resource type="Texture2D" uid="uid://blrr6whwbyljv" path="res://Sprite/Star.png" id="1_mhiop"]
+
+[node name="Start" type="Node2D" unique_id=537290822]
+
+[node name="Star" type="Sprite2D" parent="." unique_id=1884375619]
+scale = Vector2(3, 3)
+texture = ExtResource("1_mhiop")
