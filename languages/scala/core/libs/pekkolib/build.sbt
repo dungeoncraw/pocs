@@ -9,8 +9,10 @@ lazy val root = (project in file("."))
       "org.apache.pekko" %% "pekko-actor-typed" % "1.4.0",
       "org.apache.pekko" %% "pekko-stream" % "1.4.0",
       "org.apache.pekko" %% "pekko-http" % "1.3.0",
+      "org.apache.pekko" %% "pekko-http-spray-json" % "1.3.0",
       "org.apache.pekko" %% "pekko-http-testkit" % "1.3.0" % Test,
       "org.apache.pekko" %% "pekko-testkit" % "1.4.0" % Test,
+      "org.apache.pekko" %% "pekko-actor-testkit-typed" % "1.4.0" % Test,
       "org.scalatest" %% "scalatest" % "3.2.19" % Test
     )
   )

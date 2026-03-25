@@ -1,18 +1,30 @@
-import org.apache.pekko.actor.ActorSystem
+import org.apache.pekko.actor.typed.ActorSystem
+import org.apache.pekko.actor.typed.scaladsl.Behaviors
 import org.apache.pekko.http.scaladsl.Http
 import scala.concurrent.ExecutionContext
 import scala.io.StdIn
 
 @main
 def main(): Unit = {
-  given system: ActorSystem = ActorSystem("pekko-server")
-  given ec: ExecutionContext = system.dispatcher
+  val rootBehavior = Behaviors.setup[Nothing] { context =>
+    val userActor = context.spawn(UserActor(), "UserActor")
+    val orderActor = context.spawn(OrderActor(), "OrderActor")
+    
+    val routes = new Routes(userActor, orderActor)(using context.system)
 
-  val binding = Http().newServerAt("0.0.0.0", 8080).bind(Routes.route)
+    given system: ActorSystem[_] = context.system
+    given ec: ExecutionContext = system.executionContext
 
-  println("Server started at http://localhost:8080/")
-  println("Press ENTER to stop...")
+    val binding = Http().newServerAt("0.0.0.0", 8080).bind(routes.route)
+
+    println("Server started at http://localhost:8080/")
+    println("Press ENTER to stop...")
+    
+    Behaviors.empty
+  }
+
+  val system = ActorSystem(rootBehavior, "pekko-server")
+
   StdIn.readLine()
-
-  binding.flatMap(_.unbind()).onComplete(_ => system.terminate())
+  system.terminate()
 }
