@@ -12,6 +12,8 @@ var move_input: float
 @onready var sprite: Sprite2D = $Sprite
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
+@export var health: int = 3
+
 func _physics_process(delta: float) -> void:
 	move_input = Input.get_axis("move_left", "move_right")
 	# gravity
@@ -43,3 +45,17 @@ func _manage_animation():
 		anim.play("move")
 	else:
 		anim.play("idle")
+
+func take_damage(amount: int):
+	health -= amount
+	
+	if health <= 0:
+		#	wait until the phisycs finish so can remove the nodes	
+		call_deferred("game_over")
+		
+func game_over():
+	get_tree().change_scene_to_file("res://Scenes/level_1.tscn")
+
+
+func increase_score(amount: int):
+	PlayerStats.score += amount
