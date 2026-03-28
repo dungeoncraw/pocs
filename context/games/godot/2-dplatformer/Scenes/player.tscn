@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://3g357a8ib0f7" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dq2xerfhgi0yr" path="res://Sprites/Characters/character_0000.png" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://mx02k86svo20" path="res://Sprites/Characters/character_0001.png" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://ygkyq1w8cxi7" path="res://Scripts/camera_shake.gd" id="3_x3wgy"]
+[ext_resource type="Script" uid="uid://c1stue2i4j4ie" path="res://Scripts/player_ui.gd" id="4_fkybt"]
+[ext_resource type="Texture2D" uid="uid://ktmjy1ocq3x6" path="res://Sprites/Objects/tile_0044.png" id="4_vgqql"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0iea"]
 height = 28.571348
@@ -78,6 +81,11 @@ _data = {
 &"move": SubResource("Animation_vgqql")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_vgqql"]
+font_size = 1100
+shadow_size = 300
+shadow_color = Color(0, 0, 0.7490196, 0.59607846)
+
 [node name="Player" type="CharacterBody2D" unique_id=776437920 groups=["Player"]]
 script = ExtResource("1_cvnsp")
 
@@ -87,14 +95,49 @@ offset = Vector2(0, -12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1240432668]
 position = Vector2(0, -12.000001)
-scale = Vector2(1, 0.8400024)
+scale = Vector2(0.7600009, 0.8400024)
 shape = SubResource("CapsuleShape2D_v0iea")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=149104571]
-position = Vector2(0, -32)
-zoom = Vector2(3, 3)
+zoom = Vector2(5, 5)
+position_smoothing_enabled = true
+script = ExtResource("3_x3wgy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=697246741]
 libraries/ = SubResource("AnimationLibrary_vgqql")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2000552085]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1019898759]
+visible = false
+script = ExtResource("4_fkybt")
+
+[node name="HealthContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1760609878]
+offset_left = 18.0
+offset_top = 1.0
+offset_right = 58.0
+offset_bottom = 81.0
+scale = Vector2(5.920002, 1)
+
+[node name="Heart" type="TextureRect" parent="CanvasLayer/HealthContainer" unique_id=55224740]
+layout_mode = 2
+texture = ExtResource("4_vgqql")
+
+[node name="Heart2" type="TextureRect" parent="CanvasLayer/HealthContainer" unique_id=1497318798]
+layout_mode = 2
+texture = ExtResource("4_vgqql")
+
+[node name="Heart3" type="TextureRect" parent="CanvasLayer/HealthContainer" unique_id=386947385]
+layout_mode = 2
+texture = ExtResource("4_vgqql")
+
+[node name="ScoreText" type="Label" parent="CanvasLayer" unique_id=1186210081]
+texture_filter = 1
+offset_left = 31.999998
+offset_top = 92.0
+offset_right = 5437.0
+offset_bottom = 1591.0
+scale = Vector2(0.05, 0.025)
+theme_override_font_sizes/font_size = 1101
+text = "Score: 500"
+label_settings = SubResource("LabelSettings_vgqql")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=630092087]

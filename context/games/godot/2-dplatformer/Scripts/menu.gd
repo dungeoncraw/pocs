@@ -1,6 +1,5 @@
-extends Area2D
+extends Control
 
-@export var scene_to_load: PackedScene 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,10 +11,10 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("Player"):
-		return
-	call_deferred("_load_scene")
+func _on_play_button_pressed() -> void:
+	PlayerStats.score = 0
+	get_tree().change_scene_to_file("res://Scenes/level_1.tscn")
 
-func _load_scene():
-	get_tree().change_scene_to_packed(scene_to_load)
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
