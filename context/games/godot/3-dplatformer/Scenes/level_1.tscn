@@ -3,6 +3,7 @@
 [ext_resource type="ArrayMesh" uid="uid://giwela4qekr7" path="res://Models/Platformer/block-grass-low-large.obj" id="1_vk57k"]
 [ext_resource type="ArrayMesh" uid="uid://b86egagrvrb7w" path="res://Models/Platformer/block-grass-low-narrow.obj" id="2_xfk5q"]
 [ext_resource type="ArrayMesh" uid="uid://cmeaca04oklf3" path="res://Models/Platformer/block-grass-curve.obj" id="3_7p6j4"]
+[ext_resource type="PackedScene" uid="uid://chum8yjdifet8" path="res://Scenes/player.tscn" id="4_7p6j4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xfk5q"]
 
@@ -35,16 +36,13 @@ points = PackedVector3Array(0.2066075, 0.9658565, 0.4068587, -0.8925199, 0.00016
 
 [node name="Main" type="Node3D" unique_id=1735813067]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1847016803]
-transform = Transform3D(1, 0, 0, 0, 0.9750797, 0.22185482, 0, -0.22185482, 0.9750797, 0, 2.6539133, 3.3495424)
-
 [node name="Environment" type="Node" parent="." unique_id=1897980835]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1143562806]
 environment = SubResource("Environment_6444e")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=682248249]
-transform = Transform3D(1, 0, 0, 0, 0.8852963, 0.46502745, 0, -0.46502745, 0.8852963, 0, 4.58591, 3.8062382)
+transform = Transform3D(0.8795406, -0.2734789, -0.38938102, 0.4758238, 0.50551444, 0.71975476, 0, -0.8183303, 0.5747483, -3.6399515, 4.58591, 1.6673775)
 shadow_enabled = true
 shadow_blur = 3.0
 
@@ -59,7 +57,7 @@ shape = SubResource("ConvexPolygonShape3D_vk57k")
 mesh = ExtResource("1_vk57k")
 
 [node name="PlatformLowLarge2" type="StaticBody3D" parent="Platforms" unique_id=980111983]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.245964, 0, -8.427681)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.245964, 0, 6.937228)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/PlatformLowLarge2" unique_id=1764045282]
 shape = SubResource("ConvexPolygonShape3D_vk57k")
@@ -68,7 +66,7 @@ shape = SubResource("ConvexPolygonShape3D_vk57k")
 mesh = ExtResource("1_vk57k")
 
 [node name="PlatformLowNarrow2" type="StaticBody3D" parent="Platforms" unique_id=2050812041]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9154456, 0, -2.6673694)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9154456, 0, 2.9843154)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/PlatformLowNarrow2" unique_id=1539376108]
 shape = SubResource("ConvexPolygonShape3D_6444e")
@@ -77,7 +75,7 @@ shape = SubResource("ConvexPolygonShape3D_6444e")
 mesh = ExtResource("2_xfk5q")
 
 [node name="PlatformLowNarrow3" type="StaticBody3D" parent="Platforms" unique_id=2074245096]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9682044, 0, -6.386495)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9682044, 0, 7.057753)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/PlatformLowNarrow3" unique_id=871059404]
 shape = SubResource("ConvexPolygonShape3D_6444e")
@@ -86,7 +84,7 @@ shape = SubResource("ConvexPolygonShape3D_6444e")
 mesh = ExtResource("2_xfk5q")
 
 [node name="PlatformCurve" type="StaticBody3D" parent="Platforms" unique_id=1499272555]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54560876, 0.31703007, -4.180446)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54560876, 0.31703007, 4.2621503)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/PlatformCurve" unique_id=133953793]
 shape = SubResource("ConvexPolygonShape3D_evi0p")
@@ -94,3 +92,6 @@ shape = SubResource("ConvexPolygonShape3D_evi0p")
 [node name="BlockGrassCurve" type="MeshInstance3D" parent="Platforms/PlatformCurve" unique_id=790031807]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = ExtResource("3_7p6j4")
+
+[node name="PLayer" parent="." unique_id=1665385250 instance=ExtResource("4_7p6j4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4915753, 0)

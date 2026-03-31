@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://chum8yjdifet8"]
+
+[ext_resource type="Script" uid="uid://d0l2bsrkwqdkp" path="res://Scripts/player_controller.gd" id="1_cvnsp"]
+[ext_resource type="ArrayMesh" uid="uid://bwoewsvfobsvx" path="res://Models/Characters/character-female-f.obj" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://dbcn1r6hc1lon" path="res://Scripts/player_visual.gd" id="3_6t5aa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6444e"]
+radius = 0.21240234
+height = 0.7128296
+
+[node name="PLayer" type="CharacterBody3D" unique_id=1665385250]
+script = ExtResource("1_cvnsp")
+
+[node name="Model" type="MeshInstance3D" parent="." unique_id=446600304]
+mesh = ExtResource("1_v0iea")
+script = ExtResource("3_6t5aa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=768411413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35305786, 0)
+shape = SubResource("CapsuleShape3D_6444e")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1581411313]
+transform = Transform3D(-0.9963899, 0.018834472, -0.08277959, -0.03447445, 0.8012969, 0.5972729, 0.07758034, 0.5979704, -0.7977548, -0.12707865, 2.3205962, -2.166017)
