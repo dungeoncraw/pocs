@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.14"
 dependencies = [
-    "numpy>=2.4.1",
+    "numpy>=2.4.4",
     "procedure>=0.0.3",
     "pyuca>=1.2",
 ]
