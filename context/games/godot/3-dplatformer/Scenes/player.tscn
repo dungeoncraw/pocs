@@ -8,7 +8,7 @@
 radius = 0.21240234
 height = 0.7128296
 
-[node name="PLayer" type="CharacterBody3D" unique_id=1665385250]
+[node name="PLayer" type="CharacterBody3D" unique_id=1665385250 groups=["Player"]]
 script = ExtResource("1_cvnsp")
 
 [node name="Model" type="MeshInstance3D" parent="." unique_id=446600304]

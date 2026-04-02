@@ -4,6 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b86egagrvrb7w" path="res://Models/Platformer/block-grass-low-narrow.obj" id="2_xfk5q"]
 [ext_resource type="ArrayMesh" uid="uid://cmeaca04oklf3" path="res://Models/Platformer/block-grass-curve.obj" id="3_7p6j4"]
 [ext_resource type="PackedScene" uid="uid://chum8yjdifet8" path="res://Scenes/player.tscn" id="4_7p6j4"]
+[ext_resource type="PackedScene" uid="uid://dgyvrv28o2qgb" path="res://Scenes/enemy.tscn" id="5_6444e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xfk5q"]
 
@@ -14,11 +15,11 @@ sky_material = SubResource("ProceduralSkyMaterial_xfk5q")
 background_mode = 2
 sky = SubResource("Sky_7p6j4")
 ambient_light_source = 2
-ambient_light_color = Color(0.44800007, 0.17919998, 0.64, 1)
+ambient_light_color = Color(0.64, 0.64, 0.64, 1)
 fog_enabled = true
-fog_light_color = Color(0.7686129, 0.55425996, 0.7298538, 1)
+fog_light_color = Color(0.7945108, 0.4646209, 0.6745905, 1)
 fog_light_energy = 1.2
-fog_density = 0.06
+fog_density = 0.1
 fog_height = 2.0
 fog_height_density = 0.4
 adjustment_enabled = true
@@ -95,3 +96,16 @@ mesh = ExtResource("3_7p6j4")
 
 [node name="PLayer" parent="." unique_id=1665385250 instance=ExtResource("4_7p6j4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4915753, 0)
+
+[node name="Enemies" type="Node" parent="." unique_id=2059117103]
+
+[node name="Enemy" parent="Enemies" unique_id=2060213131 instance=ExtResource("5_6444e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.86105156, 0.8010037, 3.319634)
+
+[node name="Enemy2" parent="Enemies" unique_id=1523332228 instance=ExtResource("5_6444e")]
+transform = Transform3D(0.04365423, 0, -0.9990467, 0, 1, 0, 0.9990467, 0, 0.04365423, 1.4461973, 0.3663895, 0)
+move_direction = Vector3(0, 0, 2)
+
+[node name="Enemy3" parent="Enemies" unique_id=1973105810 instance=ExtResource("5_6444e")]
+transform = Transform3D(0.04365423, 0, -0.9990467, 0, 1, 0, 0.9990467, 0, 0.04365423, -2.9543555, 1.0239842, 4.5803323)
+move_direction = Vector3(0, 0, 2)
