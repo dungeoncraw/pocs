@@ -11,6 +11,7 @@ object Main extends ZIOAppDefault:
       _ <- Console.printLine(s"You entered ${tasks.size} task(s):")
       _ <- ZIO.foreachDiscard(tasks.toList)(task => Console.printLine(s"- $task"))
       _ <- computeParallel()
+      _ <- computeQueue(tasks)
     yield ()
 
 def addTasks(tasks: ListBuffer[String]): ZIO[Any, Throwable, Unit] =
@@ -43,4 +44,26 @@ def computeParallel(): ZIO[Any, Throwable, Unit] =
     //get the final value 100000
     value <- ref.get
     _ <- Console.printLine(s"Final value: $value")
+  yield ()
+
+
+def computeQueue(tasks: ListBuffer[String]): ZIO[Any, Throwable, Unit] =
+  def worker(name: String, queue: Queue[String]): ZIO[Any, Throwable, Unit] =
+    queue.take.flatMap { value =>
+      Console.printLine(s"$name got $value")
+    }.forever
+
+  for
+    queue <- Queue.unbounded[String]
+
+    fiber1 <- worker("worker-1", queue).fork
+    fiber2 <- worker("worker-2", queue).fork
+    fiber3 <- worker("worker-3", queue).fork
+
+    _ <- ZIO.foreachDiscard(tasks)(n => queue.offer(n))
+    _ <- ZIO.sleep(500.millis)
+
+    _ <- fiber1.interrupt
+    _ <- fiber2.interrupt
+    _ <- fiber3.interrupt
   yield ()
