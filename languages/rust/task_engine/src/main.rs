@@ -33,6 +33,7 @@ fn main() {
         Task::new(2, "task 2".to_string()),
         Task::new(3, "task 3".to_string())
     ];
-    vector[0].status = TaskStatus::Running;
+    vector[0].mark_running();
+    vector[1].mark_running();
     list_tasks(&vector, Some(&TaskStatus::Running));
 }

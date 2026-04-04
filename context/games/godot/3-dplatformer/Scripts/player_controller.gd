@@ -1,6 +1,9 @@
 extends CharacterBody3D
+#signals to avoid coupling
+signal OnTakeDamage (hp: int)
+signal OnUpdateScore (score: int)
 
-@export var health: int = 3
+@export var health: int = 5
 
 @export var move_speed: float = 3.0
 @export var jump_force: float = 8.0
@@ -31,9 +34,15 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(amount: int):
 	health -= amount
-	
+	OnTakeDamage.emit(health)
 	if health <= 0:
 		_game_over()
 
 func _game_over():
+	PlayerStats.score = 0
 	get_tree().reload_current_scene()
+
+
+func increase_score(amount: int):
+	PlayerStats.score += amount
+	OnUpdateScore.emit(PlayerStats.score)

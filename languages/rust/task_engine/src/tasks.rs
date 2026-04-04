@@ -20,4 +20,11 @@ impl Task {
             status: TaskStatus::Pending,
         }
     }
+    pub fn mark_running(&mut self) {
+        self.status = TaskStatus::Running;
+    }
+
+    pub fn mark_done(&mut self) {
+        self.status = TaskStatus::Done;
+    }
 }
