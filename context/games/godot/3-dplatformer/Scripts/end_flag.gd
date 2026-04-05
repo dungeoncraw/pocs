@@ -15,4 +15,8 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if not body.is_in_group("Player"):
 		return
+	# defer
+	call_deferred("_load_new_scene")
+
+func _load_new_scene():
 	get_tree().change_scene_to_packed(scene_to_load)
