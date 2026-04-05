@@ -12,6 +12,7 @@ object Main extends ZIOAppDefault:
       _ <- ZIO.foreachDiscard(tasks.toList)(task => Console.printLine(s"- $task"))
       _ <- computeParallel()
       _ <- computeQueue(tasks)
+      _ <- promiseAwait()
     yield ()
 
 def addTasks(tasks: ListBuffer[String]): ZIO[Any, Throwable, Unit] =
@@ -46,7 +47,6 @@ def computeParallel(): ZIO[Any, Throwable, Unit] =
     _ <- Console.printLine(s"Final value: $value")
   yield ()
 
-
 def computeQueue(tasks: ListBuffer[String]): ZIO[Any, Throwable, Unit] =
   def worker(name: String, queue: Queue[String]): ZIO[Any, Throwable, Unit] =
     queue.take.flatMap { value =>
@@ -62,8 +62,43 @@ def computeQueue(tasks: ListBuffer[String]): ZIO[Any, Throwable, Unit] =
 
     _ <- ZIO.foreachDiscard(tasks)(n => queue.offer(n))
     _ <- ZIO.sleep(500.millis)
-
+    // stop the fibers as the workers run forever
     _ <- fiber1.interrupt
     _ <- fiber2.interrupt
     _ <- fiber3.interrupt
+  yield ()
+
+def promiseAwait(): ZIO[Any, Throwable, Unit] =
+  def worker(name: String, ref: Ref[Int], startSignal: Promise[Nothing, Unit]): ZIO[Any, Throwable, Unit] =
+    for
+      _ <- Console.printLine(s"$name is ready and waiting...")
+      multiplier <- Random.nextIntBounded(20).map(_ + 2)
+      _ <- Console.printLine(s"$name will multiply the value by $multiplier")
+      _ <- startSignal.await
+      _ <- ref.update(_ * multiplier)
+      _ <- Console.printLine(s"$name started working")
+    yield ()
+
+  for
+    ref <- Random.nextIntBounded(199).map(_ + 2).flatMap(Ref.make)
+    // need to read the value, as Ref.make create an effect
+    initialValue <- ref.get
+    _ <- Console.printLine(s"Initial value: ${initialValue}")
+    // promise for signaling the start of the workers
+    startSignal <- Promise.make[Nothing, Unit]
+
+    fiber1 <- worker("worker-1", ref, startSignal).fork
+    fiber2 <- worker("worker-2", ref,  startSignal).fork
+    fiber3 <- worker("worker-3", ref,  startSignal).fork
+
+    _ <- ZIO.sleep(2.seconds)
+    _ <- Console.printLine("Releasing all workers now...")
+    // signal all workers to start working
+    _ <- startSignal.succeed(())
+
+    _ <- fiber1.join
+    _ <- fiber2.join
+    _ <- fiber3.join
+    finalValue <- ref.get
+    _ <- Console.printLine(s"Final value: ${finalValue}")
   yield ()
