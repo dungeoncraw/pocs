@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chum8yjdifet8" path="res://Scenes/player.tscn" id="4_7p6j4"]
 [ext_resource type="PackedScene" uid="uid://dgyvrv28o2qgb" path="res://Scenes/enemy.tscn" id="5_6444e"]
 [ext_resource type="PackedScene" uid="uid://yimfsahkl1ky" path="res://Scenes/coin.tscn" id="6_evi0p"]
+[ext_resource type="PackedScene" uid="uid://ddavgljf5bpp8" path="res://Scenes/end_flag.tscn" id="7_lsmp6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xfk5q"]
 
@@ -116,3 +117,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8224255, 0.5671211, 3.01799
 
 [node name="PLayer" parent="." unique_id=1665385250 instance=ExtResource("4_7p6j4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4915753, 0)
+
+[node name="Flag" parent="." unique_id=1468478047 instance=ExtResource("7_lsmp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3369474, 0.2876134, 7.41459)
