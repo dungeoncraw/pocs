@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dbcn1r6hc1lon" path="res://Scripts/player_visual.gd" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://bbf5d8d43dkks" path="res://Scripts/player_ui.gd" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://rhhv2rnrxask" path="res://Sprites/hud_heartFull.png" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://btq3q1tmx41qf" path="res://Scripts/camera_shake.gd" id="4_x3wgy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6444e"]
 radius = 0.21240234
@@ -28,6 +29,7 @@ shape = SubResource("CapsuleShape3D_6444e")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1581411313]
 transform = Transform3D(-0.9963899, 0.018834472, -0.08277959, -0.03447445, 0.8012969, 0.5972729, 0.07758034, 0.5979704, -0.7977548, -0.12707865, 2.3205962, -2.166017)
+script = ExtResource("4_x3wgy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=660789951]
 script = ExtResource("4_fkybt")
@@ -69,3 +71,5 @@ offset_right = 339.0
 offset_bottom = 144.0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_vgqql")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=213144203]

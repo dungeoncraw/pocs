@@ -120,5 +120,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8224255, 0.5671211, 3.01799
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4915753, 0)
 
 [node name="Flag" parent="." unique_id=1468478047 instance=ExtResource("7_lsmp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3369474, 0.2876134, 7.41459)
+transform = Transform3D(-0.98108715, 0, 0.19356664, 0, 1, 0, -0.19356664, 0, -0.98108715, -4.3369474, 0.2876134, 7.41459)
 scene_to_load = ExtResource("8_xrdnt")
