@@ -13,6 +13,7 @@ object Main extends ZIOAppDefault:
       _ <- computeParallel()
       _ <- computeQueue(tasks)
       _ <- promiseAwait()
+      _ <- clockSleep()
     yield ()
 
 def addTasks(tasks: ListBuffer[String]): ZIO[Any, Throwable, Unit] =
@@ -101,4 +102,28 @@ def promiseAwait(): ZIO[Any, Throwable, Unit] =
     _ <- fiber3.join
     finalValue <- ref.get
     _ <- Console.printLine(s"Final value: ${finalValue}")
+  yield ()
+
+def clockSleep(): ZIO[Any, Throwable, Unit] =
+  for
+    sleeper <- (
+      for
+        _ <- Console.printLine("Sleep thread start and wait")
+        _ <- Clock.sleep(3.second)
+        _ <- Console.printLine("Sleep thread finish the process")
+      yield ()
+    ).fork
+
+    worker <- (
+      for
+        _ <- Console.printLine("Worker thread start")
+        _ <- Clock.sleep(500.millis)
+        _ <- Console.printLine("Worker doing another thing")
+        _ <- Clock.sleep(500.millis)
+        _ <- Console.printLine("Worker thread end")
+      yield ()
+    ).fork
+
+    _ <- sleeper.join
+    _ <- worker.join
   yield ()
