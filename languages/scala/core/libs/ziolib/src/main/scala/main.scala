@@ -14,6 +14,7 @@ object Main extends ZIOAppDefault:
       _ <- computeQueue(tasks)
       _ <- promiseAwait()
       _ <- clockSleep()
+      _ <- scheduleRetry()
     yield ()
 
 def addTasks(tasks: ListBuffer[String]): ZIO[Any, Throwable, Unit] =
@@ -127,3 +128,20 @@ def clockSleep(): ZIO[Any, Throwable, Unit] =
     _ <- sleeper.join
     _ <- worker.join
   yield ()
+  
+def scheduleRetry(): ZIO[Any, Throwable, Unit] =
+  def flakyAction: ZIO[Any, Throwable, String] =
+    for
+      n <- Random.nextIntBounded(10)
+      _ <- Console.printLine(s"Attempting flakyAction with n = $n")
+      _ <- if n < 7 then ZIO.fail(new RuntimeException("failed")) else ZIO.succeed(())
+      _ <- Console.printLine(s"Success with n = $n")
+    yield s"result: $n"
+    
+  flakyAction
+    .retry(Schedule.recurs(5) && Schedule.spaced(1.second))
+    .foldZIO(
+      err => Console.printLine(s"Still failed: ${err.getMessage}"),
+      ok  => Console.printLine(s"Done: $ok")
+    )
+  
