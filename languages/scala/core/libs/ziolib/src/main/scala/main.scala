@@ -16,6 +16,7 @@ object Main extends ZIOAppDefault:
       _ <- clockSleep()
       _ <- scheduleRetry()
       _ <- zlayer()
+      _ <- processUser()
     yield ()
 
 def addTasks(tasks: ListBuffer[String]): ZIO[Any, Throwable, Unit] =
@@ -153,3 +154,14 @@ def zlayer(): ZIO[Any, Throwable, Unit] =
     result <- service.extractMiddleLetter("Zio is awesome!")
     _ <- Console.printLine(s"The middle letter is: $result")
   yield ()).provide(Service.live)
+
+
+def processUser(): ZIO[Any, Throwable, Unit] =
+  def procUser(user: User): ZIO[Any, Throwable, Unit] =
+    Console.printLine(s"Processing user: ${user.name}").unit
+
+  ZIO.serviceWithZIO[UserRepo] { repo =>
+    repo.streamUsers
+      .mapZIOPar(4)(procUser)
+      .runDrain
+  }.provideLayer(UserRepo.live)
