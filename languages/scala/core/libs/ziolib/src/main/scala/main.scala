@@ -15,6 +15,7 @@ object Main extends ZIOAppDefault:
       _ <- promiseAwait()
       _ <- clockSleep()
       _ <- scheduleRetry()
+      _ <- zlayer()
     yield ()
 
 def addTasks(tasks: ListBuffer[String]): ZIO[Any, Throwable, Unit] =
@@ -144,4 +145,11 @@ def scheduleRetry(): ZIO[Any, Throwable, Unit] =
       err => Console.printLine(s"Still failed: ${err.getMessage}"),
       ok  => Console.printLine(s"Done: $ok")
     )
-  
+
+
+def zlayer(): ZIO[Any, Throwable, Unit] =
+  (for
+    service <- ZIO.service[Service]
+    result <- service.extractMiddleLetter("Zio is awesome!")
+    _ <- Console.printLine(s"The middle letter is: $result")
+  yield ()).provide(Service.live)
