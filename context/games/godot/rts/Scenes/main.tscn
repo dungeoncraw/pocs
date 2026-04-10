@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://drkg1y2v6n1y" path="res://Scripts/unit_controller.gd" id="1_bo1nx"]
 [ext_resource type="TileSet" uid="uid://ddpmn87ny02bm" path="res://Sprites/Tiles/new_tile_set.tres" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://ue8pdmtwb8ui" path="res://Scenes/unit_player.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://15nmhit4f0hy" path="res://Scenes/unit_ai.tscn" id="4_jjvhh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jjgbg"]
 vertices = PackedVector2Array(56, -25, 133, -27, 198, -27, 119, 24, 70, 24, -56, 10, 213.96094, 151, -230.92969, 151, -120, 122, 119, 72, -169, 122, 70, 72, -56, 58, -105, 58, -120, 74, -169, 74, -229.07031, -100.02344, -200, -39, -151, -39, -151, -87, 7, -73, 7, -25, -105, 10, 56, -73, 133, -100.796875, -200, -87, 199.94531, -100.9375, 213.03125, -100.96875)
@@ -60,3 +61,8 @@ affect_navigation_mesh = true
 carve_navigation_mesh = true
 
 [node name="Unit_Player" parent="." unique_id=2085025265 instance=ExtResource("3_8gbba")]
+position = Vector2(-71, -26)
+
+[node name="Unit_AI" parent="." unique_id=884023595 instance=ExtResource("4_jjvhh")]
+position = Vector2(-22, 70)
+move_speed = 15.0
