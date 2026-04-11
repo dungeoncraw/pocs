@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bmbwn6oacspce" path="res://Scripts/unit.gd" id="1_2vsbj"]
 [ext_resource type="Texture2D" uid="uid://4xcuhenidgxw" path="res://Sprites/Characters/tile_0084.png" id="1_yagyl"]
+[ext_resource type="Script" uid="uid://bhsplku1swj02" path="res://Scripts/unit_visual.gd" id="3_3wtx8"]
 [ext_resource type="Script" uid="uid://dsoc84s6ipi3x" path="res://Scripts/unit_health_bar.gd" id="3_aj46g"]
+[ext_resource type="Script" uid="uid://bmgrh8vv264oh" path="res://Scripts/unit_audio.gd" id="5_00vf3"]
+[ext_resource type="AudioStream" uid="uid://dpdnbyv4w8epu" path="res://Audio/take_damage.wav" id="6_xfv1a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yagyl"]
 radius = 8.0
@@ -22,7 +25,10 @@ border_color = Color(0.105882354, 0.09019608, 0.08627451, 1)
 script = ExtResource("1_2vsbj")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=560444393]
+position = Vector2(0, 8)
 texture = ExtResource("1_yagyl")
+offset = Vector2(0, -8)
+script = ExtResource("3_3wtx8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1189762280]
 shape = SubResource("CircleShape2D_yagyl")
@@ -42,3 +48,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_2vsbj")
 value = 30.0
 show_percentage = false
 script = ExtResource("3_aj46g")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=91998226]
+script = ExtResource("5_00vf3")
+take_damage_sfx = ExtResource("6_xfv1a")
