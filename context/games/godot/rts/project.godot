@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="rts"
-run/main_scene="uid://b42jaxf0lblvy"
+run/main_scene="uid://2tmglonsxgde"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

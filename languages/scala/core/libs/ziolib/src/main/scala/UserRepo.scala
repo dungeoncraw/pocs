@@ -15,3 +15,5 @@ object UserRepo:
           ZIO.foreachPar(1 to 500)(id => ZIO.succeed(User(id, s"user-$id")))
         ).flatMap(ZStream.fromIterable)
     )
+  val list: ZStream[Any, Nothing, User] = ZStream.fromIterable(List(User(1, "user-1"), User(2, "user-2")))
+  
