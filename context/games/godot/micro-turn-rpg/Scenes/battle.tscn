@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bichpiihpgpae"]
+
+[ext_resource type="Texture2D" uid="uid://celvaxfrh538e" path="res://Sprites/backgroundCastles.png" id="1_w7k78"]
+[ext_resource type="Script" uid="uid://6sp12luerqsy" path="res://Scripts/character.gd" id="2_1ruyk"]
+[ext_resource type="Texture2D" uid="uid://dkq0vldjwhwnk" path="res://Sprites/Dragon.png" id="2_oxf17"]
+
+[node name="Main" type="Node2D" unique_id=2146771131]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=991897214]
+
+[node name="Background" type="TextureRect" parent="." unique_id=411105063]
+z_index = -4096
+offset_left = -843.0
+offset_top = -458.0
+offset_right = 868.0
+offset_bottom = 566.0
+texture = ExtResource("1_w7k78")
+stretch_mode = 1
+
+[node name="Character" type="Node2D" parent="." unique_id=1559943461]
+script = ExtResource("2_1ruyk")
+
+[node name="Sprite" type="Sprite2D" parent="Character" unique_id=982992363]
+texture = ExtResource("2_oxf17")
+offset = Vector2(0, -70)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Character" unique_id=1741580165]
