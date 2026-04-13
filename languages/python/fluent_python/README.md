@@ -13,4 +13,4 @@ This repository contains examples and notes from the book "Fluent Python: Clear,
 - [Chapter 7: Functions](chapter7/)
 
 
-## pages read = 268
+## pages read = 278
