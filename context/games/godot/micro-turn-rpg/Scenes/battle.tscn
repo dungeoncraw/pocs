@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://bichpiihpgpae"]
 
+[ext_resource type="Script" uid="uid://cj1sgjdp35iwl" path="res://Scripts/game_manager.gd" id="1_1otgo"]
 [ext_resource type="Texture2D" uid="uid://celvaxfrh538e" path="res://Sprites/backgroundCastles.png" id="1_w7k78"]
 [ext_resource type="Script" uid="uid://6sp12luerqsy" path="res://Scripts/character.gd" id="2_1ruyk"]
 [ext_resource type="Texture2D" uid="uid://dkq0vldjwhwnk" path="res://Sprites/Dragon.png" id="2_oxf17"]
 
 [node name="Main" type="Node2D" unique_id=2146771131]
+script = ExtResource("1_1otgo")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=991897214]
 
