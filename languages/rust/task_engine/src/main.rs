@@ -1,4 +1,5 @@
 use task_engine::tasks::{Task, TaskStatus};
+use task_engine::orchestrator::Orchestrator;
 use std::env;
 fn banner() -> &'static str {
     "Task Engine"
@@ -35,5 +36,11 @@ fn main() {
     ];
     vector[0].mark_running();
     vector[1].mark_running();
+    let mut orchestrator: Orchestrator = Orchestrator::new();
+    orchestrator.add_task(Task::new(4, "task 4".to_string()));
+    orchestrator.add_task(Task::new(5, "task 5".to_string()));
+    orchestrator.add_task(Task::new(6, "task 6".to_string()));
+    orchestrator.consume_task();
+
     list_tasks(&vector, Some(&TaskStatus::Running));
 }
