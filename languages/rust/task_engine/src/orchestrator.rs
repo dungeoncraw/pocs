@@ -11,8 +11,8 @@ impl Orchestrator {
         }
     }
 
-    pub fn add_task(&mut self, task:Task) {
-        self.tasks.push(task);
+    pub fn add_task(&mut self, task: &Task) {
+        self.tasks.push(task.clone());
     }
 
     pub fn consume_task(&mut self) {
@@ -28,5 +28,8 @@ impl Orchestrator {
     fn run_task(task: &mut Task) {
         task.mark_running();
         println!("run task: {}", task.payload);
+    }
+    pub fn find_task(tasks: &[Task], id: u64) -> Option<&Task> {
+        tasks.iter().find(|t| t.id == id)
     }
 }

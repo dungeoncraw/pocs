@@ -13,10 +13,10 @@ pub struct Task {
 }
 
 impl Task {
-    pub fn new(id: u64, payload: String) -> Self {
+    pub fn new(id: u64, payload: impl Into<String>) -> Self {
         Self {
             id,
-            payload,
+            payload: payload.into(),
             status: TaskStatus::Pending,
         }
     }
