@@ -27,7 +27,10 @@ func _process(delta: float) -> void:
 
 func begin_turn():
 	target_scale = 1.1
-	
+	if is_player:
+		print("player tur")
+	else:
+		print("ai turn")
 func end_turn():
 	target_scale = 0.9
 

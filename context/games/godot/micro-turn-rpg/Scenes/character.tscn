@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b61lfihofm2i8"]
+
+[ext_resource type="Script" uid="uid://6sp12luerqsy" path="res://Scripts/character.gd" id="1_ushfy"]
+[ext_resource type="Texture2D" uid="uid://dkq0vldjwhwnk" path="res://Sprites/Dragon.png" id="2_owm7s"]
+
+[node name="Character" type="Node2D" unique_id=164880619]
+script = ExtResource("1_ushfy")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=781541026]
+texture = ExtResource("2_owm7s")
+offset = Vector2(0, -70)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1482686895]

@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="microTurnRpg"
+run/main_scene="uid://bichpiihpgpae"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/mode=2
 
 [physics]
 
