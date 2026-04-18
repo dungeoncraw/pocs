@@ -10,6 +10,7 @@ signal OnHeal(health: int)
 @export var cur_health: int
 @export var max_health: int
 
+@export var combat_actions: Array[CombatAction]
 var target_scale: float = 1.0
 
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
@@ -40,7 +41,7 @@ func take_damage(amount: int):
 func heal (amount: int):
 	pass
 	
-func cast_combat_action(action, opponent: Character):
+func cast_combat_action(action: CombatAction, opponent: Character):
 	pass
 	
 func _play_audio(stream: AudioStream):

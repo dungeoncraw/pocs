@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CombatAction" format=3 uid="uid://dcpkjr2nt6qvr"]
+
+[ext_resource type="Script" uid="uid://d3og1tw6gdc4i" path="res://Scripts/combat_action.gd" id="1_efywh"]
+
+[resource]
+script = ExtResource("1_efywh")
+display_name = "Heavy hit"
+description = "Deals 16 damage"
+melee_damage = 15
+base_weight = 150
+metadata/_custom_type_script = "uid://d3og1tw6gdc4i"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CombatAction" format=3 uid="uid://dl0lhd00ex7ch"]
+
+[ext_resource type="Script" uid="uid://d3og1tw6gdc4i" path="res://Scripts/combat_action.gd" id="1_g4l3x"]
+
+[resource]
+script = ExtResource("1_g4l3x")
+display_name = "Slash"
+description = "Deal 8 damage"
+melee_damage = 8
+metadata/_custom_type_script = "uid://d3og1tw6gdc4i"

@@ -3,6 +3,12 @@
 [ext_resource type="Script" uid="uid://cj1sgjdp35iwl" path="res://Scripts/game_manager.gd" id="1_1otgo"]
 [ext_resource type="Texture2D" uid="uid://celvaxfrh538e" path="res://Sprites/backgroundCastles.png" id="1_w7k78"]
 [ext_resource type="PackedScene" uid="uid://b61lfihofm2i8" path="res://Scenes/character.tscn" id="3_1ruyk"]
+[ext_resource type="Script" uid="uid://d3og1tw6gdc4i" path="res://Scripts/combat_action.gd" id="4_ww2ai"]
+[ext_resource type="Resource" uid="uid://dl0lhd00ex7ch" path="res://CombatActions/slash.tres" id="5_lrv64"]
+[ext_resource type="Resource" uid="uid://dcpkjr2nt6qvr" path="res://CombatActions/heavy_hit.tres" id="6_qeyqd"]
+[ext_resource type="Resource" uid="uid://w0y7btjvveeo" path="res://CombatActions/heal.tres" id="7_k7mbx"]
+[ext_resource type="Script" uid="uid://cj7fy4toqbpk3" path="res://Scripts/combat_action_button.gd" id="8_lrv64"]
+[ext_resource type="Script" uid="uid://daw0w702a30nd" path="res://Scripts/combat_actions_ui.gd" id="8_qeyqd"]
 
 [node name="Main" type="Node2D" unique_id=2146771131 node_paths=PackedStringArray("player_character", "ai_character")]
 script = ExtResource("1_1otgo")
@@ -23,6 +29,60 @@ stretch_mode = 1
 [node name="Player_Character" parent="." unique_id=164880619 instance=ExtResource("3_1ruyk")]
 position = Vector2(-360, 0)
 is_player = true
+combat_actions = Array[ExtResource("4_ww2ai")]([ExtResource("5_lrv64"), ExtResource("6_qeyqd"), ExtResource("7_k7mbx")])
 
 [node name="AI_Character" parent="." unique_id=863924853 instance=ExtResource("3_1ruyk")]
 position = Vector2(360, 0)
+combat_actions = Array[ExtResource("4_ww2ai")]([ExtResource("5_lrv64"), ExtResource("6_qeyqd"), ExtResource("7_k7mbx")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=665364524]
+
+[node name="CombatActionsUI" type="Panel" parent="CanvasLayer" unique_id=1686093099]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -170.0
+offset_right = 225.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("8_qeyqd")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/CombatActionsUI" unique_id=644879300]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 9.0
+offset_right = 212.0
+offset_bottom = 147.0
+
+[node name="CombatActionButton" type="Button" parent="CanvasLayer/CombatActionsUI/ButtonContainer" unique_id=1231169722]
+layout_mode = 2
+text = "Slash"
+script = ExtResource("8_lrv64")
+
+[node name="CombatActionButton2" type="Button" parent="CanvasLayer/CombatActionsUI/ButtonContainer" unique_id=1917116623]
+layout_mode = 2
+text = "Slash"
+script = ExtResource("8_lrv64")
+
+[node name="CombatActionButton3" type="Button" parent="CanvasLayer/CombatActionsUI/ButtonContainer" unique_id=1499688228]
+layout_mode = 2
+text = "Slash"
+script = ExtResource("8_lrv64")
+
+[node name="PassTurnButton" type="Button" parent="CanvasLayer/CombatActionsUI/ButtonContainer" unique_id=1267912593]
+layout_mode = 2
+text = "Pass Turn"
+
+[node name="Description" type="RichTextLabel" parent="CanvasLayer/CombatActionsUI" unique_id=841403779]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 5.0
+offset_right = 436.0
+offset_bottom = 143.0
+bbcode_enabled = true
+
+[connection signal="pressed" from="CanvasLayer/CombatActionsUI/ButtonContainer/PassTurnButton" to="CanvasLayer/CombatActionsUI" method="_on_pass_turn_button_pressed"]
