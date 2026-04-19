@@ -2,6 +2,18 @@
 
 [ext_resource type="Script" uid="uid://6sp12luerqsy" path="res://Scripts/character.gd" id="1_ushfy"]
 [ext_resource type="Texture2D" uid="uid://dkq0vldjwhwnk" path="res://Sprites/Dragon.png" id="2_owm7s"]
+[ext_resource type="Script" uid="uid://n7n7bld5ianl" path="res://Scripts/character_health_bar.gd" id="3_owm7s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ushfy"]
+bg_color = Color(0.16026929, 0.16026932, 0.1602692, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owm7s"]
+bg_color = Color(0.99999994, 0.19376945, 0.74254286, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ushfy"]
+font_size = 22
+shadow_size = 3
+shadow_offset = Vector2(2, 1)
 
 [node name="Character" type="Node2D" unique_id=164880619]
 script = ExtResource("1_ushfy")
@@ -11,3 +23,26 @@ texture = ExtResource("2_owm7s")
 offset = Vector2(0, -70)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1482686895]
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1371340736]
+offset_left = -106.0
+offset_top = 18.0
+offset_right = 106.0
+offset_bottom = 45.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ushfy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_owm7s")
+value = 50.0
+show_percentage = false
+script = ExtResource("3_owm7s")
+
+[node name="HealthText" type="Label" parent="HealthBar" unique_id=61395057]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "40/50"
+label_settings = SubResource("LabelSettings_ushfy")
+horizontal_alignment = 1
+vertical_alignment = 1

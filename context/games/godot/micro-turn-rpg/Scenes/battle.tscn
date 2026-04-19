@@ -29,10 +29,14 @@ stretch_mode = 1
 [node name="Player_Character" parent="." unique_id=164880619 instance=ExtResource("3_1ruyk")]
 position = Vector2(-360, 0)
 is_player = true
+cur_health = 100
+max_health = 100
 combat_actions = Array[ExtResource("4_ww2ai")]([ExtResource("5_lrv64"), ExtResource("6_qeyqd"), ExtResource("7_k7mbx")])
 
 [node name="AI_Character" parent="." unique_id=863924853 instance=ExtResource("3_1ruyk")]
 position = Vector2(360, 0)
+cur_health = 100
+max_health = 100
 combat_actions = Array[ExtResource("4_ww2ai")]([ExtResource("5_lrv64"), ExtResource("6_qeyqd"), ExtResource("7_k7mbx")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=665364524]

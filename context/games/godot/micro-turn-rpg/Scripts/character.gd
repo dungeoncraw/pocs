@@ -36,13 +36,24 @@ func end_turn():
 	target_scale = 0.9
 
 func take_damage(amount: int):
-	pass
+	cur_health -= amount
+	OnTakeDamage.emit(cur_health)
+	_play_audio(take_damage_sfx)
 	
 func heal (amount: int):
-	pass
+	cur_health += amount
+	cur_health = clamp(cur_health, 0 , max_health)
+	OnHeal.emit(cur_health)
+	_play_audio(heal_sfx)
 	
 func cast_combat_action(action: CombatAction, opponent: Character):
-	pass
+	if action == null:
+		return
+	if action.melee_damage >0:
+		opponent.take_damage(action.melee_damage)
+	
+	if action.heal_amount > 0:
+		heal(action.heal_amount)
 	
 func _play_audio(stream: AudioStream):
 	pass
