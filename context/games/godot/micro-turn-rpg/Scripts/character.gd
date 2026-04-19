@@ -17,14 +17,19 @@ var target_scale: float = 1.0
 var take_damage_sfx: AudioStream = preload("res://Audio/take_damage.wav")
 var heal_sfx: AudioStream = preload("res://Audio/heal.wav")
 
+@export var facing_left: bool = false
+@export var display_texture: Texture2D
+@onready var sprite: Sprite2D = $Sprite
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	sprite.flip_h = facing_left
+	sprite.texture = display_texture
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	scale.x = lerp(scale.x, target_scale, delta * 10)
+	scale.y = lerp(scale.y, target_scale, delta * 10)
 
 func begin_turn():
 	target_scale = 1.1
@@ -56,4 +61,5 @@ func cast_combat_action(action: CombatAction, opponent: Character):
 		heal(action.heal_amount)
 	
 func _play_audio(stream: AudioStream):
-	pass
+	audio.stream = stream
+	audio.play()

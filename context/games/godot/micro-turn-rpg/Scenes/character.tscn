@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6sp12luerqsy" path="res://Scripts/character.gd" id="1_ushfy"]
 [ext_resource type="Texture2D" uid="uid://dkq0vldjwhwnk" path="res://Sprites/Dragon.png" id="2_owm7s"]
+[ext_resource type="Script" uid="uid://bih86lkb3m0mt" path="res://Scripts/character_visual.gd" id="3_nytcm"]
 [ext_resource type="Script" uid="uid://n7n7bld5ianl" path="res://Scripts/character_health_bar.gd" id="3_owm7s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ushfy"]
@@ -21,6 +22,7 @@ script = ExtResource("1_ushfy")
 [node name="Sprite" type="Sprite2D" parent="." unique_id=781541026]
 texture = ExtResource("2_owm7s")
 offset = Vector2(0, -70)
+script = ExtResource("3_nytcm")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1482686895]
 
