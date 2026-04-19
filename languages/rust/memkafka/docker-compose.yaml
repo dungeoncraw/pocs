@@ -40,6 +40,7 @@ services:
     environment:
       KAFKA_BOOTSTRAP_SERVERS: broker:29092
       APP_ADDR: 0.0.0.0:3000
+      RUST_LOG: info
     depends_on:
       broker:
         condition: service_healthy
