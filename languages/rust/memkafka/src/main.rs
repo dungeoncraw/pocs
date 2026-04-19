@@ -13,11 +13,12 @@ async fn main() {
 
     let app = app::build_app();
 
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
+    let addr = std::env::var("APP_ADDR").unwrap_or_else(|_| "127.0.0.1:3000".to_string());
+    let listener = tokio::net::TcpListener::bind(&addr)
         .await
         .expect("failed to bind address");
 
-    println!("Listening on http://127.0.0.1:3000");
+    println!("Listening on http://{}", addr);
     axum::serve(listener, app)
         .await
         .expect("server error");

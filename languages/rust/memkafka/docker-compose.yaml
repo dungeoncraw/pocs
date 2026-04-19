@@ -5,21 +5,55 @@ services:
     container_name: broker
     ports:
       - 9092:9092
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server 127.0.0.1:29092 --list"]
+      interval: 10s
+      timeout: 10s
+      retries: 25
+      start_period: 120s
     environment:
       # using some defaults from https://github.com/confluentinc/cp-docker-images/blob/5.5.1/examples/kafka/docker-compose.yml
 #     # going to test each parameter individually for learning purposes
-      KAFKA_BROKER_ID: 1
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,CONTROLLER://0.0.0.0:29093,PLAINTEXT_HOST://0.0.0.0:9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker:29093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_CLUSTER_ID: Jdsaj890ah7dnihDABS6DfL2Nb
       KAFKA_NODE_ID: 1
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker:29093
-      KAFKA_LISTENERS: PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
-      CLUSTER_ID: Jdsaj890ah7dnihDABS6DfL2Nb
+      KAFKA_INITIAL_BROKER_REGISTRATION_TIMEOUT_MS: 60000
+      JMX_PORT: 9101
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=broker"
+
+  app:
+    build: .
+    container_name: app
+    ports:
+      - "3000:3000"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: broker:29092
+      APP_ADDR: 0.0.0.0:3000
+    depends_on:
+      broker:
+        condition: service_healthy
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: broker:29092
+      KAFKA_CLUSTERS_0_METRICS_PORT: 9101
+      KAFKA_CLUSTERS_0_METRICS_TYPE: JMX
+    depends_on:
+      broker:
+        condition: service_healthy
