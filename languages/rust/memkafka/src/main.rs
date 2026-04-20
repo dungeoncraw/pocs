@@ -11,9 +11,9 @@ async fn main() {
     tracing_subscriber::fmt()
         .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
         .init();
-    tokio::spawn(async {
-        consumers::event::consume_event().await;
-    });
+    // start Kafka consumers
+    consumers::start_consumers();
+
     let app = app::build_app();
 
     let addr = std::env::var("APP_ADDR").unwrap_or_else(|_| "127.0.0.1:3000".to_string());
