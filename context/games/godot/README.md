@@ -1,6 +1,6 @@
 # Godot Projects Collection
 
-This repository contains various Godot 4.6 projects, ranging from simple scripting demonstrations to more complex game types.
+This repository contains a collection of Godot projects and experiments, covering 2D, 3D, audio, physics, AI, RPG, and RTS mechanics.
 
 ## Projects
 
@@ -13,6 +13,11 @@ This repository contains various Godot 4.6 projects, ranging from simple scripti
 - **Godot Version:** 4.6
 - **Type:** 2D Platformer
 - **Concept:** A full-featured platformer with multiple levels, enemies, and UI.
+
+### [3D Platformer](./3-dplatformer/README.md)
+- **Godot Version:** 4.6
+- **Type:** 3D Platformer
+- **Concept:** A 3D platforming project focused on movement, jumping, and level navigation.
 
 ### [Balloon Popper](./ballon_popper/README.md)
 - **Godot Version:** 4.6
@@ -33,3 +38,18 @@ This repository contains various Godot 4.6 projects, ranging from simple scripti
 - **Godot Version:** 4.6
 - **Type:** 3D Physics and Collision Demo
 - **Concept:** Showcasing 3D collisions and physics interactions.
+
+### [Godot Audio](./godot-audio/README.md)
+- **Godot Version:** 4.6
+- **Type:** Audio Demo
+- **Concept:** Audio-related features and sound handling in Godot.
+
+### [Micro Turn RPG](./micro-turn-rpg/README.md)
+- **Godot Version:** 4.6
+- **Type:** Turn-Based RPG Demo
+- **Concept:** A small tactical RPG experience with turn-based mechanics.
+
+### [RTS](./rts/README.md)
+- **Godot Version:** 4.6
+- **Type:** Real-Time Strategy Demo
+- **Concept:** Strategy gameplay with unit control and real-time management.
