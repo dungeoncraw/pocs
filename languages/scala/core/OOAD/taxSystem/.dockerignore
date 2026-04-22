@@ -1,0 +1,15 @@
+target/
+project/target/
+project/project/
+.idea/
+.bsp/
+.metals/
+.ammonite/
+out/
+*.class
+*.log
+.DS_Store
+.git/
+.gitignore
+docker-compose.yml
+Dockerfile
