@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cf1pwgl0y0mi6"]
+[gd_scene format=3 uid="uid://cf1pwgl0y0mi6"]
 
-[ext_resource type="Script" path="res://Player Controller/PlayerController.gd" id="1_krxqb"]
-[ext_resource type="Script" path="res://Player Controller/Interaction/InteractionController.gd" id="2_xq075"]
+[ext_resource type="Script" uid="uid://cls352h6ktfrg" path="res://Player Controller/PlayerController.gd" id="1_krxqb"]
+[ext_resource type="Script" uid="uid://bbhcjvttefbwg" path="res://Player Controller/Interaction/InteractionController.gd" id="2_xq075"]
+[ext_resource type="Script" uid="uid://clo37fn6vhiwy" path="res://Scripts/footsteps.gd" id="3_uw63c"]
+[ext_resource type="AudioStream" uid="uid://04e06cg7sxgg" path="res://Audio/Sound Effects/Footsteps/footstep03.ogg" id="4_yn5sn"]
+[ext_resource type="AudioStream" uid="uid://bfam3l24ekn07" path="res://Audio/Sound Effects/Footsteps/footstep04.ogg" id="5_wbj0i"]
+[ext_resource type="AudioStream" uid="uid://dinulh7w3kusf" path="res://Audio/Sound Effects/Footsteps/footstep06.ogg" id="6_ererc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lt5te"]
 radius = 0.3
@@ -10,22 +14,22 @@ height = 1.8
 [sub_resource type="LabelSettings" id="LabelSettings_cbwra"]
 font_size = 24
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=513107248 groups=["Player"]]
 script = ExtResource("1_krxqb")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=340863086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_lt5te")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1014118353]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 current = true
 
-[node name="InteractionController" type="RayCast3D" parent="Camera3D"]
+[node name="InteractionController" type="RayCast3D" parent="Camera3D" unique_id=263370132]
 target_position = Vector3(0, 0, -2)
 script = ExtResource("2_xq075")
 
-[node name="InteractionPrompt" type="Label" parent="Camera3D/InteractionController"]
+[node name="InteractionPrompt" type="Label" parent="Camera3D/InteractionController" unique_id=1733547659]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -40,3 +44,9 @@ grow_vertical = 2
 label_settings = SubResource("LabelSettings_cbwra")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="." unique_id=2142243346]
+volume_db = -15.0
+bus = &"SFX"
+script = ExtResource("3_uw63c")
+footstep_sounds = Array[AudioStream]([ExtResource("4_yn5sn"), ExtResource("5_wbj0i"), ExtResource("6_ererc")])

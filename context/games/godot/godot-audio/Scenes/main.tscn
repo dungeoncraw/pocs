@@ -3,6 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://cf1pwgl0y0mi6" path="res://Player Controller/Player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://crvwglv0qgjy0" path="res://City/CityMap.tscn" id="2_bo1nx"]
 [ext_resource type="AudioStream" uid="uid://c23ls77ap1eb8" path="res://Audio/Sound Effects/StreetAmbience (2).ogg" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://b8qsbv5kdad0o" path="res://Scripts/taxi.gd" id="4_21xkr"]
+[ext_resource type="PackedScene" uid="uid://dwt2me8jiwhde" path="res://City/Models/taxi.glb" id="4_jjvhh"]
+[ext_resource type="AudioStream" uid="uid://cv0q3i16m4gyq" path="res://Audio/Sound Effects/Car_Engine_Loop.ogg" id="5_kry3j"]
+[ext_resource type="AudioStream" uid="uid://bxel47geti0y8" path="res://Audio/Music/Alexander Ehlers - Twists.mp3" id="7_6bp64"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -21,6 +25,8 @@ fog_enabled = true
 fog_light_color = Color(0.35181767, 0.6217813, 0.40567306, 1)
 fog_density = 0.05
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_6bp64"]
+
 [node name="Main" type="Node3D" unique_id=890257976]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1386607816]
@@ -35,7 +41,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21622062, 1.1920929e-07, -
 
 [node name="CityMap" parent="." unique_id=1913202174 instance=ExtResource("2_bo1nx")]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=591636731]
+[node name="Ambience" type="AudioStreamPlayer3D" parent="." unique_id=591636731]
 stream = ExtResource("3_8gbba")
 volume_db = -31.452
 autoplay = true
+bus = &"SFX"
+
+[node name="Taxi" type="Area3D" parent="." unique_id=1961985371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91362584, -23.337738)
+script = ExtResource("4_21xkr")
+
+[node name="taxi2" parent="Taxi" unique_id=2083320301 instance=ExtResource("4_jjvhh")]
+
+[node name="CarAudio" type="AudioStreamPlayer3D" parent="Taxi" unique_id=1644148473]
+stream = ExtResource("5_kry3j")
+volume_db = -15.0
+autoplay = true
+max_distance = 50.0
+bus = &"SFX"
+doppler_tracking = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=877342919]
+stream = ExtResource("7_6bp64")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
+
+[node name="ReverbZone" type="Area3D" parent="." unique_id=974735434]
+transform = Transform3D(14.615037, 0, 0, 0, 1, 0, 0, 0, 3.8188329, -12.2591915, 0, -14.553375)
+reverb_bus_enabled = true
+reverb_bus_name = &"SFX Reverb"
+reverb_bus_amount = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReverbZone" unique_id=792796316]
+shape = SubResource("BoxShape3D_6bp64")
