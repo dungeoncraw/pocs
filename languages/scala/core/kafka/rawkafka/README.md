@@ -71,7 +71,7 @@ List topics:
 
 Run the Scala consumer from this project with sbt:
 
-    sbt "runMain KafkaConsumer test-topic localhost:9092 scala-consumer"
+    sbt "run orders localhost:9092 orders-consumer"
 
 ## Run a Producer
 

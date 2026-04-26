@@ -7,6 +7,7 @@ lazy val root = (project in file("."))
     name := "rawkafka",
     idePackagePrefix := Some("com.tetokeguii.rawkafka"),
     libraryDependencies ++= Seq(
-      "org.apache.kafka" % "kafka-clients" % "4.2.0"
+      "org.apache.kafka" % "kafka-clients" % "4.2.0",
+      "org.scalatest" %% "scalatest" % "3.2.20" % Test
     )
   )
