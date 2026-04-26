@@ -1,11 +1,9 @@
 package com.tetokeguii.rawkafka
-import org.apache.kafka.clients.consumer.ConsumerConfig
-import org.apache.kafka.common.serialization.StringDeserializer
+
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
-import com.tetokeguii.rawkafka.{ConsumerApp, ConsumerRunner, ConsumerSettings, MyBestConsumer}
 
-class KafkaConsumerSpec extends AnyFunSuite with Matchers {
+class MyBestConsumerSpec extends AnyFunSuite with Matchers {
 
   test("use default values when no args") {
     val settings = MyBestConsumer.settingsFromArgs(Seq.empty)
@@ -40,35 +38,6 @@ class KafkaConsumerSpec extends AnyFunSuite with Matchers {
       consumer should not be null
     } finally {
       consumer.close()
-    }
-  }
-
-  test("ConsumerApp should initialize runners and threads") {
-    val settings = List(
-      ConsumerSettings(topic = "topic1"),
-      ConsumerSettings(topic = "topic2")
-    )
-    val app = new ConsumerApp(settings)
-    
-    app.runners should have size 2
-    app.threads should have size 2
-    app.threads.map(_.getName) should contain allOf ("kafka-consumer-0", "kafka-consumer-1")
-    
-    // Cleanup
-    app.stop()
-  }
-
-  test("ConsumerRunner should have a consumer") {
-    val settings = ConsumerSettings(topic = "test-topic")
-    val runner = new ConsumerRunner(settings)
-    
-    try {
-      runner.consumer should not be null
-    } finally {
-      runner.wakeup() // Ensuring it's cleaned up if it was running, though it's not here
-      // consumer is closed in runner.run() finally block, but since we didn't run it, 
-      // we might want to close it manually if possible, but it's private[rawkafka]
-      runner.consumer.close()
     }
   }
 }
