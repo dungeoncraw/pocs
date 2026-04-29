@@ -3,7 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://clmc2gl23psud" path="res://Sprites/Tiles/Tileset.png" id="1_8gbba"]
 [ext_resource type="Script" uid="uid://covaliw6mscs0" path="res://Scripts/player.gd" id="1_bo1nx"]
 [ext_resource type="Texture2D" uid="uid://bip5h7afnmsil" path="res://Sprites/Player/Player.png" id="1_jjgbg"]
-[ext_resource type="PackedScene" uid="uid://beq5h6xrxtdw0" path="res://Scenes/crop.tscn" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://cbr4o60mk6u6p" path="res://Scripts/farm_manager.gd" id="1_kry3j"]
+[ext_resource type="Script" uid="uid://c8xnjpgyv7bx3" path="res://Scripts/player_tools.gd" id="5_21xkr"]
+[ext_resource type="PackedScene" uid="uid://cbwquujc6csf1" path="res://Scenes/tool_button.tscn" id="6_21xkr"]
+[ext_resource type="Texture2D" uid="uid://bonhgl8jebn4b" path="res://Sprites/UI/Hoe_Icon.png" id="7_6bp64"]
+[ext_resource type="Texture2D" uid="uid://riiqmkcmfrut" path="res://Sprites/UI/WaterBucket_Icon.png" id="8_344ge"]
+[ext_resource type="Texture2D" uid="uid://bqtixg7eoxxxx" path="res://Sprites/UI/Scythe_Icon.png" id="9_ynf5e"]
+[ext_resource type="Resource" uid="uid://dy6p3hqo2pgjo" path="res://Crops/tomato.tres" id="10_6iyac"]
+[ext_resource type="Texture2D" uid="uid://cxlr0viy7587p" path="res://Sprites/UI/TomatoSeed_Icon.png" id="10_d1ilt"]
+[ext_resource type="Texture2D" uid="uid://dw2gwpdugq52s" path="res://Sprites/UI/CornSeed_Icon.png" id="11_6iyac"]
+[ext_resource type="Resource" uid="uid://cb2lyw3yg64c" path="res://Crops/corn.tres" id="12_fdnlq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jjvhh"]
 texture = ExtResource("1_8gbba")
@@ -190,6 +199,7 @@ animations = [{
 [node name="Main" type="Node2D" unique_id=1750557409]
 
 [node name="FarmManager" type="Node" parent="." unique_id=151442572]
+script = ExtResource("1_kry3j")
 
 [node name="FarmTileMap" type="TileMapLayer" parent="FarmManager" unique_id=236848935]
 z_index = -100
@@ -203,10 +213,72 @@ zoom = Vector2(4, 4)
 script = ExtResource("1_bo1nx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=2033757479]
+position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_jjgbg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=117415394]
+z_index = 10
+position = Vector2(0, -5.5)
 sprite_frames = SubResource("SpriteFrames_8gbba")
-animation = &"walk_up"
+animation = &"idle_down"
 
-[node name="Crop" parent="." unique_id=1773554505 instance=ExtResource("4_jjvhh")]
+[node name="Tools" type="Node2D" parent="Player" unique_id=1323064917]
+script = ExtResource("5_21xkr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2052616132]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=438714471]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -136.0
+offset_right = 310.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="Hoe" parent="CanvasLayer/HBoxContainer" unique_id=1884260327 instance=ExtResource("6_21xkr")]
+layout_mode = 2
+
+[node name="Icon" parent="CanvasLayer/HBoxContainer/Hoe" index="0" unique_id=403605213]
+texture = ExtResource("7_6bp64")
+
+[node name="WaterBucket" parent="CanvasLayer/HBoxContainer" unique_id=1776111040 instance=ExtResource("6_21xkr")]
+layout_mode = 2
+tool = 1
+
+[node name="Icon" parent="CanvasLayer/HBoxContainer/WaterBucket" index="0" unique_id=403605213]
+texture = ExtResource("8_344ge")
+
+[node name="Scythe" parent="CanvasLayer/HBoxContainer" unique_id=699369673 instance=ExtResource("6_21xkr")]
+layout_mode = 2
+tool = 2
+
+[node name="Icon" parent="CanvasLayer/HBoxContainer/Scythe" index="0" unique_id=403605213]
+texture = ExtResource("9_ynf5e")
+
+[node name="TomatoSeed" parent="CanvasLayer/HBoxContainer" unique_id=42071567 instance=ExtResource("6_21xkr")]
+layout_mode = 2
+tool = 3
+seed = ExtResource("10_6iyac")
+
+[node name="Icon" parent="CanvasLayer/HBoxContainer/TomatoSeed" index="0" unique_id=403605213]
+texture = ExtResource("10_d1ilt")
+
+[node name="CornSeed" parent="CanvasLayer/HBoxContainer" unique_id=1067910569 instance=ExtResource("6_21xkr")]
+layout_mode = 2
+tool = 3
+seed = ExtResource("12_fdnlq")
+
+[node name="Icon" parent="CanvasLayer/HBoxContainer/CornSeed" index="0" unique_id=403605213]
+texture = ExtResource("11_6iyac")
+
+[editable path="CanvasLayer/HBoxContainer/Hoe"]
+[editable path="CanvasLayer/HBoxContainer/WaterBucket"]
+[editable path="CanvasLayer/HBoxContainer/Scythe"]
+[editable path="CanvasLayer/HBoxContainer/TomatoSeed"]
+[editable path="CanvasLayer/HBoxContainer/CornSeed"]
