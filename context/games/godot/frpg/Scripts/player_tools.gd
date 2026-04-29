@@ -16,8 +16,8 @@ var current_seed: CropData
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	current_tool = Tool.HOE
-
+	GameManager.SetPlayerTool.connect(_set_tool)
+	GameManager.SetPlayerTool.emit.call_deferred(Tool.HOE, null)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
