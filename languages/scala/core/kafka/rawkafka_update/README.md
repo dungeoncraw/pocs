@@ -91,6 +91,66 @@ Type a message and press Enter:
 
 The message should appear in the consumer terminal.
 
+## Update Topic Partitions
+
+If you created a topic with one partition and now need to update it to 5 partitions:
+
+    bin/kafka-topics.sh \
+      --alter \
+      --topic test-topic \
+      --bootstrap-server localhost:9092 \
+      --partitions 5
+
+To verify the change:
+
+    bin/kafka-topics.sh \
+      --describe \
+      --topic test-topic \
+      --bootstrap-server localhost:9092
+
+## Simulating Multiple Consumers (Consumer Group)
+
+To see how five consumers for the same group receive messages, open five separate terminals and run the consumer in each:
+
+    # Terminal 1 to 5
+    sbt "run test-topic localhost:9092 my-group"
+
+When you send messages using the producer, they will be distributed among the consumers. Since there are five partitions and five consumers, each consumer should be assigned to exactly one partition.
+
+If you have more consumers than partitions, some consumers will be idle. If you have fewer consumers than partitions, some consumers will read from multiple partitions.
+
+## Scenario: 5 Partitions, 2 Consumers, 100 Messages
+
+To simulate a scenario with 5 partitions and only 2 consumers:
+
+1.  **Ensure you have 5 partitions** for `test-topic` (see "Update Topic Partitions" above).
+2.  **Open two terminals** and run the consumer in each using the same group ID:
+
+    ```bash
+    # Terminal 1 and 2
+    sbt "run test-topic localhost:9092 group-scenario-2"
+    ```
+
+3.  **Send 100 messages** using a bash loop in a third terminal:
+
+    ```bash
+    cd ~/kafka_2.13-4.2.0
+    for i in {1..100}; do
+      echo "message-$i" | bin/kafka-console-producer.sh \
+        --topic test-topic \
+        --bootstrap-server localhost:9092
+    done
+    ```
+
+    **Alternatively, send messages in parallel** using the provided script:
+
+    ```bash
+    ./send_messages_parallel.sh
+    ```
+
+**Observation:**
+Since there are 5 partitions and only 2 consumers, Kafka will distribute the 5 partitions between the 2 consumers. Typically, one consumer will handle 3 partitions and the other will handle 2 partitions. You will see both consumers receiving messages from their assigned partitions.
+
 ## Stop Kafka
 
 In the terminal where Kafka is running, press:
