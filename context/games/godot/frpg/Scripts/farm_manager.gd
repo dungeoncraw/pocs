@@ -25,6 +25,12 @@ var tile_atlas_coords: Dictionary[TileType, Vector2i] = {
 	TileType.TILLED_WATERED: Vector2i(0,1)
 }
 
+#sounds
+@onready var till_sound: AudioStreamPlayer = $TillSound
+@onready var plant_seed_sound: AudioStreamPlayer = $PlantSeedSound
+@onready var harvest_sound: AudioStreamPlayer = $HarvestSound
+@onready var water_sound: AudioStreamPlayer = $WaterSound
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# connect signals
@@ -62,6 +68,7 @@ func try_till_tile(player_pos: Vector2):
 	if tile_info[coords].tilled:
 		return
 	_set_tile_state(coords, TileType.TILLED)
+	till_sound.play()
 
 func try_water_tile(player_pos: Vector2):
 	var coords: Vector2i = tile_map.local_to_map(player_pos)
@@ -70,6 +77,7 @@ func try_water_tile(player_pos: Vector2):
 		return
 	
 	_set_tile_state(coords, TileType.TILLED_WATERED)
+	water_sound.play()
 	
 	if tile_info[coords].crop:
 		tile_info[coords].crop.watered = true
@@ -91,6 +99,7 @@ func try_seed_tile(player_pos: Vector2, crop_data: CropData):
 	crop.set_crop(crop_data, is_tile_watered(coords), coords)
 	tile_info[coords].crop = crop
 	GameManager.consume_seed(crop_data)
+	plant_seed_sound.play()
 	
 
 func try_harvest_tile(player_pos: Vector2):
@@ -101,6 +110,8 @@ func try_harvest_tile(player_pos: Vector2):
 		return
 	GameManager.harverst_crop(tile_info[coords].crop)
 	tile_info[coords].crop = null
+	
+	harvest_sound.play()
 
 func is_tile_watered(player_pos: Vector2) -> bool:
 	var coords: Vector2i = tile_map.local_to_map(player_pos)
