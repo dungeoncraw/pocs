@@ -5,5 +5,8 @@ lazy val root = (project in file("."))
   .settings(
     name := "logger",
     idePackagePrefix := Some("com.tetokeguii.logger"),
-    libraryDependencies += "com.typesafe" % "config" % "1.4.3"
+    libraryDependencies ++= Seq(
+      "com.typesafe" % "config" % "1.4.3",
+      "org.scalameta" %% "munit" % "1.0.0" % Test
+    )
   )
