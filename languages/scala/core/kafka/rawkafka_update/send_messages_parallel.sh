@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Kafka directory (adjust if necessary)
-KAFKA_DIR=~/kafka_2.13-4.2.0
+KAFKA_DIR=~/Downloads/kafka_2.13-4.2.0
 TOPIC="test-topic"
 BOOTSTRAP_SERVER="localhost:9092"
 MSG_COUNT=100

@@ -48,8 +48,7 @@ class LogPipelineTests extends FunSuite {
     val pipeline = new DefaultLogPipeline(asyncConfig, List(sink))
 
     pipeline.process(LogEvent(LogLevel.Error, "error message"))
-    
-    // Since it's async, we might need to wait a bit
+
     var attempts = 0
     while (sink.events.isEmpty && attempts < 10) {
       Thread.sleep(100)
