@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c4kadli2j1x3m"]
+
+[ext_resource type="Script" uid="uid://bt83jr3e7c1a6" path="res://Scripts/bullet.gd" id="1_oduel"]
+[ext_resource type="Texture2D" uid="uid://brqmxmo7w4s03" path="res://Sprites/Spritesheet.png" id="2_ycag2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
+size = Vector2(19, 4)
+
+[node name="Bullet" type="Area2D" unique_id=450513372]
+script = ExtResource("1_oduel")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1751751877]
+texture = ExtResource("2_ycag2")
+region_enabled = true
+region_rect = Rect2(1476, 332, 21, 7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=849354140]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_bo1nx")
+
+[node name="DestroyTimer" type="Timer" parent="." unique_id=1271638464]
+wait_time = 4.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
