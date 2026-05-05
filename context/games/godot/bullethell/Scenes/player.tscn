@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://byaw7uj4y1t1h" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://brqmxmo7w4s03" path="res://Sprites/Spritesheet.png" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://x2i4dm8qobl5" path="res://Scripts/node_pool.gd" id="3_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://c4kadli2j1x3m" path="res://Scenes/bullet.tscn" id="4_vgqql"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jjgbg"]
 
@@ -20,3 +22,7 @@ shape = SubResource("CapsuleShape2D_jjgbg")
 
 [node name="Muzzle" type="Node2D" parent="." unique_id=1657630347]
 position = Vector2(0, -12)
+
+[node name="PlayerBulletPool" type="Node" parent="." unique_id=1659542582]
+script = ExtResource("3_6t5aa")
+node_scene = ExtResource("4_vgqql")

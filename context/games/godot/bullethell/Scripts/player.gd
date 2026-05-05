@@ -13,8 +13,7 @@ extends CharacterBody2D
 var last_shoot_time: float
 var move_input: Vector2
 
-#temp
-var bullet_scene: PackedScene = preload("res://Scenes/bullet.tscn")
+@onready var bullet_pool = $PlayerBulletPool
 
 func _physics_process(delta: float) -> void:
 	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -36,8 +35,7 @@ func _process(delta: float) -> void:
 
 func _shoot():
 	last_shoot_time = Time.get_unix_time_from_system()
-	var bullet = bullet_scene.instantiate()
-	get_tree().root.add_child(bullet)
+	var bullet = bullet_pool.spawn()
 	
 	bullet.global_position = muzzle.global_position
 	var mouse_pos = get_global_mouse_position()

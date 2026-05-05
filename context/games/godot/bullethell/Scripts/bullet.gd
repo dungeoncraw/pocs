@@ -22,4 +22,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_destroy_timer_timeout() -> void:
-	queue_free()
+	visible = false
+
+
+func _on_visibility_changed() -> void:
+	if visible == true and destroy_timer:
+		destroy_timer.start()
