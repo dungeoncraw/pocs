@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://brqmxmo7w4s03" path="res://Sprites/Spritesheet.png" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://c42npmcamptwh" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://b2kagau3gta1l" path="res://Scripts/camera_controller.gd" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://duh0qmlgepthe" path="res://Scenes/enemy.tscn" id="4_jjvhh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("1_jjgbg")
@@ -2914,6 +2915,7 @@ tile_map_data = PackedByteArray("AADm/+z/AAAbAA4AAADm/+3/AAAZAA4AAADm/+7/AAAgAA4
 tile_set = SubResource("TileSet_8gbba")
 
 [node name="Player" parent="." unique_id=226614802 instance=ExtResource("2_bo1nx")]
+position = Vector2(205, -3)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=738408826]
 zoom = Vector2(2, 2)
@@ -2923,3 +2925,6 @@ limit_right = 1150
 limit_bottom = 1150
 editor_draw_limits = true
 script = ExtResource("3_8gbba")
+
+[node name="Enemy" parent="." unique_id=1651008704 instance=ExtResource("4_jjvhh")]
+position = Vector2(0, 257)
