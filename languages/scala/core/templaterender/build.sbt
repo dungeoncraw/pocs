@@ -5,6 +5,8 @@ lazy val root = (project in file("."))
     name := "templaterender",
     idePackagePrefix := Some("com.tetokeguii.templaterender"),
     libraryDependencies ++= Seq(
-      "com.lihaoyi" %% "upickle" % "4.4.3"
+      "com.lihaoyi" %% "upickle" % "4.4.3",
+      "com.lihaoyi" %% "scalatags" % "0.13.1",
+      "org.scalatest" %% "scalatest" % "3.2.20" % Test
     )
   )
