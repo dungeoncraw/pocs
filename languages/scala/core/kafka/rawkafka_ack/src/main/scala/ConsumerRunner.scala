@@ -27,6 +27,10 @@ final class ConsumerRunner(settings: ConsumerSettings) {
             s"topic=${record.topic()}, partition=${record.partition()}, offset=${record.offset()}, key=${record.key()}, value=${record.value()}"
           )
           process(record.value())
+          if (record.value() == "crash-before-commit") {
+            println("Simulating JVM crash before offset commit")
+            Runtime.getRuntime.halt(1)
+          }
         }
         if (!records.isEmpty) {
           settings.ackMode match {
