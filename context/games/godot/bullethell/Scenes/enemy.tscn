@@ -2,16 +2,20 @@
 
 [ext_resource type="Script" uid="uid://diyohqxu417gw" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://brqmxmo7w4s03" path="res://Sprites/Spritesheet.png" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://x2i4dm8qobl5" path="res://Scripts/node_pool.gd" id="3_afpow"]
+[ext_resource type="PackedScene" uid="uid://db5q1yplrihsr" path="res://Scenes/enemy_bullet.tscn" id="4_287tu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gbba"]
 radius = 12.0415945
 
-[node name="Enemy" type="CharacterBody2D" unique_id=1651008704]
+[node name="Enemy" type="CharacterBody2D" unique_id=1651008704 groups=["Enemy"]]
 script = ExtResource("1_1f0kj")
 max_speed = 50.0
 acceleration = 10.0
 drag = 0.9
 stop_range = 100.0
+shoot_rate = 0.5
+shoot_range = 250.0
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=766216729]
 position = Vector2(0, 8)
@@ -23,9 +27,13 @@ region_rect = Rect2(801, 192, 28, 31)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1259829872]
 shape = SubResource("CircleShape2D_8gbba")
 
-[node name="Muzzle" type="Node2D" parent="." unique_id=1444447397]
+[node name="Muzzle" type="Node2D" parent="." unique_id=1444447397 groups=["Enemy"]]
 position = Vector2(0, -9)
 
 [node name="EnemyBulletPool" type="Node" parent="." unique_id=1939764857]
+script = ExtResource("3_afpow")
+node_scene = ExtResource("4_287tu")
 
 [node name="AvoidanceRay" type="RayCast2D" parent="." unique_id=2065064283]
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

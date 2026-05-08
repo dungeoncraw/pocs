@@ -18,8 +18,12 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
-
+	if body.is_in_group(owner_group):
+		return
+		
+	if body.has_method("take_damage"):
+		body.take_damage(1)
+	visible = false
 
 func _on_destroy_timer_timeout() -> void:
 	visible = false

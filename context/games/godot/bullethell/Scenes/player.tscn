@@ -23,6 +23,6 @@ shape = SubResource("CapsuleShape2D_jjgbg")
 [node name="Muzzle" type="Node2D" parent="." unique_id=1657630347]
 position = Vector2(0, -12)
 
-[node name="PlayerBulletPool" type="Node" parent="." unique_id=1659542582]
+[node name="PlayerBulletPool" type="Node" parent="." unique_id=1659542582 groups=["Player"]]
 script = ExtResource("3_6t5aa")
 node_scene = ExtResource("4_vgqql")

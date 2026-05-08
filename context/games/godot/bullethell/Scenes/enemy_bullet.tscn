@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://db5q1yplrihsr"]
+
+[ext_resource type="PackedScene" uid="uid://c4kadli2j1x3m" path="res://Scenes/bullet.tscn" id="1_tcvu8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcvu8"]
+size = Vector2(13, 14)
+
+[node name="Bullet" unique_id=450513372 instance=ExtResource("1_tcvu8")]
+owner_group = "Enemy"
+
+[node name="Sprite" parent="." index="0" unique_id=1751751877]
+region_rect = Rect2(1073, 847, 14, 18)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=849354140]
+shape = SubResource("RectangleShape2D_tcvu8")

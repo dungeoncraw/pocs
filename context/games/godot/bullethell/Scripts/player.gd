@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export var current_hp: int = 50
+@export var max_hp: int = 50
+
 @export var max_speed: float = 100.0
 @export var acceleration: float = 0.2
 @export var braking: float = 0.15
@@ -42,3 +45,8 @@ func _shoot():
 	var mouse_dir = muzzle.global_position.direction_to(mouse_pos)
 	
 	bullet.move_dir = mouse_dir
+
+func take_damage(damage: int):
+	current_hp -= damage
+	if current_hp <= 0:
+		print("game over")

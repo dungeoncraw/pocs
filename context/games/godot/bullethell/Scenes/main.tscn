@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://c42npmcamptwh" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://b2kagau3gta1l" path="res://Scripts/camera_controller.gd" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://duh0qmlgepthe" path="res://Scenes/enemy.tscn" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://qg653yx463oo" path="res://Scripts/enemy_spawner.gd" id="5_kry3j"]
+[ext_resource type="Script" uid="uid://x2i4dm8qobl5" path="res://Scripts/node_pool.gd" id="6_21xkr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("1_jjgbg")
@@ -2928,3 +2930,29 @@ script = ExtResource("3_8gbba")
 
 [node name="Enemy" parent="." unique_id=1651008704 instance=ExtResource("4_jjvhh")]
 position = Vector2(0, 257)
+
+[node name="EnemySpawner" type="Node" parent="." unique_id=61686560 node_paths=PackedStringArray("enemy_pool", "spawn_points")]
+script = ExtResource("5_kry3j")
+enemy_pool = NodePath("EnemyPool")
+spawn_points = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2"), NodePath("EnemySpawnPoint3"), NodePath("EnemySpawnPoint4")]
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawner" unique_id=836063827]
+one_shot = true
+
+[node name="EnemyPool" type="Node" parent="EnemySpawner" unique_id=809923825]
+script = ExtResource("6_21xkr")
+node_scene = ExtResource("4_jjvhh")
+
+[node name="EnemySpawnPoint" type="Node2D" parent="EnemySpawner" unique_id=685181655]
+position = Vector2(-160, -159)
+
+[node name="EnemySpawnPoint2" type="Node2D" parent="EnemySpawner" unique_id=465661341]
+position = Vector2(160, -159)
+
+[node name="EnemySpawnPoint3" type="Node2D" parent="EnemySpawner" unique_id=1157274674]
+position = Vector2(160, 160)
+
+[node name="EnemySpawnPoint4" type="Node2D" parent="EnemySpawner" unique_id=702165176]
+position = Vector2(-158, 162)
+
+[connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]

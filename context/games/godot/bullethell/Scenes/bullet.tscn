@@ -8,6 +8,7 @@ size = Vector2(19, 4)
 
 [node name="Bullet" type="Area2D" unique_id=450513372]
 script = ExtResource("1_oduel")
+owner_group = "Player"
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1751751877]
 texture = ExtResource("2_ycag2")
