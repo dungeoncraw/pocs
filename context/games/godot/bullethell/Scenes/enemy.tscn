@@ -8,7 +8,14 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gbba"]
 radius = 12.0415945
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_287tu"]
+bg_color = Color(0.5418674, 0.628687, 0.5357483, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0830c"]
+bg_color = Color(0.85591036, 0.11896869, 2.8878452e-07, 1)
+
 [node name="Enemy" type="CharacterBody2D" unique_id=1651008704 groups=["Enemy"]]
+collision_mask = 6
 script = ExtResource("1_1f0kj")
 max_speed = 50.0
 acceleration = 10.0
@@ -35,5 +42,17 @@ script = ExtResource("3_afpow")
 node_scene = ExtResource("4_287tu")
 
 [node name="AvoidanceRay" type="RayCast2D" parent="." unique_id=2065064283]
+collision_mask = 5
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=643227612]
+offset_left = -10.0
+offset_top = -21.0
+offset_right = 10.0
+offset_bottom = -19.0
+theme_override_styles/background = SubResource("StyleBoxFlat_287tu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0830c")
+max_value = 50.0
+value = 10.0
+show_percentage = false
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

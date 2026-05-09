@@ -8,6 +8,9 @@ extends CharacterBody2D
 @export var drag: float
 @export var stop_range: float
 @export var shoot_rate: float
+@export var shoot_range: float
+@export var flip_sprite: bool = false
+
 var last_shoot_time: float
 
 @onready var player = get_tree().get_first_node_in_group("Player")
@@ -15,19 +18,35 @@ var last_shoot_time: float
 @onready var sprite: Sprite2D = $Sprite
 @onready var bullet_pool = $EnemyBulletPool
 @onready var muzzle = $Muzzle
-@export var shoot_range: float
+@onready var health_bar: ProgressBar = $HealthBar
 
 var player_dist: float
 var player_dir: Vector2
 
+func _ready() -> void:
+	health_bar.max_value = max_hp
+	health_bar.value = current_hp
+
 func _process(delta: float) -> void:
 	player_dist = global_position.distance_to(player.global_position)
 	player_dir =  global_position.direction_to(player.global_position)
-	sprite.flip_h = player_dir.x < 0
+	if flip_sprite:
+		sprite.flip_h = player_dir.x < 0
+	else:
+		sprite.flip_h = player_dir.x < 0
 	if player_dist < shoot_range:
 		if Time.get_unix_time_from_system() - last_shoot_time > shoot_rate:
 			_shoot()
-	
+	_move_wooble()
+
+func _move_wooble():
+	if velocity.length() == 0:
+		sprite.rotation_degrees = 0
+		return
+	var t = Time.get_unix_time_from_system()
+	var rot = sin(t * 20) * 2
+	sprite.rotation_degrees = rot
+
 func _physics_process(delta: float) -> void:
 	var move_direction = player_dir
 	var local_avoidance = _local_avoidance()
@@ -65,13 +84,22 @@ func take_damage(damage: int):
 	current_hp -= damage
 	if current_hp <= 0:
 		visible = false
+	else:
+		_damage_flash()
+		health_bar.value = current_hp
 
+func _damage_flash():
+	sprite.modulate = Color.BLACK
+	await get_tree().create_timer(0.05).timeout
+	sprite.modulate = Color.WHITE
 
 func _on_visibility_changed() -> void:
 	if visible:
 		set_process(true)
 		set_physics_process(true)
 		current_hp = max_hp
+		if health_bar:
+			health_bar.value = current_hp
 	else:
 		# stop processing the current node	
 		set_process(false)

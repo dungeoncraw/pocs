@@ -7,7 +7,14 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jjgbg"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgqql"]
+bg_color = Color(0.5418674, 0.628687, 0.5357483, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkybt"]
+bg_color = Color(0.85591036, 0.11896869, 2.8878452e-07, 1)
+
 [node name="Player" type="CharacterBody2D" unique_id=226614802 groups=["Player"]]
+collision_mask = 6
 script = ExtResource("1_cvnsp")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=896904318]
@@ -26,3 +33,14 @@ position = Vector2(0, -12)
 [node name="PlayerBulletPool" type="Node" parent="." unique_id=1659542582 groups=["Player"]]
 script = ExtResource("3_6t5aa")
 node_scene = ExtResource("4_vgqql")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=2052429902]
+offset_left = -20.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_vgqql")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fkybt")
+max_value = 50.0
+value = 10.0
+show_percentage = false

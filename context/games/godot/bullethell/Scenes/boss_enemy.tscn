@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://5e63qksdc65o"]
+
+[ext_resource type="PackedScene" uid="uid://duh0qmlgepthe" path="res://Scenes/enemy.tscn" id="1_54mmy"]
+[ext_resource type="PackedScene" uid="uid://b04kinhovqbfw" path="res://Scenes/boss_bullet.tscn" id="2_hu4bx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_54mmy"]
+radius = 11.0
+
+[node name="Enemy" unique_id=1651008704 instance=ExtResource("1_54mmy")]
+current_hp = 20
+max_hp = 20
+max_speed = 30.0
+shoot_rate = 0.1
+flip_sprite = true
+
+[node name="Sprite" parent="." index="0" unique_id=766216729]
+position = Vector2(0, 5)
+region_rect = Rect2(1444, 31, 24, 30)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1259829872]
+shape = SubResource("CircleShape2D_54mmy")
+
+[node name="EnemyBulletPool" parent="." index="3" unique_id=1939764857]
+node_scene = ExtResource("2_hu4bx")

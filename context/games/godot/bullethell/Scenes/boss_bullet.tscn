@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b04kinhovqbfw"]
+
+[ext_resource type="PackedScene" uid="uid://db5q1yplrihsr" path="res://Scenes/enemy_bullet.tscn" id="1_bxm02"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bxm02"]
+radius = 5.0
+
+[node name="Bullet" unique_id=450513372 instance=ExtResource("1_bxm02")]
+
+[node name="Sprite" parent="." index="0" unique_id=1751751877]
+region_rect = Rect2(2015, 1224, 15, 18)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=849354140]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_bxm02")

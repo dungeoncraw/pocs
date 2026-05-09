@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 func _create_new() -> Node2D:
 	var node = node_scene.instantiate()
 	cached_nodes.append(node)
-	get_tree().get_root().add_child(node)
+	get_tree().get_root().add_child.call_deferred(node)
 	return node
 	
 	

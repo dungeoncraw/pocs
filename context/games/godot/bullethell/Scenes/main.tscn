@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://duh0qmlgepthe" path="res://Scenes/enemy.tscn" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://qg653yx463oo" path="res://Scripts/enemy_spawner.gd" id="5_kry3j"]
 [ext_resource type="Script" uid="uid://x2i4dm8qobl5" path="res://Scripts/node_pool.gd" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://5e63qksdc65o" path="res://Scenes/boss_enemy.tscn" id="7_6bp64"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("1_jjgbg")
@@ -2910,6 +2911,11 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_bo1nx")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bp64"]
+size = Vector2(256, 255)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6bp64"]
+
 [node name="Main" type="Node2D" unique_id=1849661644]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=486325561]
@@ -2928,12 +2934,10 @@ limit_bottom = 1150
 editor_draw_limits = true
 script = ExtResource("3_8gbba")
 
-[node name="Enemy" parent="." unique_id=1651008704 instance=ExtResource("4_jjvhh")]
-position = Vector2(0, 257)
-
-[node name="EnemySpawner" type="Node" parent="." unique_id=61686560 node_paths=PackedStringArray("enemy_pool", "spawn_points")]
+[node name="EnemySpawner" type="Node" parent="." unique_id=61686560 node_paths=PackedStringArray("enemy_pools", "spawn_points")]
 script = ExtResource("5_kry3j")
-enemy_pool = NodePath("EnemyPool")
+enemy_pools = [NodePath("EnemyPool"), NodePath("BossPool")]
+enemy_spawn_weigths = Array[int]([10, 1])
 spawn_points = [NodePath("EnemySpawnPoint"), NodePath("EnemySpawnPoint2"), NodePath("EnemySpawnPoint3"), NodePath("EnemySpawnPoint4")]
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawner" unique_id=836063827]
@@ -2942,6 +2946,10 @@ one_shot = true
 [node name="EnemyPool" type="Node" parent="EnemySpawner" unique_id=809923825]
 script = ExtResource("6_21xkr")
 node_scene = ExtResource("4_jjvhh")
+
+[node name="BossPool" type="Node" parent="EnemySpawner" unique_id=1662251147]
+script = ExtResource("6_21xkr")
+node_scene = ExtResource("7_6bp64")
 
 [node name="EnemySpawnPoint" type="Node2D" parent="EnemySpawner" unique_id=685181655]
 position = Vector2(-160, -159)
@@ -2954,5 +2962,34 @@ position = Vector2(160, 160)
 
 [node name="EnemySpawnPoint4" type="Node2D" parent="EnemySpawner" unique_id=702165176]
 position = Vector2(-158, 162)
+
+[node name="CenterObstacle" type="StaticBody2D" parent="." unique_id=78734404]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CenterObstacle" unique_id=1095360510]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_6bp64")
+
+[node name="OuterBoundary" type="StaticBody2D" parent="." unique_id=1794426608]
+collision_layer = 4
+
+[node name="Bottom" type="CollisionShape2D" parent="OuterBoundary" unique_id=1798115564]
+position = Vector2(0, 1151)
+shape = SubResource("WorldBoundaryShape2D_6bp64")
+
+[node name="Up" type="CollisionShape2D" parent="OuterBoundary" unique_id=1051660641]
+position = Vector2(0, -1151)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_6bp64")
+
+[node name="Left" type="CollisionShape2D" parent="OuterBoundary" unique_id=448258416]
+position = Vector2(-1149, -1154)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_6bp64")
+
+[node name="Rigth" type="CollisionShape2D" parent="OuterBoundary" unique_id=1996984103]
+position = Vector2(1149, -1152)
+rotation = 4.712389
+shape = SubResource("WorldBoundaryShape2D_6bp64")
 
 [connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]

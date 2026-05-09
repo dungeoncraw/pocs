@@ -17,7 +17,12 @@ var last_shoot_time: float
 var move_input: Vector2
 
 @onready var bullet_pool = $PlayerBulletPool
+@onready var health_bar: ProgressBar = $HealthBar
 
+func _ready() -> void:
+	health_bar.max_value = max_hp
+	health_bar.value = current_hp
+	
 func _physics_process(delta: float) -> void:
 	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
@@ -35,6 +40,15 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("shoot"):
 		if Time.get_unix_time_from_system() - last_shoot_time > shoot_rate:
 			_shoot()
+	_move_wooble()
+
+func _move_wooble():
+	if move_input.length() == 0:
+		sprite.rotation_degrees = 0
+		return
+	var t = Time.get_unix_time_from_system()
+	var rot = sin(t * 20) * 2
+	sprite.rotation_degrees = rot
 
 func _shoot():
 	last_shoot_time = Time.get_unix_time_from_system()
@@ -50,3 +64,12 @@ func take_damage(damage: int):
 	current_hp -= damage
 	if current_hp <= 0:
 		print("game over")
+	else:
+		_damage_flash()
+		health_bar.value = current_hp
+
+
+func _damage_flash():
+	sprite.modulate = Color.RED
+	await get_tree().create_timer(0.05).timeout
+	sprite.modulate = Color.WHITE
