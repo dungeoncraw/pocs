@@ -3,7 +3,7 @@ package com.tetokeguii.templaterender
 import core.{ExportFormat, TemplateService}
 import model.{RenderData, TemplateDefinition}
 import parser.TemplateParser
-import renderers.HtmlRenderer
+import renderers.{HtmlRenderer, PdfRenderer, CsvRenderer}
 
 import java.nio.file.{Files, Paths}
 
@@ -54,9 +54,11 @@ def main(): Unit = {
       )
       val renderData = RenderData(dataJson)
 
-      val templateService = new TemplateService(HtmlRenderer)
+      val templateService = new TemplateService(HtmlRenderer, PdfRenderer, CsvRenderer)
 
       renderAndSave(templateService, template, renderData, ExportFormat.Html, "report.html")
+      renderAndSave(templateService, template, renderData, ExportFormat.Pdf, "report.pdf")
+      renderAndSave(templateService, template, renderData, ExportFormat.Csv, "report.csv")
 
     case Left(error) =>
       println(s"Error parsing template: ${error.message}")
