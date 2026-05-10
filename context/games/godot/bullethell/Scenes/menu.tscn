@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://d0cubvg485xbr"]
+
+[ext_resource type="Script" uid="uid://rrwtiuavfbck" path="res://Scripts/menu.gd" id="1_1rerr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4yt8"]
+bg_color = Color(0.6066235, 0.2599414, 0.13278112, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u4yt8"]
+font_size = 42
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.7882353)
+
+[node name="Menu" type="Control" unique_id=1619852542]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1rerr")
+
+[node name="BackGround" type="Panel" parent="." unique_id=246993838]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u4yt8")
+
+[node name="Title" type="Label" parent="." unique_id=258044520]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -354.0
+offset_top = -319.0
+offset_right = 354.0
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "BULLET HELL GAME"
+label_settings = SubResource("LabelSettings_u4yt8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="." unique_id=664274016]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -116.0
+offset_right = 78.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="." unique_id=309665425]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -32.0
+offset_right = 78.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
