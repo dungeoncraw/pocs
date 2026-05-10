@@ -15,6 +15,7 @@ extends CharacterBody2D
 
 var last_shoot_time: float
 var move_input: Vector2
+var additional_bullet_speed: float
 
 @onready var bullet_pool = $PlayerBulletPool
 @onready var health_bar: ProgressBar = $HealthBar
@@ -59,6 +60,7 @@ func _shoot():
 	var mouse_dir = muzzle.global_position.direction_to(mouse_pos)
 	
 	bullet.move_dir = mouse_dir
+	bullet.additional_speed = additional_bullet_speed
 
 func take_damage(damage: int):
 	current_hp -= damage
@@ -73,3 +75,9 @@ func _damage_flash():
 	sprite.modulate = Color.RED
 	await get_tree().create_timer(0.05).timeout
 	sprite.modulate = Color.WHITE
+
+func heal(amount: int):
+	current_hp += amount
+	if current_hp > max_hp:
+		current_hp = max_hp
+	health_bar.value = current_hp
