@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brqmxmo7w4s03" path="res://Sprites/Spritesheet.png" id="1_hghv2"]
 [ext_resource type="Script" uid="uid://x2i4dm8qobl5" path="res://Scripts/node_pool.gd" id="3_afpow"]
 [ext_resource type="PackedScene" uid="uid://db5q1yplrihsr" path="res://Scenes/enemy_bullet.tscn" id="4_287tu"]
+[ext_resource type="AudioStream" uid="uid://bbvuov1rayqht" path="res://Audio/EnemyDamaged.wav" id="5_0830c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gbba"]
 radius = 12.0415945
@@ -54,5 +55,8 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_0830c")
 max_value = 50.0
 value = 10.0
 show_percentage = false
+
+[node name="DamagedAudio" type="AudioStreamPlayer" parent="." unique_id=720589575]
+stream = ExtResource("5_0830c")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

@@ -19,6 +19,7 @@ var last_shoot_time: float
 @onready var bullet_pool = $EnemyBulletPool
 @onready var muzzle = $Muzzle
 @onready var health_bar: ProgressBar = $HealthBar
+@onready var damage_audio: AudioStreamPlayer = $DamagedAudio
 
 var player_dist: float
 var player_dir: Vector2
@@ -28,6 +29,8 @@ func _ready() -> void:
 	health_bar.value = current_hp
 
 func _process(delta: float) -> void:
+	if not player:
+		return
 	player_dist = global_position.distance_to(player.global_position)
 	player_dir =  global_position.direction_to(player.global_position)
 	if flip_sprite:
@@ -48,6 +51,8 @@ func _move_wooble():
 	sprite.rotation_degrees = rot
 
 func _physics_process(delta: float) -> void:
+	if not player:
+		return
 	var move_direction = player_dir
 	var local_avoidance = _local_avoidance()
 	
@@ -87,6 +92,7 @@ func take_damage(damage: int):
 	else:
 		_damage_flash()
 		health_bar.value = current_hp
+		damage_audio.play()
 
 func _damage_flash():
 	sprite.modulate = Color.BLACK

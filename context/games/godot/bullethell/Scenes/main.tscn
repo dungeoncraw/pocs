@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b3og7votnjbn1" path="res://Scenes/health_potion.tscn" id="9_d1ilt"]
 [ext_resource type="PackedScene" uid="uid://8udfx28kiy27" path="res://Scenes/move_speed_potion.tscn" id="10_6iyac"]
 [ext_resource type="PackedScene" uid="uid://blrj6jh511q65" path="res://Scenes/shoot_speed_potion.tscn" id="11_fdnlq"]
+[ext_resource type="AudioStream" uid="uid://dti2w63igwmh3" path="res://Audio/Music.wav" id="13_fdnlq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("1_jjgbg")
@@ -2926,6 +2927,12 @@ font_size = 34
 shadow_size = 12
 shadow_color = Color(0, 0, 0, 0.827451)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6iyac"]
+bg_color = Color(0.4, 0, 0.17999993, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6iyac"]
+font_size = 32
+
 [node name="Main" type="Node2D" unique_id=1849661644]
 script = ExtResource("1_6iyac")
 
@@ -3026,5 +3033,53 @@ label_settings = SubResource("LabelSettings_d1ilt")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="EndScreen" type="Panel" parent="CanvasLayer" unique_id=2043967557]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6iyac")
+
+[node name="EndText" type="Label" parent="CanvasLayer/EndScreen" unique_id=909534976]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -98.0
+offset_right = 202.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You survived 47.2 seconds"
+label_settings = SubResource("LabelSettings_6iyac")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="CanvasLayer/EndScreen" unique_id=730803038]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -18.0
+offset_right = 57.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Retry"
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=821765926]
+stream = ExtResource("13_fdnlq")
+volume_db = -8.0
+autoplay = true
+
 [connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="PotionSpawner/SpawnTimer" to="PotionSpawner" method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/EndScreen/RetryButton" to="." method="_on_retry_button_pressed"]

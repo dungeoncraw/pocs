@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://brqmxmo7w4s03" path="res://Sprites/Spritesheet.png" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://x2i4dm8qobl5" path="res://Scripts/node_pool.gd" id="3_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://c4kadli2j1x3m" path="res://Scenes/bullet.tscn" id="4_vgqql"]
+[ext_resource type="AudioStream" uid="uid://chi0o0p10fwsn" path="res://Audio/PlayerAttack.wav" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://dtcu4yfa8owj" path="res://Audio/PlayerDamaged.wav" id="6_x3wgy"]
+[ext_resource type="AudioStream" uid="uid://bn8bsamqqx12l" path="res://Audio/DrinkPotion.wav" id="7_3smsa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jjgbg"]
 
@@ -44,3 +47,12 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_fkybt")
 max_value = 50.0
 value = 10.0
 show_percentage = false
+
+[node name="ShootAudio" type="AudioStreamPlayer" parent="." unique_id=1786761975]
+stream = ExtResource("5_fkybt")
+
+[node name="DamagedAudio" type="AudioStreamPlayer" parent="." unique_id=1264907386]
+stream = ExtResource("6_x3wgy")
+
+[node name="PotionAudio" type="AudioStreamPlayer" parent="." unique_id=2027740954]
+stream = ExtResource("7_3smsa")
