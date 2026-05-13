@@ -1,0 +1,36 @@
+meta {
+  name: Create Quote
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/quotes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "customerId": "customer-123",
+    "transportType": "TRUCK",
+    "origin": {
+      "latitude": 34.0522,
+      "longitude": -118.2437
+    },
+    "destination": {
+      "latitude": 41.8781,
+      "longitude": -87.6298
+    },
+    "shipment": {
+      "weightKg": 1200,
+      "lengthCm": 200,
+      "widthCm": 120,
+      "heightCm": 150
+    }
+  }
+}
+
+vars:post-response {
+  quoteId: res.body.quoteId
+}
