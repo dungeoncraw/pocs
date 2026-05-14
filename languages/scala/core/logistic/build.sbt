@@ -1,6 +1,6 @@
 ThisBuild / scalaVersion := "3.8.3"
 
-val springBootVersion = "4.0.6"
+val springBootVersion = "3.4.3"
 
 lazy val root = (project in file("."))
   .settings(
@@ -9,10 +9,10 @@ lazy val root = (project in file("."))
       "org.springframework.boot" % "spring-boot-starter-web" % springBootVersion,
       "org.springframework.boot" % "spring-boot-starter-validation" % springBootVersion,
       "org.springframework.boot" % "spring-boot-starter-jdbc" % springBootVersion,
-      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.21.3",
-      "org.postgresql" % "postgresql" % "42.7.11",
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.18.2",
+      "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.18.2",
+      "org.postgresql" % "postgresql" % "42.7.5",
       "org.springframework.boot" % "spring-boot-starter-test" % springBootVersion % Test,
-      "com.h2database" % "h2" % "2.4.240" % Test,
-      "org.springframework.boot" % "spring-boot-starter-test" % springBootVersion % Test
+      "com.h2database" % "h2" % "2.3.232" % Test
     )
   )
