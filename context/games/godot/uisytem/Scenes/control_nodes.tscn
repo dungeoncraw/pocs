@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://c2a13shnbo3uq"]
+
+[node name="ControlNodes" type="Control" unique_id=1054959937]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=390067129]
+layout_mode = 0
+offset_right = 262.0
+offset_bottom = 69.0
+text = "Some text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Label" unique_id=46963522]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 85.0
+offset_right = 178.0
+offset_bottom = 121.0
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1]Some wave[/wave]"
+
+[node name="TextEdit" type="TextEdit" parent="." unique_id=1379905578]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 37.0
+offset_right = 397.0
+offset_bottom = 87.0
+placeholder_text = "Input here"
+
+[node name="Button" type="Button" parent="." unique_id=1391175111]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 244.0
+offset_right = 289.0
+offset_bottom = 275.0
+text = "Text"
+
+[node name="CheckButton" type="CheckButton" parent="." unique_id=315668708]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 279.0
+offset_right = 292.0
+offset_bottom = 303.0
+text = "Check here"
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1293785558]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 345.0
+offset_right = 186.0
+offset_bottom = 372.0
+value = 30.0
+
+[node name="VSlider" type="VSlider" parent="." unique_id=1505307600]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 313.0
+offset_right = 362.0
+offset_bottom = 457.0
+value = 20.0

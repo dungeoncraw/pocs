@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dgbleb02imhsm"]
+
+[node name="ContainerAdvanced" type="Control" unique_id=90472379]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=832854884]
+layout_mode = 0
+offset_left = 310.0
+offset_top = 200.0
+offset_right = 599.0
+offset_bottom = 250.0
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer" unique_id=748421568]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer" unique_id=1041934771]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer" unique_id=1713782994]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect4" type="ColorRect" parent="HBoxContainer" unique_id=891882230]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=1060948639]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Control" unique_id=1337233303]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 186.0
