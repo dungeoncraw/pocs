@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bge0d4o0uwmdg"]
+
+[ext_resource type="Texture2D" uid="uid://cu52ew1mhmx1v" path="res://assets/texture button/button_texture.png" id="1_t6hdm"]
+[ext_resource type="Texture2D" uid="uid://bn3kfac6cf3pl" path="res://assets/texture button/button_texture_pressed.png" id="2_y3gg4"]
+[ext_resource type="Texture2D" uid="uid://jifge7sxj0px" path="res://assets/texture button/button_texture_hover.png" id="3_bncug"]
+[ext_resource type="Texture2D" uid="uid://bsetiel3rjan7" path="res://assets/texture button/button_texture_disabled.png" id="4_q6urs"]
+[ext_resource type="Texture2D" uid="uid://xpu7f3bjrodw" path="res://assets/progress textures/progress_bg.png" id="5_bncug"]
+[ext_resource type="Texture2D" uid="uid://nt4o16shgx6d" path="res://assets/progress textures/prgress_fg.png" id="6_4wxuw"]
+[ext_resource type="Texture2D" uid="uid://b28nwi47l7afm" path="res://assets/progress textures/green_progress.png" id="6_q6urs"]
+[ext_resource type="Texture2D" uid="uid://cj2ff2c6g3ofw" path="res://assets/progress textures/circular_progress_bg.png" id="8_bb0v5"]
+[ext_resource type="Texture2D" uid="uid://brp6ggi4ie8oj" path="res://assets/progress textures/circular_progress.png" id="9_srq6p"]
+[ext_resource type="Texture2D" uid="uid://qfc6srviqfpn" path="res://assets/panel.png" id="10_srq6p"]
+
+[node name="SpecialStyles" type="Control" unique_id=961281051]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1358871678]
+texture_filter = 1
+layout_mode = 0
+offset_left = 92.0
+offset_top = 130.0
+offset_right = 132.0
+offset_bottom = 170.0
+texture_normal = ExtResource("1_t6hdm")
+texture_pressed = ExtResource("2_y3gg4")
+texture_hover = ExtResource("3_bncug")
+texture_disabled = ExtResource("4_q6urs")
+stretch_mode = 4
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=472862102]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 70.0
+offset_right = 277.0
+offset_bottom = 110.0
+value = 10.0
+texture_under = ExtResource("5_bncug")
+texture_over = ExtResource("6_4wxuw")
+texture_progress = ExtResource("6_q6urs")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="." unique_id=2085592713]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 152.0
+offset_right = 401.0
+offset_bottom = 322.0
+value = 40.0
+fill_mode = 4
+texture_under = ExtResource("8_bb0v5")
+texture_progress = ExtResource("9_srq6p")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1292076424]
+texture_filter = 1
+layout_mode = 0
+offset_left = 79.0
+offset_top = 48.0
+offset_right = 191.0
+offset_bottom = 92.0
+texture = ExtResource("10_srq6p")
+region_rect = Rect2(0, 0, 76, 37)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10

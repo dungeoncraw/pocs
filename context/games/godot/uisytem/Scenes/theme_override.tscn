@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bcn2ctfsdai52"]
+
+[ext_resource type="FontFile" uid="uid://mpgbs78k50tr" path="res://assets/FreeCheese-Regular.ttf" id="1_natlw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1805o"]
+skew = Vector2(2, 0)
+corner_radius_bottom_left = 68
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_natlw"]
+bg_color = Color(0, 0.6, 0.6, 1)
+skew = Vector2(0, -0.15)
+
+[node name="ThemeOverride" type="Control" unique_id=2125840451]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=816418148]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 167.0
+offset_right = 318.0
+offset_bottom = 207.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1805o")
+
+[node name="Button" type="Button" parent="." unique_id=1685272909]
+layout_mode = 0
+offset_left = 386.0
+offset_top = 183.0
+offset_right = 494.0
+offset_bottom = 238.0
+theme_override_fonts/font = ExtResource("1_natlw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_natlw")
+text = "Button"
+
+[node name="Label" type="Label" parent="." unique_id=2029622619]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 88.0
+offset_right = 388.0
+offset_bottom = 111.0
+text = "Something"
