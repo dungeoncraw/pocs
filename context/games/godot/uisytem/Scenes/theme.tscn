@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://458im6nokiuf"]
+
+[ext_resource type="Theme" uid="uid://cohphlnl0a0uv" path="res://Resources/new_theme.tres" id="1_gr350"]
+
+[node name="Theme" type="Control" unique_id=1171452721]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gr350")
+
+[node name="Panel" type="Panel" parent="." unique_id=354617570]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="." unique_id=419186948]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 9.0
+offset_right = 65.0
+offset_bottom = 17.0
+text = "Buton info"
