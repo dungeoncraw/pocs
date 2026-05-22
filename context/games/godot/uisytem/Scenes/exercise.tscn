@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://phrntl7ovgf7"]
+
+[ext_resource type="FontFile" uid="uid://6mxlktgysatq" path="res://assets/exercise assets/Stormfaze.otf" id="1_gyahg"]
+[ext_resource type="Texture2D" uid="uid://p5dh5bmsgiic" path="res://assets/exercise assets/ship.png" id="1_vgskp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_csm5r"]
+bg_color = Color(0.07058824, 0.09803922, 0.14901961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.13725491, 0.18039216, 0.25882354, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gsai4"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.010904407, 0.6789669, 0.7399729, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07hix"]
+bg_color = Color(0.99607843, 0.5764706, 0.19607843, 1)
+border_color = Color(1, 0.7882353, 0.6313726, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgskp"]
+bg_color = Color(0.11764706, 0.15686275, 0.22745098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.44313726)
+shadow_size = 10
+
+[sub_resource type="Theme" id="Theme_vgskp"]
+Button/colors/font_color = Color(0.42745098, 0.5137255, 0.6666667, 1)
+Button/font_sizes/font_size = 26
+Button/fonts/font = ExtResource("1_gyahg")
+Button/styles/normal = SubResource("StyleBoxFlat_csm5r")
+HBoxContainer/constants/separation = 20
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_gyahg")
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 20
+MarginContainer/constants/margin_top = 20
+OrangeButton/base_type = &"Button"
+OrangeButton/colors/font_color = Color(1, 1, 1, 1)
+OrangeButton/colors/font_disabled_color = Color(0, 0, 0, 1)
+OrangeButton/colors/font_focus_color = Color(0, 0, 0, 1)
+OrangeButton/colors/font_hover_color = Color(0, 0, 0, 1)
+OrangeButton/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+OrangeButton/colors/font_outline_color = Color(0, 0, 0, 1)
+OrangeButton/colors/font_pressed_color = Color(0, 0, 0, 1)
+OrangeButton/colors/icon_disabled_color = Color(0, 0, 0, 1)
+OrangeButton/colors/icon_focus_color = Color(0, 0, 0, 1)
+OrangeButton/colors/icon_hover_color = Color(0, 0, 0, 1)
+OrangeButton/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+OrangeButton/colors/icon_normal_color = Color(0, 0, 0, 1)
+OrangeButton/colors/icon_pressed_color = Color(0, 0, 0, 1)
+OrangeButton/constants/align_to_largest_stylebox = 0
+OrangeButton/constants/h_separation = 0
+OrangeButton/constants/icon_max_width = 0
+OrangeButton/constants/outline_size = 0
+OrangeButton/font_sizes/font_size = 26
+OrangeButton/fonts/font = ExtResource("1_gyahg")
+OrangeButton/styles/disabled = SubResource("StyleBoxFlat_gsai4")
+OrangeButton/styles/focus = SubResource("StyleBoxFlat_gsai4")
+OrangeButton/styles/hover = SubResource("StyleBoxFlat_gsai4")
+OrangeButton/styles/normal = SubResource("StyleBoxFlat_07hix")
+OrangeButton/styles/pressed = SubResource("StyleBoxFlat_gsai4")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_vgskp")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gyahg"]
+bg_color = Color(0.99215686, 0.5764706, 0.19607843, 1)
+skew = Vector2(0.14, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[node name="Exercise" type="Control" unique_id=1199298619]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vgskp")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1470026586]
+custom_minimum_size = Vector2(400, 350)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 296.0
+offset_top = 122.0
+offset_right = 696.0
+offset_bottom = 522.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1668732854]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=744574534]
+layout_mode = 2
+
+[node name="Main" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1783477458]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main" unique_id=1474669824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/Main/VBoxContainer" unique_id=1531857574]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_vgskp")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Main/VBoxContainer" unique_id=1982470011]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/VBoxContainer/Control" unique_id=412765767]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -58.0
+offset_right = 39.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gyahg")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Main/VBoxContainer/Control/PanelContainer" unique_id=676467294]
+layout_mode = 2
+text = "Spaceship"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=824981106]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1508682891]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "Buy"
+
+[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1722878205]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Cancel"

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b26i0tsgeshhs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dljf8"]
+bg_color = Color(0.8972647, 0.31431827, 0.87179005, 1)
+
+[sub_resource type="Theme" id="Theme_ppk04"]
+Button/styles/focus = SubResource("StyleBoxFlat_dljf8")
+
+[node name="Control" type="Control" unique_id=211805428]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1642418262]
+layout_mode = 0
+offset_right = 717.0
+offset_bottom = 229.0
+theme = SubResource("Theme_ppk04")
+
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=1018458607]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Button5")
+text = "Button"
+
+[node name="Button2" type="Button" parent="HBoxContainer" unique_id=1304442637]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Button"
+
+[node name="Button3" type="Button" parent="HBoxContainer" unique_id=425156878]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Button"
+
+[node name="Button4" type="Button" parent="HBoxContainer" unique_id=994875661]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Button"
+
+[node name="Button5" type="Button" parent="HBoxContainer" unique_id=963747474]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../Button")
+text = "Button"
