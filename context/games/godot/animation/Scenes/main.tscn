@@ -1,0 +1,946 @@
+[gd_scene format=3 uid="uid://wrhyq6g3i51e"]
+
+[ext_resource type="PackedScene" uid="uid://c5rlif05ro7av" path="res://Models/road_straight.gltf" id="1_6iyac"]
+[ext_resource type="PackedScene" uid="uid://bh0ghip5ksh32" path="res://Models/road_tsplit.gltf" id="2_fdnlq"]
+[ext_resource type="PackedScene" uid="uid://b27sh4y3g1y2w" path="res://Models/road_corner_curved.gltf" id="3_jkdf5"]
+[ext_resource type="PackedScene" uid="uid://dh4h8v0dqjwii" path="res://Models/base.gltf" id="4_wsu2k"]
+[ext_resource type="PackedScene" uid="uid://qbiliop0h54n" path="res://Models/building_E.gltf" id="5_k12tt"]
+[ext_resource type="PackedScene" uid="uid://cdctc1wju3rad" path="res://Models/building_F.gltf" id="6_h1bgf"]
+[ext_resource type="PackedScene" uid="uid://be1w5k56edofu" path="res://Models/building_G.gltf" id="7_b3802"]
+[ext_resource type="PackedScene" uid="uid://gxtkjymf1axa" path="res://Models/building_H.gltf" id="8_fevyy"]
+[ext_resource type="PackedScene" uid="uid://pifj6kl67tuc" path="res://Models/building_B.gltf" id="9_hibaj"]
+[ext_resource type="PackedScene" uid="uid://0dhc8icsvrho" path="res://Models/building_C.gltf" id="10_pdsj5"]
+[ext_resource type="PackedScene" uid="uid://blw1temd173wm" path="res://Models/building_D.gltf" id="11_ee4r6"]
+[ext_resource type="PackedScene" uid="uid://baw6y8wp4dxw3" path="res://Models/building_A.gltf" id="12_gt3je"]
+[ext_resource type="PackedScene" uid="uid://ba7sx8oy8c1pt" path="res://Scenes/Objects/streetlight.tscn" id="13_fdnlq"]
+[ext_resource type="Script" uid="uid://bpp8vl3ba5xtq" path="res://Scripts/cinematic_camera.gd" id="13_wsu2k"]
+[ext_resource type="PackedScene" uid="uid://coxrh5s2arysq" path="res://Scenes/Objects/traffic_light.tscn" id="14_jkdf5"]
+[ext_resource type="Script" uid="uid://cc7yx8lpui6y6" path="res://Scripts/camera_manager.gd" id="16_k12tt"]
+[ext_resource type="PackedScene" uid="uid://csk6n0da7tdfx" path="res://Models/car_hatchback.gltf" id="17_h1bgf"]
+[ext_resource type="PackedScene" uid="uid://dt5hxglgwcn7r" path="res://Models/car_police.gltf" id="18_b3802"]
+
+[sub_resource type="Environment" id="Environment_jkdf5"]
+background_mode = 1
+ssil_enabled = true
+glow_enabled = true
+glow_intensity = 1.0
+glow_bloom = 0.11
+volumetric_fog_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_saturation = 1.1
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_wsu2k"]
+dof_blur_far_distance = 1.75
+dof_blur_far_transition = 20.0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 5.0
+dof_blur_near_transition = 3.0
+dof_blur_amount = 0.2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wsu2k"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fevyy"]
+dof_blur_far_distance = 1.75
+dof_blur_far_transition = 20.0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 0.81
+dof_blur_near_transition = 3.0
+dof_blur_amount = 0.11
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_b3802"]
+dof_blur_far_distance = 1.75
+dof_blur_far_transition = 20.0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 0.91
+dof_blur_near_transition = 0.5
+dof_blur_amount = 0.2
+
+[sub_resource type="Animation" id="Animation_hibaj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedLight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlueLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pdsj5"]
+resource_name = "lights_flash"
+length = 0.39999999999999997
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedLight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlueLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ee4r6"]
+_data = {
+&"RESET": SubResource("Animation_hibaj"),
+&"lights_flash": SubResource("Animation_pdsj5")
+}
+
+[sub_resource type="Animation" id="Animation_b3802"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Car:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-8.105455, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Car:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-1.1920929e-07, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Car:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-6.328054, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Car:rotation:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PoliceCar:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-9.726967, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PoliceCar:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.1920929e-07, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PoliceCar:position:z")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-6.3503757, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PoliceCar:rotation:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CameraManager/TrackingCamera:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(8.583218, 0.53668225, 3.376038)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CameraManager/IntroCamera:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.935, 7.348)]
+}
+
+[sub_resource type="Animation" id="Animation_fevyy"]
+resource_name = "cutscene"
+length = 20.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Car:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(-8.105455, -0.25, 0, 0.25, 0, -0.18763733, -0.35071233, -0.9839855, 0.5107422, 1.4329776, -0.1011733, -0.40369612, -0.967949, 0.74877596, 1.7953527, 7.3794622, -0.14951609, -0.5984501, 0.17594677, 0.704241, 7.620489, -0.17777768, 0.14843352, 0.15672827, -0.13085854, 5.7037096, -0.35962486, 0.104819775, 0.37360078, -0.10889334, 7.8283024, -0.18594885, -0.115840144, 0.16287851, 0.101468064, 7.007559, -0.16287851, 0.526389, 0.76111114, -2.4597507, -9.912016, -0.76111114, 2.46912, 0.11666648, -0.37847763, -10.078026, -0.11666648, 0.027668318, 0, 0),
+"times": PackedFloat32Array(0, 2.7, 6.1666665, 8.566667, 9.633333, 10.573703, 11.866667, 12.666667, 17.233334, 17.933332)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Car:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-1.1920929e-07, -0.25, 0, 0.25, 0, -1.1920929e-07, -1.2297285, 0, 0, 0, -1.1920929e-07, -0.7964348, 0, 0, 0, -1.1920929e-07, -0.503446, 0, 0, 0, -1.1920929e-07, -0.24576204, 0, 0, 0, -1.1920929e-07, -0.15672827, 0, 0, 0, -1.1920929e-07, -0.18594885, 0, 0, 0, -1.1920929e-07, -0.12750785, 0, 0, 0, -1.1920929e-07, -0.60047644, 0, 0, 0, -1.1920929e-07, -0.08132839, 0, 0, 0),
+"times": PackedFloat32Array(0, 2.7, 6.5666666, 8.566667, 9.633333, 10.573703, 11.689396, 12.666667, 17.233334, 17.933332)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Car:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(-6.328054, -0.25, 0, 0.25, 0, -5.426496, -0.28735942, -0.53960294, 0.8440757, 1.5850036, 5.891459, -0.4559245, -0.4569626, 1.0047555, 1.0070431, 5.789623, -0.33333334, 0.4123684, 0.17777777, -0.21992978, 2.09767, -0.17777777, 0.52035177, 0.15672827, -0.45874032, -0.084929466, -0.15672827, 0.38052976, 0.18594885, -0.45147613, -2.8943653, -0.18594885, 0.52955157, 0.1628785, -0.46385103, -6.0453453, -0.16287851, 0.087181345, 0.76111114, -0.40738764, -5.861779, -0.21063691, -0.45430177, 0.48581314, 1.047802, -3.3178499, -0.38085365, -0.22441912, 0, 0),
+"times": PackedFloat32Array(0, 2.7, 6.5666666, 8.566667, 9.633333, 10.573703, 11.689396, 12.666667, 17.233334, 18.2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Car:rotation:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(1.555, 0, 0, 0.3277778, -0.05416666, 1.23, -0.3277778, 0.27465516, 0.15555558, -0.13034484, -0.875, -0.15555558, 0.12212768, 0.105555534, -0.08287233, 0, -0.105555534, -0.06729166, 0.09444444, 0.06020834, -0.11, -0.09444444, 0, 0.25555557, 0, 0, -0.25555557, -0.1824138, 0.066666685, 0.04758622, 1.27, -0.066666685, -0.24521737, 0.061111134, 0.22478262, 2.82, -0.061111134, -0.019250011, 0.105555534, 0.03325, 1.585, -0.105555534, 0.065464735, 0.18333332, -0.113701925, 2.17, -0.18333332, -0.2783, 0.09444444, 0.14336666, 4.115, -0.09444444, -0.10177633, 0.11666664, 0.12572367, 3.535, -0.11666664, -0.008166685, 0.050000034, 0.003500011, 4.185, -0.050000034, -0.008653843, 0.09444444, 0.016346134, 3.685, -0.09444444, 0.17442709, 0.083333336, -0.15390627, 2.215, -0.083333336, 0.09423076, 0.13333337, -0.15076926, 2.215, -0.13333337, -0.08555559, 0.0666666, 0.042777743, 2.985, -0.0666666, -0.20935455, 0.1055557, 0.3314788, 5.46, -0.1055557, -0.18208359, 0.061110973, 0.10541644, 4.71, -0.061110973, 0.018171638, 0.35926232, -0.10682836, 4.71, -0.35926232, 0.009798084, 0.06851562, -0.0018686118, 4.875, -0.21111092, -0.2921503, 0.13333353, 0.18451641, 7.5, -0.13333353, -0.14941199, 0.055555344, 0.062254667, 5.955, -0.055555344, 0.25750002, 0, 0),
+"times": PackedFloat32Array(0, 1.9666667, 2.9, 3.5333333, 4.1, 5.633333, 6.0333333, 6.4, 7.0333333, 8.133333, 8.7, 9.4, 9.7, 10.266666, 10.766666, 11.566667, 11.966666, 12.6, 12.966666, 15.12224, 16.8, 17.6, 17.933332)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PoliceCar:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(-9.726967, 0, 0, 0.44988418, 1.5990983, -0.13237667, -0.44988418, -0.68327165, 0.61844915, 0.9392835, 0.008363366, -0.61844915, -0.8110038, 0.3566668, 0.4677153, 7.5399375, -0.3566668, -0.79349077, 0.18315825, 0.4074794, 7.2141843, -0.18315825, 0.054292206, 0, 0, 7.2141843, -0.5561013, 0, 0, 0, -10.024579, -0.037263393, 2.8731272, 0, 0),
+"times": PackedFloat32Array(1.1, 3.799305, 7.5099998, 9.650001, 10.74895, 14.085558, 14.309138)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PoliceCar:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 2, 2),
+"points": PackedFloat32Array(1.1920929e-07, -0.25, 0, 0.25, 0, 1.1920929e-07, -0.44988418, 0, 0, 0, 5.9604645e-07, -0.61844915, -7.947286e-08, 0, 0, 5.9604645e-07, -0.35666674, 0, 0, 0, 5.9604645e-07, -0.18315825, 0, 0, 0, 5.9604645e-07, -0.5561013, 0, 0, 0, 5.9604645e-07, -0.037263393, 0, 0, 0),
+"times": PackedFloat32Array(1.1, 3.799305, 7.5099998, 9.650001, 10.74895, 14.085558, 14.309138)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PoliceCar:position:z")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(-6.3503757, 0, 0, 0.44988418, 0.15387034, -5.4271536, -0.44988418, -0.8169108, 0.61844915, 1.1229953, 5.2890606, -0.61844915, -1.1727151, 0.3566668, 0.67631835, 5.667046, -0.3566668, 0.35053322, 0.18315825, -0.18000849, 2.1058104, -0.18315825, 0.5935393, 0, 0, 2.1058104, -0.5561013, 0, 0, 0, 4.1806307, -0.037263393, -0.34580338, 0, 0),
+"times": PackedFloat32Array(1.1, 3.799305, 7.5099998, 9.650001, 10.74895, 14.085558, 14.309138)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PoliceCar:rotation:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2),
+"points": PackedFloat32Array(1.71, -0.25, 0, 0.25, 0, 1.37, -0.50555557, 0.3376852, 0.14444447, -0.096481495, -0.895, -0.14444447, 0.12115649, 0.12777774, -0.10717685, 0, -0.12777774, -0.042355955, 0.32222223, 0.106810704, 0, -0.32222223, -0.13081521, 0.18888895, 0.076684795, 1.245, -0.18888895, -0.18748233, 0.07222216, 0.07168433, 1.555, -0.07222216, -0.010833325, 0.1833334, 0.027500013, 1.475, -0.1833334, -0.20549999, 0.12222227, 0.137, 3.61, -0.12222227, -0.17666683, 0.061110973, 0.08833318, 3.065, -0.061110973, 0.09083331, 0, 0, 3.2513247, 0, 0, 0, 0, -3.19, -0.6500001, 0.5108333, 0, 0),
+"times": PackedFloat32Array(0.033333335, 3.0666666, 3.9333334, 4.7, 6.633333, 7.766667, 8.2, 9.3, 10.033334, 10.4, 13.966666, 14.3)
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CameraManager")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(5.9, 8.467794, 13.172125, 16.638474),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["police"],
+"method": &"activate_camera"
+}, {
+"args": ["tracking"],
+"method": &"activate_camera"
+}, {
+"args": ["heli"],
+"method": &"activate_camera"
+}, {
+"args": ["final"],
+"method": &"activate_camera"
+}]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CameraManager/TrackingCamera:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(8.333333, 13.394961),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(8.583, 0.3, 3.376), Vector3(8.583218, 0.53668225, -6.682935)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("CameraManager/IntroCamera:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(2.3666666, 6.09087),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.935, 7.348), Vector3(0, 0.51125354, 7.348)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hibaj"]
+_data = {
+&"RESET": SubResource("Animation_b3802"),
+&"cutscene": SubResource("Animation_fevyy")
+}
+
+[node name="Main" type="Node3D" unique_id=1101321660]
+
+[node name="Roads" type="Node" parent="." unique_id=1229268574]
+
+[node name="road_straight2" parent="Roads" unique_id=800849138 instance=ExtResource("1_6iyac")]
+
+[node name="road_straight3" parent="Roads" unique_id=2009322910 instance=ExtResource("1_6iyac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="road_straight4" parent="Roads" unique_id=506748314 instance=ExtResource("1_6iyac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="road_straight5" parent="Roads" unique_id=40829271 instance=ExtResource("1_6iyac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="road_straight6" parent="Roads" unique_id=1931032914 instance=ExtResource("1_6iyac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="road_straight24" parent="Roads" unique_id=2065884037 instance=ExtResource("1_6iyac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="road_straight25" parent="Roads" unique_id=1964816787 instance=ExtResource("1_6iyac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 2)
+
+[node name="road_straight26" parent="Roads" unique_id=71424285 instance=ExtResource("1_6iyac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -2)
+
+[node name="road_straight27" parent="Roads" unique_id=1989201407 instance=ExtResource("1_6iyac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -4)
+
+[node name="road_straight28" parent="Roads" unique_id=1338309132 instance=ExtResource("1_6iyac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 4)
+
+[node name="road_straight7" parent="Roads" unique_id=1969182124 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, 6)
+
+[node name="road_straight8" parent="Roads" unique_id=1119667186 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, 6)
+
+[node name="road_straight12" parent="Roads" unique_id=1251949467 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0, 6)
+
+[node name="road_straight13" parent="Roads" unique_id=1794104363 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8, 0, 4)
+
+[node name="road_straight14" parent="Roads" unique_id=1812174319 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 6, 0, 0)
+
+[node name="road_straight15" parent="Roads" unique_id=1027105007 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8, 0, -4)
+
+[node name="road_straight9" parent="Roads" unique_id=1340976983 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2, 0, 6)
+
+[node name="road_straight10" parent="Roads" unique_id=936302598 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4, 0, 6)
+
+[node name="road_straight23" parent="Roads" unique_id=252930745 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, 6)
+
+[node name="road_straight11" parent="Roads" unique_id=1008855348 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6, 0, 6)
+
+[node name="road_straight16" parent="Roads" unique_id=473239177 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0, -6)
+
+[node name="road_straight17" parent="Roads" unique_id=684545517 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, -6)
+
+[node name="road_straight18" parent="Roads" unique_id=496538020 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -6)
+
+[node name="road_straight19" parent="Roads" unique_id=813195696 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2, 0, -6)
+
+[node name="road_straight20" parent="Roads" unique_id=2121396728 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4, 0, -6)
+
+[node name="road_straight21" parent="Roads" unique_id=1862274973 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6, 0, -6)
+
+[node name="road_straight22" parent="Roads" unique_id=895401661 instance=ExtResource("1_6iyac")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, -6)
+
+[node name="road_tsplit2" parent="Roads" unique_id=1993240951 instance=ExtResource("2_fdnlq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 6)
+
+[node name="road_tsplit3" parent="Roads" unique_id=1202785138 instance=ExtResource("2_fdnlq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -6)
+
+[node name="road_corner_curved2" parent="Roads" unique_id=2147304247 instance=ExtResource("3_jkdf5")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8, 0, 6)
+
+[node name="road_corner_curved3" parent="Roads" unique_id=412447085 instance=ExtResource("3_jkdf5")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 0, 2)
+
+[node name="road_corner_curved7" parent="Roads" unique_id=64683802 instance=ExtResource("3_jkdf5")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 0, -6)
+
+[node name="road_corner_curved4" parent="Roads" unique_id=1393825010 instance=ExtResource("3_jkdf5")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 6, 0, 2)
+
+[node name="road_corner_curved9" parent="Roads" unique_id=1784785613 instance=ExtResource("3_jkdf5")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -10, 0, 6)
+
+[node name="road_corner_curved5" parent="Roads" unique_id=316431835 instance=ExtResource("3_jkdf5")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 6, 0, -2)
+
+[node name="road_corner_curved8" parent="Roads" unique_id=1079234266 instance=ExtResource("3_jkdf5")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -10, 0, -6)
+
+[node name="road_corner_curved6" parent="Roads" unique_id=1884252539 instance=ExtResource("3_jkdf5")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8, 0, -2)
+
+[node name="base2" parent="Roads" unique_id=1437097540 instance=ExtResource("4_wsu2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Buildings" type="Node" parent="." unique_id=1942199915]
+
+[node name="building_E2" parent="Buildings" unique_id=442869497 instance=ExtResource("5_k12tt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
+
+[node name="building_F2" parent="Buildings" unique_id=800485763 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -8)
+
+[node name="building_G2" parent="Buildings" unique_id=1730617083 instance=ExtResource("7_b3802")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+
+[node name="building_H2" parent="Buildings" unique_id=1558643186 instance=ExtResource("8_fevyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -8)
+
+[node name="building_E3" parent="Buildings" unique_id=1161068751 instance=ExtResource("5_k12tt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+
+[node name="building_F3" parent="Buildings" unique_id=1551319401 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)
+
+[node name="building_G3" parent="Buildings" unique_id=2119807149 instance=ExtResource("7_b3802")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="building_E13" parent="Buildings" unique_id=138803378 instance=ExtResource("5_k12tt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 4)
+
+[node name="building_F13" parent="Buildings" unique_id=768708693 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="building_E14" parent="Buildings" unique_id=194705508 instance=ExtResource("5_k12tt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="building_H10" parent="Buildings" unique_id=1667823999 instance=ExtResource("8_fevyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="building_F4" parent="Buildings" unique_id=2080194205 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
+
+[node name="building_G4" parent="Buildings" unique_id=1857722456 instance=ExtResource("7_b3802")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8)
+
+[node name="building_H3" parent="Buildings" unique_id=1887823254 instance=ExtResource("8_fevyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="building_E8" parent="Buildings" unique_id=981981240 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, -7)
+
+[node name="building_E12" parent="Buildings" unique_id=1292427686 instance=ExtResource("5_k12tt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.644108, 0, -8.6383505)
+
+[node name="building_E9" parent="Buildings" unique_id=77929155 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, 1)
+
+[node name="building_E10" parent="Buildings" unique_id=1717398037 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, 7)
+
+[node name="building_E11" parent="Buildings" unique_id=2049752504 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.52201, 9.536743e-07, 8.561796)
+
+[node name="building_F11" parent="Buildings" unique_id=1058995692 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, -5)
+
+[node name="building_G11" parent="Buildings" unique_id=419487961 instance=ExtResource("7_b3802")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, -3)
+
+[node name="building_F12" parent="Buildings" unique_id=1474642774 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, 3)
+
+[node name="building_G12" parent="Buildings" unique_id=1390551403 instance=ExtResource("7_b3802")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, 5)
+
+[node name="building_H8" parent="Buildings" unique_id=1707698424 instance=ExtResource("8_fevyy")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, -1)
+
+[node name="building_E15" parent="Buildings" unique_id=1997815532 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -2)
+
+[node name="building_F15" parent="Buildings" unique_id=165742426 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, 0)
+
+[node name="building_G14" parent="Buildings" unique_id=1445359853 instance=ExtResource("7_b3802")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, 2)
+
+[node name="building_E18" parent="Buildings" unique_id=540266235 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, -2)
+
+[node name="building_F19" parent="Buildings" unique_id=895314354 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, 0)
+
+[node name="building_G17" parent="Buildings" unique_id=1188082784 instance=ExtResource("7_b3802")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, 2)
+
+[node name="building_E19" parent="Buildings" unique_id=977383399 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.5174756, 0, 1, 0, -4.371139e-08, -4, 0, -2)
+
+[node name="building_F22" parent="Buildings" unique_id=1579368691 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.9237908, 0, 1, 0, -4.371139e-08, -4, 0, 0)
+
+[node name="building_G20" parent="Buildings" unique_id=1886129305 instance=ExtResource("7_b3802")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.5174756, 0, 1, 0, -4.371139e-08, -4, 0, 2)
+
+[node name="building_H11" parent="Buildings" unique_id=1611630531 instance=ExtResource("8_fevyy")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -4)
+
+[node name="building_E4" parent="Buildings" unique_id=1706577017 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2, 0, 8)
+
+[node name="building_F5" parent="Buildings" unique_id=1821604346 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8, 0, 8.000001)
+
+[node name="building_G5" parent="Buildings" unique_id=857812190 instance=ExtResource("7_b3802")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 6, 0, 8.000001)
+
+[node name="building_H4" parent="Buildings" unique_id=1870181152 instance=ExtResource("8_fevyy")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4, 0, 8)
+
+[node name="building_E5" parent="Buildings" unique_id=2065445738 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6, 0, 7.9999995)
+
+[node name="building_F6" parent="Buildings" unique_id=481013160 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 8)
+
+[node name="building_F16" parent="Buildings" unique_id=501913568 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4, 0, -4)
+
+[node name="building_G6" parent="Buildings" unique_id=1102340600 instance=ExtResource("7_b3802")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2, 0, 8)
+
+[node name="building_F7" parent="Buildings" unique_id=1338270445 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -8, 0, 7.9999995)
+
+[node name="building_G7" parent="Buildings" unique_id=1261308124 instance=ExtResource("7_b3802")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -10, 0, 7.999999)
+
+[node name="building_H5" parent="Buildings" unique_id=1765352036 instance=ExtResource("8_fevyy")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4, 0, 7.9999995)
+
+[node name="building_E17" parent="Buildings" unique_id=1672150677 instance=ExtResource("5_k12tt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6, 0, -4.0000005)
+
+[node name="building_G16" parent="Buildings" unique_id=366811291 instance=ExtResource("7_b3802")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2, 0, -4)
+
+[node name="building_H13" parent="Buildings" unique_id=245499669 instance=ExtResource("8_fevyy")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4, 0, -4.0000005)
+
+[node name="building_E6" parent="Buildings" unique_id=2095919902 instance=ExtResource("5_k12tt")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -12, 0, 3)
+
+[node name="building_F8" parent="Buildings" unique_id=1164926025 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(-1, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -1, -11.233517, 0, 8.514738)
+
+[node name="building_G8" parent="Buildings" unique_id=392549000 instance=ExtResource("7_b3802")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -12.000001, 0, 7)
+
+[node name="building_H6" parent="Buildings" unique_id=193271523 instance=ExtResource("8_fevyy")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -12, 0, 5)
+
+[node name="building_E7" parent="Buildings" unique_id=1804045217 instance=ExtResource("5_k12tt")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -11.999999, 0, -5)
+
+[node name="building_F9" parent="Buildings" unique_id=1975551330 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -12, 0, 1)
+
+[node name="building_G9" parent="Buildings" unique_id=977027198 instance=ExtResource("7_b3802")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -12, 0, -1)
+
+[node name="building_F10" parent="Buildings" unique_id=2111325983 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -11.999999, 0, -7)
+
+[node name="building_G10" parent="Buildings" unique_id=1860705830 instance=ExtResource("7_b3802")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -11.370829, 0, -8.467892)
+
+[node name="building_H7" parent="Buildings" unique_id=388626764 instance=ExtResource("8_fevyy")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -11.999999, 0, -3)
+
+[node name="building_F20" parent="Buildings" unique_id=991493215 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2, 0, 2)
+
+[node name="building_G18" parent="Buildings" unique_id=1487752796 instance=ExtResource("7_b3802")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2, 0, 0)
+
+[node name="building_H14" parent="Buildings" unique_id=845725144 instance=ExtResource("8_fevyy")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1.999999, 0, -2)
+
+[node name="building_F21" parent="Buildings" unique_id=1953272599 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -6, 0, 2)
+
+[node name="building_G19" parent="Buildings" unique_id=13165200 instance=ExtResource("7_b3802")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1.349963, 0, -1, 0, 1.3113416e-07, -6, 0, 0)
+
+[node name="building_H15" parent="Buildings" unique_id=1819130459 instance=ExtResource("8_fevyy")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1.349963, 0, -1, 0, 1.3113416e-07, -5.999999, 0, -2)
+
+[node name="building_F17" parent="Buildings" unique_id=241171775 instance=ExtResource("6_h1bgf")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 4, 0, 2)
+
+[node name="building_G15" parent="Buildings" unique_id=1960941064 instance=ExtResource("7_b3802")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 4, 0, 0)
+
+[node name="building_H12" parent="Buildings" unique_id=2070367924 instance=ExtResource("8_fevyy")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 4.000001, 0, -2)
+
+[node name="building_B2" parent="Buildings" unique_id=1980937366 instance=ExtResource("9_hibaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+
+[node name="building_C2" parent="Buildings" unique_id=916952113 instance=ExtResource("10_pdsj5")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6, 0, -4)
+
+[node name="building_C3" parent="Buildings" unique_id=1534238108 instance=ExtResource("10_pdsj5")]
+transform = Transform3D(-1, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, -1, -8, 0, -4)
+
+[node name="building_D2" parent="Buildings" unique_id=979594249 instance=ExtResource("11_ee4r6")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, 4)
+
+[node name="building_A2" parent="Buildings" unique_id=812743721 instance=ExtResource("12_gt3je")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2, 0, 4)
+
+[node name="MoonLight" type="DirectionalLight3D" parent="." unique_id=1311822506]
+transform = Transform3D(0.9428867, 0.006378407, 0.3330525, -0.30631858, 0.40947482, 0.8593598, -0.13089526, -0.91229904, 0.38804218, 0, 4.47712, 0)
+light_color = Color(0.2558334, 0.050000012, 1, 1)
+light_energy = 0.4
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=761147601]
+environment = SubResource("Environment_jkdf5")
+
+[node name="Lights" type="Node" parent="." unique_id=193568669]
+
+[node name="Streetlight" parent="Lights" unique_id=2069113896 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.006622, 0, 3.2004933)
+
+[node name="Streetlight25" parent="Lights" unique_id=1612708864 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.88244164, 0, 7.0863023)
+
+[node name="Streetlight26" parent="Lights" unique_id=1214593998 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.9137015, 0, 7.0863023)
+
+[node name="Streetlight27" parent="Lights" unique_id=409700941 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.9458556, 0, 7.0863023)
+
+[node name="Streetlight28" parent="Lights" unique_id=1787246078 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.074791, 0, 7.0863023)
+
+[node name="Streetlight29" parent="Lights" unique_id=1140589145 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.9581633, 0, 7.057578)
+
+[node name="Streetlight3" parent="Lights" unique_id=1561944633 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01879, 0, -0.013805389)
+
+[node name="Streetlight4" parent="Lights" unique_id=1925242481 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.0485244, 0, -0.013805389)
+
+[node name="Streetlight5" parent="Lights" unique_id=180146849 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.0485244, 0, -4.763304)
+
+[node name="Streetlight20" parent="Lights" unique_id=855183660 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0.041368723, 0, -7.031049)
+
+[node name="Streetlight21" parent="Lights" unique_id=956557297 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -3.706401, 0, -7.031049)
+
+[node name="Streetlight22" parent="Lights" unique_id=1404089313 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -8.2602, 0, -7.031049)
+
+[node name="Streetlight23" parent="Lights" unique_id=1768827158 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 3.522213, 0, -7.031049)
+
+[node name="Streetlight24" parent="Lights" unique_id=1660677106 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 7.771313, 0, -7.031049)
+
+[node name="Streetlight7" parent="Lights" unique_id=809866060 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.97494, 0, 4.8305597)
+
+[node name="Streetlight8" parent="Lights" unique_id=350478729 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.97494, 0, -4.7569838)
+
+[node name="Streetlight9" parent="Lights" unique_id=1358387221 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.97494, 0, -0.013805389)
+
+[node name="Streetlight10" parent="Lights" unique_id=1669578446 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.042255, 0, -0.013805389)
+
+[node name="Streetlight11" parent="Lights" unique_id=1558706386 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.042255, 0, -4.763304)
+
+[node name="Streetlight12" parent="Lights" unique_id=1198309301 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.042255, 0, 4.728933)
+
+[node name="Streetlight13" parent="Lights" unique_id=1498505161 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.039217, 0, 4.8305597)
+
+[node name="Streetlight14" parent="Lights" unique_id=1208278596 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.039217, 0, -4.7569838)
+
+[node name="Streetlight15" parent="Lights" unique_id=968069018 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.800647, 0, 0.0031203032)
+
+[node name="Streetlight16" parent="Lights" unique_id=9079929 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4.98346, 0, 2.0989127)
+
+[node name="Streetlight19" parent="Lights" unique_id=1040041835 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4.98346, 0, -2.0895267)
+
+[node name="Streetlight17" parent="Lights" unique_id=1395686858 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 6.971902, 0, -4.763304)
+
+[node name="Streetlight18" parent="Lights" unique_id=2054425582 instance=ExtResource("13_fdnlq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 6.971902, 0, 4.728933)
+
+[node name="TrafficLight" parent="Lights" unique_id=278220193 instance=ExtResource("14_jkdf5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0355802, 0, -4.9618826)
+
+[node name="TrafficLight2" parent="Lights" unique_id=693066842 instance=ExtResource("14_jkdf5")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.0393224, -2.3841858e-07, 4.884791)
+
+[node name="CameraManager" type="Node" parent="." unique_id=1988699383 node_paths=PackedStringArray("cameras")]
+script = ExtResource("16_k12tt")
+cameras = [NodePath("IntroCamera"), NodePath("TrackingCamera"), NodePath("../PoliceCar/PoliceCamera"), NodePath("HeliCamera"), NodePath("FinalCamera")]
+
+[node name="IntroCamera" type="Camera3D" parent="CameraManager" unique_id=656374105]
+transform = Transform3D(0.9998477, -0.00053297105, 0.017444272, 0, 0.9995336, 0.030538537, -0.017452411, -0.030533886, 0.99938136, 0, 0.935, 7.348)
+attributes = SubResource("CameraAttributesPractical_wsu2k")
+current = true
+fov = 18.0
+script = ExtResource("13_wsu2k")
+id = "intro"
+do_handheld = true
+handheld_noise = SubResource("FastNoiseLite_wsu2k")
+handheld_amplitude = 0.01
+handheld_frequency = 100.0
+
+[node name="FinalCamera" type="Camera3D" parent="CameraManager" unique_id=1633160854]
+transform = Transform3D(0.9998477, -0.00053297105, 0.017444272, 0, 0.9995336, 0.030538537, -0.017452411, -0.030533886, 0.99938136, -10.018218, 0.6400853, 5.9348583)
+attributes = SubResource("CameraAttributesPractical_fevyy")
+fov = 18.0
+script = ExtResource("13_wsu2k")
+id = "final"
+do_handheld = true
+handheld_noise = SubResource("FastNoiseLite_wsu2k")
+handheld_amplitude = 0.01
+handheld_frequency = 100.0
+
+[node name="HeliCamera" type="Camera3D" parent="CameraManager" unique_id=1226296561 node_paths=PackedStringArray("track_target")]
+transform = Transform3D(0.9998477, -0.0005329696, 0.017444273, -0.0151827885, 0.4663407, 0.88447493, -0.008606372, -0.88460505, 0.46626157, -3.0900595, 9.008435, -3.0084522)
+fov = 10.0
+script = ExtResource("13_wsu2k")
+id = "heli"
+track_target = NodePath("../../Car")
+do_handheld = true
+handheld_noise = SubResource("FastNoiseLite_wsu2k")
+handheld_amplitude = 0.01
+handheld_frequency = 100.0
+
+[node name="TrackingCamera" type="Camera3D" parent="CameraManager" unique_id=55718901 node_paths=PackedStringArray("track_target")]
+transform = Transform3D(-0.8624685, -0.015455883, 0.5058748, 0, 0.9995336, 0.030538537, -0.50611085, 0.026338523, -0.8620662, 8.583218, 0.53668225, 3.376038)
+fov = 30.0
+script = ExtResource("13_wsu2k")
+id = "tracking"
+track_target = NodePath("../../Car")
+do_handheld = true
+handheld_noise = SubResource("FastNoiseLite_wsu2k")
+handheld_amplitude = 0.01
+handheld_frequency = 100.0
+
+[node name="Car" type="Node3D" parent="." unique_id=293776332]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -8.105455, -1.1920929e-07, -6.328054)
+
+[node name="car_hatchback2" parent="Car" unique_id=2011707534 instance=ExtResource("17_h1bgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12413445, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Car" unique_id=1849504316]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, -0.13500798, 0.19787069, 0.20212194)
+light_color = Color(1, 0.7375001, 0.37, 1)
+light_energy = 16.0
+light_specular = 0.0
+spot_angle = 29.12
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Car" unique_id=117149190]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0.15512103, 0.19787069, 0.20212194)
+light_color = Color(1, 0.7375001, 0.37, 1)
+light_energy = 16.0
+light_specular = 0.0
+spot_angle = 29.12
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Car" unique_id=109878639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21329743, 0.4682897)
+light_color = Color(1, 0.75733334, 0.44, 1)
+light_energy = 0.7
+light_specular = 0.0
+omni_range = 1.0
+
+[node name="PoliceCar" type="Node3D" parent="." unique_id=1322221062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.726967, 1.1920929e-07, -6.3503757)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PoliceCar" unique_id=1038481631]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, -0.13500798, 0.19787069, 0.22210664)
+light_color = Color(1, 0.7375001, 0.37, 1)
+light_energy = 16.0
+light_specular = 0.0
+spot_angle = 29.12
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="PoliceCar" unique_id=380806212]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0.15512103, 0.19787069, 0.22210664)
+light_color = Color(1, 0.7375001, 0.37, 1)
+light_energy = 16.0
+light_specular = 0.0
+spot_angle = 29.12
+
+[node name="OmniLight3D" type="OmniLight3D" parent="PoliceCar" unique_id=192919934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21329743, 0.5547296)
+light_color = Color(1, 0.75733334, 0.44, 1)
+light_energy = 0.7
+light_specular = 0.0
+omni_range = 1.0
+
+[node name="car_police2" parent="PoliceCar" unique_id=367321068 instance=ExtResource("18_b3802")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123121515, 0)
+
+[node name="RedLight" type="OmniLight3D" parent="PoliceCar" unique_id=177375958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12458864, 0.50622797, -0.055418134)
+light_color = Color(1, 0, 0, 1)
+light_specular = 0.0
+omni_range = 1.0
+
+[node name="BlueLight" type="OmniLight3D" parent="PoliceCar" unique_id=229667051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110254765, 0.50622797, -0.055418134)
+light_color = Color(0, 0.4333334, 1, 1)
+light_specular = 0.0
+omni_range = 1.0
+
+[node name="PoliceCamera" type="Camera3D" parent="PoliceCar" unique_id=256960075]
+transform = Transform3D(-0.85970724, -0.21528767, -0.4632007, -0.25869128, 0.9654493, 0.031410765, 0.44043437, 0.14683007, -0.88569677, -0.3898549, 0.38873672, -0.2521)
+attributes = SubResource("CameraAttributesPractical_b3802")
+fov = 30.0
+script = ExtResource("13_wsu2k")
+id = "police"
+do_handheld = true
+handheld_noise = SubResource("FastNoiseLite_wsu2k")
+handheld_amplitude = 0.03
+handheld_frequency = 100.0
+
+[node name="PoliceCarLightsPlayer" type="AnimationPlayer" parent="PoliceCar" unique_id=963562424]
+libraries/ = SubResource("AnimationLibrary_ee4r6")
+autoplay = &"lights_flash"
+
+[node name="CutscenePlayer" type="AnimationPlayer" parent="." unique_id=911152171]
+libraries/ = SubResource("AnimationLibrary_hibaj")
+autoplay = &"cutscene"
