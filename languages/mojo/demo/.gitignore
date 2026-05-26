@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+review_embeddings.npy
+query_embedding.npy
+review_embeddings.f32
+query_embedding.f32
+reviews_metadata.csv
+demo_config.json
+search_mojo_scalar
+search_mojo_scalar.exe
+.kagglehub/
+# pixi environments
+.pixi/*
+!.pixi/config.toml
