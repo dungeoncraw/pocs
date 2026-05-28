@@ -6,7 +6,7 @@ from demo_config import NUM_DOCS, DIM, TOP_K
 # - 4 = 128-bit SIMD
 # - 8 = 256-bit SIMD
 # - 16 =  512-bit SIMD
-comptime SIMD_WIDTH = 8
+comptime SIMD_WIDTH = 4
 
 
 def read_float32_file(path: String, count: Int) raises -> List[Float32]:
@@ -58,10 +58,11 @@ def calculate_score(
 
     var j = 0
 
+    # loading the values into SIMD vectors
+    var query_vector = query_ptr.load[width=SIMD_WIDTH](j)
+    var data_vector = embeddings_ptr.load[width=SIMD_WIDTH](base + j)
+    
     while j + SIMD_WIDTH <= DIM:
-        # loading the values into SIMD vectors
-        var query_vector = query_ptr.load[width=SIMD_WIDTH](j)
-        var data_vector = embeddings_ptr.load[width=SIMD_WIDTH](base + j)
         
         acc += query_vector * data_vector
 

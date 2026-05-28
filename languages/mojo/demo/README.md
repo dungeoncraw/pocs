@@ -64,3 +64,42 @@ python search_numpy.py
 pixi run mojo build -O3 search_mojo.mojo -o search_mojo
 ./search_mojo
 ```
+
+
+# Results
+
+search_python_loop.py
+
+    Embeddings shape: (100000, 384)
+    Query: healthy snack with chocolate and low sugar
+
+    Running pure Python loop search...
+
+    Pure Python loop search time: 5.317592s
+
+search_numpy.py
+
+    Embeddings shape: (100000, 384)
+    Query: healthy snack with chocolate and low sugar
+
+    Running NumPy vectorized search...
+
+    NumPy search time: 0.012511s
+
+
+search_mojo.mojo
+
+    Loading raw float32 files...
+    NUM_DOCS: 100000
+    DIM: 384
+    TOP_K: 5
+
+    Running Mojo scalar compiled search...
+
+    Mojo search time: 0.06613 s
+
+search_simd.mojo
+
+    Running Mojo SIMD search...
+
+    Mojo SIMD search time: 0.014134 s

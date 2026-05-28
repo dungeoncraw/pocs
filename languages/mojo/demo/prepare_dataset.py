@@ -107,9 +107,9 @@ def main() -> None:
     with open(OUT_DIR / "demo_config.mojo", "w", encoding="utf-8") as f:
         f.write(
             f"""\
-            comptime NUM_DOCS = {int(num_docs)}
-            comptime DIM = {int(dim)}
-            comptime TOP_K = {int(TOP_K)}
+comptime NUM_DOCS = {int(num_docs)}
+comptime DIM = {int(dim)}
+comptime TOP_K = {int(TOP_K)}
             """
         )
 
