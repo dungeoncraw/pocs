@@ -1,0 +1,79 @@
+[gd_resource type="Theme" format=3 uid="uid://b3onrlrkh62dd"]
+
+[ext_resource type="FontFile" uid="uid://c2u22t00570gg" path="res://fonts/Unageo-Bold.ttf" id="1_c0hxp"]
+[ext_resource type="FontFile" uid="uid://dhucrdogadun6" path="res://fonts/Unageo-Medium.ttf" id="1_d5464"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkklj"]
+bg_color = Color(0.11372549, 0.11372549, 0.11372549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5464"]
+bg_color = Color(0.11372549, 0.11372549, 0.11372549, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c0hxp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2a0pm"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.12156863, 0.12156863, 0.12156863, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5464"]
+
+[sub_resource type="Gradient" id="Gradient_r63l6"]
+offsets = PackedFloat32Array(0.41566265, 1)
+colors = PackedColorArray(0.11372549, 0.11372549, 0.11372549, 1, 0.19215687, 0.19215687, 0.19215687, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c0hxp"]
+gradient = SubResource("Gradient_r63l6")
+fill_from = Vector2(0.5804348, 0.71304345)
+fill_to = Vector2(0.5565217, 0.15)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d5464"]
+texture = SubResource("GradientTexture2D_c0hxp")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0hxp"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
+shadow_color = Color(0, 0, 0, 0.09803922)
+shadow_size = 10
+
+[resource]
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_d5464")
+Button/styles/focus = SubResource("StyleBoxFlat_nkklj")
+Button/styles/hover = SubResource("StyleBoxFlat_d5464")
+Button/styles/normal = SubResource("StyleBoxEmpty_c0hxp")
+FunctionButton/base_type = &"Button"
+FunctionButton/colors/font_color = Color(0.85882354, 0.78039217, 0, 1)
+FunctionButton/colors/font_disabled_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_focus_color = Color(0.85882354, 0.78039217, 0, 1)
+FunctionButton/colors/font_hover_color = Color(0.85882354, 0.78039217, 0, 1)
+FunctionButton/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_outline_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_disabled_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_focus_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_hover_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_normal_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/constants/align_to_largest_stylebox = 0
+FunctionButton/constants/h_separation = 0
+FunctionButton/constants/icon_max_width = 0
+FunctionButton/constants/outline_size = 0
+FunctionButton/font_sizes/font_size = 40
+FunctionButton/fonts/font = ExtResource("1_d5464")
+FunctionButton/styles/disabled = SubResource("StyleBoxFlat_2a0pm")
+FunctionButton/styles/focus = SubResource("StyleBoxFlat_2a0pm")
+FunctionButton/styles/hover = SubResource("StyleBoxFlat_2a0pm")
+FunctionButton/styles/normal = SubResource("StyleBoxEmpty_d5464")
+FunctionButton/styles/pressed = SubResource("StyleBoxFlat_2a0pm")
+GridContainer/constants/h_separation = 0
+GridContainer/constants/v_separation = 0
+Label/font_sizes/font_size = 80
+Label/fonts/font = ExtResource("1_c0hxp")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_right = 20
+Panel/styles/panel = SubResource("StyleBoxTexture_d5464")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_c0hxp")
