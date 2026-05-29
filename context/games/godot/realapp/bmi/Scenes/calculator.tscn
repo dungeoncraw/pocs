@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://e20pd34cqmas"]
 
 [ext_resource type="Script" uid="uid://desk3mwls3hak" path="res://Scripts/calculator.gd" id="1_57imy"]
+[ext_resource type="Theme" uid="uid://dm2lu3w2e202a" path="res://light_theme.tres" id="1_xst5o"]
 
 [node name="Calculator" type="Control" unique_id=852315990]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_xst5o")
 script = ExtResource("1_57imy")
 
 [node name="BG" type="Panel" parent="." unique_id=279267390]
@@ -67,6 +69,7 @@ text = "%"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_type_variation = &"FunctionButton"
 text = "/"
 
 [node name="Button5" type="Button" parent="VBoxContainer/PanelContainer/GridContainer" unique_id=708282488]
@@ -91,6 +94,7 @@ text = "9"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_type_variation = &"FunctionButton"
 text = "x"
 
 [node name="Button9" type="Button" parent="VBoxContainer/PanelContainer/GridContainer" unique_id=437706487]
@@ -115,6 +119,7 @@ text = "6"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_type_variation = &"FunctionButton"
 text = "-"
 
 [node name="Button13" type="Button" parent="VBoxContainer/PanelContainer/GridContainer" unique_id=1475913154]
@@ -139,6 +144,7 @@ text = "3"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_type_variation = &"FunctionButton"
 text = "+"
 
 [node name="Spacer" type="Control" parent="VBoxContainer/PanelContainer/GridContainer" unique_id=1579429938]
@@ -172,6 +178,7 @@ text = "."
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_type_variation = &"FunctionButton"
 text = "="
 
 [connection signal="resized" from="VBoxContainer/PanelContainer/GridContainer/ZeroButtonContainer/ZeroButton" to="." method="_on_zero_button_resized"]

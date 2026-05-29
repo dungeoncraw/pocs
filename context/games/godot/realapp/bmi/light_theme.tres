@@ -1,0 +1,94 @@
+[gd_resource type="Theme" format=3 uid="uid://dm2lu3w2e202a"]
+
+[ext_resource type="FontFile" uid="uid://dhucrdogadun6" path="res://fonts/Unageo-Medium.ttf" id="1_4bny6"]
+[ext_resource type="FontFile" uid="uid://c2u22t00570gg" path="res://fonts/Unageo-Bold.ttf" id="1_86ju1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p36p5"]
+bg_color = Color(0.87058824, 0.90588236, 0.93333334, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bny6"]
+bg_color = Color(0.9019608, 0.92941177, 0.9490196, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_86ju1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qtgr"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.9411765, 0.95686275, 0.96862745, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pgqc"]
+bg_color = Color(0.9411765, 0.95686275, 0.96862745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6can8"]
+bg_color = Color(0.9411765, 0.95686275, 0.96862745, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_okyf1"]
+
+[sub_resource type="Gradient" id="Gradient_hkwqb"]
+offsets = PackedFloat32Array(0.17168675, 1)
+colors = PackedColorArray(0.7294118, 0.827451, 0.87058824, 1, 0.9019608, 0.9254902, 0.9411765, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_86ju1"]
+gradient = SubResource("Gradient_hkwqb")
+fill_from = Vector2(0.6326087, 0.5521739)
+fill_to = Vector2(0.7521739, 0.06521739)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hkwqb"]
+texture = SubResource("GradientTexture2D_86ju1")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86ju1"]
+bg_color = Color(0.9411765, 0.95686275, 0.96862745, 1)
+shadow_color = Color(0, 0, 0, 0.078431375)
+shadow_size = 10
+
+[resource]
+Button/colors/font_color = Color(0.3372549, 0.34117648, 0.4117647, 1)
+Button/colors/font_focus_color = Color(0.30588236, 0.30980393, 0.3764706, 1)
+Button/colors/font_hover_color = Color(0.3372549, 0.34117648, 0.4117647, 1)
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_4bny6")
+Button/styles/focus = SubResource("StyleBoxFlat_p36p5")
+Button/styles/hover = SubResource("StyleBoxFlat_4bny6")
+Button/styles/normal = SubResource("StyleBoxEmpty_86ju1")
+FunctionButton/base_type = &"Button"
+FunctionButton/colors/font_color = Color(0.42745098, 0.7372549, 0.72156864, 1)
+FunctionButton/colors/font_disabled_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_focus_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_hover_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_outline_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_disabled_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_focus_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_hover_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_normal_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/constants/align_to_largest_stylebox = 0
+FunctionButton/constants/h_separation = 0
+FunctionButton/constants/icon_max_width = 0
+FunctionButton/constants/outline_size = 0
+FunctionButton/font_sizes/font_size = 40
+FunctionButton/fonts/font = ExtResource("1_4bny6")
+FunctionButton/styles/disabled = SubResource("StyleBoxFlat_3qtgr")
+FunctionButton/styles/focus = SubResource("StyleBoxFlat_8pgqc")
+FunctionButton/styles/hover = SubResource("StyleBoxFlat_6can8")
+FunctionButton/styles/normal = SubResource("StyleBoxEmpty_okyf1")
+FunctionButton/styles/pressed = SubResource("StyleBoxFlat_3qtgr")
+GridContainer/constants/h_separation = 0
+GridContainer/constants/v_separation = 0
+Label/colors/font_color = Color(0.27058825, 0.27058825, 0.36862746, 1)
+Label/font_sizes/font_size = 80
+Label/fonts/font = ExtResource("1_86ju1")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_right = 20
+Panel/styles/panel = SubResource("StyleBoxTexture_hkwqb")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_86ju1")
