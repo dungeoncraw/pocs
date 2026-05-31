@@ -27,12 +27,20 @@ def insert_top_k(
     mut top_scores: List[Float32],
     mut top_ids: List[Int],
 ):
-    if score <= top_scores[TOP_K - 1]:
+    # When score is less than the minimum in top_k, skip
+    if score < top_scores[TOP_K - 1]:
         return
+    
+    # When scores are exactly equal, use doc_id as tie-breaker
+    # Keep the one with LARGER doc_id first (matches Python's reverse sort behavior)
+    if score == top_scores[TOP_K - 1]:
+        if doc_id <= top_ids[TOP_K - 1]:
+            return
 
     var pos = TOP_K - 1
 
-    while pos > 0 and score > top_scores[pos - 1]:
+    # Move items down to make space, considering both score and doc_id for ties
+    while pos > 0 and (score > top_scores[pos - 1] or (score == top_scores[pos - 1] and doc_id > top_ids[pos - 1])):
         top_scores[pos] = top_scores[pos - 1]
         top_ids[pos] = top_ids[pos - 1]
         pos -= 1
