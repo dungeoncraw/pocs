@@ -1,18 +1,18 @@
 package store
 
-import models.{Cypher, FileStorage}
+import models.{CypherPayload, FileStorage}
 import types.StoragePath
 
 import scala.collection.mutable
 
 final class InMemoryFileStore extends FileStorage:
 
-  private val files = mutable.Map.empty[StoragePath, Cypher]
+  private val files = mutable.Map.empty[StoragePath, CypherPayload]
 
-  override def put(path: StoragePath, payload: Cypher): Unit =
+  override def put(path: StoragePath, payload: CypherPayload): Unit =
     files(path) = payload
 
-  override def get(path: StoragePath): Option[Cypher] =
+  override def get(path: StoragePath): Option[CypherPayload] =
     files.get(path)
 
   override def delete(path: StoragePath): Unit =

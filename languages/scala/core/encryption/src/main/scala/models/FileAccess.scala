@@ -6,6 +6,6 @@ import types.{FileId, UserId}
 final case class FileAccess(
                              fileId: FileId,
                              userId: UserId,
-                             encryptedFileKey: Cypher,
+                             encryptedFileKey: CypherPayload,
                              permission: Permission
                            )

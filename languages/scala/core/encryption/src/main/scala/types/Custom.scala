@@ -1,5 +1,16 @@
 package types
 
-final case class UserId(value: String) extends AnyVal
-final case class FileId(value: String) extends AnyVal
-final case class StoragePath(value: String) extends AnyVal
+opaque type UserId = String
+object UserId:
+  def apply(value: String): UserId = value
+  extension (id: UserId) def value: String = id
+
+opaque type FileId = String
+object FileId:
+  def apply(value: String): FileId = value
+  extension (id: FileId) def value: String = id
+
+opaque type StoragePath = String
+object StoragePath:
+  def apply(value: String): StoragePath = value
+  extension (p: StoragePath) def value: String = p

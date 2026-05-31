@@ -1,15 +1,29 @@
+import models.{FileStorage, User}
+import services.{EncryptionService, FileShareService}
+import store.{FileAccessStore, InMemoryFileStore, MetadataStore, UserStore}
+import types.UserId
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.nio.charset.StandardCharsets.UTF_8
+
 @main
 def main(): Unit = {
-  //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-  // to see how IntelliJ IDEA suggests fixing it.
-  (1 to 5).map(println)
+  val (uStore, mStore, aStore, storage) = (UserStore(), MetadataStore(), FileAccessStore(), InMemoryFileStore())
+  val share = FileShareService(uStore, mStore, aStore, storage)
 
-  for (i <- 1 to 5) {
-    //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-    // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-    println(s"i = $i")
-  }
+  val anakin = User(UserId("anakin"), "Anakin", EncryptionService.generateAes256Key())
+  val grivous = User(UserId("grivous"), "Grivous", EncryptionService.generateAes256Key())
+  uStore.add(anakin); uStore.add(grivous)
+
+  val fileId = share.saveFile(anakin.id, "report.txt", "Secret report".getBytes(UTF_8), Set("secret")).fold(e => sys.error(s"Save failed: $e"), id => id)
+  println(s"Saved: ${fileId.value}")
+
+  share.shareFile(anakin.id, fileId, grivous.id)
+  println(s"Bob restored: ${share.restoreFile(grivous.id, fileId).map(f => new String(f.bytes, UTF_8))}")
+
+  share.revokeAccess(anakin.id, fileId, grivous.id)
+  println(s"Bob after revoke: ${share.restoreFile(grivous.id, fileId)}")
+
+  share.deleteFile(anakin.id, fileId)
+  println(s"Alice after delete: ${share.restoreFile(anakin.id, fileId)}")
 }
 

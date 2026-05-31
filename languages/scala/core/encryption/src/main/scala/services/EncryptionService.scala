@@ -7,6 +7,7 @@ import java.security.SecureRandom
 import javax.crypto.{Cipher, KeyGenerator, SecretKey}
 import javax.crypto.spec.{GCMParameterSpec, SecretKeySpec}
 import scala.util.Try
+import scala.util.chaining.*
 
 object EncryptionService:
 
@@ -23,43 +24,18 @@ object EncryptionService:
     keyGenerator.init(256)
     keyGenerator.generateKey()
 
-  def encrypt(
-               plainBytes: Array[Byte],
-               key: SecretKey
-             ): Either[FileShareError, CypherPayload] =
-    Try {
-      val iv = new Array[Byte](IvLengthBytes)
-      random.nextBytes(iv)
+  def encrypt(plain: Array[Byte], key: SecretKey): Either[FileShareError, CypherPayload] = Try {
+    val iv = new Array[Byte](IvLengthBytes).tap(random.nextBytes)
+    val cipher = Cipher.getInstance(Transformation)
+    cipher.init(Cipher.ENCRYPT_MODE, key, GCMParameterSpec(TagLengthBits, iv))
+    CypherPayload(iv, cipher.doFinal(plain))
+  }.toEither.left.map(e => FileShareError.CryptoFailure(e.getMessage))
 
-      val cipher = Cipher.getInstance(Transformation)
-      val spec = GCMParameterSpec(TagLengthBits, iv)
-
-      cipher.init(Cipher.ENCRYPT_MODE, key, spec)
-
-      val cipherText = cipher.doFinal(plainBytes)
-
-      CypherPayload(
-        iv = iv,
-        cipherText = cipherText
-      )
-    }.toEither.left.map(error =>
-      FileShareError.CryptoFailure(error.getMessage)
-    )
-
-  def decrypt(
-               payload: CypherPayload,
-               key: SecretKey
-             ): Either[FileShareError, Array[Byte]] =
-    Try {
-      val cipher = Cipher.getInstance(Transformation)
-      val spec = GCMParameterSpec(TagLengthBits, payload.iv)
-
-      cipher.init(Cipher.DECRYPT_MODE, key, spec)
-
-      cipher.doFinal(payload.cipherText)
-    }.toEither.left.map(error =>
-      FileShareError.CryptoFailure(error.getMessage)
-    )
+  def decrypt(payload: CypherPayload, key: SecretKey): Either[FileShareError, Array[Byte]] = Try {
+    val cipher = Cipher.getInstance(Transformation)
+    cipher.init(Cipher.DECRYPT_MODE, key, GCMParameterSpec(TagLengthBits, payload.iv))
+    cipher.doFinal(payload.cipherText)
+  }.toEither.left.map(e => FileShareError.CryptoFailure(e.getMessage))
 
   def encryptFileKey(
                       fileKey: SecretKey,
