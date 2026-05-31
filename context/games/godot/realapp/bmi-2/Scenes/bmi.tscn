@@ -1,16 +1,19 @@
-[gd_scene format=3 uid="uid://bai2244335ot2"]
+[gd_scene format=3 uid="uid://uh1o1mbbvjsl"]
 
-[node name="BMI" type="Control" unique_id=711013192]
+[ext_resource type="Theme" uid="uid://4y4a3tlikd3j" path="res://scenes/light_theme.tres" id="1_2851y"]
+[ext_resource type="Script" uid="uid://ms5ahvh0pm3n" path="res://scenes/bmi.gd" id="2_2851y"]
+
+[node name="BMI" type="Control" unique_id=1119645098]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -532.0
-offset_bottom = 504.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_2851y")
+script = ExtResource("2_2851y")
 
-[node name="BG" type="Panel" parent="." unique_id=1921263412]
+[node name="BG" type="Panel" parent="." unique_id=2026270144]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1413984298]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1142460784]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,37 +29,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Output" type="CenterContainer" parent="VBoxContainer" unique_id=1528239813]
+[node name="Output" type="CenterContainer" parent="VBoxContainer" unique_id=1213991358]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Output" unique_id=161484481]
+[node name="Label" type="Label" parent="VBoxContainer/Output" unique_id=1099836066]
 layout_mode = 2
 text = "BMI"
 
-[node name="HeighInput" type="MarginContainer" parent="VBoxContainer" unique_id=67681645]
+[node name="HeightInput" type="MarginContainer" parent="VBoxContainer" unique_id=951958862]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HeighInput" unique_id=1096545140]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HeightInput" unique_id=1774423355]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HeighInput/PanelContainer" unique_id=1530453744]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HeightInput/PanelContainer" unique_id=2102224289]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HeighInput/PanelContainer/MarginContainer" unique_id=2085703923]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HeightInput/PanelContainer/MarginContainer" unique_id=1195509907]
 layout_mode = 2
 alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HeighInput/PanelContainer/MarginContainer/VBoxContainer" unique_id=776557920]
+[node name="HeightLineEdit" type="LineEdit" parent="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer" unique_id=1391404495]
 layout_mode = 2
 text = "170"
 alignment = 1
 
-[node name="Control" type="Control" parent="VBoxContainer/HeighInput/PanelContainer/MarginContainer/VBoxContainer" unique_id=822815908]
+[node name="Control" type="Control" parent="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer" unique_id=1736454379]
 layout_mode = 2
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/HeighInput/PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=1112347533]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=504953016]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -64,57 +67,72 @@ anchor_right = 0.9
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+min_value = 100.0
+max_value = 200.0
+value = 100.0
 
-[node name="Control" type="Control" parent="VBoxContainer/HeighInput/PanelContainer" unique_id=924743463]
+[node name="Control" type="Control" parent="VBoxContainer/HeightInput/PanelContainer" unique_id=1528770221]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HeighInput/PanelContainer/Control" unique_id=487273265]
+[node name="Label" type="Label" parent="VBoxContainer/HeightInput/PanelContainer/Control" unique_id=441948787]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -20.0
+offset_top = 10.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
 text = "Height (cm)"
 
-[node name="WeightInput" type="MarginContainer" parent="VBoxContainer" unique_id=1165607664]
+[node name="WeightInput" type="MarginContainer" parent="VBoxContainer" unique_id=338372589]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/WeightInput" unique_id=135701148]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/WeightInput" unique_id=1334726354]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/WeightInput/PanelContainer" unique_id=708087936]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/WeightInput/PanelContainer" unique_id=1835999867]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/WeightInput/PanelContainer/HBoxContainer" unique_id=76781521]
+[node name="MinusButton" type="Button" parent="VBoxContainer/WeightInput/PanelContainer/HBoxContainer" unique_id=481515213]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "-"
+text = "_"
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/WeightInput/PanelContainer/HBoxContainer" unique_id=2142723793]
+[node name="WeightLineEdit" type="LineEdit" parent="VBoxContainer/WeightInput/PanelContainer/HBoxContainer" unique_id=1382604660]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "80"
 alignment = 1
 
-[node name="Button2" type="Button" parent="VBoxContainer/WeightInput/PanelContainer/HBoxContainer" unique_id=1796404831]
+[node name="PlusButton" type="Button" parent="VBoxContainer/WeightInput/PanelContainer/HBoxContainer" unique_id=261042913]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "+"
 
-[node name="Control" type="Control" parent="VBoxContainer/WeightInput/PanelContainer" unique_id=60534361]
+[node name="Control" type="Control" parent="VBoxContainer/WeightInput/PanelContainer" unique_id=16191189]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/WeightInput/PanelContainer/Control" unique_id=1501766362]
+[node name="Label" type="Label" parent="VBoxContainer/WeightInput/PanelContainer/Control" unique_id=852110118]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -20.0
+offset_top = 10.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
 text = "Weight (kg)"
+
+[connection signal="text_changed" from="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer/HeightLineEdit" to="." method="_on_height_line_edit_text_changed"]
+[connection signal="value_changed" from="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer/Control/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/WeightInput/PanelContainer/HBoxContainer/MinusButton" to="." method="_on_minus_button_pressed"]
+[connection signal="text_changed" from="VBoxContainer/WeightInput/PanelContainer/HBoxContainer/WeightLineEdit" to="." method="_on_weight_line_edit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/WeightInput/PanelContainer/HBoxContainer/PlusButton" to="." method="_on_plus_button_pressed"]

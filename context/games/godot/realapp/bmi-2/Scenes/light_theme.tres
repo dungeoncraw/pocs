@@ -1,0 +1,93 @@
+[gd_resource type="Theme" format=3 uid="uid://4y4a3tlikd3j"]
+
+[ext_resource type="FontFile" uid="uid://crqvittpjk2o0" path="res://resources/Unageo-Bold.ttf" id="1_1k64d"]
+[ext_resource type="Texture2D" uid="uid://78nsy8s7x6op" path="res://resources/grabber_light.png" id="2_r7jik"]
+[ext_resource type="FontFile" uid="uid://4ybpd2g6boos" path="res://resources/Unageo-Medium.ttf" id="3_a2kvi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqgbe"]
+bg_color = Color(0.847059, 0.898039, 0.988235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k64d"]
+bg_color = Color(0.845272, 0.896832, 0.987229, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqgbe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7jik"]
+bg_color = Color(0.710419, 0.806552, 0.978087, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryl8m"]
+bg_color = Color(0.407843, 0.662745, 0.964706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_roeax"]
+bg_color = Color(0.407843, 0.662745, 0.964706, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_5shbb"]
+color = Color(0.685049, 0.820879, 0.986773, 1)
+thickness = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7jik"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cnj0c"]
+
+[sub_resource type="Gradient" id="Gradient_r7jik"]
+colors = PackedColorArray(0.905882, 0.941176, 0.996078, 1, 0.946886, 0.966788, 0.997758, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a2kvi"]
+gradient = SubResource("Gradient_r7jik")
+fill_from = Vector2(0.452991, 0.651282)
+fill_to = Vector2(0.617094, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ryl8m"]
+texture = SubResource("GradientTexture2D_a2kvi")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxsel"]
+bg_color = Color(0.976471, 0.976471, 0.976471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.0392157)
+shadow_size = 2
+
+[resource]
+Button/colors/font_color = Color(0.407843, 0.666667, 0.968627, 1)
+Button/colors/font_focus_color = Color(0.407843, 0.666667, 0.968627, 1)
+Button/colors/font_hover_color = Color(0.407843, 0.666667, 0.968627, 1)
+Button/font_sizes/font_size = 80
+Button/fonts/font = ExtResource("1_1k64d")
+Button/styles/focus = SubResource("StyleBoxFlat_lqgbe")
+Button/styles/hover = SubResource("StyleBoxFlat_1k64d")
+Button/styles/normal = SubResource("StyleBoxEmpty_lqgbe")
+Button/styles/pressed = SubResource("StyleBoxFlat_r7jik")
+HSlider/icons/grabber = ExtResource("2_r7jik")
+HSlider/icons/grabber_highlight = ExtResource("2_r7jik")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_ryl8m")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_roeax")
+HSlider/styles/slider = SubResource("StyleBoxLine_5shbb")
+Label/colors/font_color = Color(0.407843, 0.670588, 0.972549, 1)
+Label/font_sizes/font_size = 120
+Label/fonts/font = ExtResource("1_1k64d")
+LineEdit/colors/font_color = Color(0.407843, 0.666667, 0.968627, 1)
+LineEdit/colors/selection_color = Color(0.682353, 0.815686, 0.984314, 1)
+LineEdit/font_sizes/font_size = 120
+LineEdit/fonts/font = ExtResource("3_a2kvi")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_r7jik")
+LineEdit/styles/normal = SubResource("StyleBoxEmpty_cnj0c")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxTexture_ryl8m")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_lxsel")

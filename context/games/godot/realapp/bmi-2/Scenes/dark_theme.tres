@@ -1,0 +1,79 @@
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://s3mfbgxik58b"]
+
+[ext_resource type="FontFile" uid="uid://crqvittpjk2o0" path="res://resources/Unageo-Bold.ttf" id="1_d58vl"]
+[ext_resource type="Texture2D" uid="uid://cenjagxccmqq7" path="res://resources/grabber_dark.png" id="2_qbrsb"]
+[ext_resource type="FontFile" uid="uid://4ybpd2g6boos" path="res://resources/Unageo-Medium.ttf" id="2_xtwo5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbrsb"]
+bg_color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtwo5"]
+bg_color = Color(0.0744457, 0.0744457, 0.0744457, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qbrsb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ad1e"]
+bg_color = Color(0.952941, 0.952941, 0.952941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bx1k5"]
+bg_color = Color(0.952941, 0.952941, 0.952941, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xtwo5"]
+color = Color(0.797092, 0.797092, 0.797092, 1)
+thickness = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d58vl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtwo5"]
+
+[sub_resource type="Gradient" id="Gradient_5ad1e"]
+offsets = PackedFloat32Array(0, 0.996974)
+colors = PackedColorArray(0.137255, 0.137255, 0.137255, 1, 0.162066, 0.162066, 0.162066, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bx1k5"]
+gradient = SubResource("Gradient_5ad1e")
+fill_from = Vector2(0.283761, 0.962393)
+fill_to = Vector2(0.594872, 0.0444444)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wwmgo"]
+texture = SubResource("GradientTexture2D_bx1k5")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oh7y0"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[resource]
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_d58vl")
+Button/styles/focus = SubResource("StyleBoxFlat_qbrsb")
+Button/styles/hover = SubResource("StyleBoxFlat_xtwo5")
+Button/styles/normal = SubResource("StyleBoxEmpty_qbrsb")
+HSlider/icons/grabber = ExtResource("2_qbrsb")
+HSlider/icons/grabber_highlight = ExtResource("2_qbrsb")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_5ad1e")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_bx1k5")
+HSlider/styles/slider = SubResource("StyleBoxLine_xtwo5")
+Label/font_sizes/font_size = 120
+Label/fonts/font = ExtResource("1_d58vl")
+LineEdit/colors/selection_color = Color(0.796078, 0.796078, 0.796078, 1)
+LineEdit/font_sizes/font_size = 70
+LineEdit/fonts/font = ExtResource("2_xtwo5")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_d58vl")
+LineEdit/styles/normal = SubResource("StyleBoxEmpty_xtwo5")
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 20
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxTexture_wwmgo")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_oh7y0")
