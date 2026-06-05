@@ -1,0 +1,11 @@
+[gd_scene format=4 uid="uid://diq1arwiy8cbo"]
+
+[ext_resource type="PackedScene" uid="uid://djh3khl33k11" path="res://scenes/levels/level.tscn" id="1_1eclv"]
+
+[node name="Subway" unique_id=1678859882 instance=ExtResource("1_1eclv")]
+
+[node name="TileMapLayer" parent="Layers" parent_id_path=PackedInt32Array(1137580242) index="0" unique_id=334539260]
+tile_map_data = PackedByteArray("AAAYAB4AAAAEAAAAAAAZAB4AAAAFAAAAAAAaAB4AAAAGAAAAAAAbAB4AAAAHAAAAAAAcAB4AAAAIAAAAAAAdAB4AAAAJAAAAAAAeAB4AAAAKAAAAAAAhABwAAAAEAAAAAAAiABwAAAAFAAAAAAAjABwAAAAGAAAAAAAkABwAAAAHAAAAAAAlABwAAAAIAAAAAAAmABwAAAAJAAAAAAAnABwAAAAKAAAAAAAPABkAAAAEAAAAAAAQABkAAAAFAAAAAAARABkAAAAGAAAAAAASABkAAAAHAAAAAAATABkAAAAIAAAAAAAUABkAAAAJAAAAAAAVABkAAAAKAAAAAAA=")
+
+[node name="Player" parent="Entities" parent_id_path=PackedInt32Array(45960275) index="0" unique_id=88417789]
+position = Vector2(284, 386)
