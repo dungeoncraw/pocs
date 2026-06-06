@@ -106,3 +106,9 @@ zoom = Vector2(3, 3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1842525018]
 libraries/ = SubResource("AnimationLibrary_dyp2m")
+
+[node name="Timer" type="Node" parent="." unique_id=538837093]
+
+[node name="ReloadTimer" type="Timer" parent="Timer" unique_id=13295153]
+wait_time = 0.5
+one_shot = true
