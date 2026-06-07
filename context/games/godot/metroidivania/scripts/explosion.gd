@@ -1,8 +1,7 @@
 extends Area2D
 
-var direction: Vector2
-var speed: int = 200
-const OFFSET = 16
+var targets: Array
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -12,15 +11,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _physics_process(delta: float) -> void:
-	position += direction * speed * delta
-
-func setup(pos: Vector2, dir: Vector2):
-	position = pos + dir * OFFSET
-	direction = dir
+func setup(pos: Vector2):
+	position = pos
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if 'hit' in body:
-		body.hit()
-	queue_free()
+	targets.append(body)
+
+func hurt_targets():
+	for target in targets:
+		target.hit()

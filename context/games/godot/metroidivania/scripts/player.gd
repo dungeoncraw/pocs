@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var health: int = 10
 var direction_x: float
 @export_category('move')
 @export var speed: int = 120
@@ -71,3 +72,6 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 	animation()
 	move_and_slide()
+
+func hit():
+	health -= 1

@@ -1,0 +1,31 @@
+[gd_resource type="VisualShader" format=3 uid="uid://d3asuqbcct7g0"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_e3v1v"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_e3v1v"]
+parameter_name = "Color"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_e3v1v"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_e3v1v"]
+parameter_name = "Progress"
+hint = 1
+default_value_enabled = true
+
+[resource]
+resource_local_to_scene = true
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_e3v1v")
+nodes/fragment/2/position = Vector2(-360, 540)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_e3v1v")
+nodes/fragment/3/position = Vector2(-370, 220)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_e3v1v")
+nodes/fragment/4/position = Vector2(140, 330)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_e3v1v")
+nodes/fragment/5/position = Vector2(-280, 700)
+nodes/fragment/connections = PackedInt32Array(4, 0, 0, 0, 5, 0, 4, 2, 2, 0, 4, 0, 3, 0, 4, 1)
