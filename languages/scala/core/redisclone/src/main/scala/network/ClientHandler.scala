@@ -1,6 +1,6 @@
 package network
 
-import parser.{Command, RespParseException, RespParser}
+import parser.{Command, RespBulkString, RespEncoder, RespError, RespParseException, RespParser, RespSimpleString, RespValue}
 
 import java.io.{InputStream, OutputStream}
 import java.net.Socket
@@ -18,23 +18,31 @@ final class ClientHandler(socket: Socket):
       var running = true
 
       while running do
-        val respValue = parser.parseValue()
-        val commandResult = Command.fromResp(respValue)
+        val parsedValue = parser.parseValue()
 
-        val response =
-          commandResult match
+        val responseValue =
+          Command.fromResp(parsedValue) match
             case Right(command) =>
-              handleCommand(command)
+              command.name match
+                case "QUIT" =>
+                  running = false
+                  RespSimpleString("OK")
+
+                case other =>
+                  handleCommand(command)
 
             case Left(error) =>
-              s"-$error\r\n"
+              RespError(error)
 
-        output.write(response.getBytes)
+        val responseBytes =
+          RespEncoder.encode(responseValue)
+
+        output.write(responseBytes)
         output.flush()
 
     catch
       case error: RespParseException =>
-        println(s"RESP parse error: ${error.getMessage}")
+        println(s"RESP parse error or connection closed: ${error.getMessage}")
 
       case NonFatal(error) =>
         println(s"Client error: ${error.getMessage}")
@@ -43,19 +51,19 @@ final class ClientHandler(socket: Socket):
       println(s"Client disconnected: ${socket.getRemoteSocketAddress}")
       socket.close()
 
-  private def handleCommand(command: Command): String =
+  private def handleCommand(command: Command): RespValue =
     command.name match
       case "PING" =>
-        "+PONG\r\n"
+        RespSimpleString("PONG")
 
       case "SET" =>
-        "+OK\r\n"
+        RespSimpleString("OK")
 
       case "GET" =>
-        "$-1\r\n"
+        RespBulkString(None)
 
       case other =>
-        s"-ERR unknown command '$other'\r\n"
+        RespError(s"ERR unknown command '$other'")
 
 
 object ClientHandler:
