@@ -5,8 +5,9 @@ var speed: int = 200
 const OFFSET = 16
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	$CollisionShape2D.disabled = true
+	await get_tree().create_timer(0.2).timeout
+	$CollisionShape2D.disabled = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

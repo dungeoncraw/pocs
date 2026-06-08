@@ -2,6 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://de5wf7al0hknv" path="res://graphics/characters/player.png" id="1_rp718"]
 [ext_resource type="Script" uid="uid://bvlvaxfud8j1v" path="res://scripts/player.gd" id="1_yewv4"]
+[ext_resource type="Texture2D" uid="uid://dijla4pisrrw8" path="res://graphics/lights/main.png" id="3_76oj4"]
+[ext_resource type="Texture2D" uid="uid://otyoj5px7yk7" path="res://graphics/ui/crosshair.png" id="3_atpat"]
+[ext_resource type="PackedScene" uid="uid://drqewml4qy4h1" path="res://scenes/UI/ui.tscn" id="4_dyp2m"]
+[ext_resource type="Script" uid="uid://dy4whyay6ixla" path="res://scripts/crosshair.gd" id="4_kqtwu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rp718"]
 radius = 6.0
@@ -20,6 +24,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [24]
+}
+
+[sub_resource type="Animation" id="Animation_kqtwu"]
+resource_name = "duck"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/LegSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [34]
 }
 
 [sub_resource type="Animation" id="Animation_atpat"]
@@ -74,6 +94,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dyp2m"]
 _data = {
 &"RESET": SubResource("Animation_yewv4"),
+&"duck": SubResource("Animation_kqtwu"),
 &"idle": SubResource("Animation_atpat"),
 &"jump": SubResource("Animation_dyp2m"),
 &"run": SubResource("Animation_76oj4")
@@ -99,6 +120,11 @@ hframes = 8
 vframes = 5
 frame = 24
 
+[node name="Crosshair" type="Sprite2D" parent="Sprites" unique_id=496706181]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_atpat")
+script = ExtResource("4_kqtwu")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=835324530]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_rp718")
@@ -114,3 +140,15 @@ libraries/ = SubResource("AnimationLibrary_dyp2m")
 [node name="ReloadTimer" type="Timer" parent="Timer" unique_id=13295153]
 wait_time = 0.5
 one_shot = true
+
+[node name="DashTimer" type="Timer" parent="Timer" unique_id=22723293]
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="Timer" unique_id=1897195172]
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1957147589]
+energy = 0.5
+texture = ExtResource("3_76oj4")
+
+[node name="UI" parent="." unique_id=1289393848 instance=ExtResource("4_dyp2m")]
