@@ -1,5 +1,6 @@
 package network
 
+import db.{DelCommand, ExistsCommand, ExpireCommand, GetCommand, PExpireAtCommand, PingCommand, RedisDatabase, SetCommand, TtlCommand}
 import parser.{Command, RespBulkString, RespEncoder, RespError, RespParseException, RespParser, RespSimpleString, RespValue}
 
 import java.io.{InputStream, OutputStream}
@@ -52,18 +53,38 @@ final class ClientHandler(socket: Socket):
       socket.close()
 
   private def handleCommand(command: Command): RespValue =
-    command.name match
+    val database = RedisDatabase.instance
+
+    val result = command.name.toUpperCase match
       case "PING" =>
-        RespSimpleString("PONG")
+        PingCommand.execute(command.args)
 
       case "SET" =>
-        RespSimpleString("OK")
+        SetCommand.execute(database, command)
 
       case "GET" =>
-        RespBulkString(None)
+        GetCommand.execute(database, command.args)
+
+      case "DEL" =>
+        DelCommand.execute(database, command.args)
+
+      case "EXISTS" =>
+        ExistsCommand.execute(database, command.args)
+
+      case "EXPIRE" =>
+        ExpireCommand.execute(database, command.args)
+
+      case "PEXPIREAT" =>
+        PExpireAtCommand.execute(database, command)
+
+      case "TTL" =>
+        TtlCommand.execute(database, command.args)
 
       case other =>
-        RespError(s"ERR unknown command '$other'")
+        return RespError(s"ERR unknown command '$other'")
+
+    // In a real Redis clone, 'persist' would be used for AOF/Replication
+    result.response
 
 
 object ClientHandler:

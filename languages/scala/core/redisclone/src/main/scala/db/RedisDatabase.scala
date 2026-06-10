@@ -2,6 +2,9 @@ package db
 
 import scala.collection.mutable
 
+object RedisDatabase:
+  val instance = new RedisDatabase()
+
 final class RedisDatabase:
 
   private val data =

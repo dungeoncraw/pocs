@@ -95,7 +95,38 @@ object TtlCommand:
           response = RespInteger(database.ttlSeconds(key))
         )
 
-      case _ =>
+
+object DelCommand:
+
+  def execute(
+               database: RedisDatabase,
+               args: List[String]
+             ): CommandResult =
+    args match
+      case Nil =>
         CommandResult(
-          response = CommandSupport.wrongNumberOfArguments("ttl")
+          response = CommandSupport.wrongNumberOfArguments("del")
+        )
+
+      case keys =>
+        CommandResult(
+          response = RespInteger(database.deleteMany(keys))
+        )
+
+
+object ExistsCommand:
+
+  def execute(
+               database: RedisDatabase,
+               args: List[String]
+             ): CommandResult =
+    args match
+      case Nil =>
+        CommandResult(
+          response = CommandSupport.wrongNumberOfArguments("exists")
+        )
+
+      case keys =>
+        CommandResult(
+          response = RespInteger(database.existsMany(keys))
         )

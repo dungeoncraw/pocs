@@ -1,10 +1,16 @@
 package network
 
+import db.RedisDatabase
+
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream, InputStream, OutputStream}
 import java.net.{InetAddress, Socket, SocketAddress}
 import java.nio.charset.StandardCharsets
 
 class ClientHandlerTest extends munit.FunSuite {
+  
+  override def beforeEach(context: BeforeEach): Unit = {
+    RedisDatabase.instance.clear()
+  }
 
   test("handle PING command") {
     val input = "*1\r\n$4\r\nPING\r\n"
@@ -56,6 +62,38 @@ class ClientHandlerTest extends munit.FunSuite {
     handler.handle()
 
     assertEquals(new String(out.toByteArray, StandardCharsets.UTF_8), "-ERR unknown command 'UNKN'\r\n")
+  }
+
+  test("handle DEL command") {
+    // First set a key
+    RedisDatabase.instance.setString("key1", "val1".getBytes)
+    
+    val input = "*2\r\n$3\r\nDEL\r\n$4\r\nkey1\r\n"
+    val in = new ByteArrayInputStream(input.getBytes)
+    val out = new ByteArrayOutputStream()
+
+    val mockSocket = new MockSocket(in, out)
+    val handler = new ClientHandler(mockSocket)
+
+    handler.handle()
+
+    assertEquals(new String(out.toByteArray, StandardCharsets.UTF_8), ":1\r\n")
+  }
+
+  test("handle EXISTS command") {
+    // First set a key
+    RedisDatabase.instance.setString("key1", "val1".getBytes)
+    
+    val input = "*3\r\n$6\r\nEXISTS\r\n$4\r\nkey1\r\n$4\r\nkey2\r\n"
+    val in = new ByteArrayInputStream(input.getBytes)
+    val out = new ByteArrayOutputStream()
+
+    val mockSocket = new MockSocket(in, out)
+    val handler = new ClientHandler(mockSocket)
+
+    handler.handle()
+
+    assertEquals(new String(out.toByteArray, StandardCharsets.UTF_8), ":1\r\n")
   }
 
   class MockSocket(in: InputStream, out: OutputStream) extends Socket {
