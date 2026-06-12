@@ -4,14 +4,17 @@ import models.{Day, Schedule, ScheduledTask, Task, TimeSlot}
 
 class Scheduler:
   def schedule(tasks: Vector[Task], allSlots: Vector[TimeSlot]): Schedule =
-    val fixed =
-      tasks.flatMap(getFixedTask)
+    val fixedTasks = tasks.filter(_.fixedStart.isDefined)
+    
+    var scheduled = Vector.empty[ScheduledTask]
+    var unscheduled = Vector.empty[Task]
 
-    var scheduled =
-      fixed
-
-    var unscheduled =
-      Vector.empty[Task]
+    for task <- fixedTasks do
+      getFixedTask(task) match
+        case Some(scheduledTask) if isValid(scheduledTask) =>
+          scheduled = scheduled :+ scheduledTask
+        case _ =>
+          unscheduled = unscheduled :+ task
 
     val flexible =
       tasks.filter(_.fixedStart.isEmpty)
@@ -29,18 +32,22 @@ class Scheduler:
 
     Schedule(scheduled, unscheduled)
 
-  private def getFixedTask(task: Task): Vector[ScheduledTask] =
-    task.fixedStart match
-      case Some(start) =>
-        val slots =
-          (0 until task.durationHours).map { offset =>
-            TimeSlot(start.day, start.hour + offset)
-          }.toVector
+  private def getFixedTask(task: Task): Option[ScheduledTask] =
+    task.fixedStart.map { start =>
+      val slots =
+        (0 until task.durationHours).map { offset =>
+          TimeSlot(start.day, start.hour + offset)
+        }.toVector
 
-        Vector(ScheduledTask(task, slots))
+      ScheduledTask(task, slots)
+    }
 
+  private def isValid(scheduledTask: ScheduledTask): Boolean =
+    protectedDeadline(scheduledTask.task) match
+      case Some(deadline) =>
+        scheduledTask.slots.forall(_.index <= deadline.index)
       case None =>
-        Vector.empty
+        true
 
   private def freeSlots(
                          allSlots: Vector[TimeSlot],
@@ -55,8 +62,9 @@ class Scheduler:
 
   private def protectedDeadline(task: Task): Option[TimeSlot] =
     task.deadline.map { realDeadline =>
+      val effectiveGuard = math.max(1, task.guardDays)
       val protectedDay =
-        Day.minusWorkDays(realDeadline.day, task.guardDays)
+        Day.minusWorkDays(realDeadline.day, effectiveGuard)
 
       TimeSlot(protectedDay, realDeadline.hour)
     }

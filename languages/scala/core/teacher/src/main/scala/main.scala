@@ -1,4 +1,40 @@
 import models.{Day, Task, TaskType, TimeSlot}
+import scala.util.Random
+
+def generateRandomTasks(seed: Int): Vector[Task] = {
+  val random = new Random(seed)
+  val taskTypes = TaskType.values.toVector
+  val days = Day.all
+
+  (1 to seed).map { i =>
+    val kind = taskTypes(random.nextInt(taskTypes.size))
+    val isFixed = random.nextBoolean()
+    val duration = 1 + random.nextInt(3)
+    val priority = 1 + random.nextInt(5)
+    
+    val (fixedStart, deadline) = if (isFixed) {
+      val day = days(random.nextInt(days.size))
+      val hour = 8 + random.nextInt(18 - 8 - duration + 1)
+      (Some(TimeSlot(day, hour)), None)
+    } else {
+      val day = days(random.nextInt(days.size))
+      val hour = 17
+      (None, Some(TimeSlot(day, hour)))
+    }
+
+    Task(
+      id = s"task-$i",
+      title = s"Random Task $i ($kind)",
+      kind = kind,
+      durationHours = duration,
+      priority = priority,
+      fixedStart = fixedStart,
+      deadline = deadline,
+      guardDays = random.nextInt(3),
+      canSplit = random.nextBoolean()
+    )
+  }.toVector
+}
 
 @main
 def main(): Unit = {
@@ -7,95 +43,16 @@ def main(): Unit = {
       day <- Day.all
       hour <- 8 to 17
     yield TimeSlot(day, hour)
-  println("================== TIME SLOTS ==================")
-  println(allSlots)
-
-
-  val tasks =
-    Vector(
-      Task(
-        id = "class-monday",
-        title = "Math class",
-        kind = TaskType.Class,
-        durationHours = 1,
-        priority = 5,
-        fixedStart = Some(TimeSlot(Day.Monday, 9)),
-        deadline = None,
-        guardDays = 0,
-        canSplit = false
-      ),
-      Task(
-        id = "seminar-tuesday",
-        title = "Pedagogy seminar",
-        kind = TaskType.Seminar,
-        durationHours = 2,
-        priority = 4,
-        fixedStart = Some(TimeSlot(Day.Tuesday, 14)),
-        deadline = None,
-        guardDays = 0,
-        canSplit = false
-      ),
-      Task(
-        id = "apply-test",
-        title = "Apply algebra test",
-        kind = TaskType.ApplyTest,
-        durationHours = 1,
-        priority = 5,
-        fixedStart = Some(TimeSlot(Day.Wednesday, 9)),
-        deadline = None,
-        guardDays = 0,
-        canSplit = false
-      ),
-      Task(
-        id = "correct-test",
-        title = "Correct algebra test",
-        kind = TaskType.CorrectTest,
-        durationHours = 4,
-        priority = 5,
-        fixedStart = None,
-        deadline = Some(TimeSlot(Day.Friday, 17)),
-        guardDays = 2,
-        canSplit = true
-      ),
-      Task(
-        id = "correct-homework",
-        title = "Correct homework",
-        kind = TaskType.CorrectHomework,
-        durationHours = 2,
-        priority = 3,
-        fixedStart = None,
-        deadline = Some(TimeSlot(Day.Thursday, 17)),
-        guardDays = 1,
-        canSplit = true
-      ),
-      Task(
-        id = "prepare-lesson",
-        title = "Prepare next math lesson",
-        kind = TaskType.PrepareLesson,
-        durationHours = 2,
-        priority = 5,
-        fixedStart = None,
-        deadline = Some(TimeSlot(Day.Wednesday, 9)),
-        guardDays = 1,
-        canSplit = false
-      ),
-      Task(
-        id = "admin-emails",
-        title = "Answer school emails",
-        kind = TaskType.Admin,
-        durationHours = 1,
-        priority = 1,
-        fixedStart = None,
-        deadline = Some(TimeSlot(Day.Monday, 17)),
-        guardDays = 0,
-        canSplit = true
-      )
-    )
+  
+  val seed = 1 + new Random().nextInt(100)
+  println(s"Using random seed: $seed")
+  
+  val tasks = generateRandomTasks(seed)
+  
   println("================== TASKS ==================")
-  println(tasks)
+  tasks.foreach(println)
+  
   val schedule = new services.Scheduler().schedule(tasks, allSlots)
-  println("================== SCHEDULE ==================")
-  println(schedule.scheduled)
-  println(schedule.unscheduled)
+  services.ReportService.printSchedule(schedule)
 }
 
