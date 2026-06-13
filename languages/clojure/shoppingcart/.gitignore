@@ -1,0 +1,20 @@
+# Build artifacts
+target/
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+
+# IDE artifacts
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.cache/
+
+# OS specific
+.DS_Store
+Thumbs.db
