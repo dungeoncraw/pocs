@@ -1,0 +1,70 @@
+[gd_scene format=4 uid="uid://bnbrvs7savawt"]
+
+[ext_resource type="PackedScene" uid="uid://djh3khl33k11" path="res://scenes/levels/level.tscn" id="1_mtwam"]
+[ext_resource type="Texture2D" uid="uid://dwx81i28u52aj" path="res://graphics/sky/nuvens_3.png" id="2_n7nsg"]
+[ext_resource type="Texture2D" uid="uid://b063xwi30iqud" path="res://graphics/sky/nuvens_2.png" id="3_baaf3"]
+[ext_resource type="Texture2D" uid="uid://xrralref6v36" path="res://graphics/sky/nuvens_1.png" id="4_s0dui"]
+
+[sub_resource type="Gradient" id="Gradient_s0dui"]
+colors = PackedColorArray(0.70980394, 0.24313726, 0.19215687, 1, 0.70980394, 0.24313726, 0.19215687, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0rn0b"]
+gradient = SubResource("Gradient_s0dui")
+
+[node name="Level" unique_id=1678859882 instance=ExtResource("1_mtwam")]
+
+[node name="Parallax2D" type="Parallax2D" parent="Layers" parent_id_path=PackedInt32Array(1137580242) index="0" unique_id=1313556286]
+scroll_offset = Vector2(248, 731)
+
+[node name="Sprite2D" type="Sprite2D" parent="Layers/Parallax2D" index="0" unique_id=1793420717]
+scale = Vector2(10, 10)
+texture = ExtResource("2_n7nsg")
+
+[node name="Parallax2D2" type="Parallax2D" parent="Layers" parent_id_path=PackedInt32Array(1137580242) index="1" unique_id=28184311]
+scroll_scale = Vector2(0.9, 0.9)
+scroll_offset = Vector2(248, 731)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Layers/Parallax2D2" index="0" unique_id=316750607]
+texture = ExtResource("3_baaf3")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Layers/Parallax2D2" index="1" unique_id=97802461]
+position = Vector2(-496, 0)
+texture = ExtResource("3_baaf3")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Layers/Parallax2D2" index="2" unique_id=2065419302]
+position = Vector2(496, 0)
+texture = ExtResource("3_baaf3")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Layers/Parallax2D2" index="3" unique_id=786825639]
+position = Vector2(992, 0)
+texture = ExtResource("3_baaf3")
+
+[node name="Parallax2D3" type="Parallax2D" parent="Layers" parent_id_path=PackedInt32Array(1137580242) index="2" unique_id=1770672353]
+scroll_scale = Vector2(0.8, 0.8)
+scroll_offset = Vector2(248, 731)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Layers/Parallax2D3" index="0" unique_id=1043961308]
+texture = ExtResource("4_s0dui")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Layers/Parallax2D3" index="1" unique_id=1598518288]
+position = Vector2(-496, 0)
+texture = ExtResource("4_s0dui")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Layers/Parallax2D3" index="2" unique_id=1450497883]
+position = Vector2(496, 0)
+texture = ExtResource("4_s0dui")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Layers/Parallax2D3" index="3" unique_id=2105283909]
+position = Vector2(992, 0)
+texture = ExtResource("4_s0dui")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Layers/Parallax2D3" index="4" unique_id=1644455550]
+position = Vector2(247.99991, 297.00006)
+scale = Vector2(7.749999, 326.00006)
+texture = SubResource("GradientTexture1D_0rn0b")
+
+[node name="CollisionLayer" parent="Layers" parent_id_path=PackedInt32Array(1137580242) index="5" unique_id=334539260]
+tile_map_data = PackedByteArray("AAACADQAAAAEAAAAAAADADQAAAAFAAAAAAAEADQAAAAGAAAAAAAFADQAAAAHAAAAAAAGADQAAAAIAAAAAAAHADQAAAAJAAAAAAAIADQAAAAKAAAAAAAMADQAAAAEAAAAAAANADQAAAAFAAAAAAAOADQAAAAGAAAAAAAPADQAAAAHAAAAAAAQADQAAAAIAAAAAAARADQAAAAJAAAAAAASADQAAAAKAAAAAAAUADEAAAAEAAAAAAAVADEAAAAFAAAAAAAWADEAAAAGAAAAAAAXADEAAAAHAAAAAAAYADEAAAAIAAAAAAAZADEAAAAJAAAAAAAaADEAAAAKAAAAAAAZAC8AAAAEAAAAAAAaAC8AAAAFAAAAAAAbAC8AAAAGAAAAAAAcAC8AAAAHAAAAAAAdAC8AAAAIAAAAAAAeAC8AAAAJAAAAAAAfAC8AAAAKAAAAAAAgAC0AAAAEAAAAAAAhAC0AAAAFAAAAAAAiAC0AAAAGAAAAAAAjAC0AAAAHAAAAAAAkAC0AAAAIAAAAAAAlAC0AAAAJAAAAAAAmAC0AAAAKAAAAAAAhACkAAAAEAAAAAAAiACkAAAAFAAAAAAAjACkAAAAGAAAAAAAkACkAAAAHAAAAAAAlACkAAAAIAAAAAAAmACkAAAAJAAAAAAAnACkAAAAKAAAAAAAlACYAAAAEAAAAAAAmACYAAAAHAAAAAAAnACYAAAAIAAAAAAAoACYAAAAKAAAAAAAuAEIAAAAEAAAAAAAvAEIAAAAFAAAAAAAwAEIAAAAGAAAAAAAxAEIAAAAHAAAAAAAyAEIAAAAIAAAAAAAzAEIAAAAJAAAAAAA0AEIAAAAKAAAAAAArACYAAAAEAAAAAAAsACYAAAAHAAAAAAAtACYAAAAIAAAAAAAuACYAAAAKAAAAAAAwACYAAAAEAAAAAAAxACYAAAAGAAAAAAAyACYAAAAHAAAAAAAzACYAAAAKAAAAAAA1ACYAAAAEAAAAAAA2ACYAAAAGAAAAAAA3ACYAAAAHAAAAAAA4ACYAAAAKAAAAAABCACYAAAAGAAAAAABDACYAAAAHAAAAAABEACYAAAAKAAAAAABHACYAAAAEAAAAAABIACYAAAAGAAAAAABJACYAAAAHAAAAAABKACYAAAAIAAAAAABLACYAAAAJAAAAAABMACYAAAAKAAAAAAA7ACYAAAAEAAAAAAA8ACYAAAAGAAAAAAA9ACYAAAAHAAAAAAA+ACYAAAAKAAAAAABBACYAAAAEAAAAAAA=")
+
+[node name="Player" parent="Entities" parent_id_path=PackedInt32Array(45960275) index="0" unique_id=88417789]
+position = Vector2(60, 814)
