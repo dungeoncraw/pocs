@@ -8,6 +8,9 @@ var health: int = 10:
 var direction_x: float
 var duck: bool
 var on_floor: bool
+var controller_aim: bool = false
+var target_dir: Vector2
+var current_gun: Data.GUN
 @export_category('move')
 @export var speed: int = 120
 @export var acceleration: int = 600
@@ -46,7 +49,7 @@ func get_input():
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or $Timer/CoyoteTimer.time_left):
 		velocity.y = jump_velocity
 	if Input.is_action_just_pressed("shoot") and not $Timer/ReloadTimer.time_left:
-		shoot.emit(position, get_local_mouse_position().normalized())
+		shoot.emit(position, get_aim_dir())
 		$Timer/ReloadTimer.start()
 	if Input.is_action_just_pressed("dash") and not $Timer/DashTimer.time_left:
 		$Timer/DashTimer.start()
@@ -54,15 +57,23 @@ func get_input():
 		tween.tween_property(self, 'velocity:x', velocity.x + direction_x * dash_speed, 0.3)
 		tween.tween_callback(_dash_finish)
 	duck = Input.is_action_pressed("duck") and is_on_floor()
+	if Input.is_action_just_pressed("toggle"):
+		current_gun = posmod(current_gun + 1, Data.GUN.size()) as Data.GUN
 	
 func _dash_finish():
 	velocity.x = move_toward(velocity.x, 0, 500)
+
+func _input(event: InputEvent) -> void:
+	if Input.get_vector("aim_left","aim_right", "aim_up", "aim_down"):
+		controller_aim = true
+	if event is InputEventMouseMotion:
+		controller_aim = false
 
 func _ready() -> void:
 	$UI.set_health(health)
 
 func _process(_delta: float) -> void:
-	$Sprites/Crosshair.update(get_local_mouse_position().normalized(), crosshair_distance, duck)
+	$Sprites/Crosshair.update(get_aim_dir(), crosshair_distance, duck)
 	if on_floor and not is_on_floor() and velocity.y >=0:
 		$Timer/CoyoteTimer.start()
 	
@@ -76,9 +87,9 @@ func animation():
 	else:
 		$AnimationPlayer.current_animation = 'jump'
 	#torso
-	var raw_direction = get_local_mouse_position().normalized()
+	var raw_direction = get_aim_dir()
 	var adjusted_dir = Vector2i(round(raw_direction.x), round(raw_direction.y))
-	$Sprites/TorsoSprite.frame = GUN_DIRECTIONS[adjusted_dir]
+	$Sprites/TorsoSprite.frame = GUN_DIRECTIONS[adjusted_dir] + int(current_gun) * $Sprites/TorsoSprite.hframes
 	$Sprites/TorsoSprite.position.y = 0 if duck else  -8
 	
 func move(delta: float):
@@ -107,3 +118,12 @@ func _physics_process(delta: float) -> void:
 
 func hit():
 	health -= 1
+
+func get_aim_dir() -> Vector2:
+	if controller_aim:
+		var controller_aim_dir = Input.get_vector("aim_left","aim_right", "aim_up", "aim_down")
+		if controller_aim_dir.length:
+			target_dir = controller_aim_dir.normalized()
+	else:
+		target_dir = get_local_mouse_position().normalized()
+	return target_dir	
