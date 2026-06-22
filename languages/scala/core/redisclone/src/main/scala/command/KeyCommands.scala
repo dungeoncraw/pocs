@@ -1,6 +1,8 @@
-package db
+package command
 
-import parser.{Command, RespInteger}
+import parser.*
+import db.RedisDatabase
+import parser.RespInteger
 
 object ExpireCommand:
 

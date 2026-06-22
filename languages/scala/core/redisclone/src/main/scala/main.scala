@@ -1,4 +1,4 @@
-import network.TcpServer
+import server.TcpServer
 
 @main
 def main(): Unit = {

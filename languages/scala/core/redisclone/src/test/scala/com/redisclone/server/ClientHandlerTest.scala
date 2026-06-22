@@ -1,7 +1,7 @@
-package network
+package server
 
 import db.RedisDatabase
-
+import server.*
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream, InputStream, OutputStream}
 import java.net.{InetAddress, Socket, SocketAddress}
 import java.nio.charset.StandardCharsets

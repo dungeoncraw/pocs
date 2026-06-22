@@ -1,6 +1,5 @@
 package parser
 
-
 import java.nio.charset.StandardCharsets
 
 object RespValues:

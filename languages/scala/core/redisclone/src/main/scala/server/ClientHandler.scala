@@ -1,7 +1,8 @@
-package network
+package server
 
-import db.{DelCommand, ExistsCommand, ExpireCommand, GetCommand, PExpireAtCommand, PingCommand, RedisDatabase, SetCommand, TtlCommand}
-import parser.{Command, RespBulkString, RespEncoder, RespError, RespParseException, RespParser, RespSimpleString, RespValue}
+import command.{Command, DelCommand, ExistsCommand, ExpireCommand, GetCommand, PExpireAtCommand, PingCommand, SetCommand, TtlCommand}
+import db.RedisDatabase
+import parser.{RespEncoder, RespError, RespParseException, RespParser, RespSimpleString, RespValue}
 
 import java.io.{InputStream, OutputStream}
 import java.net.Socket
@@ -83,7 +84,6 @@ final class ClientHandler(socket: Socket):
       case other =>
         return RespError(s"ERR unknown command '$other'")
 
-    // In a real Redis clone, 'persist' would be used for AOF/Replication
     result.response
 
 

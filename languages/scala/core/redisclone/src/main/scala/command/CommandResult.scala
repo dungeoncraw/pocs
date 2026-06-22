@@ -1,8 +1,7 @@
-package db
-
+package command
 
 import parser.RespValue
-import parser.Command
+import parser.RespValue
 
 final case class CommandResult(
                                 response: RespValue,

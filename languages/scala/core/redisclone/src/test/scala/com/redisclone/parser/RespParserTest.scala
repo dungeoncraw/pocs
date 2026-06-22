@@ -1,4 +1,6 @@
-package parser
+package com.redisclone.parser
+
+import parser.{RespArray, RespBulkString, RespError, RespInteger, RespParseException, RespParser, RespSimpleString}
 
 import java.io.ByteArrayInputStream
 import java.nio.charset.StandardCharsets

@@ -8,6 +8,8 @@ Redis clients and servers communicate using **RESP**, the Redis Serialization Pr
 
 The parser and encoder solve opposite problems.
 
+Ref: https://redis.io/docs/latest/develop/reference/protocol-spec/
+
 ### RESP Parser
 
 The parser handles incoming bytes from the client.

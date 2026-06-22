@@ -1,4 +1,7 @@
-package parser
+package command
+
+import parser.*
+import parser.{RespArray, RespBulkString, RespValue}
 
 import java.nio.charset.StandardCharsets
 

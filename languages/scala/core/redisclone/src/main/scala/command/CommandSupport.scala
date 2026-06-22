@@ -1,4 +1,4 @@
-package db
+package command
 
 import parser.{RespError, RespValue}
 

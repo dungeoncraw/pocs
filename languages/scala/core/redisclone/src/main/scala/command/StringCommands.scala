@@ -1,6 +1,8 @@
-package db
+package command
 
-import parser.{Command, RespBulkString, RespSimpleString, RespValues}
+import parser.*
+import db.RedisDatabase
+import parser.{RespBulkString, RespSimpleString, RespValues}
 
 object PingCommand:
 
