@@ -23,13 +23,14 @@ var current_gun: Data.GUN
 @export var jump_time_to_descent: float = 0.4
 @export_category('shooting')
 @export var crosshair_distance: int = 50
+@export var shotgun_distance: int = 30
 
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_descent)) * -1.0
 
 #signals
-signal shoot(pos: Vector2, dir: Vector2)
+signal shoot(pos: Vector2, dir: Vector2, gun_type: Data.GUN)
 
 # player gun directions
 const GUN_DIRECTIONS = {
@@ -49,8 +50,12 @@ func get_input():
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or $Timer/CoyoteTimer.time_left):
 		velocity.y = jump_velocity
 	if Input.is_action_just_pressed("shoot") and not $Timer/ReloadTimer.time_left:
-		shoot.emit(position, get_aim_dir())
+		shoot.emit(position, get_aim_dir(), current_gun)
 		$Timer/ReloadTimer.start()
+		if current_gun == Data.GUN.SHOTGUN:
+			$ShotgunParticles.position = get_aim_dir() * shotgun_distance
+			$ShotgunParticles.process_material.set('direction', get_aim_dir())
+			$ShotgunParticles.emitting = true
 	if Input.is_action_just_pressed("dash") and not $Timer/DashTimer.time_left:
 		$Timer/DashTimer.start()
 		var tween = create_tween()

@@ -21,7 +21,15 @@ func create_explosion(pos: Vector2):
 func _add_explosion(explosion):
 	$Bullets.add_child(explosion)
 
-func _on_player_shoot(pos: Vector2, dir: Vector2) -> void:
-	var bullet = bullet_scene.instantiate()
-	$Bullets.add_child(bullet)
-	bullet.setup(pos, dir)
+func _on_player_shoot(pos: Vector2, dir: Vector2, gun_type: Data.GUN) -> void:
+	if gun_type != Data.GUN.SHOTGUN:
+		var bullet = bullet_scene.instantiate()
+		bullet.connect('explode', create_explosion)
+		$Bullets.add_child(bullet)
+		bullet.setup(pos, dir, gun_type)
+	else:
+		for drone in get_tree().get_nodes_in_group('Drones'):
+			var aim_angle = rad_to_deg(dir.angle())
+			var enemy_angle = rad_to_deg((drone.position - pos).angle())
+			if abs(aim_angle - enemy_angle) < 90 and pos.distance_to(drone.position) < 100:
+				drone.hit()
