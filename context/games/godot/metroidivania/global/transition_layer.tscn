@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://msp2df2jtxuf"]
+
+[ext_resource type="Script" uid="uid://dwsum7ysocuyt" path="res://global/transition_layer.gd" id="1_wovg7"]
+
+[node name="TransitionLayer" type="CanvasLayer" unique_id=546895757]
+script = ExtResource("1_wovg7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=322827785]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07082722, 0.07082721, 0.07082722, 1)

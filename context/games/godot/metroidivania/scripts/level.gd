@@ -33,3 +33,8 @@ func _on_player_shoot(pos: Vector2, dir: Vector2, gun_type: Data.GUN) -> void:
 			var enemy_angle = rad_to_deg((drone.position - pos).angle())
 			if abs(aim_angle - enemy_angle) < 90 and pos.distance_to(drone.position) < 100:
 				drone.hit()
+
+func position_player(level: Data.Level):
+	for gate in $Gates.get_children():
+		if gate.target == level:
+			$Entities/Player.position = gate.get_child(-1).global_position

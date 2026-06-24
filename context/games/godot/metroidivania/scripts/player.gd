@@ -11,6 +11,7 @@ var on_floor: bool
 var controller_aim: bool = false
 var target_dir: Vector2
 var current_gun: Data.GUN
+var frozen: bool
 @export_category('move')
 @export var speed: int = 120
 @export var acceleration: int = 600
@@ -114,12 +115,13 @@ func get_custom_gravity() -> float:
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
 		
 func _physics_process(delta: float) -> void:
-	get_input()
-	move(delta)
-	animation()
-	# physics process run first, then after the process to update the sprites
-	on_floor = is_on_floor()
-	move_and_slide()
+	if not frozen:
+		get_input()
+		move(delta)
+		animation()
+		# physics process run first, then after the process to update the sprites
+		on_floor = is_on_floor()
+		move_and_slide()
 
 func hit():
 	health -= 1
@@ -132,3 +134,7 @@ func get_aim_dir() -> Vector2:
 	else:
 		target_dir = get_local_mouse_position().normalized()
 	return target_dir	
+
+func freeze():
+	frozen = true
+	$AnimationPlayer.pause()
