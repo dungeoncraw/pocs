@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://diq1arwiy8cbo"]
 
 [ext_resource type="PackedScene" uid="uid://djh3khl33k11" path="res://scenes/levels/level.tscn" id="1_1eclv"]
-[ext_resource type="PackedScene" uid="uid://b2nvy7d1ptka0" path="res://scenes/characters/drone.tscn" id="2_6c57m"]
 [ext_resource type="Texture2D" uid="uid://bo5lofshl02cv" path="res://graphics/lights/l0.png" id="3_kq76o"]
 [ext_resource type="PackedScene" uid="uid://d14lk0wujtlhs" path="res://scenes/levels/transition_gate.tscn" id="4_uu0wy"]
+[ext_resource type="PackedScene" uid="uid://bfbkdgl4t1ffu" path="res://scenes/levels/enemy_spawner.tscn" id="5_k75p2"]
 
 [node name="Subway" unique_id=1678859882 instance=ExtResource("1_1eclv")]
 
@@ -18,15 +18,6 @@ tile_map_data = PackedByteArray("AAAQABkAAAACAAAAAAARABkAAAACAAAAAAASABkAAAACAAA
 
 [node name="Player" parent="Entities" parent_id_path=PackedInt32Array(45960275) index="0" unique_id=88417789]
 position = Vector2(284, 386)
-
-[node name="Drone" parent="Entities" parent_id_path=PackedInt32Array(45960275) index="1" unique_id=1482929742 instance=ExtResource("2_6c57m")]
-position = Vector2(301, 549)
-
-[node name="Drone2" parent="Entities" parent_id_path=PackedInt32Array(45960275) index="2" unique_id=1799943734 instance=ExtResource("2_6c57m")]
-position = Vector2(502, 534)
-
-[node name="Drone3" parent="Entities" parent_id_path=PackedInt32Array(45960275) index="3" unique_id=2135746856 instance=ExtResource("2_6c57m")]
-position = Vector2(606, 278)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Light" parent_id_path=PackedInt32Array(638339683) index="0" unique_id=668678427]
 color = Color(0, 0, 0, 1)
@@ -43,3 +34,12 @@ target = 1
 
 [node name="Marker2D" type="Marker2D" parent="Gates/TransitionGate" index="1" unique_id=1660366905]
 position = Vector2(52, 10)
+
+[node name="EnemySpawner" parent="EnemySpawns" parent_id_path=PackedInt32Array(1120861336) index="0" unique_id=2117575046 instance=ExtResource("5_k75p2")]
+position = Vector2(55, 497)
+
+[node name="EnemySpawner2" parent="EnemySpawns" parent_id_path=PackedInt32Array(1120861336) index="1" unique_id=2138995616 instance=ExtResource("5_k75p2")]
+position = Vector2(481, 474)
+
+[node name="EnemySpawner3" parent="EnemySpawns" parent_id_path=PackedInt32Array(1120861336) index="2" unique_id=928609568 instance=ExtResource("5_k75p2")]
+position = Vector2(788, 479)

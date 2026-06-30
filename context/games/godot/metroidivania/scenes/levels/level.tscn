@@ -1491,4 +1491,6 @@ tile_set = SubResource("TileSet_b2cq8")
 
 [node name="Gates" type="Node2D" parent="." unique_id=1191925870]
 
+[node name="EnemySpawns" type="Node2D" parent="." unique_id=1120861336]
+
 [connection signal="shoot" from="Entities/Player" to="." method="_on_player_shoot"]

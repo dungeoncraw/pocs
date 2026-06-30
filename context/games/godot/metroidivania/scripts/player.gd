@@ -1,10 +1,5 @@
 extends CharacterBody2D
 
-var health: int = 10:
-	set(value):
-		health = value
-		$UI.set_health(value)
-
 var direction_x: float
 var duck: bool
 var on_floor: bool
@@ -76,7 +71,7 @@ func _input(event: InputEvent) -> void:
 		controller_aim = false
 
 func _ready() -> void:
-	$UI.set_health(health)
+	$UI.set_health(Data.player_health)
 
 func _process(_delta: float) -> void:
 	$Sprites/Crosshair.update(get_aim_dir(), crosshair_distance, duck)
@@ -124,7 +119,8 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func hit():
-	health -= 1
+	Data.player_health -= 1
+	$UI.set_health(Data.player_health)
 
 func get_aim_dir() -> Vector2:
 	if controller_aim:

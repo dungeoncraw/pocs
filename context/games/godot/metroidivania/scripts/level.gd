@@ -2,11 +2,16 @@ extends Node2D
 
 var bullet_scene = preload("res://scenes/bullets/bullet.tscn")
 var explosion_scene = preload("res://scenes/bullets/explosion.tscn")
+var enemy_scenes = {
+	Data.Enemy.DRONE: preload("res://scenes/characters/drone.tscn")
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for drone in get_tree().get_nodes_in_group('Drones'):
-		drone.connect('explode', create_explosion)
+	for spawn_point: Marker2D in $EnemySpawns.get_children():
+		var enemy = enemy_scenes[spawn_point.type].instantiate()
+		enemy.setup(spawn_point)
+		$Entities.add_child(enemy)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

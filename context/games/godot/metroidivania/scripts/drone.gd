@@ -10,8 +10,9 @@ var health: int = 3:
 			explode.emit(position)
 			queue_free()
 
-
 signal explode(pos: Vector2)
+
+var spawn_point : Marker2D
 
 func _on_p_layer_detection_area_body_entered(body: Node2D) -> void:
 	player = body
@@ -37,3 +38,8 @@ func hit():
 func _on_collision_shape_body_entered(body: Node2D) -> void:
 	explode.emit(position)
 	queue_free()
+	
+	
+func setup(new_spawn_point: Marker2D):
+	position = new_spawn_point.global_position
+	spawn_point = new_spawn_point
