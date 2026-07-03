@@ -1,47 +1,46 @@
 extends CharacterBody2D
 
 var direction: Vector2
-var speed: int= 50
+var speed := 50
 var player: CharacterBody2D
-var health: int = 3:
+var health := 3:
 	set(value):
 		health = value
 		if health <= 0:
 			explode.emit(position)
 			spawn_point.defeated = true
 			queue_free()
-
 signal explode(pos: Vector2)
+var spawn_point: Marker2D
 
-var spawn_point : Marker2D
-
-func _on_p_layer_detection_area_body_entered(body: Node2D) -> void:
+func _on_player_detection_area_body_entered(body: Node2D) -> void:
 	player = body
 
-
-func _on_p_layer_detection_area_body_exited(_body: Node2D) -> void:
+func _on_player_detection_area_body_exited(_body: Node2D) -> void:
 	player = null
 
-func _physics_process(delta: float) -> void:
+
+func _physics_process(_delta: float) -> void:
 	if player:
-		# Vector between two bodies (player.position - position)
 		var dir = (player.position - position).normalized()
 		velocity = dir * speed
 		move_and_slide()
 
+
 func hit():
+	$AudioStreamPlayer2D.play()
 	health -= 1
 	var tween = create_tween()
 	tween.tween_property($AnimatedSprite2D.material, 'shader_parameter/Progress', 1.0, 0.3)
 	tween.tween_property($AnimatedSprite2D.material, 'shader_parameter/Progress', 0.0, 0.5)
 
 
-func _on_collision_shape_body_entered(body: Node2D) -> void:
+func _on_collision_shape_2d_2_body_entered(_body: Node2D) -> void:
 	explode.emit(position)
 	spawn_point.defeated = true
 	queue_free()
-	
-	
+
+
 func setup(new_spawn_point: Marker2D):
 	position = new_spawn_point.global_position
 	spawn_point = new_spawn_point

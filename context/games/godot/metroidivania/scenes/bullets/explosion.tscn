@@ -1,12 +1,12 @@
-[gd_scene format=3 uid="uid://03bxvik3sqw5"]
+[gd_scene load_steps=7 format=3 uid="uid://03bxvik3sqw5"]
 
-[ext_resource type="Script" uid="uid://byp3dibse7i07" path="res://scripts/explosion.gd" id="1_2ydpy"]
+[ext_resource type="Script" uid="uid://dv8mw0675ovkn" path="res://scenes/bullets/explosion.gd" id="1_2ydpy"]
 [ext_resource type="Texture2D" uid="uid://bav7n447bnsa5" path="res://graphics/fire/explosion.png" id="1_gsvrn"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gsvrn"]
-radius = 24.33105
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ydpy"]
+radius = 20.024984
 
-[sub_resource type="Animation" id="Animation_gsvrn"]
+[sub_resource type="Animation" id="Animation_2ydpy"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_2ydpy"]
+[sub_resource type="Animation" id="Animation_gsvrn"]
 resource_name = "explode"
 length = 0.8
 tracks/0/type = "value"
@@ -31,10 +31,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40000004, 0.5, 0.6, 0.73333335),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40000004, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 6]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -56,24 +56,26 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_npy6q"]
 _data = {
-&"RESET": SubResource("Animation_gsvrn"),
-&"explode": SubResource("Animation_2ydpy")
+&"RESET": SubResource("Animation_2ydpy"),
+&"explode": SubResource("Animation_gsvrn")
 }
 
-[node name="Explosion" type="Area2D" unique_id=1886766373]
+[node name="Explosion" type="Area2D"]
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_2ydpy")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1412769234]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_gsvrn")
 hframes = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1931857530]
-shape = SubResource("CircleShape2D_gsvrn")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2ydpy")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1507973613]
-libraries/ = SubResource("AnimationLibrary_npy6q")
-autoplay = &"explode"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_npy6q")
+}
+autoplay = "explode"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,20 +1,20 @@
-[gd_scene format=3 uid="uid://drqewml4qy4h1"]
+[gd_scene load_steps=3 format=3 uid="uid://drqewml4qy4h1"]
 
-[ext_resource type="Texture2D" uid="uid://bh0awhb02my2t" path="res://graphics/ui/bar_main.png" id="1_suays"]
-[ext_resource type="Script" uid="uid://br6da35d233se" path="res://scripts/ui.gd" id="1_yb1mt"]
+[ext_resource type="Script" uid="uid://b8bdf0t3mhimm" path="res://scenes/ui/ui.gd" id="1_f5cxw"]
+[ext_resource type="Texture2D" uid="uid://bh0awhb02my2t" path="res://graphics/ui/bar_main.png" id="1_u7n8c"]
 
-[node name="UI" type="CanvasLayer" unique_id=1289393848]
-script = ExtResource("1_yb1mt")
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_f5cxw")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=856993927]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 custom_minimum_size = Vector2(240, 20)
 anchors_preset = -1
 offset_left = 20.0
 offset_top = 20.0
-max_value = 10.0
-value = 10.0
+max_value = 5.0
+value = 5.0
 nine_patch_stretch = true
-texture_under = ExtResource("1_suays")
-texture_progress = ExtResource("1_suays")
-tint_under = Color(0.097351514, 0.13825601, 0.16056612, 1)
-tint_progress = Color(0.7355725, 0.16841176, 0, 1)
+texture_under = ExtResource("1_u7n8c")
+texture_progress = ExtResource("1_u7n8c")
+tint_under = Color(0.09772027, 0.09772024, 0.09772023, 1)
+tint_progress = Color(1, 0.16862746, 0.12156863, 1)
