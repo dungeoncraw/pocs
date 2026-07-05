@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://pwf6btl8iv7k"]
+
+[ext_resource type="Texture2D" uid="uid://li8enjc54fih" path="res://graphics/Ships/ship_0000.png" id="1_6xk8f"]
+[ext_resource type="Script" uid="uid://dmqrmtntlledw" path="res://scenes/enemies/enemy.gd" id="1_8e3ao"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xk8f"]
+
+[node name="Enemy" type="Area2D" unique_id=2143033319]
+script = ExtResource("1_8e3ao")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=622875091]
+rotation = 1.5707964
+texture = ExtResource("1_6xk8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=324576125]
+shape = SubResource("CircleShape2D_6xk8f")
