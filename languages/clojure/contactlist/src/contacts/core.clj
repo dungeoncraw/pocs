@@ -72,6 +72,20 @@
     #(contains-text? (:email %) query)
     contacts))
 
+(defn search-by-phone
+  [contacts query]
+  (filter
+    #(contains-text? (:phone %) query)
+    contacts))
+
+(defn search-contacts
+  [contacts query]
+  (or
+    (search-by-name contacts query)
+    (search-by-email contacts query)
+    (search-by-phone contacts query)
+    )
+  )
 
 (defn has-tag?
   [contact tag]
@@ -84,6 +98,10 @@
     #(has-tag? % tag)
     contacts))
 
+(defn count-by-tag
+  [contacts]
+  (frequencies
+    (mapcat :tags contacts)))
 
 (defn update-contact
   [contacts contact-id update-fn]
@@ -199,7 +217,13 @@
        " | tags: "
        (tags-summary (:tags contact))))
 
-
+(defn contact-errors
+  [contact]
+  (cond
+    (not (contains? contact :name)) "Missing name"
+    (not (contains? contact :email)) "Missing email"
+    (not (contains? contact :phone)) "Missing phone"
+    :else nil))
 (defn print-contacts
   [contacts]
   (doseq [contact contacts]
@@ -256,7 +280,12 @@
           (println "\nDelete contact 4:")
           (let [result4 (delete-contact (:contacts result3)
                                         4)]
-            (print-result result4))
+            (print-result result4)
+            (println (search-contacts (:contacts result4) "eduardo"))
+            (println (count-by-tag (:contacts result4)))
+            (doseq [contact (:contacts result4)]
+              (println (contact-errors contact)))
+            )
           )
         )
       )
