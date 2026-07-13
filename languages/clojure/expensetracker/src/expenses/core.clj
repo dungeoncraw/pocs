@@ -1,40 +1,40 @@
 (ns expenses.core)
 (def expenses
-  [{:id 1
+  [{:id          1
     :description "Lunch"
-    :category :food
-    :amount 35.50
-    :date "2026-07-01"}
+    :category    :food
+    :amount      35.50
+    :date        "2026-07-01"}
 
-   {:id 2
+   {:id          2
     :description "Bus ticket"
-    :category :transport
-    :amount 4.80
-    :date "2026-07-01"}
+    :category    :transport
+    :amount      4.80
+    :date        "2026-07-01"}
 
-   {:id 3
+   {:id          3
     :description "Coffee"
-    :category :food
-    :amount 8.00
-    :date "2026-07-02"}
+    :category    :food
+    :amount      8.00
+    :date        "2026-07-02"}
 
-   {:id 4
+   {:id          4
     :description "Book"
-    :category :education
-    :amount 55.00
-    :date "2026-07-03"}
+    :category    :education
+    :amount      55.00
+    :date        "2026-07-03"}
 
-   {:id 5
+   {:id          5
     :description "Internet bill"
-    :category :bills
-    :amount 120.00
-    :date "2026-07-05"}
+    :category    :bills
+    :amount      120.00
+    :date        "2026-07-05"}
 
-   {:id 6
+   {:id          6
     :description "Uber"
-    :category :transport
-    :amount 27.90
-    :date "2026-07-06"}])
+    :category    :transport
+    :amount      27.90
+    :date        "2026-07-06"}])
 
 
 (def valid-categories
@@ -68,25 +68,25 @@
   [expenses description category amount date]
   (cond
     (not (valid-category? category))
-    {:success false
-     :error :invalid-category
+    {:success  false
+     :error    :invalid-category
      :expenses expenses}
 
     (not (positive-amount? amount))
-    {:success false
-     :error :invalid-amount
+    {:success  false
+     :error    :invalid-amount
      :expenses expenses}
 
     :else
-    {:success true
+    {:success   true
      :operation :add-expense
      :expenses
      (conj expenses
-           {:id (next-id expenses)
+           {:id          (next-id expenses)
             :description description
-            :category category
-            :amount amount
-            :date date})}))
+            :category    category
+            :amount      amount
+            :date        date})}))
 
 
 (defn update-expense
@@ -103,17 +103,17 @@
   [expenses expense-id new-category]
   (cond
     (not (expense-exists? expenses expense-id))
-    {:success false
-     :error :expense-not-found
+    {:success  false
+     :error    :expense-not-found
      :expenses expenses}
 
     (not (valid-category? new-category))
-    {:success false
-     :error :invalid-category
+    {:success  false
+     :error    :invalid-category
      :expenses expenses}
 
     :else
-    {:success true
+    {:success   true
      :operation :change-category
      :expenses
      (update-expense
@@ -125,14 +125,14 @@
 (defn delete-expense
   [expenses expense-id]
   (if (expense-exists? expenses expense-id)
-    {:success true
+    {:success   true
      :operation :delete-expense
      :expenses
      (vec
        (remove #(= (:id %) expense-id)
                expenses))}
-    {:success false
-     :error :expense-not-found
+    {:success  false
+     :error    :expense-not-found
      :expenses expenses}))
 
 (defn expenses-by-category
@@ -203,7 +203,24 @@
               [category (category-total expenses-in-category)])
             grouped))))
 
+(defn totals-by-date
+  [expenses]
+  (into {}
+        (map (fn [[date expenses-on-date]]
+               [date (reduce + 0 (map :amount expenses-on-date))])
+             (group-by :date expenses)
+             )))
+(defn expenses-between
+  [expenses min-amount max-amount]
+  (filter
+    #(and (>= (:amount %) min-amount)
+          (<= (:amount %) max-amount))
+    expenses)
+  )
 
+(defn count-by-category
+  [expenses]
+  (frequencies (map :category expenses)))
 (defn category-summary
   [expenses]
   (let [grouped (group-expenses-by-category expenses)]
@@ -211,21 +228,23 @@
           (map
             (fn [[category expenses-in-category]]
               [category
-               {:count (count expenses-in-category)
-                :total (total-amount expenses-in-category)
+               {:count   (count expenses-in-category)
+                :total   (total-amount expenses-in-category)
                 :average (average-expense expenses-in-category)}])
             grouped))))
 
 
 (defn expense-report
   [expenses]
-  {:total (total-amount expenses)
-   :count (count expenses)
-   :average (average-expense expenses)
-   :most-expensive (most-expensive expenses)
-   :cheapest (cheapest expenses)
+  {:total              (total-amount expenses)
+   :count              (count expenses)
+   :average            (average-expense expenses)
+   :most-expensive     (most-expensive expenses)
+   :cheapest           (cheapest expenses)
    :totals-by-category (totals-by-category expenses)
-   :category-summary (category-summary expenses)})
+   :category-summary   (category-summary expenses)
+   :count-by-category  (count-by-category expenses)
+   :totals-by-date     (totals-by-date expenses)})
 
 
 (defn format-money
@@ -276,7 +295,17 @@
   (println)
   (println "Totals by category:")
   (doseq [entry (:totals-by-category report)]
-    (print-category-total entry)))
+    (print-category-total entry))
+
+  (println)
+  (println "Count by category:")
+  (doseq [[category cnt] (:count-by-category report)]
+    (println "-" category ":" cnt))
+
+  (println)
+  (println "Totals by date:")
+  (doseq [[date total] (:totals-by-date report)]
+    (println "-" date ":" (format-money total))))
 
 
 (defn print-result
