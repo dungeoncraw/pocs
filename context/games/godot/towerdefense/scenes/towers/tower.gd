@@ -1,16 +1,8 @@
 class_name Tower extends Node2D
 
 var enemies: Array
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if enemies.size() > 0:
-		$Turret.look_at(enemies[0].global_position)
-		$Turret.rotatio -= PI/2
+@warning_ignore("unused_signal")
+signal shoot(pos: Vector2, direction: float, bullet_enum: Data.Bullet)
 
 
 func _on_enemy_detection_area_area_entered(area: Area2D) -> void:

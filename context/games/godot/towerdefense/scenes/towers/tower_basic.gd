@@ -1,11 +1,12 @@
 extends Tower
 
+func _process(_delta: float) -> void:
+	if enemies.size() > 0:
+		$Turret.look_at(enemies[0].global_position)
+		$Turret.rotation -= PI/2
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_reload_timer_timeout() -> void:
+	if enemies:
+		var dir = Vector2.DOWN.rotated($Turret.rotation).normalized()
+		shoot.emit(position + dir * 16, $Turret.rotation, Data.Bullet.SINGLE)

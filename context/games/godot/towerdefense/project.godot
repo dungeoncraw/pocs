@@ -8,15 +8,20 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
-config/name="Tower Defense"
+config/name="Tower defense"
+run/main_scene="uid://cnj438cs45i3f"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Data="*uid://by3dyxy5nes4g"
+Data="*res://global/data.gd"
 
 [display]
 
@@ -37,10 +42,6 @@ exit={
 2d_physics/layer_2="Bullets"
 2d_physics/layer_3="Towers"
 
-[physics]
-
-3d/physics_engine="Jolt Physics"
-
 [rendering]
 
-rendering_device/driver.windows="d3d12"
+textures/canvas_textures/default_texture_filter=0

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://k2uh63vandnx"]
+
+[ext_resource type="Script" uid="uid://dlipoclehusot" path="res://scenes/ui/player_camera.gd" id="1_ekya4"]
+
+[node name="PlayerCamera" type="Camera2D"]
+zoom = Vector2(3, 3)
+script = ExtResource("1_ekya4")
