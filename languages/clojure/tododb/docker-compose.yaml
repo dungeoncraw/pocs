@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17
+    container_name: todo-list-db
+    environment:
+      POSTGRES_DB: todo_app
+      POSTGRES_USER: todo_user
+      POSTGRES_PASSWORD: todo_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - todo-data:/var/lib/postgresql/data
+
+volumes:
+  todo-data:
