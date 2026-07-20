@@ -41,14 +41,16 @@ const UPGRADE_DATA = {
 		'bullet': Bullet.MORTAR_EXPLOSION}}
 const ENEMY_WAVES = {
 	0: {Enemy.DEFAULT: 5, Enemy.STRONG: 2, Enemy.FAST: 1},
-	1: {Enemy.DEFAULT: 5, Enemy.FAST: 1}}
+	1: {Enemy.DEFAULT: 5, Enemy.FAST: 1},
+	2: {Enemy.DEFAULT: 20, Enemy.FAST: 1, Enemy.BIG: 2, Enemy.STRONG: 3},
+	}
 const ENEMY_DATA = {
 	Enemy.DEFAULT: {'health': 3, 'texture': "res://graphics/Ships/ship_0004.png", 'speed': 20},
 	Enemy.FAST: {'health': 3, 'texture': "res://graphics/Ships/ship_0007.png", 'speed': 50},
 	Enemy.STRONG: {'health': 6, 'texture': "res://graphics/Ships/ship_0000.png", 'speed': 25},
 	Enemy.BIG: {'health': 20, 'texture': "res://graphics/Ships/ship_0015.png", 'speed': 15}}
 
-var money := 50:
+var money := 200:
 	set(value):
 		money = value
 		get_tree().get_first_node_in_group('UI').update_stats(money, health)
@@ -58,4 +60,6 @@ var health := 100:
 	set(value):
 		health = value
 		get_tree().get_first_node_in_group('UI').update_stats(money, health)
+		if health <= 0:
+			get_tree().quit()
 var current_wave: int

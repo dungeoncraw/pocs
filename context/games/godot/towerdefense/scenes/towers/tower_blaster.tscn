@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://cndrwmbyv3r4g"]
+
+[ext_resource type="PackedScene" uid="uid://to6d1j5dni6t" path="res://scenes/towers/tower.tscn" id="1_sc5qg"]
+[ext_resource type="Script" uid="uid://dnsynb64smf00" path="res://scenes/towers/tower_blaster.gd" id="2_n8gjn"]
+[ext_resource type="Texture2D" uid="uid://ctglvdto0scv8" path="res://graphics/towers/blaster/blaster.png" id="2_ujad2"]
+[ext_resource type="Texture2D" uid="uid://hqsncaw7fucr" path="res://graphics/explosion animations/fire explosion.png" id="4_6lo63"]
+[ext_resource type="AudioStream" uid="uid://bwljxijrlthqk" path="res://audio/fire.wav" id="5_itnc1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ujad2"]
+radius = 30.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_itnc1"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c5o44"]
+particle_flag_disable_z = true
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6lo63"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_itnc1"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t8p0d"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+
+[node name="TowerBlaster" instance=ExtResource("1_sc5qg")]
+script = ExtResource("2_n8gjn")
+
+[node name="Base" parent="." index="0"]
+texture = ExtResource("2_ujad2")
+
+[node name="Turret" parent="." index="1"]
+visible = false
+
+[node name="CollisionShape2D" parent="EnemyDetectionArea" index="0"]
+shape = SubResource("CircleShape2D_ujad2")
+
+[node name="Particles" type="Node2D" parent="." index="4"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Particles" index="0"]
+material = SubResource("CanvasItemMaterial_itnc1")
+position = Vector2(10, 0)
+emitting = false
+texture = ExtResource("4_6lo63")
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_c5o44")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Particles" index="1"]
+material = SubResource("CanvasItemMaterial_itnc1")
+position = Vector2(-10, 0)
+emitting = false
+texture = ExtResource("4_6lo63")
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_6lo63")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="Particles" index="2"]
+material = SubResource("CanvasItemMaterial_itnc1")
+position = Vector2(0, -10)
+emitting = false
+texture = ExtResource("4_6lo63")
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_itnc1")
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="Particles" index="3"]
+material = SubResource("CanvasItemMaterial_itnc1")
+position = Vector2(0, 10)
+emitting = false
+texture = ExtResource("4_6lo63")
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_t8p0d")
+
+[node name="ShootSound" parent="." index="8"]
+stream = ExtResource("5_itnc1")
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

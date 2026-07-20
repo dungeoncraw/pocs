@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://4q7nxm2ekhm"]
+
+[ext_resource type="PackedScene" uid="uid://to6d1j5dni6t" path="res://scenes/towers/tower.tscn" id="1_uawef"]
+[ext_resource type="Texture2D" uid="uid://1t08v8xyx2kj" path="res://graphics/towers/mortar/mortar tower down.png" id="2_3wrqq"]
+[ext_resource type="Script" uid="uid://wmn5bnu3b2k0" path="res://scenes/towers/tower_mortar.gd" id="2_oqusg"]
+[ext_resource type="Texture2D" uid="uid://decyie3x0j0su" path="res://graphics/ui/crosshair.png" id="3_kgixf"]
+[ext_resource type="Texture2D" uid="uid://bwj40wgb4ivd7" path="res://graphics/towers/mortar/mortar tower effect.png" id="5_3an13"]
+[ext_resource type="AudioStream" uid="uid://bwljxijrlthqk" path="res://audio/fire.wav" id="6_872qs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_872qs"]
+atlas = ExtResource("5_3an13")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsoru"]
+atlas = ExtResource("5_3an13")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u5is"]
+atlas = ExtResource("5_3an13")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfxdv"]
+atlas = ExtResource("5_3an13")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_61v7j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_872qs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsoru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u5is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfxdv")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TowerMortar" instance=ExtResource("1_uawef")]
+script = ExtResource("2_oqusg")
+
+[node name="Base" parent="." index="0"]
+texture = ExtResource("2_3wrqq")
+
+[node name="Turret" parent="." index="1"]
+visible = false
+
+[node name="ReloadTimer" parent="." index="3"]
+wait_time = 3.0
+
+[node name="CrosshairSprite" type="Sprite2D" parent="." index="4"]
+visible = false
+texture = ExtResource("3_kgixf")
+
+[node name="ShootAnimation" type="AnimatedSprite2D" parent="." index="8"]
+visible = false
+position = Vector2(0, 6)
+sprite_frames = SubResource("SpriteFrames_61v7j")
+frame = 1
+frame_progress = 0.60802555
+
+[node name="ShootSound" parent="." index="9"]
+stream = ExtResource("6_872qs")
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://5fcgjf624a6x" path="res://graphics/ui/frame.png" id="2_g5kmx"]
 [ext_resource type="Texture2D" uid="uid://dtx2b4ht28ccs" path="res://graphics/ui/suit_hearts.png" id="3_0dwhk"]
 [ext_resource type="Texture2D" uid="uid://b3k0r3etcd08f" path="res://graphics/ui/dollar.png" id="4_pfayw"]
-[ext_resource type="PackedScene" uid="uid://c78ec16wdsuvr" path="res://scenes/ui/tower_card.tscn" id="5_0dwhk"]
+[ext_resource type="Texture2D" uid="uid://l6jm6r7wbg1m" path="res://graphics/ui/menu.png" id="7_7vp6q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vv7ut"]
 bg_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
@@ -51,6 +51,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="WaveButton" type="Button" parent="Control"]
 custom_minimum_size = Vector2(240, 50)
@@ -130,16 +131,28 @@ offset_top = -40.0
 offset_right = 40.0
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TowerCards"]
+[node name="TowerCardsContainer" type="HBoxContainer" parent="TowerCards"]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = -1
 anchor_top = 1.0
 anchor_bottom = 1.0
+offset_left = 60.0
 offset_top = -180.0
 offset_right = 140.0
+offset_bottom = -10.0
 grow_vertical = 0
 
-[node name="TowerCard" parent="TowerCards/HBoxContainer" instance=ExtResource("5_0dwhk")]
-layout_mode = 2
+[node name="MenuToggleButton" type="TextureButton" parent="TowerCards"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_bottom = -10.0
+grow_vertical = 0
+texture_normal = ExtResource("7_7vp6q")
+stretch_mode = 4
 
 [connection signal="pressed" from="Control/WaveButton" to="." method="_on_wave_button_pressed"]
+[connection signal="pressed" from="TowerCards/MenuToggleButton" to="." method="_on_menu_toggle_button_pressed"]

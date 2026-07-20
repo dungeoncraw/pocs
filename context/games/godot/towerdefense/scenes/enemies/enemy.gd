@@ -16,7 +16,7 @@ func setup(new_path_follow: PathFollow2D, type: Data.Enemy):
 func _process(delta: float) -> void:
 	path_follow.progress += speed * delta
 	if path_follow.progress_ratio >= 0.99:
-		Data.health -= 1
+		Data.health -= 20
 		queue_free()
 
 
@@ -26,6 +26,7 @@ func _on_area_entered(bullet: Area2D) -> void:
 
 
 func hit():
+	$AudioStreamPlayer2D.play()
 	health -= 1
 	flash()
 	if health <= 0:

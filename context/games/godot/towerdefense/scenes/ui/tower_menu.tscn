@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://bs7mlpxrwhrat"]
+
+[ext_resource type="Script" uid="uid://x4eww8u2ks8" path="res://scenes/ui/tower_menu.gd" id="1_atwrq"]
+[ext_resource type="FontFile" uid="uid://bqm53gushpubk" path="res://graphics/ui/Digitalt.otf" id="2_2nd6s"]
+[ext_resource type="Texture2D" uid="uid://cnlkrt3od8e0" path="res://graphics/ui/close_normal.png" id="2_s8xt8"]
+[ext_resource type="Texture2D" uid="uid://0co0sik7sq0v" path="res://graphics/ui/close_hover.png" id="3_2nd6s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvfoo"]
+bg_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.19607843)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t40u1"]
+bg_color = Color(0.19363177, 0.1936318, 0.19363174, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.19607843)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77868"]
+bg_color = Color(0.21176471, 0.21176471, 0.21176471, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.19607843)
+shadow_size = 3
+
+[node name="TowerMenu" type="Control" groups=["TowerCard"]]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_atwrq")
+
+[node name="UpgradeButton" type="Button" parent="."]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 20.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_2nd6s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_bvfoo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_t40u1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_77868")
+text = "Upgrade (30)"
+
+[node name="DeleteButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 30.0
+offset_top = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_s8xt8")
+texture_pressed = ExtResource("2_s8xt8")
+texture_hover = ExtResource("3_2nd6s")
+
+[connection signal="pressed" from="UpgradeButton" to="." method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]
