@@ -41,6 +41,15 @@
     (print-todo
       (todos/change-priority! (:id todo) "normal"))
 
+    (print-title "List todos by priority: high")
+    (print-todos (todos/list-todos-by-priority "high"))
+
+    (print-title "Toggle todo (done -> pending)")
+    (print-todo (todos/toggle-todo! (:id todo)))
+
+    (print-title "Toggle todo again (pending -> done)")
+    (print-todo (todos/toggle-todo! (:id todo)))
+
     (print-title "Pending todos")
     (print-todos (todos/list-pending-todos))
 

@@ -28,10 +28,25 @@
        done boolean not null default false,
        priority text not null default 'normal',
        created_at timestamptz not null default now()
+     )"])
+  (jdbc/execute!
+    datasource
+    ["create table if not exists tags (
+       id bigserial primary key,
+       name text not null unique
+     )"])
+  (jdbc/execute!
+    datasource
+    ["create table if not exists todo_tags (
+       todo_id bigint not null references todos(id) on delete cascade,
+       tag_id bigint not null references tags(id) on delete cascade,
+       primary key (todo_id, tag_id)
      )"]))
 
 
 (defn reset-db!
   []
+  (jdbc/execute! datasource ["drop table if exists todo_tags"])
+  (jdbc/execute! datasource ["drop table if exists tags"])
   (jdbc/execute! datasource ["drop table if exists todos"])
   (migrate!))

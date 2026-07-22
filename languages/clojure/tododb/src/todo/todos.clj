@@ -3,6 +3,14 @@
             [todo.db :refer [datasource query-options]]))
 
 
+(def valid-priorities #{"low" "normal" "high"})
+
+
+(defn valid-priority?
+  [priority]
+  (contains? valid-priorities priority))
+
+
 (defn create-todo!
   [title]
   (jdbc/execute-one!
@@ -16,6 +24,10 @@
 
 (defn create-todo-with-priority!
   [title priority]
+  (when-not (valid-priority? priority)
+    (throw (ex-info "Invalid priority"
+                    {:priority         priority
+                     :valid-priorities valid-priorities})))
   (jdbc/execute-one!
     datasource
     ["insert into todos (title, priority)
@@ -120,6 +132,10 @@
 
 (defn change-priority!
   [id priority]
+  (when-not (valid-priority? priority)
+    (throw (ex-info "Invalid priority"
+                    {:priority         priority
+                     :valid-priorities valid-priorities})))
   (jdbc/execute-one!
     datasource
     ["update todos
@@ -127,6 +143,30 @@
      where id = ?
      returning id, title, done, priority, created_at"
      priority
+     id]
+    query-options))
+
+
+(defn list-todos-by-priority
+  [priority]
+  (jdbc/execute!
+    datasource
+    ["select id, title, done, priority, created_at
+     from todos
+     where priority = ?
+     order by id"
+     priority]
+    query-options))
+
+
+(defn toggle-todo!
+  [id]
+  (jdbc/execute-one!
+    datasource
+    ["update todos
+     set done = not done
+     where id = ?
+     returning id, title, done, priority, created_at"
      id]
     query-options))
 
