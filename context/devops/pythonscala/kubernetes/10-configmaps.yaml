@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: django-scala-config
+  namespace: django-scala-local
+data:
+  DJANGO_DEBUG: "false"
+  ALLOWED_HOSTS: "*"
+  SQLITE_PATH: "/tmp/db.sqlite3"
+  TZ: "America/Sao_Paulo"
+
+  # Both containers run in the same Pod and share localhost.
+  DJANGO_BASE_URL: "http://127.0.0.1:8000"
+
+  RUN_ON_START: "true"
+  JAVA_OPTS: >-
+    -XX:MaxRAMPercentage=75.0
+    -XX:+ExitOnOutOfMemoryError
+    -Dfile.encoding=UTF-8
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scala-crontab
+  namespace: django-scala-local
+data:
+  crontab: |
+    CRON_TZ=America/Sao_Paulo
+
+    # Runs at minutes 00, 10, 20, 30, 40, and 50.
+    */10 * * * * /opt/scala-job/run-job.sh

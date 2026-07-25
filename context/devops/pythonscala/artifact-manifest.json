@@ -1,0 +1,24 @@
+{
+  "project": "django-scala-minikube-en",
+  "architecture": "Deployment with one Pod and two containers",
+  "images": [
+    "django-scala/django:dev",
+    "django-scala/scala-cron:dev"
+  ],
+  "namespace": "django-scala-local",
+  "validation": [
+    "Shell scripts: OK",
+    "Python: OK",
+    "YAML: OK",
+    "YAML sem tabs: OK"
+  ],
+  "versions": {
+    "python_base": "3.13-slim-bookworm",
+    "django": "6.0.7",
+    "gunicorn": "26.0.0",
+    "java": "21",
+    "scala": "3.6.3",
+    "supercronic": "0.2.48"
+  },
+  "language": "English"
+}
