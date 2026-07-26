@@ -14,15 +14,24 @@ Application is ready.
 Check status:
   make status
 
-Open Django:
+Display API URLs:
   make url
+
+Test both implementations against the shared CSV:
+  make test-apis
+
+Display the CSV:
+  make show-csv
 
 Django logs:
   make logs-django
 
-Scala logs:
-  make logs-scala
+Scala API logs:
+  make logs-scala-api
 
-Run Scala now:
+Scala cron logs:
+  make logs-scala-cron
+
+Run the Scala update now:
   make run-scala
 EOF

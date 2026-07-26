@@ -5,17 +5,6 @@ source "$(dirname "$0")/common.sh"
 
 require_command kubectl
 
-container="${1:-}"
-
-case "$container" in
-  django|scala-api|scala-cron)
-    ;;
-  *)
-    echo "Usage: $0 django|scala-api|scala-cron" >&2
-    exit 1
-    ;;
-esac
-
 pod="$(current_pod)"
 
 if [[ -z "$pod" ]]; then
@@ -25,8 +14,6 @@ fi
 
 kubectl exec \
   --namespace "$NAMESPACE" \
-  --stdin \
-  --tty \
   "$pod" \
-  --container "$container" \
-  -- /bin/sh
+  --container django \
+  -- sh -c 'if [ -f "${CSV_PATH:-/data/records.csv}" ]; then cat "${CSV_PATH:-/data/records.csv}"; else echo "CSV file does not exist yet."; fi'

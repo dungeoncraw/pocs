@@ -8,7 +8,7 @@ RUN set -eux; \
     case "$(dpkg --print-architecture)" in \
       amd64) SCALA_CLI_ARCH="x86_64" ;; \
       arm64) SCALA_CLI_ARCH="aarch64" ;; \
-      *) echo "Arquitetura não suportada pelo Scala CLI" >&2; exit 1 ;; \
+      *) echo "Architecture not supported by Scala CLI" >&2; exit 1 ;; \
     esac; \
     curl -fL \
       "https://github.com/VirtusLab/scala-cli/releases/latest/download/scala-cli-${SCALA_CLI_ARCH}-pc-linux.gz" \
@@ -19,13 +19,16 @@ RUN set -eux; \
 WORKDIR /src
 COPY src/Main.scala ./Main.scala
 
-RUN mkdir -p /out \
+RUN java -version \
+    && mkdir -p /out \
     && scala-cli --power package Main.scala \
        --assembly \
        --server=false \
+       --jvm system \
        --force \
        --main-class localjob.Main \
-       -o /out/app.jar
+       -o /out/app.jar \
+    && test -s /out/app.jar
 
 FROM eclipse-temurin:21-jre-jammy
 
@@ -49,7 +52,7 @@ RUN set -eux; \
         SUPERCRONIC_SHA1="2ab9b3bdcf290f60b59700aad876b6e68f3a6b06"; \
         ;; \
       *) \
-        echo "Arquitetura não suportada pelo Supercronic" >&2; \
+        echo "Architecture not supported by Supercronic" >&2; \
         exit 1; \
         ;; \
     esac; \
@@ -67,8 +70,8 @@ RUN groupadd --system --gid 10001 scala-job \
         --home-dir /nonexistent \
         --shell /usr/sbin/nologin \
         scala-job \
-    && mkdir -p /opt/scala-job /etc/supercronic \
-    && chown -R scala-job:scala-job /opt/scala-job /etc/supercronic
+    && mkdir -p /opt/scala-job /etc/supercronic /data \
+    && chown -R scala-job:scala-job /opt/scala-job /etc/supercronic /data
 
 COPY --from=builder --chown=10001:10001 /out/app.jar /opt/scala-job/app.jar
 COPY --chown=10001:10001 docker/run-job.sh /opt/scala-job/run-job.sh
@@ -77,5 +80,7 @@ COPY --chown=10001:10001 docker/entrypoint.sh /opt/scala-job/entrypoint.sh
 RUN chmod 0755 /opt/scala-job/run-job.sh /opt/scala-job/entrypoint.sh
 
 USER 10001:10001
+
+EXPOSE 9000
 
 ENTRYPOINT ["/opt/scala-job/entrypoint.sh"]

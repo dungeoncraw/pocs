@@ -1,6 +1,8 @@
 SHELL := /bin/bash
 
-.PHONY: up start build deploy status url logs-django logs-scala run-scala shell-django shell-scala restart down delete-cluster
+.PHONY: up start build deploy recover status url test-apis show-csv \
+  logs-django logs-scala-api logs-scala-cron run-scala \
+  shell-django shell-scala-api shell-scala-cron restart down delete-cluster
 
 up:
 	./scripts/up.sh
@@ -14,16 +16,28 @@ build:
 deploy:
 	./scripts/deploy.sh
 
+recover:
+	./scripts/recover-after-build-failure.sh
+
 status:
 	./scripts/status.sh
 
 url:
 	./scripts/open-service.sh
 
+test-apis:
+	./scripts/test-apis.sh
+
+show-csv:
+	./scripts/show-csv.sh
+
 logs-django:
 	kubectl logs -n django-scala-local deployment/django-scala -c django --follow
 
-logs-scala:
+logs-scala-api:
+	kubectl logs -n django-scala-local deployment/django-scala -c scala-api --follow
+
+logs-scala-cron:
 	kubectl logs -n django-scala-local deployment/django-scala -c scala-cron --follow
 
 run-scala:
@@ -32,12 +46,15 @@ run-scala:
 shell-django:
 	./scripts/shell.sh django
 
-shell-scala:
+shell-scala-api:
+	./scripts/shell.sh scala-api
+
+shell-scala-cron:
 	./scripts/shell.sh scala-cron
 
 restart:
 	kubectl rollout restart deployment/django-scala -n django-scala-local
-	kubectl rollout status deployment/django-scala -n django-scala-local --timeout=180s
+	kubectl rollout status deployment/django-scala -n django-scala-local --timeout=300s
 
 down:
 	kubectl delete namespace django-scala-local --ignore-not-found

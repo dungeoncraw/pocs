@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: django
+  name: django-scala
   namespace: django-scala-local
   labels:
     app.kubernetes.io/name: django-scala
@@ -12,8 +12,14 @@ spec:
     app.kubernetes.io/name: django-scala
 
   ports:
-    - name: http
+    - name: django-http
       protocol: TCP
       port: 80
-      targetPort: http
+      targetPort: django-http
       nodePort: 30080
+
+    - name: scala-http
+      protocol: TCP
+      port: 9000
+      targetPort: scala-http
+      nodePort: 30090

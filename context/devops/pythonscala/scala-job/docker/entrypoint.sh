@@ -1,39 +1,40 @@
 #!/bin/sh
 set -eu
 
-CRONTAB_FILE="${CRONTAB_FILE:-/etc/supercronic/crontab}"
-READY_URL="${DJANGO_BASE_URL:-http://127.0.0.1:8000}/health/ready/"
+mode="${APP_MODE:-server}"
 
-if [ ! -r "$CRONTAB_FILE" ]; then
-  echo "[entrypoint] Crontab not found or not readable: $CRONTAB_FILE" >&2
-  exit 1
-fi
+case "$mode" in
+  server)
+    echo "[entrypoint] Starting the Scala CSV API."
+    # JAVA_OPTS intentionally expands into multiple JVM arguments.
+    # shellcheck disable=SC2086
+    exec java ${JAVA_OPTS:-} -jar /opt/scala-job/app.jar server
+    ;;
 
-echo "[entrypoint] Validating the crontab."
-supercronic -test "$CRONTAB_FILE"
+  scheduler)
+    crontab_file="${CRONTAB_FILE:-/etc/supercronic/crontab}"
 
-if [ "${RUN_ON_START:-true}" = "true" ]; then
-  echo "[entrypoint] Waiting for Django at $READY_URL"
+    if [ ! -r "$crontab_file" ]; then
+      echo "[entrypoint] Crontab not found or not readable: $crontab_file" >&2
+      exit 1
+    fi
 
-  attempt=1
-  while [ "$attempt" -le 60 ]; do
-    if curl --fail --silent --show-error --max-time 3 "$READY_URL" >/dev/null; then
-      echo "[entrypoint] Django is ready. Running the initial job."
+    echo "[entrypoint] Validating the crontab."
+    supercronic -test "$crontab_file"
+
+    if [ "${RUN_ON_START:-true}" = "true" ]; then
+      echo "[entrypoint] Running the initial Scala CSV update."
       /opt/scala-job/run-job.sh || {
         echo "[entrypoint] The initial job failed; the scheduler will remain active." >&2
       }
-      break
     fi
 
-    echo "[entrypoint] Django is not ready yet; attempt $attempt/60."
-    attempt=$((attempt + 1))
-    sleep 2
-  done
+    echo "[entrypoint] Starting Supercronic with $crontab_file"
+    exec supercronic -split-logs -inotify "$crontab_file"
+    ;;
 
-  if [ "$attempt" -gt 60 ]; then
-    echo "[entrypoint] Django did not become ready within the wait period; starting only the scheduler." >&2
-  fi
-fi
-
-echo "[entrypoint] Starting Supercronic with $CRONTAB_FILE"
-exec supercronic -split-logs -inotify "$CRONTAB_FILE"
+  *)
+    echo "[entrypoint] Unknown APP_MODE: $mode. Use server or scheduler." >&2
+    exit 2
+    ;;
+esac

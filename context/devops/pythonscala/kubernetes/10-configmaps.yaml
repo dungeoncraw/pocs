@@ -9,11 +9,15 @@ data:
   SQLITE_PATH: "/tmp/db.sqlite3"
   TZ: "America/Sao_Paulo"
 
-  # Both containers run in the same Pod and share localhost.
-  DJANGO_BASE_URL: "http://127.0.0.1:8000"
+  CSV_PATH: "/data/records.csv"
+  CSV_LOCK_PATH: "/data/records.lock"
+
+  SCALA_HOST: "0.0.0.0"
+  SCALA_PORT: "9000"
 
   RUN_ON_START: "true"
   JAVA_OPTS: >-
+    --add-modules=jdk.httpserver
     -XX:MaxRAMPercentage=75.0
     -XX:+ExitOnOutOfMemoryError
     -Dfile.encoding=UTF-8

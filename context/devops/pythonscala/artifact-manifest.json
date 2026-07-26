@@ -1,24 +1,37 @@
 {
-  "project": "django-scala-minikube-en",
-  "architecture": "Deployment with one Pod and two containers",
+  "project": "django-scala-csv-minikube",
+  "language": "English",
+  "architecture": "One Deployment, one Pod, three containers, one shared PVC",
+  "containers": [
+    "django",
+    "scala-api",
+    "scala-cron"
+  ],
   "images": [
     "django-scala/django:dev",
-    "django-scala/scala-cron:dev"
+    "django-scala/scala-app:dev"
   ],
   "namespace": "django-scala-local",
-  "validation": [
-    "Shell scripts: OK",
-    "Python: OK",
-    "YAML: OK",
-    "YAML sem tabs: OK"
-  ],
-  "versions": {
-    "python_base": "3.13-slim-bookworm",
-    "django": "6.0.7",
-    "gunicorn": "26.0.0",
-    "java": "21",
-    "scala": "3.6.3",
-    "supercronic": "0.2.48"
+  "csv": {
+    "path": "/data/records.csv",
+    "lock_path": "/data/records.lock",
+    "headers": [
+      "id",
+      "name",
+      "value",
+      "updated_at",
+      "updated_by"
+    ],
+    "persistence": "PersistentVolumeClaim/shared-csv-data"
   },
-  "language": "English"
+  "apis": {
+    "django": [
+      "POST /api/csv/upsert/",
+      "GET /api/csv/records/"
+    ],
+    "scala": [
+      "POST /api/csv/upsert",
+      "GET /api/csv/records"
+    ]
+  }
 }

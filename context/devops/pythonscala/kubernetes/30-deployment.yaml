@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: django-scala
     app.kubernetes.io/part-of: django-scala-example
 spec:
-  # Each Pod contains a scheduler. Keep a single replica.
+  # The scheduler runs in this Pod. Keep a single replica.
   replicas: 1
 
   # Avoids two schedulers during a normal rollout.
@@ -28,6 +28,8 @@ spec:
       terminationGracePeriodSeconds: 45
 
       securityContext:
+        fsGroup: 10001
+        fsGroupChangePolicy: OnRootMismatch
         seccompProfile:
           type: RuntimeDefault
 
@@ -37,7 +39,7 @@ spec:
           imagePullPolicy: Never
 
           ports:
-            - name: http
+            - name: django-http
               containerPort: 8000
               protocol: TCP
 
@@ -62,7 +64,7 @@ spec:
           startupProbe:
             httpGet:
               path: /health/live/
-              port: http
+              port: django-http
             periodSeconds: 2
             timeoutSeconds: 2
             failureThreshold: 30
@@ -70,7 +72,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /health/ready/
-              port: http
+              port: django-http
             periodSeconds: 5
             timeoutSeconds: 2
             failureThreshold: 3
@@ -78,7 +80,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /health/live/
-              port: http
+              port: django-http
             periodSeconds: 15
             timeoutSeconds: 2
             failureThreshold: 3
@@ -104,9 +106,88 @@ spec:
           volumeMounts:
             - name: django-tmp
               mountPath: /tmp
+            - name: csv-data
+              mountPath: /data
+
+        - name: scala-api
+          image: django-scala/scala-app:dev
+          imagePullPolicy: Never
+
+          ports:
+            - name: scala-http
+              containerPort: 9000
+              protocol: TCP
+
+          envFrom:
+            - configMapRef:
+                name: django-scala-config
+            - secretRef:
+                name: django-scala-secrets
+
+          env:
+            - name: APP_MODE
+              value: server
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: HOME
+              value: /tmp
+
+          startupProbe:
+            httpGet:
+              path: /health/live
+              port: scala-http
+            periodSeconds: 2
+            timeoutSeconds: 2
+            failureThreshold: 45
+
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: scala-http
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: scala-http
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          resources:
+            requests:
+              cpu: 75m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 384Mi
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+
+          volumeMounts:
+            - name: scala-api-tmp
+              mountPath: /tmp
+            - name: csv-data
+              mountPath: /data
 
         - name: scala-cron
-          image: django-scala/scala-cron:dev
+          image: django-scala/scala-app:dev
           imagePullPolicy: Never
 
           envFrom:
@@ -116,6 +197,8 @@ spec:
                 name: django-scala-secrets
 
           env:
+            - name: APP_MODE
+              value: scheduler
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -151,8 +234,10 @@ spec:
             - name: scala-crontab
               mountPath: /etc/supercronic
               readOnly: true
-            - name: scala-tmp
+            - name: scala-cron-tmp
               mountPath: /tmp
+            - name: csv-data
+              mountPath: /data
 
       volumes:
         - name: scala-crontab
@@ -163,10 +248,18 @@ spec:
               - key: crontab
                 path: crontab
 
+        - name: csv-data
+          persistentVolumeClaim:
+            claimName: shared-csv-data
+
         - name: django-tmp
           emptyDir:
             sizeLimit: 128Mi
 
-        - name: scala-tmp
+        - name: scala-api-tmp
+          emptyDir:
+            sizeLimit: 128Mi
+
+        - name: scala-cron-tmp
           emptyDir:
             sizeLimit: 128Mi
