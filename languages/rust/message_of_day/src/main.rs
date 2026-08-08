@@ -92,6 +92,28 @@ fn print_next<S: MessageSource>(source: &mut S) {
         None => println!("No more messages"),
     }
 }
+
+fn run_predicate<F>(predicate: F)
+where
+    F: for<'a> Fn(&'a str) -> bool,
+{
+    let long_lived = String::from("Rust");
+
+    println!("{}", predicate(&long_lived));
+
+    {
+        let short_lived = String::from("C");
+
+        println!("{}", predicate(&short_lived));
+    }
+
+    {
+        let another = String::from("Haskell");
+
+        println!("{}", predicate(&another));
+    }
+}
+
 fn main() {
     let length = LengthHeuristic;
     let question = QuestionHeuristic;
@@ -134,6 +156,8 @@ fn main() {
     println!();
     println!("ToString from stdlib:");
     println!("{}", product.to_string());
+
+    run_predicate(|s| s.len() > 3);
 }
 
 #[cfg(test)]
