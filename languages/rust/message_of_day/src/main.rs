@@ -1,11 +1,12 @@
+use anyhow::Context;
 use message_of_day::cache::Cache;
 use message_of_day::describe::Describe;
 use message_of_day::heuristic::{run_dynamic, run_generic, Heuristic, LengthHeuristic, QuestionHeuristic};
-use message_of_day::message::{print_next, SingleMessageSource, TextMessage};
+use message_of_day::message::{get_message, print_next, SingleMessageSource, TextMessage};
 use message_of_day::predicate::run_predicate;
 use message_of_day::product::Product;
 
-fn main() {
+fn main() -> anyhow::Result<()> {
     let length = LengthHeuristic;
     let question = QuestionHeuristic;
 
@@ -66,4 +67,18 @@ fn main() {
 
     println!("{:?}", cache.get(&key));
     println!("entries: {}", cache.len());
+
+    let mood = "happy";
+    let day = 3;
+
+    let message = get_message(mood, day)
+        .with_context(|| {
+            format!(
+                "failed to get message for mood={mood}, day={day}"
+            )
+        })?;
+
+    println!("{message}");
+
+    Ok(())
 }

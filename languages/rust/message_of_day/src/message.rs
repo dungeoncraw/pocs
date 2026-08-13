@@ -1,4 +1,5 @@
 use std::fmt::{self, Display};
+use crate::error::MessageError;
 
 // Supertrait as a constraint on the types that implement the trait.
 pub trait Message: Display {}
@@ -38,6 +39,39 @@ pub fn print_next<S: MessageSource>(source: &mut S) {
     }
 }
 
+pub fn validate_mood(mood: &str) -> Result<(), MessageError> {
+    match mood {
+        "happy" | "sad" | "angry" => Ok(()),
+        _ => Err(MessageError::InvalidMood),
+    }
+}
+
+pub fn validate_day(day: u8) -> Result<(), MessageError> {
+    match day {
+        1..=7 => Ok(()),
+        _ => Err(MessageError::InvalidDay),
+    }
+}
+
+pub fn repository_find_message(
+    _mood: &str,
+    _day: u8,
+) -> Result<Option<String>, sqlx::Error> {
+    Ok(Some(
+        "The road ahead looks strangely quiet.".to_string(),
+    ))
+}
+
+pub fn get_message(mood: &str, day: u8) -> Result<String, MessageError> {
+    validate_mood(mood)?;
+
+    validate_day(day)?;
+
+    let message = repository_find_message(mood, day)?;
+
+    message.ok_or(MessageError::NotFound)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -67,5 +101,73 @@ mod tests {
     fn empty_single_message_source_returns_none() {
         let mut source = SingleMessageSource { message: None };
         assert!(source.next_message().is_none());
+    }
+
+    #[test]
+    fn validate_mood_accepts_valid_moods() {
+        assert!(validate_mood("happy").is_ok());
+        assert!(validate_mood("sad").is_ok());
+        assert!(validate_mood("angry").is_ok());
+    }
+
+    #[test]
+    fn validate_mood_rejects_invalid_mood() {
+        match validate_mood("excited") {
+            Err(MessageError::InvalidMood) => (),
+            _ => panic!("expected InvalidMood error"),
+        }
+    }
+
+    #[test]
+    fn validate_day_accepts_valid_days() {
+        for day in 1..=7 {
+            assert!(validate_day(day).is_ok());
+        }
+    }
+
+    #[test]
+    fn validate_day_rejects_invalid_days() {
+        match validate_day(0) {
+            Err(MessageError::InvalidDay) => (),
+            _ => panic!("expected InvalidDay error for 0"),
+        }
+        match validate_day(8) {
+            Err(MessageError::InvalidDay) => (),
+            _ => panic!("expected InvalidDay error for 8"),
+        }
+    }
+
+    #[test]
+    fn repository_find_message_returns_message() {
+        let res = repository_find_message("happy", 3);
+        assert_eq!(
+            res.unwrap(),
+            Some("The road ahead looks strangely quiet.".to_string())
+        );
+    }
+
+    #[test]
+    fn get_message_success() {
+        let msg = get_message("happy", 3);
+        assert_eq!(
+            msg.unwrap(),
+            "The road ahead looks strangely quiet.".to_string()
+        );
+    }
+
+    #[test]
+    fn get_message_fails_on_invalid_mood() {
+        match get_message("invalid", 3) {
+            Err(MessageError::InvalidMood) => (),
+            _ => panic!("expected InvalidMood error"),
+        }
+    }
+
+    #[test]
+    fn get_message_fails_on_invalid_day() {
+        match get_message("happy", 10) {
+            Err(MessageError::InvalidDay) => (),
+            _ => panic!("expected InvalidDay error"),
+        }
     }
 }
