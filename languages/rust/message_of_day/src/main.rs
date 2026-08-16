@@ -80,5 +80,17 @@ fn main() -> anyhow::Result<()> {
 
     println!("{message}");
 
+    let mood_confused = "confused";
+    let day_confused = 13;
+
+    let message = get_message(mood_confused, day_confused)
+        .with_context(|| {
+            format!(
+                "failed to get message for mood={mood_confused}, day={day_confused}"
+            )
+        })?;
+
+    println!("{message}");
+
     Ok(())
 }
