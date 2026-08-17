@@ -8,7 +8,7 @@ use axum::{
 use serde::{Deserialize, Serialize};
 
 use crate::error::MessageError;
-use crate::message::get_message;
+use crate::message::{get_message, Mood};
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct MessageResponse {
@@ -46,6 +46,8 @@ pub async fn health_handler() -> &'static str {
 pub async fn get_message_path_handler(
     Path((mood, day)): Path<(String, u8)>,
 ) -> Result<Json<MessageResponse>, MessageError> {
+
+    let mood = mood.parse::<Mood>()?;
     let message = get_message(&mood, day)?;
     Ok(Json(MessageResponse { message }))
 }
@@ -53,7 +55,8 @@ pub async fn get_message_path_handler(
 pub async fn get_message_query_handler(
     Query(query): Query<MessageQuery>,
 ) -> Result<Json<MessageResponse>, MessageError> {
-    let message = get_message(&query.mood, query.day)?;
+    let mood = query.mood.parse::<Mood>()?;
+    let message = get_message(&mood, query.day)?;
     Ok(Json(MessageResponse { message }))
 }
 
