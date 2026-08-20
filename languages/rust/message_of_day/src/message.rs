@@ -1,42 +1,6 @@
-use std::{
-    fmt::{self, Display},
-    str::FromStr,
-};
+use std::fmt::{self, Display};
+pub use message_core::{Message, Mood, Weekday};
 use crate::error::MessageError;
-
-
-macro_rules! create_mood {
-    ($($name:ident),+) => {
-        pub enum Mood {
-            $(
-                $name,
-            )+
-        }
-    };
-}
-
-create_mood!(
-    Happy,
-    Sad,
-    Angry,
-    Excited
-);
-
-impl FromStr for Mood {
-    type Err = MessageError;
-
-    fn from_str(value: &str) -> Result<Self, Self::Err> {
-        match value.to_ascii_lowercase().as_str() {
-            "happy" => Ok(Mood::Happy),
-            "sad" => Ok(Mood::Sad),
-            "angry" => Ok(Mood::Angry),
-            "excited" => Ok(Mood::Excited),
-            _ => Err(MessageError::InvalidMood),
-        }
-    }
-}
-// Supertrait as a constraint on the types that implement the trait.
-pub trait Message: Display {}
 
 pub struct TextMessage {
     pub content: String,
@@ -48,10 +12,8 @@ impl Display for TextMessage {
     }
 }
 
-impl Message for TextMessage {}
-
 pub trait MessageSource {
-    type Item: Message;
+    type Item: Display;
     fn next_message(&mut self) -> Option<Self::Item>;
 }
 
@@ -203,5 +165,30 @@ mod tests {
             Err(MessageError::InvalidDay) => (),
             _ => panic!("expected InvalidDay error"),
         }
+    }
+
+    #[test]
+    fn core_struct_message_usage() {
+        let msg = Message {
+            id: 100,
+            text: "Hello from core".to_string(),
+            day_tags: vec![Weekday::Monday, Weekday::Friday],
+            mood_tags: vec![Mood::Happy],
+            weight: 5,
+            times_served: 0,
+        };
+        assert_eq!(msg.id, 100);
+        assert_eq!(msg.text, "Hello from core");
+        assert_eq!(msg.day_tags, vec![Weekday::Monday, Weekday::Friday]);
+        assert_eq!(msg.mood_tags, vec![Mood::Happy]);
+        assert_eq!(msg.weight, 5);
+        assert_eq!(msg.times_served, 0);
+    }
+
+    #[test]
+    fn weekday_enum_usage() {
+        let monday = Weekday::Monday;
+        assert_eq!(monday.number(), 1);
+        assert_eq!(monday.to_string(), "monday");
     }
 }

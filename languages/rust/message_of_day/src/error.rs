@@ -15,6 +15,16 @@ pub enum MessageError {
     DbError(#[from] sqlx::Error),
 }
 
+impl From<message_core::MessageError> for MessageError {
+    fn from(err: message_core::MessageError) -> Self {
+        match err {
+            message_core::MessageError::NotFound => MessageError::NotFound,
+            message_core::MessageError::InvalidMood => MessageError::InvalidMood,
+            message_core::MessageError::InvalidDay => MessageError::InvalidDay,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -45,6 +55,13 @@ mod tests {
             err.to_string(),
             "database error: no rows returned by a query that expected to return at least one row"
         );
+    }
+
+    #[test]
+    fn core_error_conversion() {
+        let core_err = message_core::MessageError::InvalidMood;
+        let err = MessageError::from(core_err);
+        assert_eq!(err.to_string(), "invalid mood");
     }
 
     #[test]

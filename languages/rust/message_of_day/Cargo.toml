@@ -3,7 +3,13 @@ name = "message_of_day"
 version = "0.1.0"
 edition = "2024"
 
+[workspace]
+members = [
+    "crates/message-core",
+]
+
 [dependencies]
+message-core = { path = "crates/message-core" }
 anyhow = "1.0.104"
 axum = "0.8.9"
 serde = { version = "1.0.229", features = ["derive"] }
