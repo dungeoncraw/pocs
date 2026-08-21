@@ -31,13 +31,41 @@ impl Message {
             times_served,
         }
     }
-
+    /// Returns true if the message matches the given day.
+    /// Example:
+    /// ```
+    /// use message_core::Weekday;
+    /// use message_core::{Message, Mood};
+    /// let specific_msg = Message::new(
+    ///             1,
+    ///             "Friday vibes",
+    ///             vec![Weekday::Friday],
+    ///             vec![Mood::Excited],
+    ///             1,
+    ///             0,
+    ///         );
+    /// println!("{}", specific_msg.matches_day(&Weekday::Friday));
+    /// ```
     pub fn matches_day(&self, day: &Weekday) -> bool {
         self.day_tags.is_empty() || self.day_tags.contains(day)
     }
-
+    /// Returns true if the mood matches the given mood
+    /// Example:
+    /// ```
+    /// use message_core::Weekday;
+    /// use message_core::{Message, Mood};
+    /// let specific_msg = Message::new(
+    ///             1,
+    ///             "Friday Sadness",
+    ///             vec![Weekday::Friday],
+    ///             vec![Mood::Happy],
+    ///             1,
+    ///             0,
+    ///         );
+    /// println!("{}", specific_msg.matches_mood(&Mood::Excited));
+    /// ```
     pub fn matches_mood(&self, mood: &Mood) -> bool {
-        self.mood_tags.is_empty() || self.mood_tags.contains(mood)
+        self.mood_tags.contains(mood)
     }
 
     pub fn is_available_on(&self, day: &Weekday, mood: &Mood) -> bool {
@@ -125,8 +153,8 @@ mod tests {
         );
 
         assert!(universal_msg.matches_day(&Weekday::Tuesday));
-        assert!(universal_msg.matches_mood(&Mood::Angry));
-        assert!(universal_msg.is_available_on(&Weekday::Tuesday, &Mood::Angry));
+        assert!(!universal_msg.matches_mood(&Mood::Angry));
+        assert!(!universal_msg.is_available_on(&Weekday::Tuesday, &Mood::Angry));
     }
 
     #[test]
