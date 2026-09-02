@@ -8,7 +8,9 @@ var place_tower: bool:
 		$BG/TowerPreview.visible = value
 var selected_tower: Data.Tower
 var tower_scenes = {
-	Data.Tower.BASIC: "res://scenes/towers/tower_basic.tscn"
+	Data.Tower.BASIC: "res://scenes/towers/tower_basic.tscn",
+	Data.Tower.BLAST: "res://scenes/towers/tower_blaster.tscn",
+	Data.Tower.MORTAR: "res://scenes/towers/tower_mortar.tscn",
 }
 var used_cells: Array[Vector2i]
 
