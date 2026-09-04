@@ -1,0 +1,19 @@
+The sprites and audio assets are sourced under the CC0 license, and the font under the OFL license.
+
+Sprites
+----------------------
+Player and Enemies: https://luizmelo.itch.io/hero-knight-2
+Background: https://ansimuz.itch.io/bulkhead-walls-environment
+
+Audio
+----------------------
+Music: https://opengameart.org/content/battle-theme-a
+Player_Damaged: https://opengameart.org/content/37-hitspunches
+Enemy_Damaged:  https://opengameart.org/content/37-hitspunches
+Heal: https://opengameart.org/content/rpg-sound-pack
+Card_Drag: https://kenney.nl/assets/rpg-audio
+Card_Hover: https://kenney.nl/assets/rpg-audio
+
+Font
+----------------------
+PT Serif: https://fonts.google.com/specimen/PT+Serif/license?query=pt+serif
