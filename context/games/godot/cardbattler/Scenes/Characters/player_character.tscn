@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cmsi36144f24j"]
+
+[ext_resource type="PackedScene" uid="uid://drf3k0yagq56u" path="res://Scenes/Characters/character.tscn" id="1_l560e"]
+
+[node name="PlayerCharacter" unique_id=877285650 instance=ExtResource("1_l560e")]
+is_player = true
