@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://kpm2dyutlqdf" path="res://Sprites/Background/background.png" id="1_w7k78"]
 [ext_resource type="PackedScene" uid="uid://cmsi36144f24j" path="res://Scenes/Characters/player_character.tscn" id="2_oxf17"]
+[ext_resource type="PackedScene" uid="uid://dynw0xowce5fw" path="res://Scenes/Characters/goblin_enemy_character.tscn" id="3_1ruyk"]
 
 [node name="Main" type="Node2D" unique_id=1297537195]
 
@@ -16,4 +17,8 @@ position = Vector2(0, -20)
 texture = ExtResource("1_w7k78")
 
 [node name="PlayerCharacter" parent="." unique_id=877285650 instance=ExtResource("2_oxf17")]
-position = Vector2(-77, 18)
+position = Vector2(-50, 18)
+
+[node name="EnemyCharacter" parent="." unique_id=2045020535 instance=ExtResource("3_1ruyk")]
+position = Vector2(50, 18)
+max_health = 15
