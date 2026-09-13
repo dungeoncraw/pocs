@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AttackCardData" format=3 uid="uid://dei3mmnsug4c"]
+
+[ext_resource type="Texture2D" uid="uid://d3ev7h0kr7sqk" path="res://Sprites/Card/icon_attack.png" id="1_2vbyh"]
+[ext_resource type="Script" uid="uid://diqyx6k8i2cb7" path="res://Scripts/Cards/attack_card_data.gd" id="1_fsae6"]
+
+[resource]
+script = ExtResource("1_fsae6")
+display_name = "Jab"
+icon = ExtResource("1_2vbyh")
+metadata/_custom_type_script = "uid://diqyx6k8i2cb7"
