@@ -3,6 +3,34 @@
 [ext_resource type="Texture2D" uid="uid://kpm2dyutlqdf" path="res://Sprites/Background/background.png" id="1_w7k78"]
 [ext_resource type="PackedScene" uid="uid://cmsi36144f24j" path="res://Scenes/Characters/player_character.tscn" id="2_oxf17"]
 [ext_resource type="PackedScene" uid="uid://dynw0xowce5fw" path="res://Scenes/Characters/goblin_enemy_character.tscn" id="3_1ruyk"]
+[ext_resource type="Texture2D" uid="uid://bdieqr67341oq" path="res://Sprites/Card/card.png" id="4_pd5xk"]
+[ext_resource type="FontFile" uid="uid://cohpllogfwy1m" path="res://Font/PTSerif-Bold.ttf" id="5_f6xt6"]
+[ext_resource type="FontFile" uid="uid://3e6e1k8n8g43" path="res://Font/PTSerif-Regular.ttf" id="6_f6xt6"]
+[ext_resource type="Texture2D" uid="uid://d3ev7h0kr7sqk" path="res://Sprites/Card/icon_attack.png" id="7_ww2ai"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wigeg"]
+size = Vector2(42, 63)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wigeg"]
+font = ExtResource("5_f6xt6")
+font_size = 8
+outline_size = 2
+outline_color = Color(0.6426383, 0.00030794056, 0.64286214, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ww2ai"]
+line_spacing = 0.5
+font = ExtResource("6_f6xt6")
+font_size = 6
+outline_size = 1
+outline_color = Color(0.45437658, 0.33711013, 0, 1)
+shadow_color = Color(0, 0, 0, 0.27450982)
+shadow_offset = Vector2(0.5, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lrv64"]
+line_spacing = 0.5
+font = ExtResource("6_f6xt6")
+font_size = 4
+font_color = Color(0.07, 0.07, 0.07, 1)
 
 [node name="Main" type="Node2D" unique_id=1297537195]
 
@@ -22,3 +50,55 @@ position = Vector2(-50, 18)
 [node name="EnemyCharacter" parent="." unique_id=2045020535 instance=ExtResource("3_1ruyk")]
 position = Vector2(50, 18)
 max_health = 15
+
+[node name="Card" type="Area2D" parent="." unique_id=741481672]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card" unique_id=242069794]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_wigeg")
+
+[node name="CardSprite" type="Sprite2D" parent="Card" unique_id=301296076]
+texture = ExtResource("4_pd5xk")
+
+[node name="CostLabel" type="Label" parent="Card" unique_id=1623259840]
+offset_left = -10.0
+offset_top = -30.0
+offset_right = 9.0
+offset_bottom = -18.0
+text = "3"
+label_settings = SubResource("LabelSettings_wigeg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DisplayNameLabel" type="Label" parent="Card" unique_id=1316169803]
+custom_minimum_size = Vector2(39, 12)
+offset_left = -20.0
+offset_top = -17.0
+offset_right = 19.0
+offset_bottom = -5.0
+text = "Card Name"
+label_settings = SubResource("LabelSettings_ww2ai")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="Card" unique_id=680555341]
+custom_minimum_size = Vector2(39, 12)
+offset_left = -20.0
+offset_top = 7.0
+offset_right = 19.0
+offset_bottom = 30.0
+text = "This is a description of what card should do"
+label_settings = SubResource("LabelSettings_lrv64")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Card" unique_id=959541471]
+offset_left = -7.0
+offset_top = -5.0
+offset_right = 7.0
+offset_bottom = 6.0
+texture = ExtResource("7_ww2ai")
+expand_mode = 1
+stretch_mode = 5
