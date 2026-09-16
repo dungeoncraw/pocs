@@ -51,6 +51,11 @@ impl RecentMessages {
 
         ids.iter().copied().collect()
     }
+
+    fn force_poison(&self) {
+        let _guard = self.ids.lock().expect("Recent messages lock poisoned");
+        panic!("Simulated worker panic while holding the lock to induce mutex poisoning");
+    }
 }
 
 fn main() {
@@ -77,4 +82,54 @@ fn main() {
 
     println!("Recent messages: {:?}", recent.snapshot());
     println!("Eligible messages: {:?}", eligible);
+
+    println!("\n--- Forcing Mutex Poisoning Scenario ---");
+    let poison_target = recent.clone();
+    let poison_thread = thread::spawn(move || {
+        poison_target.force_poison();
+    });
+
+    // The thread panics while holding the lock
+    let join_result = poison_thread.join();
+    assert!(join_result.is_err(), "Expected thread to panic");
+    println!("Worker thread panicked while holding the mutex guard.");
+
+    // Subsequent lock attempts will now observe a PoisonError
+    match recent.ids.lock() {
+        Ok(_) => panic!("Expected mutex to be poisoned!"),
+        Err(poison_err) => {
+            println!("Verified Mutex is poisoned: {}", poison_err);
+            let recovered_data = poison_err.into_inner();
+            println!("Recovered state from poisoned lock: {:?}", *recovered_data);
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_mutex_poisoning_scenario() {
+        let recent = RecentMessages::new();
+        recent.record(42);
+
+        let poison_target = recent.clone();
+        let handle = thread::spawn(move || {
+            poison_target.force_poison();
+        });
+
+        // Ensure the worker thread actually panicked
+        let res = handle.join();
+        assert!(res.is_err(), "Thread must panic while holding the lock");
+
+        // Verify the mutex is now poisoned on subsequent access
+        let lock_res = recent.ids.lock();
+        assert!(lock_res.is_err(), "Mutex should return a PoisonError");
+
+        // Verify that data can still be inspected or salvaged via into_inner()
+        let recovered = lock_res.unwrap_err().into_inner();
+        assert_eq!(recovered.len(), 1);
+        assert_eq!(recovered[0], 42);
+    }
 }
