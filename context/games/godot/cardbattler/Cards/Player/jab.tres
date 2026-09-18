@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_fsae6")
+attack_damage = 3
 display_name = "Jab"
 icon = ExtResource("1_2vbyh")
 metadata/_custom_type_script = "uid://diqyx6k8i2cb7"

@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://8mkav8u65wsf"]
 
+[ext_resource type="Script" uid="uid://dvv12hs4rhpyj" path="res://Scripts/Managers/card_interactor.gd" id="1_k7mbx"]
 [ext_resource type="Texture2D" uid="uid://kpm2dyutlqdf" path="res://Sprites/Background/background.png" id="1_w7k78"]
 [ext_resource type="PackedScene" uid="uid://cmsi36144f24j" path="res://Scenes/Characters/player_character.tscn" id="2_oxf17"]
 [ext_resource type="PackedScene" uid="uid://dynw0xowce5fw" path="res://Scenes/Characters/goblin_enemy_character.tscn" id="3_1ruyk"]
+[ext_resource type="Script" uid="uid://kjcvq00trd4j" path="res://Scripts/Cards/card.gd" id="4_lrv64"]
 [ext_resource type="Texture2D" uid="uid://bdieqr67341oq" path="res://Sprites/Card/card.png" id="4_pd5xk"]
 [ext_resource type="FontFile" uid="uid://cohpllogfwy1m" path="res://Font/PTSerif-Bold.ttf" id="5_f6xt6"]
+[ext_resource type="Resource" uid="uid://dei3mmnsug4c" path="res://Cards/Player/jab.tres" id="5_qeyqd"]
 [ext_resource type="FontFile" uid="uid://3e6e1k8n8g43" path="res://Font/PTSerif-Regular.ttf" id="6_f6xt6"]
 [ext_resource type="Texture2D" uid="uid://d3ev7h0kr7sqk" path="res://Sprites/Card/icon_attack.png" id="7_ww2ai"]
 
@@ -34,6 +37,9 @@ font_color = Color(0.07, 0.07, 0.07, 1)
 
 [node name="Main" type="Node2D" unique_id=1297537195]
 
+[node name="CardInteractor" type="Node2D" parent="." unique_id=934499757]
+script = ExtResource("1_k7mbx")
+
 [node name="Environment" type="Node" parent="." unique_id=580342474]
 
 [node name="Camera2D" type="Camera2D" parent="Environment" unique_id=1353798802]
@@ -52,6 +58,8 @@ position = Vector2(50, 18)
 max_health = 15
 
 [node name="Card" type="Area2D" parent="." unique_id=741481672]
+script = ExtResource("4_lrv64")
+data = ExtResource("5_qeyqd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Card" unique_id=242069794]
 position = Vector2(0, 0.5)
