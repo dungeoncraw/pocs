@@ -1,7 +1,7 @@
 extends Node2D
 
 var selected_card: Card
-
+var mouse_down_last_frame: bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -13,9 +13,30 @@ func _process(delta: float) -> void:
 	var mouse_down: bool = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 	
 	if not mouse_down:
-		if cur_hover_card != null and cur_hover_card != selected_card:
-			selected_card = cur_hover_card
-			selected_card.hover_enter()
+		if cur_hover_card != null:
+			if selected_card != null and cur_hover_card != selected_card:
+				selected_card.hover_exit()
+				selected_card = null
+			if cur_hover_card != selected_card:
+				selected_card = cur_hover_card
+				selected_card.hover_enter()
+		elif selected_card != null:
+			selected_card.hover_exit()
+			selected_card = null
+	if selected_card != null:
+		#	start dragging
+		if mouse_down and not mouse_down_last_frame:
+			_pickup_card()
+		# release dragging
+		elif not mouse_down and mouse_down_last_frame:
+			_drop_card()
+		
+	mouse_down_last_frame = mouse_down
+func _pickup_card():
+	selected_card.begin_drag()
+
+func _drop_card():
+	selected_card.end_drag()
 
 func _get_selected_card() -> Card:
 	var mouse_pos: Vector2 = get_global_mouse_position()

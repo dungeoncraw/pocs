@@ -27,12 +27,22 @@ func _setup_visual():
 	icon_rect.texture = data.icon
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	idle_pos = global_position
 	_setup_visual()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	var lerp_speed: float = 10
+	var target_position: Vector2 = idle_pos
+	
+	if state == State.HOVERED:
+		target_position = hover_pos
+		lerp_speed  = 15
+	elif state == State.DRAGGING:
+		target_position = get_global_mouse_position()
+		lerp_speed = 20
+		
+	global_position = global_position.lerp(target_position, delta * lerp_speed)
 	
 func hover_enter():
 	state = State.HOVERED
