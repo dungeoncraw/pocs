@@ -26,8 +26,9 @@ func _setup_visual():
 	description_label.text = data.get_description()
 	icon_rect.texture = data.icon
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	idle_pos = global_position
+func setup(data: CardData) -> void:
+	self.data = data
+	state = State.IDLE
 	_setup_visual()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
