@@ -27,7 +27,7 @@ func _rearrange_cards():
 	for i in len(card_nodes):
 		var card: Card = card_nodes[i]
 		card.idle_pos = _get_card_position(i)
-		card.z_index = i + 1
+		card.default_z_index = i + 1
 		
 
 func _deal_hand():
@@ -46,6 +46,8 @@ func _deal_card():
 	add_child(card)
 	card.global_position = card_spawn.global_position
 	card_nodes.append(card)
+	card.z_index = len(card_nodes)
+	
 	card.setup(card_data)
 	_rearrange_cards()
 	

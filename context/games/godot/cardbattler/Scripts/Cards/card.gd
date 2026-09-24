@@ -20,16 +20,26 @@ var idle_pos: Vector2
 var hover_pos: Vector2:
 	get: return idle_pos + Vector2(0, -30)
 
+var default_z_index: int
+
+#managers
+var game_manager: GameManager:
+	get: return ManagerRegistry.get_manager("game_manager")
+
 func _setup_visual():
 	name_label.text = data.display_name
 	cost_label.text = str(data.cost)
 	description_label.text = data.get_description()
 	icon_rect.texture = data.icon
+
 # Called when the node enters the scene tree for the first time.
 func setup(data: CardData) -> void:
 	self.data = data
 	state = State.IDLE
 	_setup_visual()
+
+func cast():
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -47,9 +57,11 @@ func _process(delta: float) -> void:
 	
 func hover_enter():
 	state = State.HOVERED
+	z_index = 99
 	
 func hover_exit():
 	state = State.IDLE
+	z_index = default_z_index
 
 func begin_drag():
 	state = State.DRAGGING

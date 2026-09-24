@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://kpm2dyutlqdf" path="res://Sprites/Background/background.png" id="1_w7k78"]
 [ext_resource type="PackedScene" uid="uid://cmsi36144f24j" path="res://Scenes/Characters/player_character.tscn" id="2_oxf17"]
 [ext_resource type="PackedScene" uid="uid://dynw0xowce5fw" path="res://Scenes/Characters/goblin_enemy_character.tscn" id="3_1ruyk"]
+[ext_resource type="Script" uid="uid://fonf6f1faff6" path="res://Scripts/Managers/game_manager.gd" id="3_f6xt6"]
 
 [node name="Main" type="Node2D" unique_id=1297537195]
 
@@ -19,6 +20,12 @@ position = Vector2(-163, 73)
 
 [node name="CardInteractor" type="Node2D" parent="." unique_id=934499757]
 script = ExtResource("1_k7mbx")
+
+[node name="GameManager" type="Node" parent="." unique_id=267566005 node_paths=PackedStringArray("player", "enemy")]
+script = ExtResource("3_f6xt6")
+player = NodePath("../PlayerCharacter")
+enemy = NodePath("../EnemyCharacter")
+metadata/_custom_type_script = "uid://fonf6f1faff6"
 
 [node name="Environment" type="Node" parent="." unique_id=580342474]
 

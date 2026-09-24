@@ -33,10 +33,20 @@ func _process(delta: float) -> void:
 		
 	mouse_down_last_frame = mouse_down
 func _pickup_card():
+	if not selected_card:
+		return
 	selected_card.begin_drag()
 
 func _drop_card():
+	if not selected_card:
+		return
 	selected_card.end_drag()
+	
+	if selected_card.global_position.y > 20:
+		return
+	#cast it
+	#spend mana
+	#discard card
 
 func _get_selected_card() -> Card:
 	var mouse_pos: Vector2 = get_global_mouse_position()
