@@ -13,6 +13,14 @@ var card_nodes: Array[Card]
 
 @onready var card_origin: Node2D = $CardOrigin
 @onready var card_spawn: Node2D = $CardSpawn
+
+
+func _enter_tree() -> void:
+	ManagerRegistry.register("card_manager", self)
+	
+func _exit_tree() -> void:
+	ManagerRegistry.unregister("card_manager")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	draw_pile = player_deck.duplicate()
@@ -58,4 +66,8 @@ func _get_card_position(card_index: int) -> Vector2:
 	return card_origin.global_position + Vector2(pos_x, 0)
 
 func discard_card(card: Card):
-	pass
+	discard_pile.append(card.data)
+	
+	card_nodes.erase(card)
+	card.queue_free()
+	_rearrange_cards()

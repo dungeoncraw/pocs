@@ -1,13 +1,40 @@
 [gd_scene format=3 uid="uid://8mkav8u65wsf"]
 
 [ext_resource type="Script" uid="uid://dvv12hs4rhpyj" path="res://Scripts/Managers/card_interactor.gd" id="1_k7mbx"]
+[ext_resource type="Script" uid="uid://cntmn0ochhnp5" path="res://Scripts/Managers/ui_manager.gd" id="1_qeyqd"]
 [ext_resource type="Script" uid="uid://dc4whcsifcfad" path="res://Scripts/Managers/card_manager.gd" id="1_upb72"]
 [ext_resource type="Texture2D" uid="uid://kpm2dyutlqdf" path="res://Sprites/Background/background.png" id="1_w7k78"]
+[ext_resource type="Texture2D" uid="uid://gubbsrr2lpg1" path="res://Sprites/UI/mana_bg.png" id="1_ww2ai"]
+[ext_resource type="FontFile" uid="uid://3e6e1k8n8g43" path="res://Font/PTSerif-Regular.ttf" id="2_lrv64"]
 [ext_resource type="PackedScene" uid="uid://cmsi36144f24j" path="res://Scenes/Characters/player_character.tscn" id="2_oxf17"]
 [ext_resource type="PackedScene" uid="uid://dynw0xowce5fw" path="res://Scenes/Characters/goblin_enemy_character.tscn" id="3_1ruyk"]
 [ext_resource type="Script" uid="uid://fonf6f1faff6" path="res://Scripts/Managers/game_manager.gd" id="3_f6xt6"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_ww2ai"]
+font = ExtResource("2_lrv64")
+outline_size = 3
+outline_color = Color(0.60948443, 0.00028214246, 0.6122366, 1)
+
 [node name="Main" type="Node2D" unique_id=1297537195]
+
+[node name="UIManager" type="Node" parent="." unique_id=1309402397]
+script = ExtResource("1_qeyqd")
+
+[node name="ManaUI" type="Node2D" parent="UIManager" unique_id=699800435]
+position = Vector2(-224, -119)
+
+[node name="ManaBg" type="Sprite2D" parent="UIManager/ManaUI" unique_id=907093472]
+texture = ExtResource("1_ww2ai")
+
+[node name="ManaLabel" type="Label" parent="UIManager/ManaUI" unique_id=546908094]
+offset_left = -19.0
+offset_top = -11.0
+offset_right = 21.0
+offset_bottom = 12.0
+text = "2/3"
+label_settings = SubResource("LabelSettings_ww2ai")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CardManager" type="Node" parent="." unique_id=1310644573]
 script = ExtResource("1_upb72")
@@ -34,7 +61,8 @@ zoom = Vector2(4, 4)
 
 [node name="Background" type="Sprite2D" parent="Environment" unique_id=1415125154]
 z_index = -10
-position = Vector2(0, -20)
+position = Vector2(0, -36.000004)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_w7k78")
 
 [node name="PlayerCharacter" parent="." unique_id=877285650 instance=ExtResource("2_oxf17")]

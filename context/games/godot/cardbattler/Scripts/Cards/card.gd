@@ -32,6 +32,9 @@ func _setup_visual():
 	description_label.text = data.get_description()
 	icon_rect.texture = data.icon
 
+func _ready() -> void:
+	game_manager.ManaChanged.connect(_on_mana_changed)
+
 # Called when the node enters the scene tree for the first time.
 func setup(data: CardData) -> void:
 	self.data = data
@@ -39,7 +42,11 @@ func setup(data: CardData) -> void:
 	_setup_visual()
 
 func cast():
-	pass
+		var cast_data: CardData.CastData = CardData.CastData.new()
+		cast_data.caster = game_manager.player
+		cast_data.opponent = game_manager.enemy
+		
+		data.cast(cast_data)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -68,3 +75,9 @@ func begin_drag():
 
 func end_drag():
 	state = State.IDLE
+
+func _on_mana_changed(cur: int, max: int):
+	if cur >= data.cost:
+		cost_label.self_modulate = Color.WHITE
+	else:
+		cost_label.self_modulate = Color.RED
