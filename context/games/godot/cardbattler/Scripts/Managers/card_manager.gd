@@ -1,6 +1,8 @@
 class_name CardManager
 extends Node
 
+signal CardPileChanged (draw: int, discard: int)
+
 @export var player_deck: Array[CardData]
 @export var card_scene: PackedScene
 @export var cards_to_deal: int = 3
@@ -25,6 +27,7 @@ func _exit_tree() -> void:
 func _ready() -> void:
 	draw_pile = player_deck.duplicate()
 	draw_pile.shuffle()
+	CardPileChanged.emit(len(draw_pile), len(discard_pile))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,7 +51,10 @@ func _deal_card():
 		draw_pile = discard_pile.duplicate()
 		draw_pile.shuffle()
 		discard_pile.clear()
+		CardPileChanged.emit(len(draw_pile), len(discard_pile))
+	
 	var card_data: CardData = draw_pile.pop_back()
+	CardPileChanged.emit(len(draw_pile), len(discard_pile))
 	
 	var card: Card = card_scene.instantiate()
 	add_child(card)
@@ -67,6 +73,7 @@ func _get_card_position(card_index: int) -> Vector2:
 
 func discard_card(card: Card):
 	discard_pile.append(card.data)
+	CardPileChanged.emit(len(draw_pile), len(discard_pile))
 	
 	card_nodes.erase(card)
 	card.queue_free()
