@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://fonf6f1faff6" path="res://Scripts/Managers/game_manager.gd" id="3_f6xt6"]
 [ext_resource type="Texture2D" uid="uid://cxb5i5s2ffvfb" path="res://Sprites/UI/draw_pile.png" id="4_k7mbx"]
 [ext_resource type="Texture2D" uid="uid://ciy8rlwqw2538" path="res://Sprites/UI/discard_pile.png" id="5_upb72"]
+[ext_resource type="Texture2D" uid="uid://syc67q5ytx2f" path="res://Sprites/UI/end_turn_button.png" id="6_rssjf"]
+[ext_resource type="Texture2D" uid="uid://cfc7jxwx7m0a" path="res://Sprites/Background/character_highlight.png" id="10_heh15"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ww2ai"]
 font = ExtResource("2_lrv64")
@@ -28,6 +30,15 @@ font = ExtResource("2_lrv64")
 font_size = 12
 outline_size = 2
 outline_color = Color(0.25490198, 0.101960786, 0.078431375, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rssjf"]
+font = ExtResource("2_lrv64")
+font_size = 8
+outline_size = 2
+outline_color = Color(0.30588236, 0.078431375, 0.47843137, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_heh15"]
+blend_mode = 1
 
 [node name="Main" type="Node2D" unique_id=1297537195]
 
@@ -82,6 +93,22 @@ label_settings = SubResource("LabelSettings_upb72")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="EndTurnUI" type="Node2D" parent="UIManager" unique_id=481688981]
+position = Vector2(193, -129)
+
+[node name="EndTurnButton" type="TextureButton" parent="UIManager/EndTurnUI" unique_id=655009496]
+offset_right = 42.0
+offset_bottom = 24.0
+texture_normal = ExtResource("6_rssjf")
+
+[node name="EndTurnLabel" type="Label" parent="UIManager/EndTurnUI" unique_id=290833887]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "End Turn"
+label_settings = SubResource("LabelSettings_rssjf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CardManager" type="Node" parent="." unique_id=1310644573]
 script = ExtResource("1_upb72")
 
@@ -100,6 +127,15 @@ player = NodePath("../PlayerCharacter")
 enemy = NodePath("../EnemyCharacter")
 metadata/_custom_type_script = "uid://fonf6f1faff6"
 
+[node name="CharacterHighlight" type="Node2D" parent="GameManager" unique_id=1168818178]
+position = Vector2(-49, -21)
+
+[node name="Sprite" type="Sprite2D" parent="GameManager/CharacterHighlight" unique_id=339336743]
+modulate = Color(1, 1, 1, 0.73333335)
+z_index = -1
+material = SubResource("CanvasItemMaterial_heh15")
+texture = ExtResource("10_heh15")
+
 [node name="Environment" type="Node" parent="." unique_id=580342474]
 
 [node name="Camera2D" type="Camera2D" parent="Environment" unique_id=1353798802]
@@ -117,3 +153,5 @@ position = Vector2(-50, 30)
 [node name="EnemyCharacter" parent="." unique_id=2045020535 instance=ExtResource("3_1ruyk")]
 position = Vector2(50, 30)
 max_health = 15
+
+[connection signal="pressed" from="UIManager/EndTurnUI/EndTurnButton" to="UIManager" method="_on_end_turn_button_pressed"]

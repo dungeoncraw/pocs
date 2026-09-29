@@ -1,11 +1,38 @@
 [gd_scene format=3 uid="uid://dynw0xowce5fw"]
 
 [ext_resource type="PackedScene" uid="uid://drf3k0yagq56u" path="res://Scenes/Characters/character.tscn" id="1_dxcs8"]
+[ext_resource type="Script" uid="uid://dgqye7igbt7hr" path="res://Scripts/Enemy/enemy_ai.gd" id="2_0kjr3"]
 [ext_resource type="SpriteFrames" uid="uid://cwj276dkym8q3" path="res://Sprites/Enemies/Goblin/goblin.tres" id="2_ochns"]
+[ext_resource type="Texture2D" uid="uid://d3ev7h0kr7sqk" path="res://Sprites/Card/icon_attack.png" id="4_0kjr3"]
+[ext_resource type="FontFile" uid="uid://cohpllogfwy1m" path="res://Font/PTSerif-Bold.ttf" id="5_q5qer"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0kjr3"]
+font = ExtResource("5_q5qer")
+font_size = 6
+outline_size = 3
+outline_color = Color(0.12955844, 0.12955847, 0.12955844, 1)
 
 [node name="EnemyCharacter" unique_id=877285650 instance=ExtResource("1_dxcs8")]
 
-[node name="CharacterAnimation" parent="." index="0" unique_id=1273012440]
+[node name="EnemyAI" type="Node" parent="." index="0" unique_id=360075579]
+script = ExtResource("2_0kjr3")
+
+[node name="CharacterAnimation" parent="." index="1" unique_id=1273012440]
 position = Vector2(0, -26)
 sprite_frames = ExtResource("2_ochns")
 flip_h = true
+
+[node name="NextActionIcon" type="Sprite2D" parent="." index="3" unique_id=688623874]
+position = Vector2(-27, -47.000004)
+scale = Vector2(0.56249994, 0.56249994)
+texture = ExtResource("4_0kjr3")
+
+[node name="NextActionLabel" type="Label" parent="." index="4" unique_id=1433417505]
+offset_left = -26.0
+offset_top = -49.0
+offset_right = -22.0
+offset_bottom = -41.0
+text = "3"
+label_settings = SubResource("LabelSettings_0kjr3")
+horizontal_alignment = 1
+vertical_alignment = 1

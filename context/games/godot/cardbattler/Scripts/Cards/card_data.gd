@@ -12,6 +12,9 @@ func get_description() -> String
 @abstract
 func cast(data: CastData)
 
+@abstract
+func get_value() -> int
+
 class CastData:
 	var caster: Character
 	var opponent: Character

@@ -37,3 +37,8 @@ func _on_mana_changed(cur: int, max: int):
 func _on_card_piles_changed(draw: int, discard: int):
 	draw_pile_label.text = str(draw)
 	discard_pile_label.text = str(discard)
+
+
+func _on_end_turn_button_pressed() -> void:
+	if game_manager.is_player_turn:
+		game_manager.end_character_turn()
