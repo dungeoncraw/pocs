@@ -1,0 +1,6 @@
+[package]
+name = "challenge_17_return_ref_to_local"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

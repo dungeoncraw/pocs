@@ -1,0 +1,6 @@
+[package]
+name = "challenge_20_utf8_slice_panic"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

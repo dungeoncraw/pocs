@@ -1,0 +1,6 @@
+[package]
+name = "challenge_16_mutex_deadlock"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

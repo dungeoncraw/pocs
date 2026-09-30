@@ -1,0 +1,6 @@
+[package]
+name = "challenge_03_use_after_move"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

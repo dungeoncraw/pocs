@@ -1,0 +1,6 @@
+[package]
+name = "challenge_01_immutable_assign"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

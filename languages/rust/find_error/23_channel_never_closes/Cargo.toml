@@ -1,0 +1,6 @@
+[package]
+name = "challenge_23_channel_never_closes"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

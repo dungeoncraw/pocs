@@ -1,0 +1,6 @@
+[package]
+name = "challenge_28_drop_order_guard"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

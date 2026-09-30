@@ -1,0 +1,6 @@
+[package]
+name = "challenge_12_question_mark_in_wrong_fn"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

@@ -1,0 +1,6 @@
+[package]
+name = "challenge_06_non_exhaustive_match"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
