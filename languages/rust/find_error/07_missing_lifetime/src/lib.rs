@@ -1,7 +1,7 @@
 //! Small helpers for picking the "best" piece of text out of several inputs.
 
 /// Returns the longer of two strings. On a tie, the first one wins.
-pub fn longest(a: &str, b: &str) -> &str {
+pub fn longest<'c>(a: &'c str, b: &'c str) -> &'c str {
     if b.len() > a.len() {
         b
     } else {
@@ -11,7 +11,7 @@ pub fn longest(a: &str, b: &str) -> &str {
 
 /// Returns the first word of `text` that is longer than `min_len`,
 /// falling back to `default` when there is none.
-pub fn first_long_word(text: &str, min_len: usize, default: &str) -> &str {
+pub fn first_long_word<'a>(text: &'a str, min_len: usize, default: &'a str) -> &'a str {
     for word in text.split_whitespace() {
         if word.len() > min_len {
             return word;

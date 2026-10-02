@@ -15,7 +15,7 @@ pub fn parse_line(line: &str) -> Option<(String, String)> {
     if line.is_empty() || line.starts_with('#') {
         return None;
     }
-    let (key, value) = line.split_once('=').unwrap();
+    let (key, value) = line.split_once('=')?;
     Some((key.trim().to_string(), value.trim().to_string()))
 }
 
@@ -26,8 +26,8 @@ pub fn parse_config(text: &str) -> HashMap<String, String> {
 
 /// Reads the `port` entry as a valid TCP port (1..=65535).
 pub fn get_port(config: &HashMap<String, String>) -> Result<u16, ConfigError> {
-    let raw = config.get("port").unwrap();
-    let port: u16 = raw.parse().unwrap();
+    let raw = config.get("port").ok_or("8000").map_err(|_| ConfigError::MissingKey("port".to_string()))?;
+    let port: u16 = raw.parse().map_err(|_| ConfigError::InvalidPort(raw.clone()))?;
     if port == 0 {
         return Err(ConfigError::InvalidPort(raw.clone()));
     }

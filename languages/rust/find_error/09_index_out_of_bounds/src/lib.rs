@@ -9,7 +9,7 @@ pub fn moving_average(data: &[f64], window: usize) -> Vec<f64> {
     }
     let count = data.len() - window + 1;
     let mut out = Vec::with_capacity(count);
-    for start in 0..=count {
+    for start in 0..count {
         let mut sum = 0.0;
         for i in start..start + window {
             sum += data[i];
