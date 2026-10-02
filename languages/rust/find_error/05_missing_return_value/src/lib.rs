@@ -9,7 +9,7 @@ pub fn shipping_cost(weight_grams: u32) -> u32 {
     } else {
         let extra = weight_grams - INCLUDED_GRAMS;
         let blocks = (extra + 99) / 100;
-        BASE_RATE + blocks * RATE_PER_EXTRA_100G;
+        BASE_RATE + blocks * RATE_PER_EXTRA_100G
     }
 }
 

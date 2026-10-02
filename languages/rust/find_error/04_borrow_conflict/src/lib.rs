@@ -1,7 +1,7 @@
 /// Appends a "-copy" entry derived from the first element of the list and
 /// returns the first element, or `None` when the list is empty.
 pub fn append_copy_of_first(items: &mut Vec<String>) -> Option<String> {
-    let leader = items.first()?;
+    let leader = items.first()?.clone();
     items.push(format!("{}-copy", leader));
     Some(leader.clone())
 }

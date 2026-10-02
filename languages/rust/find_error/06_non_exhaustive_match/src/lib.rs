@@ -14,6 +14,7 @@ pub fn label(status: OrderStatus) -> &'static str {
         OrderStatus::Paid => "Payment received",
         OrderStatus::Shipped => "On its way",
         OrderStatus::Delivered => "Delivered",
+        OrderStatus::Cancelled => "Order cancelled",
     }
 }
 
