@@ -18,6 +18,12 @@ impl fmt::Display for SumError {
     }
 }
 
+impl From<ParseIntError> for SumError {
+    fn from(err: ParseIntError) -> Self {
+        SumError::Parse(err.to_string())
+    }
+}
+
 impl std::error::Error for SumError {}
 
 fn parse_token(token: &str) -> Result<i64, ParseIntError> {
