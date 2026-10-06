@@ -9,6 +9,7 @@ var current_health: int
 @export var attack_delay: float = 0.3
 
 @onready var anim: CharacterAnimation = $CharacterAnimation
+@onready var heal_particle: CPUParticles2D = $HealParticle
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,6 +38,7 @@ func attack(target: Character, damage_amount: int):
 	
 func heal(amount: int):
 	current_health = clamp(current_health + amount, 0, max_health)
+	heal_particle.emitting = true
 	HealthUpdated.emit()
 	
 func die():
