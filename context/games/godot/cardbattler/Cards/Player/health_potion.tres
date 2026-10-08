@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="HealCardData" format=3 uid="uid://djcthhps4s8d8"]
+[gd_resource type="Resource" script_class="HealCardData" format=3 uid="uid://bjlgr5ceqcas3"]
 
-[ext_resource type="Texture2D" uid="uid://bkkksjkeiuedc" path="res://Sprites/Card/icon_heal.png" id="1_hsdrc"]
-[ext_resource type="Script" uid="uid://cahqbah4crqt4" path="res://Scripts/Cards/heal_card_data.gd" id="1_uji4j"]
+[ext_resource type="Texture2D" uid="uid://cfnjjt1jlnat3" path="res://Sprites/Card/icon_heal.png" id="1_hsdrc"]
+[ext_resource type="Script" uid="uid://62yl7not4eh2" path="res://Scripts/Cards/heal_card_data.gd" id="1_uji4j"]
 
 [resource]
 script = ExtResource("1_uji4j")
@@ -9,4 +9,4 @@ heal_amount = 3
 display_name = "Health Potion"
 cost = 2
 icon = ExtResource("1_hsdrc")
-metadata/_custom_type_script = "uid://cahqbah4crqt4"
+metadata/_custom_type_script = "uid://62yl7not4eh2"

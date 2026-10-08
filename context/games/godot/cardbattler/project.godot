@@ -10,19 +10,18 @@ config_version=5
 
 [application]
 
-config/name="cardbattler"
-run/main_scene="uid://8mkav8u65wsf"
+config/name="CardBattler"
+run/main_scene="uid://jsnw762gaxde"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-ManagerRegistry="*uid://cdwfq08jc11pv"
+ManagerRegistry="*uid://bm3jbviuob2o3"
+GameData="*uid://5cgl2geanrco"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

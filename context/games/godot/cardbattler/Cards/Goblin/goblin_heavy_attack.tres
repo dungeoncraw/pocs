@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="AttackCardData" format=3 uid="uid://dq21jxircciti"]
+[gd_resource type="Resource" script_class="AttackCardData" format=3 uid="uid://cxvkrx5kbn7se"]
 
-[ext_resource type="Script" uid="uid://diqyx6k8i2cb7" path="res://Scripts/Cards/attack_card_data.gd" id="1_ramx6"]
-[ext_resource type="Texture2D" uid="uid://d3ev7h0kr7sqk" path="res://Sprites/Card/icon_attack.png" id="1_wts3t"]
+[ext_resource type="Script" uid="uid://c2vpw5awgcb2o" path="res://Scripts/Cards/attack_card_data.gd" id="1_ramx6"]
+[ext_resource type="Texture2D" uid="uid://bo7oddwoummp2" path="res://Sprites/Card/icon_attack.png" id="1_wts3t"]
 
 [resource]
 script = ExtResource("1_ramx6")
 attack_damage = 10
 icon = ExtResource("1_wts3t")
-metadata/_custom_type_script = "uid://diqyx6k8i2cb7"
+metadata/_custom_type_script = "uid://c2vpw5awgcb2o"

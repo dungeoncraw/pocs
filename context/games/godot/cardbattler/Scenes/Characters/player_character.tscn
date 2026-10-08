@@ -1,6 +1,15 @@
-[gd_scene format=3 uid="uid://cmsi36144f24j"]
+[gd_scene format=3 uid="uid://ekl5lyenpdcf"]
 
-[ext_resource type="PackedScene" uid="uid://drf3k0yagq56u" path="res://Scenes/Characters/character.tscn" id="1_l560e"]
+[ext_resource type="PackedScene" uid="uid://dv1mrxpto1664" path="res://Scenes/Characters/character.tscn" id="1_l560e"]
+[ext_resource type="AudioStream" uid="uid://brmg7vjccvrfp" path="res://Audio/player_damaged.ogg" id="2_c2rcm"]
+[ext_resource type="AudioStream" uid="uid://bbrdwhycqfm2k" path="res://Audio/heal.ogg" id="3_i26gt"]
 
-[node name="PlayerCharacter" unique_id=877285650 instance=ExtResource("1_l560e")]
+[node name="PlayerCharacter" unique_id=899095962 instance=ExtResource("1_l560e")]
 is_player = true
+damaged_sfx = ExtResource("2_c2rcm")
+healed_sfx = ExtResource("3_i26gt")
+
+[node name="CharacterAnimation" parent="." index="0" unique_id=1295767939]
+animation = &"idle"
+frame = 0
+frame_progress = 0.0

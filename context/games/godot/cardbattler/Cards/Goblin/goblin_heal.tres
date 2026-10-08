@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="HealCardData" format=3 uid="uid://dc5a2kuiyji4k"]
+[gd_resource type="Resource" script_class="HealCardData" format=3 uid="uid://gohy43738m7p"]
 
-[ext_resource type="Texture2D" uid="uid://bkkksjkeiuedc" path="res://Sprites/Card/icon_heal.png" id="1_8hw6y"]
-[ext_resource type="Script" uid="uid://cahqbah4crqt4" path="res://Scripts/Cards/heal_card_data.gd" id="1_ni6mp"]
+[ext_resource type="Texture2D" uid="uid://cfnjjt1jlnat3" path="res://Sprites/Card/icon_heal.png" id="1_8hw6y"]
+[ext_resource type="Script" uid="uid://62yl7not4eh2" path="res://Scripts/Cards/heal_card_data.gd" id="1_ni6mp"]
 
 [resource]
 script = ExtResource("1_ni6mp")
 heal_amount = 4
 icon = ExtResource("1_8hw6y")
-metadata/_custom_type_script = "uid://cahqbah4crqt4"
+metadata/_custom_type_script = "uid://62yl7not4eh2"

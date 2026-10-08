@@ -1,9 +1,9 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://b053ga5vxf0tk"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://bocxn7uo247e0"]
 
-[ext_resource type="Texture2D" uid="uid://bek1352gjqv8o" path="res://Sprites/Player/player_attack.png" id="1_nwx6c"]
-[ext_resource type="Texture2D" uid="uid://cwn4mhtd6c0nb" path="res://Sprites/Player/player_idle.png" id="1_xn27d"]
-[ext_resource type="Texture2D" uid="uid://b5nvycskhokr5" path="res://Sprites/Player/player_death.png" id="2_34hb3"]
-[ext_resource type="Texture2D" uid="uid://lvvj0axl8cpe" path="res://Sprites/Player/player_hit.png" id="3_tctog"]
+[ext_resource type="Texture2D" uid="uid://dhsjgrm8f4wex" path="res://Sprites/Player/player_attack.png" id="1_nwx6c"]
+[ext_resource type="Texture2D" uid="uid://cm7jlnibmbn0y" path="res://Sprites/Player/player_idle.png" id="1_xn27d"]
+[ext_resource type="Texture2D" uid="uid://58vtu546dg6f" path="res://Sprites/Player/player_death.png" id="2_34hb3"]
+[ext_resource type="Texture2D" uid="uid://dy8dlslmjcelh" path="res://Sprites/Player/player_hit.png" id="3_tctog"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gn4sj"]
 atlas = ExtResource("1_nwx6c")

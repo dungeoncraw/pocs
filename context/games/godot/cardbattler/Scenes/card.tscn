@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://xa34kwjo1trn"]
+
+[ext_resource type="Script" uid="uid://dmac7cwx07tp4" path="res://Scripts/Cards/card.gd" id="1_bnspj"]
+[ext_resource type="Resource" uid="uid://bjlgr5ceqcas3" path="res://Cards/Player/health_potion.tres" id="2_xnv4g"]
+[ext_resource type="AudioStream" uid="uid://dfyhi4wbmmtav" path="res://Audio/card_hover.ogg" id="3_mm04k"]
+[ext_resource type="Texture2D" uid="uid://dd12l4505uk0e" path="res://Sprites/Card/card.png" id="3_u5wvb"]
+[ext_resource type="FontFile" uid="uid://cj5hxyu5fg34k" path="res://Font/PTSerif-Bold.ttf" id="4_mm04k"]
+[ext_resource type="AudioStream" uid="uid://wbiopvryd1sm" path="res://Audio/card_drag.ogg" id="4_yvxpl"]
+[ext_resource type="FontFile" uid="uid://ccybyp4jquowr" path="res://Font/PTSerif-Regular.ttf" id="5_yvxpl"]
+[ext_resource type="Texture2D" uid="uid://bo7oddwoummp2" path="res://Sprites/Card/icon_attack.png" id="6_uf1hq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bj4t2"]
+size = Vector2(42, 64)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bj4t2"]
+font = ExtResource("4_mm04k")
+font_size = 8
+outline_size = 2
+outline_color = Color(0.40609974, 0.18950278, 0.43866298, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ww2ai"]
+line_spacing = 0.5
+font = ExtResource("5_yvxpl")
+font_size = 6
+outline_size = 2
+outline_color = Color(0.42665774, 0.23785564, 0.106403194, 1)
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_offset = Vector2(0.5, 0.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lrv64"]
+line_spacing = 0.5
+font = ExtResource("5_yvxpl")
+font_size = 4
+font_color = Color(0.09239707, 0.09239706, 0.09239706, 1)
+shadow_size = 0
+
+[node name="Card" type="Area2D" unique_id=2086410480]
+script = ExtResource("1_bnspj")
+data = ExtResource("2_xnv4g")
+hover_sfx = ExtResource("3_mm04k")
+drag_sfx = ExtResource("4_yvxpl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1650475632]
+shape = SubResource("RectangleShape2D_bj4t2")
+
+[node name="CardSprite" type="Sprite2D" parent="." unique_id=1028014021]
+texture = ExtResource("3_u5wvb")
+
+[node name="CostLabel" type="Label" parent="." unique_id=1952842478]
+offset_left = -8.0
+offset_top = -30.0
+offset_right = 7.0
+offset_bottom = -19.333332
+text = "3"
+label_settings = SubResource("LabelSettings_bj4t2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DisplayNameLabel" type="Label" parent="." unique_id=166879620]
+custom_minimum_size = Vector2(38, 10)
+offset_left = -19.0
+offset_top = -17.0
+offset_right = 19.0
+offset_bottom = -6.333332
+text = "Card Name"
+label_settings = SubResource("LabelSettings_ww2ai")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="." unique_id=1864389543]
+custom_minimum_size = Vector2(39, 10)
+offset_left = -19.0
+offset_top = 9.0
+offset_right = 20.0
+offset_bottom = 30.0
+text = "Description about the card and what is does goes here."
+label_settings = SubResource("LabelSettings_lrv64")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Icon" type="TextureRect" parent="." unique_id=280271270]
+offset_left = -6.0
+offset_top = -3.0
+offset_right = 6.0
+offset_bottom = 9.0
+texture = ExtResource("6_uf1hq")
+expand_mode = 1
+stretch_mode = 5

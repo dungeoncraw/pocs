@@ -1,38 +1,49 @@
-[gd_scene format=3 uid="uid://dynw0xowce5fw"]
+[gd_scene format=3 uid="uid://dtmkhl481bqad"]
 
-[ext_resource type="PackedScene" uid="uid://drf3k0yagq56u" path="res://Scenes/Characters/character.tscn" id="1_dxcs8"]
-[ext_resource type="Script" uid="uid://dgqye7igbt7hr" path="res://Scripts/Enemy/enemy_ai.gd" id="2_0kjr3"]
-[ext_resource type="SpriteFrames" uid="uid://cwj276dkym8q3" path="res://Sprites/Enemies/Goblin/goblin.tres" id="2_ochns"]
-[ext_resource type="Texture2D" uid="uid://d3ev7h0kr7sqk" path="res://Sprites/Card/icon_attack.png" id="4_0kjr3"]
-[ext_resource type="FontFile" uid="uid://cohpllogfwy1m" path="res://Font/PTSerif-Bold.ttf" id="5_q5qer"]
+[ext_resource type="PackedScene" uid="uid://dv1mrxpto1664" path="res://Scenes/Characters/character.tscn" id="1_0gac6"]
+[ext_resource type="SpriteFrames" uid="uid://d26slk7rbvc85" path="res://Sprites/Enemies/Goblin/goblin.tres" id="2_dxcs8"]
+[ext_resource type="Script" uid="uid://b3rhrlcqp1gpt" path="res://Scripts/Enemy/enemy_ai.gd" id="2_ochns"]
+[ext_resource type="AudioStream" uid="uid://dbuotossefdma" path="res://Audio/enemy_damaged.ogg" id="2_rta8c"]
+[ext_resource type="Script" uid="uid://b2373tex1m7jm" path="res://Scripts/Cards/card_data.gd" id="3_3nvn6"]
+[ext_resource type="AudioStream" uid="uid://bbrdwhycqfm2k" path="res://Audio/heal.ogg" id="3_6fe0v"]
+[ext_resource type="Resource" uid="uid://v2sxv8nbft5l" path="res://Cards/Goblin/goblin_attack.tres" id="4_duad4"]
+[ext_resource type="Resource" uid="uid://gohy43738m7p" path="res://Cards/Goblin/goblin_heal.tres" id="5_j6afl"]
+[ext_resource type="Resource" uid="uid://cxvkrx5kbn7se" path="res://Cards/Goblin/goblin_heavy_attack.tres" id="6_6q66t"]
+[ext_resource type="Texture2D" uid="uid://bo7oddwoummp2" path="res://Sprites/Card/icon_attack.png" id="8_j6afl"]
+[ext_resource type="FontFile" uid="uid://cj5hxyu5fg34k" path="res://Font/PTSerif-Bold.ttf" id="9_6q66t"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_0kjr3"]
-font = ExtResource("5_q5qer")
+[sub_resource type="LabelSettings" id="LabelSettings_bj4t2"]
+font = ExtResource("9_6q66t")
 font_size = 6
-outline_size = 3
-outline_color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+outline_size = 2
+outline_color = Color(0.06053035, 0.06053035, 0.060530342, 1)
 
-[node name="EnemyCharacter" unique_id=877285650 instance=ExtResource("1_dxcs8")]
+[node name="GoblinEnemyCharacter" unique_id=899095962 instance=ExtResource("1_0gac6")]
+max_health = 15
+damaged_sfx = ExtResource("2_rta8c")
+healed_sfx = ExtResource("3_6fe0v")
 
-[node name="EnemyAI" type="Node" parent="." index="0" unique_id=360075579]
-script = ExtResource("2_0kjr3")
+[node name="EnemyAI" type="Node" parent="." index="0" unique_id=1610653380]
+script = ExtResource("2_ochns")
+actions = Array[ExtResource("3_3nvn6")]([ExtResource("4_duad4"), ExtResource("5_j6afl"), ExtResource("6_6q66t")])
 
-[node name="CharacterAnimation" parent="." index="1" unique_id=1273012440]
+[node name="CharacterAnimation" parent="." index="1" unique_id=1295767939]
 position = Vector2(0, -26)
-sprite_frames = ExtResource("2_ochns")
+sprite_frames = ExtResource("2_dxcs8")
+animation = &"idle"
+frame = 0
+frame_progress = 0.0
 flip_h = true
 
-[node name="NextActionIcon" type="Sprite2D" parent="." index="3" unique_id=688623874]
-position = Vector2(-27, -47.000004)
-scale = Vector2(0.56249994, 0.56249994)
-texture = ExtResource("4_0kjr3")
+[node name="NextActionIcon" type="Sprite2D" parent="." index="3" unique_id=1035463554]
+position = Vector2(-26.75, -48.25)
+scale = Vector2(0.5312501, 0.5312501)
+texture = ExtResource("8_j6afl")
 
-[node name="NextActionLabel" type="Label" parent="." index="4" unique_id=1433417505]
-offset_left = -26.0
-offset_top = -49.0
-offset_right = -22.0
-offset_bottom = -41.0
-text = "3"
-label_settings = SubResource("LabelSettings_0kjr3")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="NextActionLabel" type="Label" parent="." index="4" unique_id=507365265]
+offset_left = -27.0
+offset_top = -51.0
+offset_right = -20.0
+offset_bottom = -43.0
+text = "5"
+label_settings = SubResource("LabelSettings_bj4t2")

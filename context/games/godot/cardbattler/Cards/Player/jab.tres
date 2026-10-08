@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="AttackCardData" format=3 uid="uid://dei3mmnsug4c"]
+[gd_resource type="Resource" script_class="AttackCardData" format=3 uid="uid://dtswgwftf7feb"]
 
-[ext_resource type="Texture2D" uid="uid://d3ev7h0kr7sqk" path="res://Sprites/Card/icon_attack.png" id="1_2vbyh"]
-[ext_resource type="Script" uid="uid://diqyx6k8i2cb7" path="res://Scripts/Cards/attack_card_data.gd" id="1_fsae6"]
+[ext_resource type="Texture2D" uid="uid://bo7oddwoummp2" path="res://Sprites/Card/icon_attack.png" id="1_2vbyh"]
+[ext_resource type="Script" uid="uid://c2vpw5awgcb2o" path="res://Scripts/Cards/attack_card_data.gd" id="1_fsae6"]
 
 [resource]
 script = ExtResource("1_fsae6")
 attack_damage = 3
 display_name = "Jab"
 icon = ExtResource("1_2vbyh")
-metadata/_custom_type_script = "uid://diqyx6k8i2cb7"
+metadata/_custom_type_script = "uid://c2vpw5awgcb2o"
