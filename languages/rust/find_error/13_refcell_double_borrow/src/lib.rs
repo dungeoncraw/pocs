@@ -26,7 +26,9 @@ impl EventBus {
 
     /// Delivers `event` to every handler registered when publishing starts.
     pub fn publish(&self, event: &str) {
-        for handler in self.handlers.borrow().iter() {
+        let handlers: Vec<Handler> = self.handlers.borrow().iter().cloned().collect();
+
+        for handler in handlers {
             handler.as_ref()(self, event);
             self.delivered.set(self.delivered.get() + 1);
         }
