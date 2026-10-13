@@ -1,11 +1,11 @@
 use std::cell::{Cell, RefCell};
-use std::rc::Rc;
+use std::rc::{Rc, Weak};
 
 /// A node in a directory-like tree. Children are owned by their parent and
 /// every child can navigate back up to its parent.
 pub struct Node {
     name: String,
-    parent: RefCell<Option<Rc<Node>>>,
+    parent: RefCell<Option<Weak<Node>>>,
     children: RefCell<Vec<Rc<Node>>>,
     drops: Rc<Cell<usize>>,
 }
@@ -22,7 +22,8 @@ impl Node {
     }
 
     pub fn add_child(parent: &Rc<Node>, child: &Rc<Node>) {
-        *child.parent.borrow_mut() = Some(Rc::clone(parent));
+        // use downgrade to create a weak reference to the parent
+        *child.parent.borrow_mut() = Some(Rc::downgrade(parent));
         parent.children.borrow_mut().push(Rc::clone(child));
     }
 
@@ -35,7 +36,7 @@ impl Node {
     }
 
     pub fn parent(&self) -> Option<Rc<Node>> {
-        self.parent.borrow().clone()
+        self.parent.borrow().as_ref().and_then(Weak::upgrade)
     }
 
     /// Slash-separated path from the root down to this node.
