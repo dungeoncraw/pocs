@@ -1,30 +1,29 @@
-use std::cell::RefCell;
-use std::rc::Rc;
+use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// A counter handle that can be cloned and shared between workers.
 #[derive(Clone)]
 pub struct SharedCounter {
-    inner: Rc<RefCell<u64>>,
+    inner: Arc<Mutex<u64>>,
 }
 
 impl SharedCounter {
     pub fn new() -> Self {
         SharedCounter {
-            inner: Rc::new(RefCell::new(0)),
+            inner: Arc::new(Mutex::new(0)),
         }
     }
 
     pub fn increment(&self) {
-        *self.inner.borrow_mut() += 1;
+        *self.inner.lock().unwrap() += 1;
     }
 
     pub fn add(&self, n: u64) {
-        *self.inner.borrow_mut() += n;
+        *self.inner.lock().unwrap() += n;
     }
 
     pub fn get(&self) -> u64 {
-        *self.inner.borrow()
+        *self.inner.lock().unwrap()
     }
 }
 
