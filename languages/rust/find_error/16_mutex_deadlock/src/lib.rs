@@ -1,6 +1,4 @@
-use std::sync::Mutex;
-use std::thread;
-use std::time::Duration;
+use std::sync::{Mutex, MutexGuard};
 
 pub struct Account {
     id: u32,
@@ -35,14 +33,23 @@ pub fn transfer(from: &Account, to: &Account, amount: i64) -> Result<(), Transfe
     if from.id == to.id {
         return Err(TransferError::SameAccount);
     }
-    let mut src = from.balance.lock().unwrap();
-    // Simulates the latency of writing an audit record.
-    thread::sleep(Duration::from_millis(50));
-    let mut dst = to.balance.lock().unwrap();
+
+    let (mut src, mut dst): (MutexGuard<'_, i64>, MutexGuard<'_, i64>) = if from.id < to.id {
+        let src = from.balance.lock().unwrap();
+        let dst = to.balance.lock().unwrap();
+        (src, dst)
+    } else {
+        let dst = to.balance.lock().unwrap();
+        let src = from.balance.lock().unwrap();
+        (src, dst)
+    };
+
     if *src < amount {
         return Err(TransferError::InsufficientFunds);
     }
+
     *src -= amount;
     *dst += amount;
+
     Ok(())
 }
