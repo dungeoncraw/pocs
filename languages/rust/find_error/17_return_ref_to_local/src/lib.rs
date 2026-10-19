@@ -1,17 +1,17 @@
-/// Turns a title into a URL-friendly slug: "Hello  World" -> "hello-world".
-pub fn slugify(title: &str) -> &str {
+/// Turns a title into a URL-friendly slug: "Hello World" -> "hello-world".
+pub fn slugify(title: &str) -> String {
     let slug = title
         .split_whitespace()
         .map(|w| w.to_lowercase())
         .collect::<Vec<_>>()
         .join("-");
-    &slug
+    slug
 }
 
 /// Joins a directory and a file name with a single slash.
-pub fn join_path(dir: &str, file: &str) -> &str {
+pub fn join_path(dir: &str, file: &str) -> String {
     let joined = format!("{}/{}", dir.trim_end_matches('/'), file);
-    joined.as_str()
+    joined
 }
 
 pub struct Ticket {
@@ -28,8 +28,8 @@ impl Ticket {
     }
 
     /// Human readable label such as "#0042 Fix login".
-    pub fn label(&self) -> &str {
+    pub fn label(&self) -> String {
         let label = format!("#{:04} {}", self.id, self.title);
-        &label
+        label
     }
 }
