@@ -29,24 +29,18 @@ impl Importer {
     }
 
     pub fn import(&self, lines: &[&str]) -> Vec<Record> {
-        let parsed: Vec<(&str, Option<Record>)> = lines
+        lines
             .iter()
-            .map(|line| {
+            .filter_map(|&line| {
                 self.seen.set(self.seen.get() + 1);
-                (*line, parse(line))
+                match parse(line) {
+                    Some(record) => Some(record),
+                    None => {
+                        self.rejected.borrow_mut().push(line.to_string());
+                        None
+                    }
+                }
             })
-            .collect();
-
-        parsed
-            .iter()
-            .filter(|(_, record)| record.is_none())
-            .map(|(line, _)| self.rejected.borrow_mut().push(line.to_string()));
-
-        parsed
-            .into_iter()
-            .map(|(_, record)| record)
-            .take_while(|record| record.is_some())
-            .flatten()
             .collect()
     }
 
