@@ -2,13 +2,13 @@ use std::thread;
 
 /// Builds a function that adds `n` to its input.
 pub fn make_adder(n: i64) -> Box<dyn Fn(i64) -> i64> {
-    Box::new(|x| x + n)
+    Box::new(move |x| x + n)
 }
 
 /// Builds a counter that grows by `step` every time it is called.
 pub fn make_counter(step: u32) -> impl FnMut() -> u32 {
     let mut total = 0;
-    || {
+    move || {
         total += step;
         total
     }
@@ -39,7 +39,7 @@ impl Pipeline {
 pub fn parallel_scale(values: Vec<i64>, factor: i64) -> Vec<i64> {
     let handles: Vec<_> = values
         .into_iter()
-        .map(|v| thread::spawn(|| v * factor))
+        .map(|v| thread::spawn(move || v * factor))
         .collect();
     handles.into_iter().map(|h| h.join().unwrap()).collect()
 }
